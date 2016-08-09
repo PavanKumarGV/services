@@ -255,5 +255,17 @@
 			<name>repo</name>
 			<url>http://repo.maven.apache.org/maven2</url>
 		</repository>
+		
+		<repository>
+            <id>maven-repo.spire.lan4</id>
+            <name>maven-repo.spire.lan-releases</name>
+            <url>http://maven-repo.spire.lan:8081/artifactory/ee-release-local</url>
+            <releases>
+            <enabled>true</enabled>
+            </releases>
+            <snapshots>
+            <enabled>false</enabled>
+            </snapshots>
+            </repository>
 	</repositories>
 </project>
