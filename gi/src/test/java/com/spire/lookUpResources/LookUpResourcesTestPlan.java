@@ -27,7 +27,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
 	}
 	
-	/**GET list of demand filter by REQUISITION_STATUS
+	/**GET list of demand filter by Type(REQUISITION_STATUS)
 	 * Verify: Response Code/Response body - Open requisition*/
 	@Test(groups = { "sanity" , "verifyLookupservices" })
 	public void verifyLookupservices(){
@@ -40,5 +40,20 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		System.out.println("RESPONSE CODE >>" + responseBody);
 		Assertion.assertTrue(responseBody.contains("Open"),  "Open demand filter is not available.");
 		Logging.log("Open demand filter is available.");
+	}
+	
+	/**GET list of demand filter by Type(REQUISITION_STATUS) and Keyword(o)
+	 * Verify: Response Code/Response body - Open requisition*/
+	@Test(groups = { "sanity" , "verifyLookupservicesByTypeNKeyword" })
+	public void verifyLookupservicesByTypeNKeyword(){
+		lookUpConsumer = new LookUpResourcesConsumer();
+		Response response = lookUpConsumer.getListOfDemandFilterByTypeNKeyword(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull");
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println("RESPONSE CODE >>" + responseBody);
+		Assertion.assertTrue(responseBody.contains("Joined"),  "Joined demand filter is not available.");
+		Logging.log("Joined demand filter is available.");
 	}
 }

@@ -12,7 +12,7 @@
         <test name="CandidateResourcesTestPlan">
 		<groups>
 			<run>
-				<include name="verifyLookupservices"/>
+				<include name="verifyLookupservicesByTypeNKeyword"/>
 			</run>
 		</groups>
 		<packages>
