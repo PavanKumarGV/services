@@ -7,13 +7,24 @@ import com.spire.base.service.BaseServiceConsumerNew;
 
 public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 
-	String endPointURL = getServiceEndPoint("FETCH_CANDIDATES");
+	String fetchCandidateURL = getServiceEndPoint("FETCH_CANDIDATES");
+	String getResumeURL = getServiceEndPoint("GET_RESUME");
 
-	public void getCandidates(String hostName) {
-		String serviceEndPoint = endPointURL.replaceAll("hostAddress", hostName);
+	public int getCandidates(String hostName) {
+		String serviceEndPoint = fetchCandidateURL.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		System.out.println(response.getEntity());
+		System.out.println(response.readEntity(String.class));
+		return response.getStatus();
+	}
+	
+	public int getResume(String hostName){
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		System.out.println(response.readEntity(String.class));
+		return response.getStatus();
 	}
 }
