@@ -43,7 +43,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity" , "verifyGetResumeRequest" })
 	public void verifyGetResumeRequest(){
 		candConsumer = new CandidateResourcesConsumer();
-		int actualStatusCode = candConsumer.getCandidates(hostName);
+		int actualStatusCode = candConsumer.getResume(hostName);
 		Assertion.assertEquals(200, actualStatusCode, "Get Resume Request Fail - Status Code: "+actualStatusCode);
 		Logging.log("Get Resume Request Pass");
 	}
