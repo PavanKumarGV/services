@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<suite name="Talent 2.0 Automation" parallel="tests" thread-count="1">
+<!--<listeners>
+    <listener class-name="com.spire.base.reporter.SpireReport"/>
+   &lt;!&ndash;  <listener class-name="com.spire.base.controller.TestRetryListener"/> &ndash;&gt;
+    <listener class-name="com.spire.base.reporter.SpireEmailReport"/>
+</listeners>-->
+	<parameter name="host" value ="http://192.168.2.177:8080"/>
+	    <parameter name="healthCheck" value="false"/>	
+        <test name="CandidateResourcesTestPlan">
+		<groups>
+			<run>
+				<include name="verifyFetchCandidatesRequest"/>
+			</run>
+		</groups>
+		<packages>
+			<package name="com.spire.searchResources" />
+		</packages>
+	</test>
+</suite>               
+        
+   
