@@ -51,11 +51,11 @@
 			<scope>test</scope>
 		</dependency>
 
-	<!--  	<dependency>
+	  	<dependency>
 			<groupId>gi.commons</groupId>
 			<artifactId>generic-services</artifactId>
 			<version>1.0.0</version>
-		</dependency>-->
+		</dependency>
 
 
 		<!--common -->
