@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[ EndPoint URL >>http://192.168.2.177:8080/generic-services/api/lookup/demand/filter?type=REQUISITION_STATUS]]>
+    </line>
+    <line>
+      <![CDATA[RESPONSE CODE >>200]]>
+    </line>
+  </reporter-output>
+  <suite name="Talent 2.0 Automation" duration-ms="2110" started-at="2016-08-09T05:03:00Z" finished-at="2016-08-09T05:03:02Z">
+    <groups>
+      <group name="verifyLookupservices">
+        <method signature="LookUpResourcesTestPlan.verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="verifyLookupservices" class="com.spire.lookUpResources.LookUpResourcesTestPlan"/>
+      </group> <!-- verifyLookupservices -->
+      <group name="sanity">
+        <method signature="LookUpResourcesTestPlan.verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="verifyLookupservices" class="com.spire.lookUpResources.LookUpResourcesTestPlan"/>
+      </group> <!-- sanity -->
+    </groups>
+    <test name="CandidateResourcesTestPlan" duration-ms="2110" started-at="2016-08-09T05:03:00Z" finished-at="2016-08-09T05:03:02Z">
+      <class name="com.spire.lookUpResources.LookUpResourcesTestPlan">
+        <test-method status="PASS" signature="beforeTestSuite(org.testng.ITestContext)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="beforeTestSuite" is-config="true" duration-ms="18" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@627551fb]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTestSuite -->
+        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext, org.testng.xml.XmlTest)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="beforeTest" is-config="true" duration-ms="1" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@627551fb]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[[Test: "CandidateResourcesTestPlan" verbose:1[parameters:][metagroups:] [included: verifyLookupservices ][excluded: ]  classes:[XmlClass class=com.spire.lookUpResources.LookUpResourcesTestPlan]  packages:org.testng.xml.XmlPackage@972f7c43 ] ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="setUp" is-config="true" duration-ms="1" started-at="2016-08-09T10:33:00Z" depends-on-methods="com.spire.base.controller.TestPlan.beforeTest" finished-at="2016-08-09T10:33:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="beforeTestMethod([Ljava.lang.Object;, java.lang.reflect.Method, org.testng.ITestContext, org.testng.xml.XmlTest)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="beforeTestMethod" is-config="true" duration-ms="6" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.Object;@a7e666]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void com.spire.lookUpResources.LookUpResourcesTestPlan.verifyLookupservices()]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[org.testng.TestRunner@627551fb]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[[Test: "CandidateResourcesTestPlan" verbose:1[parameters:][metagroups:] [included: verifyLookupservices ][excluded: ]  classes:[XmlClass class=com.spire.lookUpResources.LookUpResourcesTestPlan]  packages:org.testng.xml.XmlPackage@972f7c43 ] ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTestMethod -->
+        <test-method status="PASS" signature="verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="verifyLookupservices" duration-ms="2088" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:02Z">
+          <reporter-output>
+            <line>
+              <![CDATA[ EndPoint URL >>http://192.168.2.177:8080/generic-services/api/lookup/demand/filter?type=REQUISITION_STATUS]]>
+            </line>
+            <line>
+              <![CDATA[RESPONSE CODE >>200]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyLookupservices -->
+        <test-method status="PASS" signature="afterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="afterTestMethod" is-config="true" duration-ms="0" started-at="2016-08-09T10:33:02Z" finished-at="2016-08-09T10:33:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.spire.lookUpResources.LookUpResourcesTestPlan.verifyLookupservices()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTestMethod -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="afterMethod" is-config="true" duration-ms="0" started-at="2016-08-09T10:33:02Z" finished-at="2016-08-09T10:33:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyLookupservices status=SUCCESS method=LookUpResourcesTestPlan.verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea] output= EndPoint URL >>http://192.168.2.177:8080/generic-services/api/lookup/demand/filter?type=REQUISITION_STATUS]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="afterTestSuite()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="afterTestSuite" is-config="true" duration-ms="0" started-at="2016-08-09T10:33:02Z" finished-at="2016-08-09T10:33:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTestSuite -->
+      </class> <!-- com.spire.lookUpResources.LookUpResourcesTestPlan -->
+    </test> <!-- CandidateResourcesTestPlan -->
+  </suite> <!-- Talent 2.0 Automation -->
+</testng-results>

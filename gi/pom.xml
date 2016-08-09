@@ -1,0 +1,230 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>gi2.0</groupId>
+  <artifactId>gi</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>gi</name>
+  <url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+ <dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>gi.commons</groupId>
+			<artifactId>generic-services</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+
+		<!--common -->
+
+		<dependency>
+			<groupId>com.spire.automation</groupId>
+			<artifactId>spire-base</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!--TALENT -->
+		<!-- <dependency> <groupId>spire.talent</groupId> <artifactId>talent-bean</artifactId> 
+			<version>1.0.13</version> <scope>system</scope> <systemPath>${project.basedir}/src/main/resources/lib/talent-bean.jar</systemPath> 
+			</dependency> -->
+		<dependency>
+			<groupId>spire.commons</groupId>
+			<artifactId>user-service-bean</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+
+		<!-- REST services bean dependencies End.. -->
+
+		<dependency>
+			<groupId>org.fluttercode.datafactory</groupId>
+			<artifactId>datafactory</artifactId>
+			<version>0.8</version>
+			<type>jar</type>
+		</dependency>
+
+		<!-- ObjectMapper dependencies start .. -->
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>spire.commons</groupId>
+			<artifactId>search-commons-beans</artifactId>
+			<version>1.0.18</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>2.4.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- ObjectMapper dependencies End.. -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+			<version>2.19</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.ws.rs</groupId>
+					<artifactId>javax.ws.rs-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.spire.automation</groupId>
+			<artifactId>spire-base</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-json</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		</dependencies>
+
+  
+  <repositories>
+
+		<repository>
+			<id>maven-repo.spire.lan</id>
+			<url>http://maven-repo.spire.lan:8081/artifactory/libs-release-local</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>maven-repo.spire.lan1</id>
+			<url>http://maven-repo.spire.lan:8081/artifactory/ext-release-local</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>maven-repo.spire.lan2</id>
+			<url>http://maven-repo.spire.lan:8081/artifactory/libs-snapshot-local</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>maven-repo.spire.lan3</id>
+			<url>http://maven-repo.spire.lan:8081/artifactory/ext-snapshot-local</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+
+		<repository>
+			<id>s2g-artifacts</id>
+			<name>s2-artifacts-releases</name>
+			<url>http://192.168.2.104:7777/artifactory/spire-build</url>
+		</repository>
+
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>repo</name>
+			<url>http://192.168.2.104:7777/artifactory/spire-build</url>
+		</repository>
+
+
+		<repository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>repo</name>
+			<url>http://192.168.2.104:7777/artifactory/spire-build</url>
+		</repository>
+
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>opensource_central</id>
+			<name>repo</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+		</repository>
+
+		<repository>
+			<snapshots />
+			<id>opensource_snapshots</id>
+			<name>repo</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+		</repository>
+	</repositories>
+</project>

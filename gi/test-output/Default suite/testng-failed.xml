@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.spire.lookUpResources.LookUpResourcesTestPlan">
+        <methods>
+          <include name="afterTestMethod"/>
+          <include name="afterTestSuite"/>
+          <include name="verifyLookupservices"/>
+          <include name="beforeTestSuite"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.spire.lookUpResources.LookUpResourcesTestPlan -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

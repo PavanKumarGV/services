@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" name="Failed suite [Talent 2.0 Automation]" parallel="tests">
+  <parameter name="healthCheck" value="false"/>
+  <parameter name="host" value="http://192.168.2.177:8080"/>
+  <test name="CandidateResourcesTestPlan(failed)" parallel="tests">
+    <groups>
+      <run>
+        <include name="verifyLookupservices"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.spire.lookUpResources.LookUpResourcesTestPlan">
+        <methods>
+          <include name="afterTestMethod"/>
+          <include name="setUp"/>
+          <include name="afterTestSuite"/>
+          <include name="verifyLookupservices"/>
+          <include name="beforeTestSuite"/>
+          <include name="beforeTest"/>
+          <include name="beforeTestMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.spire.lookUpResources.LookUpResourcesTestPlan -->
+    </classes>
+  </test> <!-- CandidateResourcesTestPlan(failed) -->
+</suite> <!-- Failed suite [Talent 2.0 Automation] -->
