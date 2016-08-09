@@ -8,11 +8,10 @@ import com.spire.base.service.BaseServiceConsumerNew;
 
 public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 
-	String lookUpByType = getServiceEndPoint("LOOK_UP");
-	String lookUpByTypeNKeyword = getServiceEndPoint("LOOK_UP_BY_KEYWORD_TYPE");
+	String lookUp = getServiceEndPoint("LOOK_UP");
 
 	public Response getListOfDemandFilter(String hostName) {
-		String serviceEndPoint = lookUpByType.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"?type=REQUISITION_STATUS";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
@@ -20,7 +19,7 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	}
 	
 	public Response getListOfDemandFilterByTypeNKeyword(String hostName) {
-		String serviceEndPoint = lookUpByTypeNKeyword.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=REQUISITION_STATUS&keyword=O";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
