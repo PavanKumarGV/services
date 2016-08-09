@@ -27,8 +27,9 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
 	}
 	
-	/**GET list of demand filter by Type(REQUISITION_STATUS)
-	 * Verify: Response Code/Response body - Open requisition*/
+	/**Steps: GET list of demand filter by Type(REQUISITION_STATUS)
+	 * Validation: Asserting Open Requisition Status in response body*/
+	
 	@Test(groups = { "sanity" , "verifyLookupservices" })
 	public void verifyLookupservices(){
 		lookUpConsumer = new LookUpResourcesConsumer();
@@ -42,8 +43,9 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		Logging.log("Open demand filter is available.");
 	}
 	
-	/**GET list of demand filter by Type(REQUISITION_STATUS) and Keyword(o)
-	 * Verify: Response Code/Response body - Open requisition*/
+	/**Steps: GET list of demand filter by Type(REQUISITION_STATUS) and Keyword(o)
+	 * Validation: Asserting Joined Requistion Status in response body*/
+	
 	@Test(groups = { "sanity" , "verifyLookupservicesByTypeNKeyword" })
 	public void verifyLookupservicesByTypeNKeyword(){
 		lookUpConsumer = new LookUpResourcesConsumer();
