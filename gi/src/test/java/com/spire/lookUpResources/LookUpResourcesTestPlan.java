@@ -145,7 +145,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		Assertion.assertEquals(response.getStatus(), 404, "Request Unsuccessfull: Expected Response Code 404");
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
@@ -163,7 +163,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.getListOfDemandFilterByTypeNBlankKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		Assertion.assertEquals(response.getStatus(), 404, "Request Unsuccessfull: Expected Response Code 404");
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
