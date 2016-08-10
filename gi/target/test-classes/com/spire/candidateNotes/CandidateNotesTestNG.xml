@@ -12,11 +12,11 @@
         <test name="CandidateResourcesTestPlan">
 		<groups>
 			<run>
-				<include name="verifyLookUpServiceByTypeNBlankKeyword"/>
+				<include name="sanity"/>
 			</run>
 		</groups>
 		<packages>
-			<package name="com.spire.lookUpResources" />
+			<package name="com.spire.candidateNotes" />
 		</packages>
 	</test>
 </suite>               

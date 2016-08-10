@@ -26,5 +26,51 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 	}
 	
+	public Response verifyListOfDemandFilterWithoutType(String hostName){
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
 	
+	public Response verifyListOfDemandFilterWithInvalidType(String hostName){
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"?type=agAH";
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
+	
+	public Response getListOfDemandFilterByBlankTypeNBlankKeyword(String hostName){
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match";
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
+	
+	public Response getListOfDemandFilterByPrimarySKillTypeNKeyword(String hostName) {
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=PRIMARY_SKILL&keyword=j";
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
+	
+	public Response getListOfDemandFilterByBlankTypeNKeyword(String hostName){
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?keyword=j";
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
+	
+	public Response getListOfDemandFilterByTypeNBlankKeyword(String hostName){
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?type=REQUISITION_STATUS";
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
 }

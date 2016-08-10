@@ -48,7 +48,7 @@
               <ul>
                 <li>
                   <a href="#" class="navigator-link " panel-name="test-xml-Talent_2.0_Automation">
-                    <span>C:\Users\Vivek NA\ginew\gi\src\test\java\com\spire\lookUpResources\LookUpResourcesTestNG.xml</span>
+                    <span>C:\Users\Udhaya\Desktop\gi\gi\gi\src\test\java\com\spire\requisitionResources\SearchResourcesTestNG.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -101,7 +101,7 @@
                     <div class="method-list-content passed suite-Talent_2.0_Automation">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Talent_2.0_Automation" title="com.spire.lookUpResources.LookUpResourcesTestPlan" hash-for-method="verifyLookupservices">verifyLookupservices</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Talent_2.0_Automation" title="com.spire.requisitionResources.SearchResourcesTestPlan" hash-for-method="GetRequisitionSearch">GetRequisitionSearch</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Talent_2.0_Automation -->
@@ -119,14 +119,14 @@
           <div class="suite-Talent_2.0_Automation-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.spire.lookUpResources.LookUpResourcesTestPlan</span>
+              <span class="class-name">com.spire.requisitionResources.SearchResourcesTestPlan</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="verifyLookupservices">
-                  </a> <!-- verifyLookupservices -->
-                  <span class="method-name">verifyLookupservices</span>
+                  <a name="GetRequisitionSearch">
+                  </a> <!-- GetRequisitionSearch -->
+                  <span class="method-name">GetRequisitionSearch</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -134,28 +134,34 @@
         </div> <!-- panel Talent_2.0_Automation -->
         <div panel-name="test-xml-Talent_2.0_Automation" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Vivek NA\ginew\gi\src\test\java\com\spire\lookUpResources\LookUpResourcesTestNG.xml</span>
+            <span class="header-content">C:\Users\Udhaya\Desktop\gi\gi\gi\src\test\java\com\spire\requisitionResources\SearchResourcesTestNG.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite thread-count=&quot;1&quot; name=&quot;Talent 2.0 Automation&quot; parallel=&quot;tests&quot;&gt;
+  &lt;parameter name=&quot;password&quot; value=&quot;spire@123&quot;/&gt;
   &lt;parameter name=&quot;healthCheck&quot; value=&quot;false&quot;/&gt;
   &lt;parameter name=&quot;host&quot; value=&quot;http://192.168.2.177:8080&quot;/&gt;
-  &lt;test name=&quot;CandidateResourcesTestPlan&quot;&gt;
+  &lt;parameter name=&quot;userId&quot; value=&quot;tester@logica.com&quot;/&gt;
+  &lt;listeners&gt;
+    &lt;listener class-name=&quot;com.spire.base.reporter.SpireReport&quot;/&gt;
+    &lt;listener class-name=&quot;com.spire.base.controller.TestRetryListener&quot;/&gt;
+  &lt;/listeners&gt;
+  &lt;test name=&quot;RequsisitionSearchTestPlan&quot;&gt;
     &lt;groups&gt;
       &lt;run&gt;
-        &lt;include name=&quot;verifyLookupservices&quot;/&gt;
+        &lt;include name=&quot;GetRequisitionSearch&quot;/&gt;
       &lt;/run&gt;
     &lt;/groups&gt;
     &lt;packages&gt;
-      &lt;package name=&quot;com.spire.lookUpResources&quot;/&gt;
+      &lt;package name=&quot;com.spire.requisitionResources&quot;/&gt;
     &lt;/packages&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.spire.lookUpResources.LookUpResourcesTestPlan&quot;/&gt;
+      &lt;class name=&quot;com.spire.requisitionResources.SearchResourcesTestPlan&quot;/&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- CandidateResourcesTestPlan --&gt;
+  &lt;/test&gt; &lt;!-- RequsisitionSearchTestPlan --&gt;
 &lt;/suite&gt; &lt;!-- Talent 2.0 Automation --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -167,7 +173,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">CandidateResourcesTestPlan (1 class)</span>
+                <span class="test-name">RequsisitionSearchTestPlan (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -178,18 +184,18 @@
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="test-group">
-              <span class="test-group-name">sanity</span>
+              <span class="test-group-name">GetRequisitionSearch</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyLookupservices</span>
+                <span class="method-in-group-name">GetRequisitionSearch</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
             <div class="test-group">
-              <span class="test-group-name">verifyLookupservices</span>
+              <span class="test-group-name">sanity</span>
               <br/>
               <div class="method-in-group">
-                <span class="method-in-group-name">verifyLookupservices</span>
+                <span class="method-in-group-name">GetRequisitionSearch</span>
                 <br/>
               </div> <!-- method-in-group -->
             </div> <!-- test-group -->
@@ -211,14 +217,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'verifyLookupservices')
-data.setCell(0, 2, 'com.spire.lookUpResources.LookUpResourcesTestPlan')
-data.setCell(0, 3, 2088);
+data.setCell(0, 1, 'GetRequisitionSearch')
+data.setCell(0, 2, 'com.spire.requisitionResources.SearchResourcesTestPlan')
+data.setCell(0, 3, 1381);
 window.suiteTableData['Talent_2.0_Automation']= { tableData: data, tableDiv: 'times-div-Talent_2.0_Automation'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 2 seconds</span>
+              <span class="suite-total-time">Total running time: 1 seconds</span>
               <div id="times-div-Talent_2.0_Automation">
               </div> <!-- times-div-Talent_2.0_Automation -->
             </div> <!-- times-div -->
@@ -230,10 +236,14 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="reporter-method-div">
-              <span class="reporter-method-name">verifyLookupservices</span>
+              <span class="reporter-method-name">GetRequisitionSearch</span>
               <div class="reporter-method-output-div">
-                <span class="reporter-method-output"> EndPoint URL >>http://192.168.2.177:8080/generic-services/api/lookup/demand/filter?type=REQUISITION_STATUS</span>
-                <span class="reporter-method-output">RESPONSE CODE >>200</span>
+                <span class="reporter-method-output">Inside of Login</span>
+                <span class="reporter-method-output">userId >>>>6002:6003:760e9c3442a741ddb4c0bed4613a4b18</span>
+                <span class="reporter-method-output">tenantId  >>>>6002</span>
+                <span class="reporter-method-output">realmName  >>>>Realm1</span>
+                <span class="reporter-method-output">Authorization  >>>>eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI5YmY2MGZlNC02YjU2LTRmMTYtYmJjOC1mY2NjNDhiYzcyMzQiLCJleHAiOjE0ODM3ODc5OTYsIm5iZiI6MCwiaWF0IjoxNDcwODI3OTk2LCJpc3MiOiJodHRwOi8vMTcyLjE2LjAuMjE2OjgwODAvYXV0aC9yZWFsbXMvUmVhbG0xIiwiYXVkIjoidXNlci1zZXJ2aWNlIiwic3ViIjoiZGFmZDY2YWItMTFmMS00NzMwLWE3NDQtMDNjNDc1OGE5ZGMwIiwiYXpwIjoidXNlci1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6IjY0NTkzODk0LTNkNmMtNDk1OC1hNzYwLTY3YzczMGYzM2RkOSIsImNsaWVudF9zZXNzaW9uIjoiZjg0NjAxMGQtMDk5Zi00ZmJlLTgzMzUtNjcxYjJjZGVjYzVjIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImFkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiY3JtLXJ1bGVzIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tYWN0aXZpdHlzdHJlYW0iOnsicm9sZXMiOlsiYWRtaW4iXX0sInNlY3VyaXR5LWFkbWluLWNvbnNvbGUiOnsicm9sZXMiOlsiYWRtaW4iXX0sImJsb2Itc3RvcmUtd2ViIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tY29tLXNlcnZpY2VzIjp7InJvbGVzIjpbImFkbWluIl19LCJzb2NpYWwtd2ViIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tY29tLWJpei1zZXJ2aWNlcyI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXVzZXItc2VydmljZSI6eyJyb2xlcyI6WyJhZG1pbiJdfSwidGFsZW50LWVudGl0eS1sYXllciI6eyJyb2xlcyI6WyJhZG1pbiJdfSwibGFiZWxzLWJpei13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sInNlYXJjaC1hbmQtbWF0Y2gtc2VydmljZSI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXBpcGVsaW5lIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tc2VhcmNoLWJpei13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1lbWFpbHMiOnsicm9sZXMiOlsiYWRtaW4iXX0sInNhdmUtc2VhcmNoIjp7InJvbGVzIjpbImFkbWluIl19LCJ0YWxlbnQtYml6LUxheWVyIjp7InJvbGVzIjpbImFkbWluIl19LCJwcm9maWxlcy13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1qb2Jwb3N0LXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXByb2ZpbGVzIjp7InJvbGVzIjpbImFkbWluIl19LCJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwidmlldy1yZWFsbSIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwidmlldy1ldmVudHMiLCJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWNsaWVudHMiXX0sInByb2ZpbGUtYml6LXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYWNxdXJhLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYWN0aXZpdHktc3RyZWFtLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLWNhbXBhaWduLWJpeiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLW5vdGVzLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLWNhbXBhaWduLXNlcnZpY2VzIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tbm90aWZpY2F0aW9uLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImxhYmVscy13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1jYW1wYWlnbnMiOnsicm9sZXMiOlsiYWRtaW4iXX0sIkNSTS1Bc3luYy1Db25zdW1lciI6eyJyb2xlcyI6WyJhZG1pbiJdfSwic3BpcmUtYml6Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fSwibmFtZSI6InRlc3RlciBsb2dpY2EiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0ZXJAbG9naWNhLmNvbSIsImdpdmVuX25hbWUiOiJ0ZXN0ZXIiLCJmYW1pbHlfbmFtZSI6ImxvZ2ljYSIsImVtYWlsIjoidGVzdGVyQGxvZ2ljYS5jb20ifQ.Ox5ZVLLTXnmTyJFSwc-FaDa4TbUGB_5XnfMVY-BLGIhJbwFoqQqebczWFaIQwvyXQAMbalj6t-mbzCW8wdBGEMp_PM2xvlzQmOJo_1pAaD3jJwBrKZB1u6I2xJ7r485Eg8xkxUZInFikLqMvIeegz73aX2ZiQDJTP42_MfAO0sq361lJUCVvyK5wKiicdssxJW-Mg-VvPLl5lDk7Mzh8m0cDkm_pyPTVokDqmps4SkHMk1E0hEM_QLRTp1JV5y5IwyNitHdo-jb-8kal4RNv2QO8RjagXUwwJgASdKpS9kmDugUUi36xEmNOKBvjTT_GC-RrhcD3qNq_aUu-F3aLiA</span>
+                <span class="reporter-method-output">Setting Headers from the service call !!!</span>
               </div> <!-- reporter-method-output-div -->
             </div> <!-- reporter-method-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -251,38 +261,42 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.spire.lookUpResources.LookUpResourcesTestPlan</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.spire.requisitionResources.SearchResourcesTestPlan</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
-                <span class="method-name">beforeTestSuite(org.testng.TestRunner@627551fb)</span>
+                <span class="method-name">beforeTestSuite(org.testng.TestRunner@7e0e6aa2)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
               <div class="configuration-test before">
-                <span class="method-name">beforeTest(org.testng.TestRunner@627551fb, [Test: "CandidateResourcesTestPlan" verbose:1[parameters:][metagroup...)</span>
-                <span class="method-start">27 ms</span>
+                <span class="method-name">beforeTest(org.testng.TestRunner@7e0e6aa2, [Test: "RequsisitionSearchTestPlan" verbose:1[parameters:][metagroup...)</span>
+                <span class="method-start">33 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-test before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">28 ms</span>
+                <span class="method-start">34 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-method before">
-                <span class="method-name">beforeTestMethod([], public void com.spire.lookUpResources.LookUpResourcesTestPlan.verifyLookupservices(), org.testng...)</span>
-                <span class="method-start">38 ms</span>
+                <span class="method-name">beforeTestMethod([], public void com.spire.requisitionResources.SearchResourcesTestPlan.GetRequisitionSearch() throws...)</span>
+                <span class="method-start">42 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">verifyLookupservices</span>
+                <span class="method-name">GetRequisitionSearch</span>
                 <span class="method-start">44 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">afterMethod([TestResult name=verifyLookupservices status=SUCCESS method=LookUpResourcesTestPlan.verifyLookupserv...)</span>
-                <span class="method-start">2133 ms</span>
+                <span class="method-name">_takeScreenShotOnFailure([TestResult name=GetRequisitionSearch status=SUCCESS method=SearchResourcesTestPlan.GetRequisitionSe...)</span>
+                <span class="method-start">1425 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method after">
-                <span class="method-name">afterTestMethod(public void com.spire.lookUpResources.LookUpResourcesTestPlan.verifyLookupservices())</span>
-                <span class="method-start">2133 ms</span>
+                <span class="method-name">afterMethod([TestResult name=GetRequisitionSearch status=SUCCESS method=SearchResourcesTestPlan.GetRequisitionSe...)</span>
+                <span class="method-start">1425 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">afterTestMethod(public void com.spire.requisitionResources.SearchResourcesTestPlan.GetRequisitionSearch() throws org...)</span>
+                <span class="method-start">1425 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-suite after">
                 <span class="method-name">afterTestSuite</span>
-                <span class="method-start">2200 ms</span>
+                <span class="method-start">1456 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
