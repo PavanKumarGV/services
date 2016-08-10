@@ -26,12 +26,14 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
 	}
-	
-	/**Steps: GET list of demand filter by Type(REQUISITION_STATUS)
-	 * Validation: Asserting Open Requisition Status in response body*/
-	
-	@Test(groups = { "sanity" , "verifyLookupservices" })
-	public void verifyLookupservices(){
+
+	/**
+	 * Steps: GET list of demand filter by Type(REQUISITION_STATUS) Validation:
+	 * Asserting Open Requisition Status in response body
+	 */
+
+	@Test(groups = { "sanity", "verifyLookupservices" })
+	public void verifyLookupservices() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.getListOfDemandFilter(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -39,15 +41,18 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
-		Assertion.assertTrue(responseBody.contains("Open"),  "Open demand filter is not available.");
+		Assertion.assertTrue(responseBody.contains("Open"), "Open demand filter is not available.");
 		Logging.log("Open demand filter is available.");
 	}
-	
-	/**Steps: GET list of demand filter by Type(REQUISITION_STATUS) and Keyword(o)
-	 * Validation: Asserting Joined Requistion Status in response body*/
-	
-	@Test(groups = { "sanity" , "verifyLookupservicesByTypeNKeyword" })
-	public void verifyLookupservicesByTypeNKeyword(){
+
+	/**
+	 * Steps: GET list of demand filter by Type(REQUISITION_STATUS) and
+	 * Keyword(o) Validation: Asserting Joined Requistion Status in response
+	 * body
+	 */
+
+	@Test(groups = { "sanity", "verifyLookupservicesByTypeNKeyword" })
+	public void verifyLookupservicesByTypeNKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.getListOfDemandFilterByTypeNKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -55,7 +60,113 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
-		Assertion.assertTrue(responseBody.contains("Joined"),  "Joined demand filter is not available.");
+		Assertion.assertTrue(responseBody.contains("Joined"), "Joined demand filter is not available.");
 		Logging.log("Joined demand filter is available.");
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter with
+	 *         Blank demand filter type Validation: Status code 500, Response
+	 *         message
+	 */
+	@Test(groups = { "sanity", "getListOfDemandFilterWithBlankType" })
+	public void getListOfDemandFilterWithoutType() {
+		lookUpConsumer = new LookUpResourcesConsumer();
+		Response response = lookUpConsumer.verifyListOfDemandFilterWithoutType(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println("RESPONSE CODE >>" + responseBody);
+
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter with
+	 *         Blank demand filter type Validation: Status code 500, Response
+	 *         message
+	 */
+	@Test(groups = { "sanity", "getListOfDemandFilterWithInvalidType" })
+	public void getListOfDemandFilterWithInvalidType() {
+		lookUpConsumer = new LookUpResourcesConsumer();
+		Response response = lookUpConsumer.verifyListOfDemandFilterWithInvalidType(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 400, "Request Unsuccessfull: Expected Response Code 400");
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println("RESPONSE CODE >>" + responseBody);
+
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
+	 *         blank Type and Keyword Validation: Status code 500, Response
+	 *         message
+	 */
+
+	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNBlankKeyword" })
+	public void verifyLookUpServiceByBlankTypeNBlankKeyword() {
+		lookUpConsumer = new LookUpResourcesConsumer();
+		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNBlankKeyword(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println("RESPONSE CODE >>" + responseBody);
+
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
+	 *         Primary skill Type and Keyword j Validation: Asserting Status
+	 *         code 200, Response Message
+	 */
+	@Test(groups = { "sanity", "verifyLookupservicesByPrimarySkillTypeNKeyword" })
+	public void verifyLookupservicesByPrimarySkillTypeNKeyword() {
+		lookUpConsumer = new LookUpResourcesConsumer();
+		Response response = lookUpConsumer.getListOfDemandFilterByPrimarySKillTypeNKeyword(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull");
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println("RESPONSE CODE >>" + responseBody);
+		Assertion.assertTrue(responseBody.contains("Java"), "Java primary skill is not available.");
+		Logging.log("Java Primary skill is available.");
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
+	 *         blank Type and Keyword Validation: Status code 500, Response
+	 *         message
+	 */
+
+	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNKeyword" })
+	public void verifyLookUpServiceByBlankTypeNKeyword() {
+		lookUpConsumer = new LookUpResourcesConsumer();
+		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNKeyword(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println("RESPONSE CODE >>" + responseBody);
+
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
+	 *         blank Type and Keyword Validation: Status code 500, Response
+	 *         message
+	 */
+
+	@Test(groups = { "sanity", "verifyLookUpServiceByTypeNBlankKeyword" })
+	public void verifyLookUpServiceByTypeNBlankKeyword() {
+		lookUpConsumer = new LookUpResourcesConsumer();
+		Response response = lookUpConsumer.getListOfDemandFilterByTypeNBlankKeyword(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println("RESPONSE CODE >>" + responseBody);
+
 	}
 }
