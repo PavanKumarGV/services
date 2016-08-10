@@ -22,6 +22,9 @@ public class CandidateNotesTestPlan extends TestPlan {
 	String hostName;
 	CandidateNotesConsumers candnoteConsumer = null;
 	NoteBean noteBeanRequest = null;
+	NoteBean noteBeanRequestWithBlankEntity = null;
+	NoteBean noteBeanRequestWithBlankParameter = null;
+	NoteBean noteBeanRequestWithOnlyEntityId = null;
 
 	/**
 	 * Passing HostName,UserName and Password from the xml.
@@ -157,7 +160,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		String entityId = noteBeanRequest.getId();
 		Logging.log(entityId);
 		candnoteConsumer = new CandidateNotesConsumers();
-		Response response = candnoteConsumer.createNote(noteBeanRequest,hostName);
+		Response response = candnoteConsumer.createNote(noteBeanRequest, hostName);
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
@@ -166,4 +169,48 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log("Notes Created successfully with entity id: " + entityId);
 
 	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps:Create Note without entity id
+	 *         Validation: asserting the error response
+	 */
+
+	@Test(groups = { "sanity", "createNotesWithBlankEntityId" })
+	public void createNotesWithBlankEntityId() {
+		noteBeanRequestWithBlankEntity = NotesServicesUtil.getNoteBeanWithBlankEntity();
+		candnoteConsumer = new CandidateNotesConsumers();
+		Response response = candnoteConsumer.createNote(noteBeanRequestWithBlankEntity, hostName);
+		Assertion.assertEquals(response.getStatus(), 500, "Response not successfull: Expected 500");
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps:Create Note without any parameter
+	 *         Validation: asserting the error response
+	 */
+	@Test(groups = { "sanity", "createNotesWithBlankParameter" })
+	public void createNotesWithBlankParameter() {
+		noteBeanRequestWithBlankParameter = NotesServicesUtil.getNoteBeanWithBlankParameter();
+		candnoteConsumer = new CandidateNotesConsumers();
+		Response response = candnoteConsumer.createNote(noteBeanRequestWithBlankParameter, hostName);
+		Assertion.assertEquals(response.getStatus(), 500, "Response not successfull: Expected 500");
+	}
+
+	/**
+	 * @author Radharani Patra 10/08/16 Steps:Create Note with only entity id
+	 *         Validation: Successfull Note creation in response body
+	 */
+	@Test(groups = { "sanity", "createNotesWithOnlyEntityId" })
+	public void createNotesWithOnlyEntityId() {
+		noteBeanRequestWithOnlyEntityId = NotesServicesUtil.getNoteBeanWithOnlyEntityId();
+		String entityId1 = noteBeanRequestWithOnlyEntityId.getId();
+		candnoteConsumer = new CandidateNotesConsumers();
+		Response response = candnoteConsumer.createNote(noteBeanRequestWithOnlyEntityId, hostName);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull: Expected 200");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains(entityId1), "Notes creation failed");
+		Logging.log("Notes Created successfully with entity id: " + entityId1);
+	}
+
 }
