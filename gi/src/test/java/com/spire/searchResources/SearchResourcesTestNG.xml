@@ -5,12 +5,18 @@
    &lt;!&ndash;  <listener class-name="com.spire.base.controller.TestRetryListener"/> &ndash;&gt;
     <listener class-name="com.spire.base.reporter.SpireEmailReport"/>
 </listeners>-->
+<listeners>
+		<listener class-name="com.spire.base.reporter.SpireReport" />
+		<listener class-name="com.spire.base.controller.TestRetryListener" />
+	</listeners>
 	<parameter name="host" value ="http://192.168.2.177:8080"/>
+	<parameter name="userId" value="tester@logica.com" />
+	<parameter name="password" value="spire@123" />
 	    <parameter name="healthCheck" value="false"/>	
         <test name="CandidateResourcesTestPlan">
 		<groups>
 			<run>
-				<include name="verifyFetchCandidatesRequest"/>
+				<include name="GetSimillerProfiles"/>
 			</run>
 		</groups>
 		<packages>

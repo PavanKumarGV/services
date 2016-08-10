@@ -182,27 +182,27 @@ public abstract class BaseServiceConsumerNew extends
 	 * Setting properties
 	 */
 
-//	protected LoginResponseBean getUserToken(String userId, String password) {
-//		LoginRequestBean loginRequestBean = new LoginRequestBean();
-//		loginRequestBean.setUserId(userId);
-//		loginRequestBean.setPassword(password);
-//		String URL = getServiceEndPoint("TALENT_USER_SERVICE");
-//		WebTarget target = ClientBuilder.newClient().target(URL);
-//		Response response = target.request().post(
-//				Entity.entity(loginRequestBean, MediaType.APPLICATION_JSON));
-//		if (response.getStatus() == 200) {
-//			loginResponse = response.readEntity(LoginResponseBean.class);
-//			Logging.log("userId >>>>" + loginResponse.getUserId());
-//			Logging.log("tenantId  >>>>" + loginResponse.getTenantId());
-//			Logging.log("realmName  >>>>" + loginResponse.getRealmName());
-//			Logging.log("Authorization  >>>>" + loginResponse.getTokenId());
-//			setDynamicProperties();
-//			return loginResponse;
-//		} else {
-//			return null;
-//		}
-//		
-//	}
+	protected LoginResponseBean getUserToken(String userId, String password) {
+		LoginRequestBean loginRequestBean = new LoginRequestBean();
+		loginRequestBean.setUserId(userId);
+		loginRequestBean.setPassword(password);
+		String URL = getServiceEndPoint("TALENT_USER_SERVICE");
+		WebTarget target = ClientBuilder.newClient().target(URL);
+		Response response = target.request().post(
+				Entity.entity(loginRequestBean, MediaType.APPLICATION_JSON));
+		if (response.getStatus() == 200) {
+			loginResponse = response.readEntity(LoginResponseBean.class);
+			Logging.log("userId >>>>" + loginResponse.getUserId());
+			Logging.log("tenantId  >>>>" + loginResponse.getTenantId());
+			Logging.log("realmName  >>>>" + loginResponse.getRealmName());
+			Logging.log("Authorization  >>>>" + loginResponse.getTokenId());
+			setDynamicProperties();
+			return loginResponse;
+		} else {
+			return null;
+		}
+		
+	}
 	public LoginResponseBean getUserToken(String userId, String password,String hostName) {
 		LoginRequestBean loginRequestBean = new LoginRequestBean();
 		loginRequestBean.setUserId(userId);
