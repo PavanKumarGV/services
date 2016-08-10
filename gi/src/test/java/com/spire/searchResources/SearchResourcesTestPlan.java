@@ -2,7 +2,10 @@ package com.spire.searchResources;
 
 import java.io.IOException;
 
+import javax.ws.rs.core.Response;
+
 import org.apache.http.client.ClientProtocolException;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -47,4 +50,43 @@ public class SearchResourcesTestPlan extends TestPlan {
 		candConsumer.getSemilarProfiles(hostName);  
 
 	}
+	
+	/**
+	 *  Bhagyasree - Get suggestion when passing keyword
+	 * 
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 **/
+	
+	@Test(groups = { "sanity" , "verifySuggestRequest" })
+	public void verifySuggestRequest()throws ClientProtocolException,
+	IOException {
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody =suggestConsumer.getSuggest(hostName);  
+		String response = responsebody.readEntity(String.class);
+		System.out.println("***** RESPONSE ******"+response);
+		Assert.assertTrue(response.contains("java"));
+		
+				
+	}
+	
+	/**
+	 *  Bhagyasree - Get error code when keyword is blank
+	 * 
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 **/
+	
+	@Test(groups = { "sanity" , "verifySuggestValidation" })
+	public void verifySuggestValidation()throws ClientProtocolException,
+	IOException {
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		suggestConsumer.suggestValidation(hostName);  
+		
+				
+	}
+
+	
 }
