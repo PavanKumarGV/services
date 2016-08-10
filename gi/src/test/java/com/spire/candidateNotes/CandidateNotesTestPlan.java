@@ -199,7 +199,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 10/08/16 Steps:Create Note with only entity id
 	 *         Validation: Successfull Note creation in response body
 	 */
-	@Test(groups = { "sanity", "createNotesWithOnlyEntityId" })
+	@Test(groups = {  "createNotesWithOnlyEntityId" })
 	public void createNotesWithOnlyEntityId() {
 		noteBeanRequestWithOnlyEntityId = NotesServicesUtil.getNoteBeanWithOnlyEntityId();
 		String entityId1 = noteBeanRequestWithOnlyEntityId.getId();
