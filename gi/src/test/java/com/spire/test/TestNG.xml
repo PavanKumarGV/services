@@ -11,6 +11,7 @@
 		<groups>
 			<run>
 				<include name="sanity"/>
+				
 			</run>
 		</groups>
 		<packages>
