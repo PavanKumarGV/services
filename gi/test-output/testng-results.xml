@@ -2,117 +2,158 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
     <line>
-      <![CDATA[ EndPoint URL >>http://192.168.2.177:8080/generic-services/api/lookup/demand/filter?type=REQUISITION_STATUS]]>
+      <![CDATA[Start :: Login with Username: tester@logica.comPassword: spire@123and hostName: http://192.168.2.177:8080]]>
     </line>
     <line>
-      <![CDATA[RESPONSE CODE >>200]]>
+      <![CDATA[Inside of Login]]>
+    </line>
+    <line>
+      <![CDATA[userId >>>>6002:6003:760e9c3442a741ddb4c0bed4613a4b18]]>
+    </line>
+    <line>
+      <![CDATA[tenantId  >>>>6002]]>
+    </line>
+    <line>
+      <![CDATA[realmName  >>>>Realm1]]>
+    </line>
+    <line>
+      <![CDATA[Authorization  >>>>eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI5YmY2MGZlNC02YjU2LTRmMTYtYmJjOC1mY2NjNDhiYzcyMzQiLCJleHAiOjE0ODM3ODc5OTYsIm5iZiI6MCwiaWF0IjoxNDcwODI3OTk2LCJpc3MiOiJodHRwOi8vMTcyLjE2LjAuMjE2OjgwODAvYXV0aC9yZWFsbXMvUmVhbG0xIiwiYXVkIjoidXNlci1zZXJ2aWNlIiwic3ViIjoiZGFmZDY2YWItMTFmMS00NzMwLWE3NDQtMDNjNDc1OGE5ZGMwIiwiYXpwIjoidXNlci1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6IjY0NTkzODk0LTNkNmMtNDk1OC1hNzYwLTY3YzczMGYzM2RkOSIsImNsaWVudF9zZXNzaW9uIjoiZjg0NjAxMGQtMDk5Zi00ZmJlLTgzMzUtNjcxYjJjZGVjYzVjIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImFkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiY3JtLXJ1bGVzIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tYWN0aXZpdHlzdHJlYW0iOnsicm9sZXMiOlsiYWRtaW4iXX0sInNlY3VyaXR5LWFkbWluLWNvbnNvbGUiOnsicm9sZXMiOlsiYWRtaW4iXX0sImJsb2Itc3RvcmUtd2ViIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tY29tLXNlcnZpY2VzIjp7InJvbGVzIjpbImFkbWluIl19LCJzb2NpYWwtd2ViIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tY29tLWJpei1zZXJ2aWNlcyI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXVzZXItc2VydmljZSI6eyJyb2xlcyI6WyJhZG1pbiJdfSwidGFsZW50LWVudGl0eS1sYXllciI6eyJyb2xlcyI6WyJhZG1pbiJdfSwibGFiZWxzLWJpei13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sInNlYXJjaC1hbmQtbWF0Y2gtc2VydmljZSI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXBpcGVsaW5lIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tc2VhcmNoLWJpei13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1lbWFpbHMiOnsicm9sZXMiOlsiYWRtaW4iXX0sInNhdmUtc2VhcmNoIjp7InJvbGVzIjpbImFkbWluIl19LCJ0YWxlbnQtYml6LUxheWVyIjp7InJvbGVzIjpbImFkbWluIl19LCJwcm9maWxlcy13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1qb2Jwb3N0LXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXByb2ZpbGVzIjp7InJvbGVzIjpbImFkbWluIl19LCJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwidmlldy1yZWFsbSIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwidmlldy1ldmVudHMiLCJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWNsaWVudHMiXX0sInByb2ZpbGUtYml6LXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYWNxdXJhLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYWN0aXZpdHktc3RyZWFtLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLWNhbXBhaWduLWJpeiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLW5vdGVzLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLWNhbXBhaWduLXNlcnZpY2VzIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tbm90aWZpY2F0aW9uLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImxhYmVscy13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1jYW1wYWlnbnMiOnsicm9sZXMiOlsiYWRtaW4iXX0sIkNSTS1Bc3luYy1Db25zdW1lciI6eyJyb2xlcyI6WyJhZG1pbiJdfSwic3BpcmUtYml6Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fSwibmFtZSI6InRlc3RlciBsb2dpY2EiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0ZXJAbG9naWNhLmNvbSIsImdpdmVuX25hbWUiOiJ0ZXN0ZXIiLCJmYW1pbHlfbmFtZSI6ImxvZ2ljYSIsImVtYWlsIjoidGVzdGVyQGxvZ2ljYS5jb20ifQ.Ox5ZVLLTXnmTyJFSwc-FaDa4TbUGB_5XnfMVY-BLGIhJbwFoqQqebczWFaIQwvyXQAMbalj6t-mbzCW8wdBGEMp_PM2xvlzQmOJo_1pAaD3jJwBrKZB1u6I2xJ7r485Eg8xkxUZInFikLqMvIeegz73aX2ZiQDJTP42_MfAO0sq361lJUCVvyK5wKiicdssxJW-Mg-VvPLl5lDk7Mzh8m0cDkm_pyPTVokDqmps4SkHMk1E0hEM_QLRTp1JV5y5IwyNitHdo-jb-8kal4RNv2QO8RjagXUwwJgASdKpS9kmDugUUi36xEmNOKBvjTT_GC-RrhcD3qNq_aUu-F3aLiA]]>
+    </line>
+    <line>
+      <![CDATA[Setting Headers from the service call !!!]]>
     </line>
   </reporter-output>
-  <suite name="Talent 2.0 Automation" duration-ms="2110" started-at="2016-08-09T05:03:00Z" finished-at="2016-08-09T05:03:02Z">
+  <suite name="Talent 2.0 Automation" duration-ms="1394" started-at="2016-08-10T11:20:07Z" finished-at="2016-08-10T11:20:08Z">
     <groups>
-      <group name="verifyLookupservices">
-        <method signature="LookUpResourcesTestPlan.verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="verifyLookupservices" class="com.spire.lookUpResources.LookUpResourcesTestPlan"/>
-      </group> <!-- verifyLookupservices -->
       <group name="sanity">
-        <method signature="LookUpResourcesTestPlan.verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="verifyLookupservices" class="com.spire.lookUpResources.LookUpResourcesTestPlan"/>
+        <method signature="SearchResourcesTestPlan.GetRequisitionSearch()[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="GetRequisitionSearch" class="com.spire.requisitionResources.SearchResourcesTestPlan"/>
       </group> <!-- sanity -->
+      <group name="GetRequisitionSearch">
+        <method signature="SearchResourcesTestPlan.GetRequisitionSearch()[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="GetRequisitionSearch" class="com.spire.requisitionResources.SearchResourcesTestPlan"/>
+      </group> <!-- GetRequisitionSearch -->
     </groups>
-    <test name="CandidateResourcesTestPlan" duration-ms="2110" started-at="2016-08-09T05:03:00Z" finished-at="2016-08-09T05:03:02Z">
-      <class name="com.spire.lookUpResources.LookUpResourcesTestPlan">
-        <test-method status="PASS" signature="beforeTestSuite(org.testng.ITestContext)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="beforeTestSuite" is-config="true" duration-ms="18" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:00Z">
+    <test name="RequsisitionSearchTestPlan" duration-ms="1394" started-at="2016-08-10T11:20:07Z" finished-at="2016-08-10T11:20:08Z">
+      <class name="com.spire.requisitionResources.SearchResourcesTestPlan">
+        <test-method status="PASS" signature="beforeTestSuite(org.testng.ITestContext)[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="beforeTestSuite" is-config="true" duration-ms="15" started-at="2016-08-10T16:50:07Z" finished-at="2016-08-10T16:50:07Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@627551fb]]>
+                <![CDATA[org.testng.TestRunner@7e0e6aa2]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTestSuite -->
-        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext, org.testng.xml.XmlTest)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="beforeTest" is-config="true" duration-ms="1" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:00Z">
+        <test-method status="PASS" signature="beforeTest(org.testng.ITestContext, org.testng.xml.XmlTest)[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="beforeTest" is-config="true" duration-ms="1" started-at="2016-08-10T16:50:07Z" finished-at="2016-08-10T16:50:07Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@627551fb]]>
+                <![CDATA[org.testng.TestRunner@7e0e6aa2]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[[Test: "CandidateResourcesTestPlan" verbose:1[parameters:][metagroups:] [included: verifyLookupservices ][excluded: ]  classes:[XmlClass class=com.spire.lookUpResources.LookUpResourcesTestPlan]  packages:org.testng.xml.XmlPackage@972f7c43 ] ]]>
+                <![CDATA[[Test: "RequsisitionSearchTestPlan" verbose:1[parameters:][metagroups:] [included: GetRequisitionSearch ][excluded: ]  classes:[XmlClass class=com.spire.requisitionResources.SearchResourcesTestPlan]  packages:org.testng.xml.XmlPackage@e9969954 ] ]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="setUp" is-config="true" duration-ms="1" started-at="2016-08-09T10:33:00Z" depends-on-methods="com.spire.base.controller.TestPlan.beforeTest" finished-at="2016-08-09T10:33:00Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="setUp" is-config="true" duration-ms="1" started-at="2016-08-10T16:50:07Z" depends-on-methods="com.spire.base.controller.TestPlan.beforeTest" finished-at="2016-08-10T16:50:07Z">
           <reporter-output>
+            <line>
+              <![CDATA[Start :: Login with Username: tester@logica.comPassword: spire@123and hostName: http://192.168.2.177:8080]]>
+            </line>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="beforeTestMethod([Ljava.lang.Object;, java.lang.reflect.Method, org.testng.ITestContext, org.testng.xml.XmlTest)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="beforeTestMethod" is-config="true" duration-ms="6" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:00Z">
+        <test-method status="PASS" signature="beforeTestMethod([Ljava.lang.Object;, java.lang.reflect.Method, org.testng.ITestContext, org.testng.xml.XmlTest)[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="beforeTestMethod" is-config="true" duration-ms="2" started-at="2016-08-10T16:50:07Z" finished-at="2016-08-10T16:50:07Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[Ljava.lang.Object;@a7e666]]>
+                <![CDATA[[Ljava.lang.Object;@5c072e3f]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[public void com.spire.lookUpResources.LookUpResourcesTestPlan.verifyLookupservices()]]>
+                <![CDATA[public void com.spire.requisitionResources.SearchResourcesTestPlan.GetRequisitionSearch() throws org.apache.http.client.ClientProtocolException,java.io.IOException]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[org.testng.TestRunner@627551fb]]>
+                <![CDATA[org.testng.TestRunner@7e0e6aa2]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[[Test: "CandidateResourcesTestPlan" verbose:1[parameters:][metagroups:] [included: verifyLookupservices ][excluded: ]  classes:[XmlClass class=com.spire.lookUpResources.LookUpResourcesTestPlan]  packages:org.testng.xml.XmlPackage@972f7c43 ] ]]>
+                <![CDATA[[Test: "RequsisitionSearchTestPlan" verbose:1[parameters:][metagroups:] [included: GetRequisitionSearch ][excluded: ]  classes:[XmlClass class=com.spire.requisitionResources.SearchResourcesTestPlan]  packages:org.testng.xml.XmlPackage@e9969954 ] ]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTestMethod -->
-        <test-method status="PASS" signature="verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="verifyLookupservices" duration-ms="2088" started-at="2016-08-09T10:33:00Z" finished-at="2016-08-09T10:33:02Z">
+        <test-method status="PASS" signature="GetRequisitionSearch()[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="GetRequisitionSearch" duration-ms="1381" started-at="2016-08-10T16:50:07Z" finished-at="2016-08-10T16:50:08Z">
           <reporter-output>
             <line>
-              <![CDATA[ EndPoint URL >>http://192.168.2.177:8080/generic-services/api/lookup/demand/filter?type=REQUISITION_STATUS]]>
+              <![CDATA[Inside of Login]]>
             </line>
             <line>
-              <![CDATA[RESPONSE CODE >>200]]>
+              <![CDATA[userId >>>>6002:6003:760e9c3442a741ddb4c0bed4613a4b18]]>
+            </line>
+            <line>
+              <![CDATA[tenantId  >>>>6002]]>
+            </line>
+            <line>
+              <![CDATA[realmName  >>>>Realm1]]>
+            </line>
+            <line>
+              <![CDATA[Authorization  >>>>eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI5YmY2MGZlNC02YjU2LTRmMTYtYmJjOC1mY2NjNDhiYzcyMzQiLCJleHAiOjE0ODM3ODc5OTYsIm5iZiI6MCwiaWF0IjoxNDcwODI3OTk2LCJpc3MiOiJodHRwOi8vMTcyLjE2LjAuMjE2OjgwODAvYXV0aC9yZWFsbXMvUmVhbG0xIiwiYXVkIjoidXNlci1zZXJ2aWNlIiwic3ViIjoiZGFmZDY2YWItMTFmMS00NzMwLWE3NDQtMDNjNDc1OGE5ZGMwIiwiYXpwIjoidXNlci1zZXJ2aWNlIiwic2Vzc2lvbl9zdGF0ZSI6IjY0NTkzODk0LTNkNmMtNDk1OC1hNzYwLTY3YzczMGYzM2RkOSIsImNsaWVudF9zZXNzaW9uIjoiZjg0NjAxMGQtMDk5Zi00ZmJlLTgzMzUtNjcxYjJjZGVjYzVjIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImFkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiY3JtLXJ1bGVzIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tYWN0aXZpdHlzdHJlYW0iOnsicm9sZXMiOlsiYWRtaW4iXX0sInNlY3VyaXR5LWFkbWluLWNvbnNvbGUiOnsicm9sZXMiOlsiYWRtaW4iXX0sImJsb2Itc3RvcmUtd2ViIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tY29tLXNlcnZpY2VzIjp7InJvbGVzIjpbImFkbWluIl19LCJzb2NpYWwtd2ViIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tY29tLWJpei1zZXJ2aWNlcyI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXVzZXItc2VydmljZSI6eyJyb2xlcyI6WyJhZG1pbiJdfSwidGFsZW50LWVudGl0eS1sYXllciI6eyJyb2xlcyI6WyJhZG1pbiJdfSwibGFiZWxzLWJpei13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sInNlYXJjaC1hbmQtbWF0Y2gtc2VydmljZSI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXBpcGVsaW5lIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tc2VhcmNoLWJpei13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1lbWFpbHMiOnsicm9sZXMiOlsiYWRtaW4iXX0sInNhdmUtc2VhcmNoIjp7InJvbGVzIjpbImFkbWluIl19LCJ0YWxlbnQtYml6LUxheWVyIjp7InJvbGVzIjpbImFkbWluIl19LCJwcm9maWxlcy13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1qb2Jwb3N0LXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLXByb2ZpbGVzIjp7InJvbGVzIjpbImFkbWluIl19LCJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctaWRlbnRpdHktcHJvdmlkZXJzIiwidmlldy1yZWFsbSIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwidmlldy1ldmVudHMiLCJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWNsaWVudHMiXX0sInByb2ZpbGUtYml6LXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYWNxdXJhLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYWN0aXZpdHktc3RyZWFtLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLWNhbXBhaWduLWJpeiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLW5vdGVzLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiY3JtLWNhbXBhaWduLXNlcnZpY2VzIjp7InJvbGVzIjpbImFkbWluIl19LCJjcm0tbm90aWZpY2F0aW9uLXdlYiI6eyJyb2xlcyI6WyJhZG1pbiJdfSwiYnJva2VyIjp7InJvbGVzIjpbInJlYWQtdG9rZW4iXX0sImxhYmVscy13ZWIiOnsicm9sZXMiOlsiYWRtaW4iXX0sImNybS1jYW1wYWlnbnMiOnsicm9sZXMiOlsiYWRtaW4iXX0sIkNSTS1Bc3luYy1Db25zdW1lciI6eyJyb2xlcyI6WyJhZG1pbiJdfSwic3BpcmUtYml6Ijp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19fSwibmFtZSI6InRlc3RlciBsb2dpY2EiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0ZXJAbG9naWNhLmNvbSIsImdpdmVuX25hbWUiOiJ0ZXN0ZXIiLCJmYW1pbHlfbmFtZSI6ImxvZ2ljYSIsImVtYWlsIjoidGVzdGVyQGxvZ2ljYS5jb20ifQ.Ox5ZVLLTXnmTyJFSwc-FaDa4TbUGB_5XnfMVY-BLGIhJbwFoqQqebczWFaIQwvyXQAMbalj6t-mbzCW8wdBGEMp_PM2xvlzQmOJo_1pAaD3jJwBrKZB1u6I2xJ7r485Eg8xkxUZInFikLqMvIeegz73aX2ZiQDJTP42_MfAO0sq361lJUCVvyK5wKiicdssxJW-Mg-VvPLl5lDk7Mzh8m0cDkm_pyPTVokDqmps4SkHMk1E0hEM_QLRTp1JV5y5IwyNitHdo-jb-8kal4RNv2QO8RjagXUwwJgASdKpS9kmDugUUi36xEmNOKBvjTT_GC-RrhcD3qNq_aUu-F3aLiA]]>
+            </line>
+            <line>
+              <![CDATA[Setting Headers from the service call !!!]]>
             </line>
           </reporter-output>
-        </test-method> <!-- verifyLookupservices -->
-        <test-method status="PASS" signature="afterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="afterTestMethod" is-config="true" duration-ms="0" started-at="2016-08-09T10:33:02Z" finished-at="2016-08-09T10:33:02Z">
+        </test-method> <!-- GetRequisitionSearch -->
+        <test-method status="PASS" signature="_takeScreenShotOnFailure(org.testng.ITestResult)[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="_takeScreenShotOnFailure" is-config="true" duration-ms="0" started-at="2016-08-10T16:50:08Z" finished-at="2016-08-10T16:50:08Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[public void com.spire.lookUpResources.LookUpResourcesTestPlan.verifyLookupservices()]]>
+                <![CDATA[[TestResult name=GetRequisitionSearch status=SUCCESS method=SearchResourcesTestPlan.GetRequisitionSearch()[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd] output=Inside of Login]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- _takeScreenShotOnFailure -->
+        <test-method status="PASS" signature="afterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="afterTestMethod" is-config="true" duration-ms="0" started-at="2016-08-10T16:50:08Z" finished-at="2016-08-10T16:50:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.spire.requisitionResources.SearchResourcesTestPlan.GetRequisitionSearch() throws org.apache.http.client.ClientProtocolException,java.io.IOException]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTestMethod -->
-        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="afterMethod" is-config="true" duration-ms="0" started-at="2016-08-09T10:33:02Z" finished-at="2016-08-09T10:33:02Z">
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="afterMethod" is-config="true" duration-ms="0" started-at="2016-08-10T16:50:08Z" finished-at="2016-08-10T16:50:08Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyLookupservices status=SUCCESS method=LookUpResourcesTestPlan.verifyLookupservices()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea] output= EndPoint URL >>http://192.168.2.177:8080/generic-services/api/lookup/demand/filter?type=REQUISITION_STATUS]]]>
+                <![CDATA[[TestResult name=GetRequisitionSearch status=SUCCESS method=SearchResourcesTestPlan.GetRequisitionSearch()[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd] output=Inside of Login]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method status="PASS" signature="afterTestSuite()[pri:0, instance:com.spire.lookUpResources.LookUpResourcesTestPlan@59f99ea]" name="afterTestSuite" is-config="true" duration-ms="0" started-at="2016-08-09T10:33:02Z" finished-at="2016-08-09T10:33:02Z">
+        <test-method status="PASS" signature="afterTestSuite()[pri:0, instance:com.spire.requisitionResources.SearchResourcesTestPlan@6ee52dcd]" name="afterTestSuite" is-config="true" duration-ms="0" started-at="2016-08-10T16:50:09Z" finished-at="2016-08-10T16:50:09Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTestSuite -->
-      </class> <!-- com.spire.lookUpResources.LookUpResourcesTestPlan -->
-    </test> <!-- CandidateResourcesTestPlan -->
+      </class> <!-- com.spire.requisitionResources.SearchResourcesTestPlan -->
+    </test> <!-- RequsisitionSearchTestPlan -->
   </suite> <!-- Talent 2.0 Automation -->
 </testng-results>
