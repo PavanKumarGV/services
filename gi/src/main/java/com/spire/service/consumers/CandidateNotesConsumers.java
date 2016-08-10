@@ -106,6 +106,30 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 		Logging.log("Response Code >>" + response.getStatus());
 		return response;
 	}
+	public Response getCandidatenotelistwithincorrectparameter(String hostname)
+	{
+		String serviceEndPoint =endPointURLCandidatenoteslist.replaceAll("hostAddress", hostname)+"entityId=1234&interval=asd";
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("Response Code >>"+response.getStatus());
+		return response;
+		
+		
+		
+	}
+	
+	public Response getCandidatenotesearchwithincorrectparameter(String hostname)
+	{
+		String serviceEndPoint =endPointURLCandidatenotessearch.replaceAll("hostAddress", hostname)+"?entityId=23123&searchText=asdasd123";
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("Response Code >>"+response.getStatus());
+		return response;
+	}
 
 	public Response createNote(NoteBean notesServiceBean,String hostname) {
 		String serviceEndPoint = createNoteEndPointUrl.replaceAll("hostAddress", hostname);
