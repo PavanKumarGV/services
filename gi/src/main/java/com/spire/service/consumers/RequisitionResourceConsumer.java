@@ -13,7 +13,8 @@ import com.spire.base.service.BaseServiceConsumerNew;
 public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	
 	String endPointURL_REQ = getServiceEndPoint("REQUISITION_SEARCH");
-	
+	String endPointURL_JOBDES_BY_ID = getServiceEndPoint("JOB_DES_BY_ID");
+
 	
 	public RequisitionResourceConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -22,7 +23,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		}
 
 	
-	public void getRequisition(String hostName)
+	public Response getRequisition(String hostName)
 			throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress",
 				hostName);
@@ -33,9 +34,29 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		} else {
 			Assert.fail();
 		}
-
-	}  
-	//test
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
+/*
+ * Get the job description by requisition id
+ */
+	
+	public Response getJobDesByreqID(String hostName)
+			throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_JOBDES_BY_ID.replaceAll("hostAddress",
+				hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
+		if (response1.getStatus() == 200) {
+			Logging.log("Status Code 200 ");		
+			} else {
+			Assert.fail();	
+		}
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
 
 }
 

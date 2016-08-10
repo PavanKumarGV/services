@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.ws.rs.core.Response;
 
 import org.apache.http.client.ClientProtocolException;
+import org.elasticsearch.common.inject.matcher.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -48,10 +49,16 @@ public class SearchResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "GetSimillerProfiles" })
 	public void GetSimillerProfiles() throws ClientProtocolException,
 			IOException {
-		candConsumer = new SearchResourcesConsumer(userId, password, hostName);
-		candConsumer.getSemilarProfiles(hostName);  
-
+		
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		suggestConsumer.getSemilarProfiles(hostName);  
+		Response responsebody =suggestConsumer.getSemilarProfiles(hostName);  
+		String response = responsebody.readEntity(String.class);
+		System.out.println("***** RESPONSE ******"+response);
+		Assert.assertTrue(response.contains("6002:6005:c7133f48171543998a8ad4190e1353eb"));
 	}
+	
 	
 	/**
 	 *  Bhagyasree - Get suggestion when passing keyword
@@ -129,7 +136,27 @@ public class SearchResourcesTestPlan extends TestPlan {
 		
 				
 	}
+
+	/**
+	 *  Vasista - Get -Similler profiles 
+	 * 
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 **/  
+	@Test(groups = { "sanity", "GetSimillerProfilesNegetive" })
+	public void GetSimillerProfilesNegetive() throws ClientProtocolException,
+			IOException {
+		
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		suggestConsumer.getSemilarProfilesNegi(hostName);  
+		Response responsebody =suggestConsumer.getSemilarProfiles(hostName);  
+		String response = responsebody.readEntity(String.class);
+		System.out.println("***** RESPONSE ******"+response);
+		Assert.assertTrue(response.contains(" "));
 	
+	}
+
 
 	
 }
