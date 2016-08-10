@@ -20,6 +20,7 @@
 			<package name="com.spire.candidateNotes" />
 			<package name="com.spire.requisitionResources" />
 			<package name="com.spire.searchResources" />
+			<package name="com.spire.candidateResources" />
 		</packages>
 	</test>
 </suite>               
