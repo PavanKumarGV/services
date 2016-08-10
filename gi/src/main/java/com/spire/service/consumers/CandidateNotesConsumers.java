@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.http.impl.client.BasicResponseHandler;
 
-
+import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 
 public class CandidateNotesConsumers extends BaseServiceConsumerNew 
@@ -18,30 +18,32 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew
 	String endpointURLCandidatenotesearchwithoutsearchtext=getServiceEndPoint("CANDIDATE_NOTES_SEARCH_WITHOUT_SEARCHTEXT");
 	String endpointURLCandidatenotesearchwithoutentityid=getServiceEndPoint("CANDIDATE_NOTES_SEARCH_WITHOUT_ENTITYID");
 	
-	public void getCandidatenoteslist(String hostName) {
+	public Response getCandidatenoteslist(String hostName) {
 		String serviceEndPoint = endPointURLCandidatenoteslist.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		System.out.println(response.getEntity());
+		Logging.log("Response Code >>"+response.getStatus());
+		return response;
 	}
-	public void getCandidatenotesearch(String hostName) {
+	public Response getCandidatenotesearch(String hostName) {
 		String serviceEndPoint =endPointURLCandidatenotessearch.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		System.out.println(response.getEntity());
+		Logging.log("Response Code >>"+response.getStatus());
+		return response;
 	}
 	
 	public Response getCandidatenoteslistwithoutInterval(String hostName)
 	{
 		String serviceEndPoint =endPointURLCandidatenoteswithoutinterval.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		/*Assert.assertEquals(200, response.getStatus());
-		String responsebody=response.readEntity(String.class);
-		System.out.println(responsebody);*/
+		Logging.log("Response Code >>"+response.getStatus());
 		return response;
 		
 		
@@ -50,11 +52,10 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew
 	{
 		String serviceEndPoint =endpointURLCandidatenotelistwithoutentityid.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		/*Assert.assertEquals(200, response.getStatus());
-		String responsebody=response.readEntity(String.class);
-		System.out.println(responsebody);*/
+		Logging.log("Response Code >>"+response.getStatus());
 		return response;
 		
 	}
@@ -63,11 +64,10 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew
 	{
 		String serviceEndPoint =endpointURLCandidatenotesearchwithoutsearchtext.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		/*Assert.assertEquals(200, response.getStatus());
-		String responsebody=response.readEntity(String.class);
-		System.out.println(responsebody);*/
+		Logging.log("Response Code >>"+response.getStatus());
 		return response;
 		
 		
@@ -76,11 +76,10 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew
 	{
 		String serviceEndPoint =endpointURLCandidatenotesearchwithoutentityid.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		/*Assert.assertEquals(200, response.getStatus());
-		String responsebody=response.readEntity(String.class);
-		System.out.println(responsebody);*/
+		Logging.log("Response Code >>"+response.getStatus());
 		return response;
 		
 		
