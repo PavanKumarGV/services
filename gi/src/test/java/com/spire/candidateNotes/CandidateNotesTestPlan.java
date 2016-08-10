@@ -157,7 +157,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		String entityId = noteBeanRequest.getId();
 		Logging.log(entityId);
 		candnoteConsumer = new CandidateNotesConsumers();
-		Response response = candnoteConsumer.createNote(noteBeanRequest);
+		Response response = candnoteConsumer.createNote(noteBeanRequest,hostName);
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);

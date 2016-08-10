@@ -14,6 +14,7 @@ import spire.talent.gi.beans.NoteBean;
 public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 	String endPointURLCandidatenoteslist = getServiceEndPoint("CANDIDATE_NOTES_LIST");
 	String endPointURLCandidatenotessearch = getServiceEndPoint("CANDIDATE_NOTES_SEARCH");
+	String createNoteEndPointUrl = getServiceEndPoint("CREATE_NOTE");
 
 	public Response getCandidatenoteslist(String hostName) {
 		String serviceEndPoint = endPointURLCandidatenoteslist.replaceAll("hostAddress", hostName)
@@ -106,10 +107,12 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 		return response;
 	}
 
-	public Response createNote(NoteBean notesServiceBean) {
-		String url = "http://192.168.2.177:8180/generic-services/api/notes/create";
+	public Response createNote(NoteBean notesServiceBean,String hostname) {
+		String serviceEndPoint = createNoteEndPointUrl.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<NoteBean> noteBean = Entity.entity(notesServiceBean, MediaType.APPLICATION_JSON_TYPE);
-		Response response = executePOST(url, noteBean);
+		Response response = executePOST(serviceEndPoint, noteBean);
 
 		return response;
 	}
