@@ -29,8 +29,10 @@ public class SearchResourcesTestPlan extends TestPlan {
 	@BeforeTest(alwaysRun = true)
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
-		userId = (String) ContextManager.getThreadContext().getUserid();
-		password = (String) ContextManager.getThreadContext().getPassword();
+		userId = (String) "tester@logica.com";
+		password = (String) "spire@123";
+		//userId = (String) ContextManager.getThreadContext().getUserid();
+		//password = (String) ContextManager.getThreadContext().getPassword();
 		Logging.log("Start :: Login with Username: " + userId + "Password: "
 				+ password + "and hostName: " + hostName);
 		

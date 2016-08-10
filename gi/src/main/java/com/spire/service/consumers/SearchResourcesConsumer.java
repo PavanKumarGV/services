@@ -19,6 +19,10 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 			"%3A");
 	String endPointURLSuggest = getServiceEndPoint("SEARCH_SUGGEST");
 	String endPointURLSuggestValidation = getServiceEndPoint("SUGGEST_VALIDATION");
+	String endPointURLSuggestForSkillwithMultipleWords = getServiceEndPoint("SEARCH_SUGGESTFORMULTIPLEWORDS").replace(" ",
+			"%20");
+	String endPointURLSuggestForSkillwithSpecialCharacter = getServiceEndPoint("SEARCH_SUGGESTWITHSPECIALCHARACTER");
+
 	
 	public SearchResourcesConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -51,6 +55,7 @@ public Response getSuggest(String hostName) throws ClientProtocolException, IOEx
 					
 		} else {
 			Assert.fail();
+			Logging.log("Response Code >>"+response.getStatus());
 		}
 				Logging.log("Response Code >>"+response.getStatus());
 				return response;
@@ -66,7 +71,39 @@ Response response = executeGET(serviceEndPoint);
 System.out.println("********** PASS **************");
 } else {
 Assert.fail();
+Logging.log("Response Code >>"+response.getStatus());
 }
+
+}
+
+public Response getSuggestForSkillwithMultipleWords(String hostName) throws ClientProtocolException, IOException  {
+	
+	String serviceEndPointM = endPointURLSuggestForSkillwithMultipleWords.replaceAll("hostAddress", hostName);		
+	System.out.println(" EndPoint URL >>" + serviceEndPointM);
+	Response responseM = executeGET(serviceEndPointM);
+			if (responseM.getStatus() == 200) {
+		System.out.println("***** PASS ******RESPONSE CODE >>" + responseM.getStatus());
+				
+	} else {
+		Assert.fail();
+	}
+			Logging.log("Response Code >>"+responseM.getStatus());
+			return responseM;
+
+}
+public Response getSuggestForSkillwithSpecialCharacter(String hostName) throws ClientProtocolException, IOException  {
+
+String serviceEndPointS = endPointURLSuggestForSkillwithSpecialCharacter.replaceAll("hostAddress", hostName);		
+System.out.println(" EndPoint URL >>" + serviceEndPointS);
+Response responseS = executeGET(serviceEndPointS);
+	if (responseS.getStatus() == 200) {
+System.out.println("***** PASS ******RESPONSE CODE >>" + responseS.getStatus());
+		
+} else {
+Assert.fail();
+}
+	Logging.log("Response Code >>"+responseS.getStatus());
+	return responseS;
 
 }
 

@@ -19,6 +19,8 @@
 				<include name="GetSimillerProfiles"/>
 				<include name="verifySuggestRequest"/>
 				<include name="verifySuggestValidation"/>
+				<include name="verifySuggestForSkillwithMultipleWords"/>
+				<include name="verifySuggestForSkillwithSpecialCharacter"/>
 				
 			</run>
 		</groups>
