@@ -111,4 +111,32 @@ public class CandidateNotesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		Assert.assertTrue(response.contains("entityId cannot be null"));
 	}
+	/**
+	 * Steps:List Note without any parameter
+	 * Validation:asserting the error response.
+	 */
+	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutanyparameterRequest" })
+	public void verifycandidatenotesearchwithoutanyparameterRequest() {
+		candnoteConsumer = new CandidateNotesConsumers();
+		Response responsebody = candnoteConsumer.getCandidatenotesearchwithoutanyparameter(hostName);
+		System.out.println(responsebody);
+		Assert.assertEquals(500, responsebody.getStatus());
+		String response = responsebody.readEntity(String.class);
+		Assert.assertTrue(response.contains("entityId cannot be null"));
+		Assert.assertTrue(response.contains("searchText cannot be null"));
+}
+	/**
+	 * Steps:Search Note without any parameter
+	 * Validation:asserting the error response.
+	 */
+	@Test(groups = { "sanity", "verifycandidatenotelistwithoutanyparameterRequest" })
+	public void verifycandidatenotelistwithoutanyparameterRequest() {
+		candnoteConsumer = new CandidateNotesConsumers();
+		Response responsebody = candnoteConsumer.getCandidatenotelistwithoutanyparameter(hostName);
+		System.out.println(responsebody);
+		Assert.assertEquals(500, responsebody.getStatus());
+		String response = responsebody.readEntity(String.class);
+		Assert.assertTrue(response.contains("entityId cannot be null"));
+		Assert.assertTrue(response.contains("interval cannot be null"));
+}
 }

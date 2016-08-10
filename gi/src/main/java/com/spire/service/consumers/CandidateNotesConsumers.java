@@ -16,6 +16,7 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew
 	String endPointURLCandidatenotessearch=getServiceEndPoint("CANDIDATE_NOTES_SEARCH");
 	
 	
+	
 	public Response getCandidatenoteslist(String hostName) {
 		String serviceEndPoint = endPointURLCandidatenoteslist.replaceAll("hostAddress", hostName)+"?entityId=Testing1&interval=1";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -106,5 +107,7 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew
 		Logging.log("Response Code >>"+response.getStatus());
 		return response;
 	}
+	
+	
 
 }
