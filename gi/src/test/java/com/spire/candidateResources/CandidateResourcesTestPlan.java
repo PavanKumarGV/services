@@ -35,7 +35,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	}
 	/**GET candidates
 	 * Verify: Response Code*/
-	@Test(groups = { "sanity" , "verifyFetchCandidatesRequest" })
+	@Test(groups = {  "verifyFetchCandidatesRequest" })
 	public void verifyFetchCandidatesRequest(){
 		candConsumer = new CandidateResourcesConsumer();
 		int actualStatusCode = candConsumer.getCandidates(hostName);
@@ -45,7 +45,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	
 	/**GET Resume
 	 * Verify: Response Code*/
-	@Test(groups = { "sanity" , "verifyGetResumeRequest" })
+	@Test(groups = {  "verifyGetResumeRequest" })
 	public void verifyGetResumeRequest(){
 		candConsumer = new CandidateResourcesConsumer();
 		int actualStatusCode = candConsumer.getResume(hostName);
