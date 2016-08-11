@@ -21,6 +21,7 @@ public class NotesServicesUtil {
 		noteBeanreq.setCreatedBy("Radha");
 		noteBeanreq.setCreatedOn(todaysDate());
 		noteBeanreq.setEntityId("EntityId" + getRandom(1, 10000));
+		//noteBeanreq.setEntityId("EntityId123");
 		System.out.println(noteBeanreq.getId());
 		System.out.println(noteBeanreq.getEntityId());
 		return noteBeanreq;
@@ -74,6 +75,12 @@ public class NotesServicesUtil {
 		noteBeanreq.setEntityId("EntityId" + getRandom(1, 10000));
 		System.out.println(noteBeanreq.getId());
 		System.out.println(noteBeanreq.getEntityId());
+		return noteBeanreq;
+	}
+	
+	public static NoteBean getNoteForExistingEntityId(String id){
+		NoteBean noteBeanreq = new NoteBean();
+		noteBeanreq.setEntityId(id);
 		return noteBeanreq;
 	}
 }

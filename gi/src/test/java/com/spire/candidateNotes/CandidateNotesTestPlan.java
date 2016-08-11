@@ -27,6 +27,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	NoteBean noteBeanRequestWithBlankParameter = null;
 	NoteBean noteBeanRequestWithOnlyEntityId = null;
 	static String entityId = null;
+	static String id =null;
 
 	/**
 	 * Passing HostName,UserName and Password from the xml.
@@ -43,12 +44,12 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * in response body
 	 */
 
-	@Test(groups = { "sanity", "verifycandidatenoteslistRequest" })
+	@Test(groups = { "sanity", "verifycandidatenoteslistRequest" },dependsOnGroups={"createNotes"})
 	public void verifycandidatenoteslistRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
-		Response responsebody = candnoteConsumer.getCandidatenoteslist(hostName);
+		Response responsebody = candnoteConsumer.getCandidatenoteslist(hostName,id);
 		String response = responsebody.readEntity(String.class);
-		Assertion.assertTrue(response.contains("Testing1"), "not getting entityid in the response.");
+		Assertion.assertTrue(response.contains(id), "not getting entityid in the response.");
 		
 	}
 
@@ -198,6 +199,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	public void createNotes() {
 		noteBeanRequest = NotesServicesUtil.getNoteBean();
 		entityId = noteBeanRequest.getId();
+		id = noteBeanRequest.getEntityId();
 		Logging.log("Entity ID: "+entityId);
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response response = candnoteConsumer.createNote(noteBeanRequest, hostName);
@@ -274,5 +276,23 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log("Notes Created successfully with entity id: " + entityId);
 
 	}
-
+	
+	/**
+	 * @author Radharani Patra 11/08/16 Steps:Create Multiple Note with same entity id
+	 *         Validation: Successfull Note creation in response body
+	 */
+	@Test(groups = { "sanity", "createMultipleNotesWithSameEntityId" },dependsOnGroups={"createNotes"})
+	public void createMultipleNotesWithSameEntityId() {
+		noteBeanRequest = NotesServicesUtil.getNoteForExistingEntityId(id);
+		id = noteBeanRequest.getEntityId();
+		Logging.log("Entity ID: "+entityId);
+		candnoteConsumer = new CandidateNotesConsumers();
+		Response response = candnoteConsumer.createNote(noteBeanRequest, hostName);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
+		Logging.log("Notes Created successfully with entity id: " + entityId);
+}
 }
