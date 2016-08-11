@@ -101,6 +101,30 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		
 
 	}	 
+	
+	
+	
+	/* *  Udhay - /requisitions/{requisitionId}
+	 * 
+	 * Search RR with Invalid Requisition. The test case should not return 200 response 
+	 * 
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 **/  
+	@Test(groups = { "sanity", "GetRequInvalidInputSrch" })
+	public void GetRequInvalidInputSrch() throws ClientProtocolException,
+			IOException {
+		candConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response responsebody =	candConsumer.getRequisitionInvalidInput(hostName);  
+		String response = responsebody.readEntity(String.class);
+		System.out.println("***** RESPONSE ******"+response);
+		Assert.assertTrue(response.contains("primarySkill"));
+		Logging.log("contains the primary skill " );
+		Assert.assertTrue(response.contains("jobLevel"));
+		Logging.log("contains the jobLevel " );
+		
+
+	}	
 
 	}
 	
