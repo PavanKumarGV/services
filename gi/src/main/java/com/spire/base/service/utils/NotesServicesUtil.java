@@ -59,8 +59,21 @@ public class NotesServicesUtil {
 	
 	public static NoteBean getNoteBeanWithOnlyEntityId() {
 		NoteBean noteBeanreq = new NoteBean();
-		noteBeanreq.setId("ID" + getRandom(1, 10000));
+		noteBeanreq.setEntityId("ID" + getRandom(1, 10000));
+		System.out.println(noteBeanreq.getEntityId());
+		return noteBeanreq;
+	}
+	
+	public static NoteBean getNoteBeanWithExistingEntityId(String id) {
+		NoteBean noteBeanreq = new NoteBean();
+		noteBeanreq.setNoteTitle("Test" + getRandom(1, 10000));
+		noteBeanreq.setNoteDes("Description");
+		noteBeanreq.setId(id);
+		noteBeanreq.setCreatedBy("Radha");
+		noteBeanreq.setCreatedOn(todaysDate());
+		noteBeanreq.setEntityId("EntityId" + getRandom(1, 10000));
 		System.out.println(noteBeanreq.getId());
+		System.out.println(noteBeanreq.getEntityId());
 		return noteBeanreq;
 	}
 }
