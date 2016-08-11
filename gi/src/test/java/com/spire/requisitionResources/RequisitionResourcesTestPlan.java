@@ -19,7 +19,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	String userId;
 	String password;
 
-	RequisitionResourceConsumer candConsumer = null;
+	RequisitionResourceConsumer reqConsumer = null;
 
 	/** 
 	 * Passing HostName,UserName and Password from the xml.
@@ -47,8 +47,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "GetRequisitionSearch" })
 	public void GetRequisitionSearch() throws ClientProtocolException,
 			IOException {
-		candConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response responsebody =	candConsumer.getRequisition(hostName);  
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response responsebody =	reqConsumer.getRequisition(hostName);  
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******"+response);
 		Assert.assertTrue(response.contains("primarySkill"));
@@ -67,10 +67,10 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void GetJobDesByID() throws ClientProtocolException,
 			IOException {
 	
-		RequisitionResourceConsumer candConsumer = null;
-		candConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		candConsumer.getJobDesByreqID(hostName);  
-		Response responsebody =candConsumer.getJobDesByreqID(hostName);  
+		RequisitionResourceConsumer reqConsumer = null;
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		reqConsumer.getJobDesByreqID(hostName);  
+		Response responsebody =reqConsumer.getJobDesByreqID(hostName);  
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******"+response);
 		Assert.assertTrue(response.contains("primarySkill"));
@@ -90,8 +90,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "GetRequInvalidSrch" })
 	public void GetRequInvalidSrch() throws ClientProtocolException,
 			IOException {
-		candConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response responsebody =	candConsumer.getRequisitionInvalid(hostName);  
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response responsebody =	reqConsumer.getRequisitionInvalid(hostName);  
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******"+response);
 		Assert.assertTrue(response.contains("primarySkill"));
@@ -114,8 +114,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "GetRequInvalidInputSrch" })
 	public void GetRequInvalidInputSrch() throws ClientProtocolException,
 			IOException {
-		candConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response responsebody =	candConsumer.getRequisitionInvalidInput(hostName);  
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response responsebody =	reqConsumer.getRequisitionInvalidInput(hostName);  
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******"+response);
 		Assert.assertTrue(response.contains("primarySkill"));
@@ -125,6 +125,16 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		
 
 	}	
+	
+	/**
+	 * @author Radharani Patra 11/08/16 
+	 * Steps:Post - Search requisition with mandatory field
+	 *         Validation: Success Response Code, validate list of requiistion in response body
+	 */
+	@Test(groups = { "sanity", "searchRequisitionWithInSearchCriteria" })
+	public void searchRequisitionWithInSearchCriteria(){
+		
+	}
 
 	}
 	
