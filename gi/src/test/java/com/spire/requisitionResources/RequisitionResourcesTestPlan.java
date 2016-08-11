@@ -7,17 +7,23 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
+import com.spire.base.service.utils.RequisitionResourceServiceUtil;
 import com.spire.service.consumers.RequisitionResourceConsumer;
 import com.spire.service.consumers.SearchResourcesConsumer;
+
+import spire.talent.gi.beans.SearchRequisitionRequestBean;
 
 public class RequisitionResourcesTestPlan extends TestPlan {
 
 	String hostName;
 	String userId;
 	String password;
+	SearchRequisitionRequestBean searchReqrequestBean = null;
+	SearchRequisitionRequestBean searchReqrequestBean1 = null;
 
 	RequisitionResourceConsumer reqConsumer = null;
 
@@ -131,9 +137,35 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * Steps:Post - Search requisition with mandatory field
 	 *         Validation: Success Response Code, validate list of requiistion in response body
 	 */
-	@Test(groups = { "sanity", "searchRequisitionWithInSearchCriteria" })
+	@Test(groups = {  "searchRequisitionWithInSearchCriteria" })
 	public void searchRequisitionWithInSearchCriteria(){
-		
+		searchReqrequestBean = RequisitionResourceServiceUtil.getSearchRequisition();
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains("Open"), "Open requisition not found");
+		Logging.log("Open requiistions found");
+	}
+	
+	/**
+	 * @author Radharani Patra 11/08/16 
+	 * Steps:Post - Search requisition with mandatory field
+	 *         Validation: Success Response Code, validate list of requiistion in response body
+	 */
+	@Test(groups = {  "searchRequisitionWithoutSearchCriteria" })
+	public void searchRequisitionWithoutSearchCriteria(){
+		searchReqrequestBean1 = RequisitionResourceServiceUtil.getSearchRequisitionWithoutCriteria();
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean1);
+		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains("Open"), "Open requisition not found");
+		Logging.log("Open requiistions found");
 	}
 
 	}

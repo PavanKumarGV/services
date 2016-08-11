@@ -2,6 +2,8 @@ package com.spire.service.consumers;
 
 import java.io.IOException;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.http.client.ClientProtocolException;
@@ -10,12 +12,16 @@ import org.testng.Assert;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 
+import spire.talent.gi.beans.NoteBean;
+import spire.talent.gi.beans.SearchRequisitionRequestBean;
+
 public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	
 	String endPointURL_REQ = getServiceEndPoint("REQUISITION_SEARCH");
 	String endPointURL_JOBDES_BY_ID = getServiceEndPoint("JOB_DES_BY_ID");
 	String endPointURL_REQInvalid = getServiceEndPoint("INVALID_REQ_SEARCH");
 	String endPointURL_REQInvalid1 = getServiceEndPoint("INVALID1_REQ_SEARCH");
+	String searchReqURLEndpoint = getServiceEndPoint("SEARCH_REQUISITION");
 	
 	public RequisitionResourceConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -96,6 +102,15 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	}
 	
 
+	public Response searchRequisition(String hostName,SearchRequisitionRequestBean searchReqrequestBean){
+		String serviceEndPoint = searchReqURLEndpoint.replaceAll("hostAddress",hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, searchBean);
+
+		return response;
+	}
 }
 
 
