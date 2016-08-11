@@ -14,6 +14,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	
 	String endPointURL_REQ = getServiceEndPoint("REQUISITION_SEARCH");
 	String endPointURL_JOBDES_BY_ID = getServiceEndPoint("JOB_DES_BY_ID");
+	String endPointURL_REQInvalid = getServiceEndPoint("INVALID_REQ_SEARCH");
 
 	
 	public RequisitionResourceConsumer(String username, String password, String hostName) {
@@ -22,6 +23,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		getUserToken(username, password, hostName);
 		}
 
+	/* Get RR status code*/
 	
 	public Response getRequisition(String hostName)
 			throws ClientProtocolException, IOException {
@@ -30,6 +32,23 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
+			System.out.println("********** pass **************");
+		} else {
+			Assert.fail();
+		}
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
+	/* Get RR status code for INVALID RR ID- Special character*/
+	
+	public Response getRequisitionInvalid(String hostName)
+			throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_REQInvalid.replaceAll("hostAddress",
+				hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
+		if (response1.getStatus() != 200) {
 			System.out.println("********** pass **************");
 		} else {
 			Assert.fail();

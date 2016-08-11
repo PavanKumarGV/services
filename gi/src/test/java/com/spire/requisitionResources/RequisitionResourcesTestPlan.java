@@ -80,6 +80,30 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		
 	}
 	
+	/* *  Udhay - /requisitions/{requisitionId}
+	 * 
+	 * Search RR with special character. The test case should not return 200 response 
+	 * 
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 **/  
+	@Test(groups = { "sanity", "GetRequInvalidSrch" })
+	public void GetRequInvalidSrch() throws ClientProtocolException,
+			IOException {
+		candConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response responsebody =	candConsumer.getRequisitionInvalid(hostName);  
+		String response = responsebody.readEntity(String.class);
+		System.out.println("***** RESPONSE ******"+response);
+		Assert.assertTrue(response.contains("primarySkill"));
+		Logging.log("contains the primary skill " );
+		Assert.assertTrue(response.contains("jobLevel"));
+		Logging.log("contains the jobLevel " );
+		
+
+	}	 
+
+	}
 	
 	
-}
+	
+	
