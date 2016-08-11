@@ -24,7 +24,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	String password;
 	SearchRequisitionRequestBean searchReqrequestBean = null;
 	SearchRequisitionRequestBean searchReqrequestBean1 = null;
-
+	SearchRequisitionRequestBean candidatestasBean1=null;
 	RequisitionResourceConsumer reqConsumer = null;
 
 	/** 
@@ -166,6 +166,40 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("Open"), "Open requisition not found");
 		Logging.log("Open requiistions found");
+	}
+	/**
+	 * @author Pritisudha Pattanaik 11/08/16
+	 * Steps:Post - Get candidate stats for search criteria  with mandatory field
+	 *         Validation: Success Response Code, validate list of requiistion in response body
+	 */
+	@Test(groups = { "sanity", "getcandidatestas" })
+	public void getcandidatestas()
+	{
+		candidatestasBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisition();
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response =	reqConsumer.searchRequisition(hostName,candidatestasBean1);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains("Open"), "Open requisition not found");
+		Logging.log("Open requiistions found");
+		
+	}
+	/**
+	 * @author Pritisudha Pattanaik 11/08/16
+	 * Steps:Post - Get candidate stats  without any field
+	 *         Validation:  Response Code
+	 */
+	
+	@Test(groups = {"sanity",  "candidatestasRequisitionWithoutSearchCriteria" })
+	public void candidatestasRequisitionWithoutSearchCriteria(){
+		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandiadteStasRequisitionWithoutCriteria();
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean1);
+		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		
 	}
 
 	}

@@ -26,4 +26,25 @@ public class RequisitionResourceServiceUtil {
 		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
 		return searchReqBean;
 	}
+	public static SearchRequisitionRequestBean getCandidateStasRequisition()
+	{
+		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
+		List<String> list = new ArrayList<String>();
+		list.add("open");
+		Map<String,List<String>> map = new HashMap<String,List<String>>();
+		map.put("statusDisplay",list);
+		searchReqBean.setInSearchCriteria(map);
+		System.out.println(searchReqBean.getInSearchCriteria());
+		searchReqBean.setOffset(1);
+		searchReqBean.setLimit(5);
+		searchReqBean.setExprncToMnth(12);
+		
+		return searchReqBean;
+		
+	}
+	public static SearchRequisitionRequestBean getCandiadteStasRequisitionWithoutCriteria()
+	{
+		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
+		return searchReqBean;
+	}
 }
