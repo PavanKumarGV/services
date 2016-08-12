@@ -46,7 +46,7 @@ public class NotesServicesUtil {
 		// noteBeanreq.setId("ID"+getRandom(1, 10000));
 		noteBeanreq.setCreatedBy("Radha");
 		noteBeanreq.setCreatedOn(todaysDate());
-		noteBeanreq.setEntityId("EntityId" + getRandom(1, 10000));
+		noteBeanreq.setId("EntityId" + getRandom(1, 10000));
 		// System.out.println(noteBeanreq.getId());
 		System.out.println(noteBeanreq.getEntityId());
 		return noteBeanreq;

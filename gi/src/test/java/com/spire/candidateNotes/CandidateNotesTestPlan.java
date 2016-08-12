@@ -222,7 +222,10 @@ public class CandidateNotesTestPlan extends TestPlan {
 		noteBeanRequestWithBlankEntity = NotesServicesUtil.getNoteBeanWithBlankEntity();
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response response = candnoteConsumer.createNote(noteBeanRequestWithBlankEntity, hostName);
-		Assertion.assertEquals(response.getStatus(), 500, "Response not successfull: Expected 500");
+		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull: Expected 500");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Notes created");
+		Logging.log("Notes Created failed due to invalid parameter");
 	}
 
 	/**
@@ -234,7 +237,10 @@ public class CandidateNotesTestPlan extends TestPlan {
 		noteBeanRequestWithBlankParameter = NotesServicesUtil.getNoteBeanWithBlankParameter();
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response response = candnoteConsumer.createNote(noteBeanRequestWithBlankParameter, hostName);
-		Assertion.assertEquals(response.getStatus(), 500, "Response not successfull: Expected 500");
+		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull: Expected 400");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Notes created");
+		Logging.log("Notes Created failed due to invalid parameter");
 	}
 
 	/**
@@ -251,7 +257,6 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull: Expected 200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
-		Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
 		Logging.log("Notes Created successfully with entity id: " + entityId1);
 	}
