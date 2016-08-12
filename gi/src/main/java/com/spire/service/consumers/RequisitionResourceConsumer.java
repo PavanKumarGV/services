@@ -30,6 +30,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_MATCHING_REQ3 = getServiceEndPoint("MATCHING_REQS_WITH_ALL_FEILDS");
 	String endPointURL_MATCHING_REQ4 = getServiceEndPoint("MATCHING_REQS_WITH_ID_OFSET");
 	String endPointURL_MATCHING_REQ5 = getServiceEndPoint("MATCHING_REQS_ID_ONLY");
+	String createCandidateStasEndPOint=getServiceEndPoint("CREATE_CANDIDATE_STAS");
 
 	public RequisitionResourceConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -239,6 +240,23 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		String[] str2 = str1.split(":");
 		String str3 = str2[1].substring(0, str2[1].length() - 1);
 		return str3.substring(0, str3.length() - 1);
+	}
+	/**
+	 * priti
+	 * @param hostName
+	 * @param searchReqrequestBean
+	 * @return
+	 */
+	public Response createcandidatestas(String hostName,SearchRequisitionRequestBean searchReqrequestBean)
+	{
+		String serviceEndPoint = createCandidateStasEndPOint.replaceAll("hostAddress",hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, searchBean);
+		return response;
+		
+		
 	}
 
 }

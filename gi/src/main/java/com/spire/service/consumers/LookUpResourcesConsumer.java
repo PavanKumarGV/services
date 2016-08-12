@@ -9,6 +9,7 @@ import com.spire.base.service.BaseServiceConsumerNew;
 public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 
 	String lookUp = getServiceEndPoint("LOOK_UP");
+	String getlistlookupwithspecialcharacter=getServiceEndPoint("LOOK_UP_WITH_SPECIAL_CHARACTER");
 
 	public Response getListOfDemandFilter(String hostName) {
 		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"?type=REQUISITION_STATUS";
@@ -72,5 +73,15 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		return response;
+	}
+	public Response getListOfDemandFilterWithSpecialCharacter(String hostName)
+	{
+		String serviceEndPoint = getlistlookupwithspecialcharacter.replaceAll("hostAddress", hostName);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response = executeGET(serviceEndPoint);
+		return response;
+		
+		
 	}
 }
