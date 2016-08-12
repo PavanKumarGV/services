@@ -24,6 +24,10 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	String endPointURLSuggestForSkillwithMultipleWords = getServiceEndPoint(
 			"SEARCH_SUGGESTFORMULTIPLEWORDS").replace(" ", "%20");
 	String endPointURLSuggestForSkillwithSpecialCharacter = getServiceEndPoint("SEARCH_SUGGESTWITHSPECIALCHARACTER");
+        String searchCandidateEndPointUrl = getServiceEndPoint("SEARCH_CANDIDATE");
+	String endPointURLSavedSearch = getServiceEndPoint("SAVED_SEARCH");
+	String endPointURLSavedSearchById = getServiceEndPoint("SAVED_SEARCHBYID");
+	String endPointURLSavedSearchByIdNonExistent = getServiceEndPoint("SAVED_SEARCHBYIDNONEXISTENT");
 
 	public SearchResourcesConsumer(String username, String password,
 			String hostName) {
@@ -75,11 +79,13 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 				"hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		if (response.getStatus() == 500) {
+			if (responsebody.getStatus() != 200) {
 			System.out.println("********** PASS **************");
+			Logging.log("Response Code >>" + responsebody.getStatus());
 		} else {
 			Assert.fail();
-			Logging.log("Response Code >>" + response.getStatus());
+			System.out.println("********** FAIL **************");
+			Logging.log("Response Code >>" + responsebody.getStatus());
 		}
 
 	}
@@ -141,6 +147,75 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
+public Response searchCandidate(com.spire.base.service.utils.SearchInputRequest inputBean,String hostName)
+			throws ClientProtocolException, IOException {
+
+		String serviceEndPointC = searchCandidateEndPointUrl
+				.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPointC);
+		
+		Entity<com.spire.base.service.utils.SearchInputRequest> searchInputRequest = Entity.entity(inputBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPointC, searchInputRequest);
+		return response;
+
+	}
+	
+	public Response getSavedSearch(String hostName)
+			throws ClientProtocolException, IOException {
+
+		String serviceEndPoint = endPointURLSavedSearch
+				.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response responseS = executeGET(serviceEndPoint);
+		if (responseS.getStatus() == 200) {
+			System.out.println("***** PASS ******RESPONSE CODE >>"
+					+ responseS.getStatus());
+
+		} else {
+			Assert.fail();
+		}
+		Logging.log("Response Code >>" + responseS.getStatus());
+		return responseS;
+
+	}	
+	
+	public Response getSavedSearchById(String hostName)
+			throws ClientProtocolException, IOException {
+
+		String serviceEndPoint = endPointURLSavedSearchById
+				.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response responseS = executeGET(serviceEndPoint);
+		if (responseS.getStatus() == 200) {
+			System.out.println("***** PASS ******RESPONSE CODE >>"
+					+ responseS.getStatus());
+
+		} else {
+			Assert.fail();
+		}
+		Logging.log("Response Code >>" + responseS.getStatus());
+		return responseS;
+
+	}	
+	
+	public Response getSavedSearchByNonExistingId(String hostName)
+			throws ClientProtocolException, IOException {
+
+		String serviceEndPoint = endPointURLSavedSearchByIdNonExistent
+				.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response responseS = executeGET(serviceEndPoint);
+		if (responseS.getStatus() == 200) {
+			System.out.println("***** PASS ******RESPONSE CODE >>"
+					+ responseS.getStatus());
+
+		} else {
+			Assert.fail();
+		}
+		Logging.log("Response Code >>" + responseS.getStatus());
+		return responseS;
+
+	}	
 
 
 }
