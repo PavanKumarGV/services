@@ -91,7 +91,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.verifyListOfDemandFilterWithInvalidType(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull");
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
