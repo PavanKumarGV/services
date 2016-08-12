@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 import org.apache.http.client.ClientProtocolException;
 import org.testng.Assert;
 
+import com.spire.base.controller.Assertion;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 
@@ -228,6 +229,16 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		}
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
+	}
+	
+	public String getTotalCount(Response response){
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("totalResults"), "Requisition count not found");
+		String[] str = responseBody.split("totalResults");
+		String str1 = str[1];
+		String[] str2 = str1.split(":");
+		String str3 = str2[1].substring(0, str2[1].length() - 1);
+		return str3.substring(0, str3.length() - 1);
 	}
 
 }
