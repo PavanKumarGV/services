@@ -1,21 +1,32 @@
 package com.spire.searchResources;
 
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
 import java.io.IOException;
+import java.util.List;
 
 import javax.ws.rs.core.Response;
 
 import org.apache.http.client.ClientProtocolException;
-import org.elasticsearch.common.inject.matcher.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
+
+import spire.commons.search.response.CandidateSummary;
+import spire.talent.gi.beans.NoteBean;
+import spire.talent.gi.beans.SearchInput;
+
+import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
+import com.spire.base.service.utils.NotesServicesUtil;
+import com.spire.base.service.utils.SearchUtil;
+import com.spire.service.consumers.CandidateNotesConsumers;
 import com.spire.service.consumers.SearchResourcesConsumer;
 
-public class SearchResourcesTestPlan extends TestPlan {
+public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	String hostName;
 	String userId;

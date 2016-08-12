@@ -2,12 +2,17 @@ package com.spire.service.consumers;
 
 import java.io.IOException;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.http.client.ClientProtocolException;
 import org.testng.Assert;
 
 import spire.commons.userservice.bean.LoginResponseBean;
+import spire.talent.gi.beans.NoteBean;
+import spire.talent.gi.beans.SearchInput;
+import spire.talent.gi.rest.core.requests.SearchCandidateRequest;
 
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
@@ -79,6 +84,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 				"hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
+		Response responsebody = executeGET(serviceEndPoint);
 			if (responsebody.getStatus() != 200) {
 			System.out.println("********** PASS **************");
 			Logging.log("Response Code >>" + responsebody.getStatus());
