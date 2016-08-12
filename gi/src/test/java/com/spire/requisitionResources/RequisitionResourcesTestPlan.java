@@ -160,7 +160,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getSearchRequisitionWithoutCriteria();
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean1);
-		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull Expected:400");
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:400");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		/*String responseBody = response.readEntity(String.class);
 		Logging.log(responseBody);
