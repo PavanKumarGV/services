@@ -1,15 +1,30 @@
 package com.spire.service.consumers;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
+
+import spire.talent.gi.beans.GetCandidateRequestBean;
 
 public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 
 	String fetchCandidateURL = getServiceEndPoint("FETCH_CANDIDATES");
 	String getResumeURL = getServiceEndPoint("GET_RESUME");
 	String getcandidateprofileURL=getServiceEndPoint("GET_CANDIDATE_PROFILE");
+	
+	public CandidateResourcesConsumer(String username, String password, String hostName) {
+		Logging.log("Inside of Login");
+		System.out.println("Inside of Login");
+		getUserToken(username, password, hostName);
+	}
+	
+	public CandidateResourcesConsumer() {
+		Logging.log("Inside of Login");
+		
+	}
 
 	public int getCandidates(String hostName) {
 		String serviceEndPoint = fetchCandidateURL.replaceAll("hostAddress", hostName);
@@ -80,6 +95,14 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 	}
 	
-	
+	public Response getCandidateList(GetCandidateRequestBean reqBean,String hostname){
+		String serviceEndPoint = fetchCandidateURL.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<GetCandidateRequestBean> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, bean);
+		return response;
+		
+	}
 	
 }
