@@ -76,7 +76,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response responsebody = candnoteConsumer.getCandidatenoteslistwithoutInterval(hostName);
 		System.out.println(responsebody);
-		Assert.assertEquals(200, responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("interval cannot be null"), "not getting in response body as interval cannot be null");
 		
@@ -91,7 +91,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response responsebody = candnoteConsumer.getCandidatenoteslistwithoutEntityid(hostName);
 		System.out.println(responsebody);
-		Assertion.assertEquals(responsebody.getStatus(), 200, "expected response as 200 but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in response body");
 		
@@ -107,7 +107,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response responsebody = candnoteConsumer.getCandidatenotessearchwithoutsearchtext(hostName);
 		System.out.println(responsebody);
-		Assertion.assertEquals(responsebody.getStatus(), 200, "expected response as 200 but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("searchText cannot be null"), "not getting in the response body");
 		
@@ -122,7 +122,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response responsebody = candnoteConsumer.getCandidatenotessearchwithoutentityid(hostName);
 		System.out.println(responsebody);
-		Assertion.assertEquals(responsebody.getStatus(), 200, "expected response as 200 but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in the response body");
 		
@@ -137,7 +137,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response responsebody = candnoteConsumer.getCandidatenotesearchwithoutanyparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertEquals(responsebody.getStatus(), 500, "expected response as 500 but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in the response body");
 		Assertion.assertTrue(response.contains("searchText cannot be null"), "not getting in the response body");
@@ -153,7 +153,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response responsebody = candnoteConsumer.getCandidatenotelistwithoutanyparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertEquals(responsebody.getStatus(), 500, "expected response as 500 but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in the response body");
 		Assertion.assertTrue(response.contains("interval cannot be null"), "not getting in the response body");
@@ -169,7 +169,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		Response responsebody = candnoteConsumer.getCandidatenotelistwithincorrectparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertEquals(responsebody.getStatus(), 404, "expected 404 but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("The requested resource is not available"), "not matching with response body");
 		
