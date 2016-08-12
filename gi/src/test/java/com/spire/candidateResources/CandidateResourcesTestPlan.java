@@ -357,4 +357,18 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		Logging.log("Response is blank for invalid candidate id");
 	}
 	
+	/**priti- GET candidate profile without headers
+     * Validation on response code
+     *
+     */
+    @Test(groups={"sanity","verifyGetCandidateProfilewithoutheaderRequest"})
+    public void verifyGetCandidateProfilewithoutheaderRequest()
+    {
+        candConsumer = new CandidateResourcesConsumer();
+        Response responsebody = candConsumer.getcandidateprofile(hostName);
+        Assertion.assertTrue((responsebody.getStatus())!= 200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+        
+        
+        
+    }
 }
