@@ -13,7 +13,7 @@ public class RequisitionResourceServiceUtil {
 	public static SearchRequisitionRequestBean getSearchRequisition(){
 		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
 		List<String> list = new ArrayList<String>();
-		list.add("open");
+		list.add("Open");
 		Map<String,List<String>> map = new HashMap<String,List<String>>();
 		map.put("statusDisplay",list);
 		searchReqBean.setInSearchCriteria(map);
