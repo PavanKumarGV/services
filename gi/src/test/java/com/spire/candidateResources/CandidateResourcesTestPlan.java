@@ -88,8 +88,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		candConsumer.getToken(userId, password, hostName);
 		
 		Response responsebody = candConsumer.getCandidateprofilewithoutanyparameter(hostName);
-		Assertion.assertEquals(responsebody.getStatus(),404, "response expected 404 but found response code as:"+responsebody.getStatus());
-		
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 	}
 	/**GET Candidate profile without id
 	 * Verify:Response code
@@ -101,7 +100,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		candConsumer = new CandidateResourcesConsumer();
 		candConsumer.getToken(userId, password, hostName);
 		Response responsebody = candConsumer.getCandidateprofilewithoutid(hostName);
-		Assertion.assertEquals(responsebody.getStatus(),404, "response expected 404 but found response code as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
 	}
 	/** GET Candidate profile without projection
 	 */
