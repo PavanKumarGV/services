@@ -74,7 +74,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.verifyListOfDemandFilterWithoutType(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
@@ -91,7 +91,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.verifyListOfDemandFilterWithInvalidType(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertEquals(response.getStatus(), 400, "Request Unsuccessfull: Expected Response Code 400");
+		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
@@ -109,7 +109,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNBlankKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertEquals(response.getStatus(), 500, "Request Unsuccessfull: Expected Response Code 500");
+		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
@@ -145,7 +145,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertEquals(response.getStatus(), 404, "Request Unsuccessfull: Expected Response Code 404");
+		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
@@ -163,10 +163,25 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		Response response = lookUpConsumer.getListOfDemandFilterByTypeNBlankKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		Assertion.assertEquals(response.getStatus(), 404, "Request Unsuccessfull: Expected Response Code 404");
+		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
 
 	}
+	
+	/**
+     * @author Pritisudha Pattanaik
+     * Steps: Get list of demand filter by passing special characters
+     * Validation: asserting status code
+     */
+    @Test(groups={"sanity","verifylistofdemandfilterwithSpecialcharacters"})
+    public void verifylistofdemandfilterwithSpecialcharacters()
+    {
+        lookUpConsumer = new LookUpResourcesConsumer();
+        Response response=lookUpConsumer.getListOfDemandFilterWithSpecialCharacter(hostName);
+        Logging.log("RESPONSE CODE >>" + response.getStatus());
+        Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull: Expected Response Code 200 but found :"+response.getStatus());
+        
+    }
 }
