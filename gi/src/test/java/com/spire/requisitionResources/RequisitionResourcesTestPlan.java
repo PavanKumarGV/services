@@ -169,7 +169,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	}
 	/**
 	 * @author Pritisudha Pattanaik 11/08/16
-	 * Steps:Post - Get candidate stats for search criteria  with mandatory field
+	 * Steps:Post - Get candidate stats for search criteria  with insearchcriteria,and experience from month and to month
 	 *         Validation: Success Response Code, validate list of requiistion in response body
 	 */
 	@Test(groups = { "sanity", "getcandidatestas" })
@@ -177,13 +177,15 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	{
 		candidatestasBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisition();
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response response =	reqConsumer.searchRequisition(hostName,candidatestasBean1);
+		Response response =	reqConsumer.createcandidatestas(hostName,candidatestasBean1);
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
+		System.out.println("response="+response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
+		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Open"), "Open requisition not found");
-		Logging.log("Open requiistions found");
+		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Logging.log("Automatched requiistions found");
 		
 	}
 	/**
@@ -196,9 +198,67 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void candidatestasRequisitionWithoutSearchCriteria(){
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandiadteStasRequisitionWithoutCriteria();
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean1);
-		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull");
+		Response response =	reqConsumer.createcandidatestas(hostName,searchReqrequestBean1);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		
+	}
+	/**
+	 * @author Pritisudha Pattanaik 12/08/16
+	 * Steps:Post - Get candidate stats  with only insearchcriteria
+	 *         Validation:  Response Code and asserting response.
+	 */
+	@Test(groups = {"sanity",  "candidatestasRequisitionWithonlyinsearchcriteria" })
+	public void candidatestasRequisitionWithonlyinsearchcriteria(){
+		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisitionwithInsearchcriteria();
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response =	reqConsumer.createcandidatestas(hostName,searchReqrequestBean1);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println(responseBody);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Logging.log("Automatched requiistions found");
+		
+	}
+	/**
+	 * @author Pritisudha Pattanaik 12/08/16
+	 * Steps:Post - Get candidate stas with insearchcriteria and calculatedrecordcount as true
+	 * validation:Response code and asserting response.
+	 */
+	
+	@Test(groups = {"sanity",  "candidatestasRequisitionWithinsearchcriteriaandrecordcountTrue" })
+	public void candidatestasRequisitionWithinsearchcriteriaandrecordcountTrue(){
+		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisitionwithsearchandcalculatedrecordtrue();
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response =	reqConsumer.createcandidatestas(hostName,searchReqrequestBean1);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println(responseBody);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Logging.log("Automatched requiistions found");
+		
+	}
+	/**
+	 * @author Pritisudha Pattanaik 12/08/2016
+	 * Steps:Post - Get candidate stas with insearchcriteria and calculatedrecordcount as false
+	 * validation:Response code and asserting response.
+	 */
+	@Test(groups = {"sanity",  "candidatestasRequisitionWithinsearchcriteriaandrecordcountfalse" })
+	public void candidatestasRequisitionWithinsearchcriteriaandrecordcountfalse(){
+		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisitionwithsearchandcalculatedrecordfalse();
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response =	reqConsumer.createcandidatestas(hostName,searchReqrequestBean1);
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		String responseBody = response.readEntity(String.class);
+		System.out.println(responseBody);
+		Logging.log(responseBody);
+		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Logging.log("Automatched requiistions found");
 		
 	}
 	
