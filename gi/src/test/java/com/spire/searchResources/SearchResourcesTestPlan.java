@@ -296,6 +296,304 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		System.out.println("***** RESPONSE ******"+response);
 		
 	}
+	/**
+	 * priti- Get autocomplete with full skill
+	 */
+	@Test(groups = { "sanity","getautocompletewithfullskillRequest" })
+	public void getautocompletewithfullskillRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefullskillsearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("skill"), "skill not found in the response.");
+		 Assertion.assertTrue(response.contains("java script"), "full skill not found in response");
+	}
+	/**
+	 * priti-Get autocomplete with partial skill
+	 */
+	@Test(groups = { "sanity","getautocompletewithpartialskillRequest" })
+	public void getautocompletewithpartialskillRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartialskillsearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("skill"), "skill not found in the response.");
+		 Assertion.assertTrue(response.contains("ja"), "partial skill search not found in response");
+	}
+	/**
+	 * priti- Get autocomplete with full institute
+	 */
+	
+	@Test(groups = { "sanity","getautocompletewithfullinstituteRequest" })
+	public void getautocompletewithfullinstituteRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefullinstitutesearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("institute"), "institute not found in the response.");
+		 Assertion.assertTrue(response.contains("M.D. University"), "full institute not found in response");
+	}
+	
+	/**
+	 * priti- Get autocomplete with partial institute
+	 */
+	
+	@Test(groups = { "sanity","getautocompletewithpartialinstituteRequest" })
+	public void getautocompletewithpartialinstituteRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartialinstitutesearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("institute"), "institute not found in the response.");
+		Assertion.assertTrue(response.contains("Harvard"), "partial institute not found in response");
+	}
+	/**
+	 * priti-Get autocomplete with full education
+	 */
+	
+	
+	
+	@Test(groups = { "sanity","getautocompletewithfulleducationRequest" })
+	public void getautocompletewithfulleducationRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefulleducationsearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("education"), "education not found in the response.");
+		 Assertion.assertTrue(response.contains("Diploma in Computer Applications"), "full education not found in response");
+	}
+	/**
+	 * priti-Get autocomplete with partial education
+	 */
+	
+	
+	
+	@Test(groups = { "sanity","getautocompletewithpartialeducationRequest" })
+	public void getautocompletewithpartialeducationRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartialeducationsearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("education"), "education not found in the response.");
+		 Assertion.assertTrue(response.contains("Diploma"), "partial education not found in response");
+	}
+	/**
+	 * priti-Get autocomplete with full employer
+	 */
+	
+	
+	
+	@Test(groups = { "sanity","getautocompletewithfullemployerRequest" })
+	public void getautocompletewithfullemployerRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefullemployersearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("employer"), "employer not found in the response.");
+		 Assertion.assertTrue(response.contains("WIPRO TECHNOLOGIES Bangalore"), "full employer not found in response");
+	}
+	/**
+	 * priti-Get autocomplete with partial employer
+	 */
+	
+	
+	
+	@Test(groups = { "sanity","getautocompletepartialemployerRequest" })
+	public void getautocompletepartialemployerRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartialemployersearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("employer"), "employer not found in the response.");
+		 Assertion.assertTrue(response.contains("WIPRO"), "partial employer not found in response");
+	}
+	/**
+	 * priti-Get autocomplete with full location
+	 */
+	@Test(groups = { "sanity","getautocompletfulllocationRequest" })
+	public void getautocompletfulllocationRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefulllocationsearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("location"), "location not found in the response.");
+		 Assertion.assertTrue(response.contains("Bangalore"), "full location not found in response");
+	}
+	/**
+	 * priti-Get autocomplete with partial location
+	 */
+	@Test(groups = { "sanity","getautocompletpartiallocationRequest" })
+	public void getautocompletpartiallocationRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartiallocationsearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("location"), "location not found in the response.");
+		 Assertion.assertTrue(response.contains("ba"), "partial location not found in response");
+	}
+	
+	/**
+	 * priti-Get autocomplete with full sourcetype
+	 */
+	@Test(groups = { "sanity","getautocompletfullsourcetypeRequest" })
+	public void getautocompletfullsourcetypeRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefullsourcetypesearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("sourcetype"), "sourcetype not found in the response.");
+		 Assertion.assertTrue(response.contains("Referral - Employee"), "full sourcetype not found in response");
+	}
+	
+	/**
+	 * priti-Get autocomplete with partial sourcetype
+	 */
+	@Test(groups = { "sanity","getautocompletpartialsourcetypeRequest" })
+	public void getautocompletpartialsourcetypeRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartialsourcetypesearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("sourcetype"), "sourcetype not found in the response.");
+		 Assertion.assertTrue(response.contains("Referral"), "partial sourcetype not found in response");
+	}
+	
+	/**
+	 * priti-Get autocomplete with full sourcename
+	 */
+	@Test(groups = { "sanity","getautocompletfullsourcenameRequest" })
+	public void getautocompletfullsourcenameRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefullsourcenamesearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("sourcename"), "sourcename not found in the response.");
+		 Assertion.assertTrue(response.contains("Media - Alumni"), "full sourcename not found in response");
+	}
+	
+	/**
+	 * priti-Get autocomplete with partial sourcename
+	 */
+	@Test(groups = { "sanity","getautocompletpartialsourcenameRequest" })
+	public void getautocompletpartialsourcenameRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartialsourcenamesearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("sourcename"), "sourcename not found in the response.");
+		 Assertion.assertTrue(response.contains("Alumni"), "partial sourcename not found in response");
+	}
+	
+	/**
+	 * priti-Get autocomplete with full status
+	 */
+	@Test(groups = { "sanity","getautocompletfullstatusRequest" })
+	public void getautocompletfullstatusRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletefullstatussearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("status"), "status not found in the response.");
+		 Assertion.assertTrue(response.contains("Hr Interviewed"), "full status not found in response");
+	}
+	
+	/**
+	 * priti-Get autocomplete with partial status
+	 */
+	@Test(groups = { "sanity","getautocompletpartialstatusRequest" })
+	public void getautocompletpartialstatusRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletepartialstatussearch(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("status"), "status not found in the response.");
+		 Assertion.assertTrue(response.contains("Interviewed"), "partial status not found in response");
+	}
+	/**
+	 * priti-Get autocomplete without keyword
+	 */
+	
+	@Test(groups = { "sanity","getautocompletewithoutkeywordRequest" })
+	public void getautocompletewithoutkeywordRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletewithoutkey(hostName);  
+		Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("skill"), "skill not found in the response.");
+		 
+	}
+	/**
+	 * priti-Get autocomplete without type
+	 */
+	
+	@Test(groups = { "sanity","getautocompletewithouttypeRequest" })
+	public void getautocompletewithouttypeRequest()
+	{
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody=suggestConsumer.getautocompletewithouttype(hostName);  
+		//Assertion.assertEquals(200, responsebody.getStatus(), "Response expected 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!=200, "response is unsuccessfull");
+		 String response = responsebody.readEntity(String.class);
+		 
+		 Assertion.assertTrue(response.contains("Search input cannot be null or empty"), "Search input cannot be null or empty not found in the response.");
+		 //Assertion.assertTrue(response.contains("ja"), "full institute not found in response");
+	}
+	
+	
+	
+
 
 
 	
