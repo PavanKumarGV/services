@@ -31,7 +31,12 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_MATCHING_REQ4 = getServiceEndPoint("MATCHING_REQS_WITH_ID_OFSET");
 	String endPointURL_MATCHING_REQ5 = getServiceEndPoint("MATCHING_REQS_ID_ONLY");
 	String createCandidateStasEndPOint=getServiceEndPoint("CREATE_CANDIDATE_STAS");
-
+	
+	String endPointURL_GET_WITHOUT_REQID = getServiceEndPoint("GET_REQ_ID_INVALID"); //Get Requisition by requisition id
+	String endPointURL_GET_INVALIED_JD = getServiceEndPoint("GET_REQ_JD_INVALID"); //Get Requisition by requisition JD
+	String endPointURL_GET_INVALIED2_JD = getServiceEndPoint("GET_REQ_JD_INVALID2"); //Get Requisition by requisition JD
+	
+	
 	public RequisitionResourceConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
 		System.out.println("Inside of Login");
@@ -259,4 +264,67 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		
 	}
 
+	
+	/*
+	 * 12- 08 -2016 vasista - With out passing requisition id
+	 * 	 it should get the != 200
+	 */
+
+	public Response getWithOutReqID(String hostName) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_GET_WITHOUT_REQID.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
+		if (response1.getStatus() != 200) {
+			Logging.log("Status Code not equals  200");
+		} else {
+			Assert.fail();
+		}
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
+	
+	/*
+	 * 12- 08 -2016 vasista - With invalid jd
+	 * 	 it should get the != 200
+	 */
+
+	public Response getWithOutReqJD(String hostName) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_GET_INVALIED_JD.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
+		Logging.log("Response Code >>" + response1.getStatus());
+
+		if (response1.getStatus() != 200) {
+			Logging.log("Status Code not equals  200");
+	
+		} else {
+			Assert.fail();
+		}
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
+	
+	/*
+	 * 12- 08 -2016 vasista - with  valid requisition JD
+	 * 	 it should get the != 200
+	 */
+
+	public Response getWithInValid2ReqJD(String hostName) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_GET_INVALIED2_JD.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
+		Logging.log("Response Code >>" + response1.getStatus());
+
+		if (response1.getStatus() != 200) {
+			Logging.log("Status Code not equals  200");
+	
+		} else {
+			Assert.fail();
+		}
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
 }

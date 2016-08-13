@@ -34,7 +34,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@BeforeTest(alwaysRun = true)
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
-		userId = (String) "tester@logica.com";
+		userId = (String) "user@uat.com";
 		password = (String) "spire@123";
 		//userId = (String) ContextManager.getThreadContext().getUserid();
 		//password = (String) ContextManager.getThreadContext().getPassword();
@@ -472,6 +472,42 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		
 	}
 	
+	// 12- 08 -2016 vasista - With out passing requisition id
+			// * it should get the != 200
+
+			@Test(groups = { "sanity", "GetWithOutReqID" })
+			public void GetWithOutReqID() throws ClientProtocolException, IOException {
+
+				reqConsumer = new RequisitionResourceConsumer(userId, password,
+						hostName);
+				reqConsumer.getWithOutReqID(hostName);
+
+			}
+
+		// 12- 08 -2016 vasista - With out req JD
+			// * it should get the != 200
+
+			@Test(groups = { "sanity", "GetInvalidReqJD" })
+			public void GetInvalidReqJD() throws ClientProtocolException, IOException {
+
+				reqConsumer = new RequisitionResourceConsumer(userId, password,
+						hostName);
+				reqConsumer.getWithOutReqJD(hostName);
+
+			}
+			
+					// 12- 08 -2016 vasista - With wrong requisition id
+					// * it should get the != 200
+
+					@Test(groups = { "sanity", "GetInValid2ReqJD" })
+					public void GetInValid2ReqJD() throws ClientProtocolException, IOException {
+
+						reqConsumer = new RequisitionResourceConsumer(userId, password,
+								hostName);
+						reqConsumer.getWithInValid2ReqJD(hostName);
+
+					}
+			
 	}
 	
 	
