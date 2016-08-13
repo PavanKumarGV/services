@@ -6,6 +6,7 @@ import javax.ws.rs.core.Response;
 
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
+import com.spire.base.service.Constants;
 
 import spire.talent.gi.beans.GetCandidateRequestBean;
 
@@ -53,7 +54,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	
 	public Response getcandidateprofile(String hostName)
 	{
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)+"/6002%3A6005%3A19c5a4a6aabb4336a5718e079e26528e?projection=full";
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)+"/"+Constants.requisition_Id+"?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
@@ -86,7 +87,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	}
 	public Response getCandidateprofilewithoutid(String hostName)
 	{
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)+"/6002:6005:19c5a4a6aabb4336a5718e079e26528e";
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)+"/"+Constants.requisition_Id;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
