@@ -6,5 +6,29 @@ public class Constants {
 	public static final String requisition_Id1 = "6079:6066:055c8bc96fe34ef6b3c036b2136d4d20";
 	public static final String user_Id = "user@uat.com";
 	public static final String password = "spire@123";
+	public static final String partial_Skill_to_search="ja";
+    public static final String full_skill_to_search="java%20script";
+    public static final String partial_institute_to_search="Harvard";
+    public static final String full_institute_to_search="M.D.%20University";
+    public static final String partial_education_to_search="Diploma";
+    public static final String full_education_to_search="Diploma%20in%20Computer%20Applications";
+    public static final String full_employer_to_search="WIPRO%20TECHNOLOGIES%20Bangalore";
+    public static final String partial_employer_to_search="WIPRO";
+    public static final String full_location_to_search="Bangalore";
+    public static final String partial_location_to_search="ba";
+    public static final String full_sourcetype_to_search="Referral%20-%20Employee";
+    public static final String partial_sourcetype_to_search="Referral";
+    public static final String full_sourcename_to_search="Media%20-%20Alumni";
+    public static final String partial_sourcename_to_search="Alumni";
+    public static final String full_status_to_search="Hr%20Interviewed";
+    public static final String partial_status_to_search="Interviewed";
+    public static final String skill="skill";
+    public static final String institute="institute";
+    public static final String education="education";
+    public static final String employer="employer";
+    public static final String location="location";
+    public static final String sourcetype="sourcetype";
+    public static final String sourcename="sourcename";
+    public static final String status="status";
 			
 }
