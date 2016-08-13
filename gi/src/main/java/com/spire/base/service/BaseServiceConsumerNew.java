@@ -107,7 +107,7 @@ public abstract class BaseServiceConsumerNew extends
 	 * DELETE Operation
 	 */
 
-	private Response executeDELETE(String URL) {
+	protected Response executeDELETE(String URL) {
 		prepareInvocation(URL);
 		logger.info("***** Calling DELETE !!! *****");
 		return invocationBuilder.delete();

@@ -22,6 +22,27 @@
 				<include name="verifySuggestForSkillwithMultipleWords"/>
 				<include name="verifySuggestForSkillwithSpecialCharacter"/>
 				
+				<include name="getSavedSearch"/>
+				<include name="getSavedSearchById"/>
+				<include name="getSavedSearchByNonExistingId"/>
+				
+				<include name="searchCandidatesWithSkill"/>
+				<include name="searchCandidatesWithSkillAndLocation"/>
+				<include name="verifySuggestValidation"/>
+				
+				<include name="listSavedSearchWithSortByModifiedOnAsc"/>
+				<include name="listSavedSearchWithSortByModifiedOnDsc"/>
+				<include name="listSavedSearchWithSortByCreatedOnAsc"/>
+				<include name="listSavedSearchWithSortByCreatedOnDsc"/> 
+				<include name="verifySuggestRequestForInvalidKeyword"/>
+				<include name="getSavedSearchByIdWithSpace"/>
+				<include name="createSavedSearchWithSkill"/>
+			    <include name="createSavedSearchInputBeanWithSkillAndLocation"/>
+				<include name="createPublicSavedSearchWithSkill"/>
+				<include name="deleteSavedSearchById"/>
+				<include name="deleteSavedSearchByIdNonExisting"/>
+			
+				
 			</run>
 		</groups>
 		<packages>
