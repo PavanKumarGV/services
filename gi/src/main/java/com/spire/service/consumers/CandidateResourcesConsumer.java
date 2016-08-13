@@ -15,6 +15,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	String fetchCandidateURL = getServiceEndPoint("FETCH_CANDIDATES");
 	String getResumeURL = getServiceEndPoint("GET_RESUME");
 	String getcandidateprofileURL=getServiceEndPoint("GET_CANDIDATE_PROFILE");
+	String getCandidateByprojection=getServiceEndPoint("CANDIDATE_BY_PROJECTION");
 	
 	public CandidateResourcesConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -98,6 +99,16 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	
 	public Response getCandidateList(GetCandidateRequestBean reqBean,String hostname){
 		String serviceEndPoint = fetchCandidateURL.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<GetCandidateRequestBean> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, bean);
+		return response;
+		
+	}
+	
+	public Response getCandidateByProjection(GetCandidateRequestBean reqBean,String hostname){
+		String serviceEndPoint = getCandidateByprojection.replaceAll("hostAddress", hostname);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<GetCandidateRequestBean> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);

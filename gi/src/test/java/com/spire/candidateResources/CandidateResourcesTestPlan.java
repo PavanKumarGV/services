@@ -370,4 +370,130 @@ public class CandidateResourcesTestPlan extends TestPlan {
         
         
     }
+    
+    /**
+	 * @author Radharani Patra 13/08/16 
+	 * Steps:Get Candidate By Projection with valid parameter(Candidate Id and Projection Type Basic)
+	 *         Validation: Response code and body
+	 */
+
+	@Test(groups = { "sanity","getCandidateByProjectionBASIC" })
+	public void getCandidateByProjectionBASIC() {
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListBasic(Constants.candidate_Id);
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		Response response = candConsumer.getCandidateByProjection(candRequestBean,hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 200, "Response successfull, Expected : 200");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(!responseBody.contains(Constants.candidate_Id), "Get Candidate By Projection UnSuccessful");
+		Logging.log("Get candidate By Projection successful, candidate id: "+Constants.candidate_Id);
+	}
+	
+	/**
+	 * @author Radharani Patra 13/08/16 
+	 * Steps:Get Candidate By Projection with valid parameter(Candidate Id and Projection Type Full)
+	 *         Validation: Response code and body
+	 */
+
+	@Test(groups = { "sanity","getCandidateByProjectionFULL" })
+	public void getCandidateByProjectionFULL() {
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListFull(Constants.candidate_Id);
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		Response response = candConsumer.getCandidateByProjection(candRequestBean,hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 200, "Response successfull, Expected : 200");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains(Constants.candidate_Id), "Get Candidate By Projection UnSuccessful");
+		Logging.log("Get candidate By Projection successful, candidate id: "+Constants.candidate_Id);
+	}
+	
+	/**
+	 * @author Radharani Patra 13/08/16 
+	 * Steps:Get Candidate By Projection with valid parameter(Candidate Id and Projection Type Custom)
+	 *         Validation: Response code and body
+	 */
+
+	@Test(groups = { "sanity","getCandidateByProjectionCUSTOM" })
+	public void getCandidateByProjectionCUSTOM() {
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListCustom(Constants.candidate_Id);
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		Response response = candConsumer.getCandidateByProjection(candRequestBean,hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 200, "Response successfull, Expected : 200");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(!responseBody.contains(Constants.candidate_Id), "Get Candidate By Projection UnSuccessful");
+		Logging.log("Get candidate By Projection successful, candidate id: "+Constants.candidate_Id);
+	}
+	
+	/**
+	 * @author Radharani Patra 13/08/16 
+	 * Steps:Get Candidate By Projection with blank Candidate Id 
+	 *         Validation: Response code and body
+	 */
+
+	@Test(groups = { "sanity","getCandidateByProjectionBlankCID" })
+	public void getCandidateByProjectionBlankCID() {
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlankCId();
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		Response response = candConsumer.getCandidateByProjection(candRequestBean,hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 400, "Response successfull, Expected : 400");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Get Candidate By Projection Successful");
+		Logging.log("Get candidate By Projection Unsuccessful, Response: "+"INVALID_PARAMETER");
+	}
+	
+	/**
+	 * @author Radharani Patra 13/08/16 
+	 * Steps:Get Candidate By Projection with blank projection type
+	 *         Validation: Response code and body
+	 */
+
+	@Test(groups = { "sanity","getCandidateByProjectionBlankProjectiontype" })
+	public void getCandidateByProjectionBlankProjectiontype() {
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlankPojectiontype(Constants.candidate_Id);
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		Response response = candConsumer.getCandidateByProjection(candRequestBean,hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 400, "Response successfull, Expected : 400");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Get Candidate By Projection Successful");
+		Logging.log("Get candidate By Projection Unsuccessful, Response: "+"INVALID_PARAMETER");
+	}
+	
+	/**
+	 * @author Radharani Patra 13/08/16 
+	 * Steps:Get Candidate By Projection with blank projection type
+	 *         Validation: Response code and body
+	 */
+
+	@Test(groups = { "sanity","getCandidateByProjectionBlankParameter" })
+	public void getCandidateByProjectionBlankParameter() {
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlank();
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		Response response = candConsumer.getCandidateByProjection(candRequestBean,hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 400, "Response successfull, Expected : 400");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Get Candidate By Projection Successful");
+		Logging.log("Get candidate By Projection Unsuccessful, Response: "+"INVALID_PARAMETER");
+	}
+	
+	/**
+	 * @author Radharani Patra 13/08/16 
+	 * Steps:Get Candidate By Projection with invalid candidate id
+	 *         Validation: Response code and body
+	 */
+
+	@Test(groups = { "sanity","getCandidateByProjectionInvalidCID" })
+	public void getCandidateByProjectionInvalidCID() {
+		candRequestBean = CandidateResourceServiceUtil.getCandidateprojectionInvalidCandidateId(Constants.candidate_Id);
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		Response response = candConsumer.getCandidateByProjection(candRequestBean,hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertEquals(response.getStatus(), 200, "Response successfull, Expected : 200");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains(""), "Get Candidate By Projection UnSuccessful");
+		Logging.log("Get candidate By Projection successful, Response: "+"Blank");
+	}
 }
