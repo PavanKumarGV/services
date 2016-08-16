@@ -17,6 +17,7 @@ import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
+import com.spire.base.service.Constants;
 import com.spire.base.service.utils.SearchUtil;
 import com.spire.service.consumers.SearchResourcesConsumer;
 
@@ -38,10 +39,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	@BeforeTest(alwaysRun = true)
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
-		userId = (String) "tester@logica.com";
-		password = (String) "spire@123";
-		// userId = (String) ContextManager.getThreadContext().getUserid();
-		// password = (String) ContextManager.getThreadContext().getPassword();
+		userId = Constants.user_Id;
+		password = Constants.password;
 		Logging.log("Start :: Login with Username: " + userId + "Password: "
 				+ password + "and hostName: " + hostName);
 
