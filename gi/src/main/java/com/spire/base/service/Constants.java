@@ -31,5 +31,6 @@ public class Constants {
     public static final String sourcetype="sourcetype";
     public static final String sourcename="sourcename";
     public static final String status="status";
+    public static final String candidate_resume="6079:6005:09c8cccc8ea74ad7a890475063bec46e";
 			
 }

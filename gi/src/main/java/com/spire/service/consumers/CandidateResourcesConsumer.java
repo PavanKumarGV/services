@@ -4,6 +4,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.spire.base.controller.Assertion;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 
@@ -114,6 +115,27 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		Response response = executePOST(serviceEndPoint, bean);
 		return response;
 
+	}
+	
+	public Response getCandidateResume(String cid,String hostname){
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname)+"/"+cid;
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		//call Get Operation
+		Response response = executeGET(serviceEndPoint);
+		return response;
+		
+	}
+	
+	public void assertResponse(Response response){
+		String responseBody = response.readEntity(String.class);
+		String[] str = responseBody.split("fileName");
+		String[] str1 = str[1].substring(3).split("\"");
+		String fileType = str1[0].substring(str1[0].length()-4, str1[0].length());
+		System.out.println("******"+fileType);
+		//Asserting response Body
+		Assertion.assertTrue(fileType.contains("doc")||fileType.contains("docx")||fileType.contains("pdf")||fileType.contains("txt"), "Get Candidate Resume Unsuccessfull");
+		Logging.log("Get Candidate Resume successful, File Type: "+fileType );
 	}
 
 }

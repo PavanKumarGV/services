@@ -430,4 +430,22 @@ public class CandidateResourcesTestPlan extends TestPlan {
 				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 
 	}
+	
+	/**
+	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume
+	 *  Validation: Response code and body
+	 */
+	@Test(groups = { "sanity", "getCandidateResume" })
+	public void getCandidateResume(){
+		//Get user token
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		//execute Get Request
+		Response response = candConsumer.getCandidateResume(Constants.candidate_resume,hostName);
+		//Asset Response Code
+		Assertion.assertEquals(response.getStatus(), 200, "Response Unsuccessfull, Expected : 200");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		//Assert Response Body
+		candConsumer.assertResponse(response);
+
+	}
 }

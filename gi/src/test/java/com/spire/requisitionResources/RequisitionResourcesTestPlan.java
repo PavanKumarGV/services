@@ -140,13 +140,18 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "searchRequisitionWithInSearchCriteria" })
 	public void searchRequisitionWithInSearchCriteria(){
+		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getSearchRequisition();
+		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		// Execute POST Request
 		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean);
+		// Assering Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		//Logging.log(responseBody);
+		//Asseting response body
 		Assertion.assertTrue(responseBody.contains("Open"), "Open requisition not found");
 		Logging.log("InSearch Criteria : Open, Open requistions found");
 	}
@@ -158,9 +163,13 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "searchRequisitionWithoutSearchCriteria" })
 	public void searchRequisitionWithoutSearchCriteria(){
+		// Get Request Bean
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getSearchRequisitionWithoutCriteria();
+		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		// Execute POST Request
 		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean1);
+		// Assering Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:400");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		/*String responseBody = response.readEntity(String.class);
@@ -270,13 +279,18 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "searchRequisitionWithStatusAndExperienceRange" })
 	public void searchRequisitionWithOpenStatusAndExperienceRange(){
+		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getOpenNClosedRequisitionWithExp();
+		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		// Execute POST Request
 		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean);
+		// Assering Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		//Logging.log(responseBody);
+		//Asseting response body
 		Assertion.assertTrue(responseBody.contains("Open")||responseBody.contains("Closed"), "Open requisition not found");
 		//Assertion.assertTrue(responseBody.contains("Closed"), "Closed requisition not found");
 		Logging.log("InSearch Criteria : Open and Closed status");
@@ -289,11 +303,16 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "searchRequisitionWithStatusAndCount" })
 	public void searchRequisitionWithStatusAndCount(){
+		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getRequisitionWithCount();
+		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		// Execute POST Request
 		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean);
+		// Assering Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		//Asseting response body
 		String count = reqConsumer.getTotalCount(response);
 //		Assertion.assertTrue(responseBody.contains("totalResults"), "Requisition count not found");
 		Logging.log("Total Requisition count: "+count);
@@ -306,12 +325,17 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "searchRequisitionWithStatusAndCountFalse" })
 	public void searchRequisitionWithStatusAndCountFalse(){
+		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getRequisitionWithCountFalse();
+		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		// Execute POST Request
 		Response response =	reqConsumer.searchRequisition(hostName,searchReqrequestBean);
+		// Assering Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
+		//Asseting response body
 		Assertion.assertTrue(!responseBody.contains("\"totalResults\": 0"), "Total result count found");
 		Logging.log("Total Result Count Not found showing \"totalResults\": 0");
 	}
