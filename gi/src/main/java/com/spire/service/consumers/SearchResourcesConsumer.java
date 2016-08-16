@@ -60,7 +60,8 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 	public Response getSemilarProfiles(String hostName)
 			throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL1.replaceAll("hostAddress",
+		endPointURL2=endPointURL1+Constants.candidate_Id2;
+		String serviceEndPoint = endPointURL2.replaceAll("hostAddress",
 				hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
@@ -70,7 +71,10 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 			Assert.fail();
 		}
 		Logging.log("Response Code >>" + response1.getStatus());
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+
 		return response1;
+		
 
 	}
 
