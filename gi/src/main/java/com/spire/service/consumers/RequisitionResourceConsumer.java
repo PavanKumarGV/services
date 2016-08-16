@@ -14,6 +14,7 @@ import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 
 import spire.talent.gi.beans.NoteBean;
+import spire.talent.gi.beans.RequisitionStatusBean;
 import spire.talent.gi.beans.SearchRequisitionRequestBean;
 
 public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
@@ -31,6 +32,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_MATCHING_REQ4 = getServiceEndPoint("MATCHING_REQS_WITH_ID_OFSET");
 	String endPointURL_MATCHING_REQ5 = getServiceEndPoint("MATCHING_REQS_ID_ONLY");
 	String createCandidateStasEndPOint=getServiceEndPoint("CREATE_CANDIDATE_STAS");
+	String changeReqURL = getServiceEndPoint("CHANGE_REQ_STATUS");
 
 	public RequisitionResourceConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -258,5 +260,32 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		
 		
 	}
+	public Response changeReqStatus(RequisitionStatusBean serviceBean,String hostname,String reqId,String stats) {
+		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname)+reqId+"/"+stats;
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePUT(serviceEndPoint, bean);
+		return response;
+	}
+	
+	public Response changeReqStatusBlnkRR(RequisitionStatusBean serviceBean,String hostname,String stats) {
+		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname)+stats;
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePUT(serviceEndPoint, bean);
+		return response;
+	}
+	
+	public Response changeReqStatusBlnk(RequisitionStatusBean serviceBean,String hostname) {
+		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePUT(serviceEndPoint, bean);
+		return response;
+	}
+
 
 }

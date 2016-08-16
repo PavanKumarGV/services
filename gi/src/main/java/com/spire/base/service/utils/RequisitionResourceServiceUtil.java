@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import spire.talent.gi.beans.RequisitionStatusBean;
 import spire.talent.gi.beans.SearchRequisitionRequestBean;
 
 public class RequisitionResourceServiceUtil {
@@ -141,5 +142,13 @@ public class RequisitionResourceServiceUtil {
 		searchReqBean.setInSearchCriteria(map);
 		searchReqBean.setCalculateRecordCount(false);
 		return searchReqBean;
+	}
+	
+	public static RequisitionStatusBean changereqStatus(String rid,String status){
+		RequisitionStatusBean reqStstusChange = new RequisitionStatusBean();
+		reqStstusChange.setId(rid);
+		reqStstusChange.setStatusDisplay(status);
+		return reqStstusChange;
+		
 	}
 }

@@ -195,7 +195,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 *         Validation: Successfull Note creation in response body
 	 */
 
-	@Test(groups = { "createNotes" })
+	@Test(groups = { "createNotes","P1" })
 	public void createNotes() {
 		noteBeanRequest = NotesServicesUtil.getNoteBean();
 		entityId = noteBeanRequest.getId();
@@ -217,7 +217,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 *         Validation: asserting the error response
 	 */
 
-	@Test(groups = { "sanity", "createNotesWithBlankEntityId" })
+	@Test(groups = { "sanity", "createNotesWithBlankEntityId","P1" })
 	public void createNotesWithBlankEntityId() {
 		noteBeanRequestWithBlankEntity = NotesServicesUtil.getNoteBeanWithBlankEntity();
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -232,7 +232,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 10/08/16 Steps:Create Note without any parameter
 	 *         Validation: asserting the error response
 	 */
-	@Test(groups = { "sanity", "createNotesWithBlankParameter" })
+	@Test(groups = { "sanity", "createNotesWithBlankParameter","P2" })
 	public void createNotesWithBlankParameter() {
 		noteBeanRequestWithBlankParameter = NotesServicesUtil.getNoteBeanWithBlankParameter();
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -247,7 +247,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 10/08/16 Steps:Create Note with only entity id
 	 *         Validation: Successfull Note creation in response body
 	 */
-	@Test(groups = { "sanity", "createNotesWithOnlyEntityId" })
+	@Test(groups = { "sanity", "createNotesWithOnlyEntityId","P2" })
 	public void createNotesWithOnlyEntityId() {
 		noteBeanRequestWithOnlyEntityId = NotesServicesUtil.getNoteBeanWithOnlyEntityId();
 		String entityId1 = noteBeanRequestWithOnlyEntityId.getId();
@@ -266,7 +266,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 *         Validation: Successfull Note creation in response body
 	 */
 
-	@Test(groups = { "sanity", "createNotesWithDuplicateId" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "createNotesWithDuplicateId","P1" },dependsOnGroups={"createNotes"})
 	public void createNotesWithDuplicateId() {
 		noteBeanRequest = NotesServicesUtil.getNoteBeanWithExistingEntityId(entityId);
 		entityId = noteBeanRequest.getId();
@@ -286,7 +286,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 11/08/16 Steps:Create Multiple Note with same entity id
 	 *         Validation: Successfull Note creation in response body
 	 */
-	@Test(groups = { "sanity", "createMultipleNotesWithSameEntityId" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "createMultipleNotesWithSameEntityId","P2" },dependsOnGroups={"createNotes"})
 	public void createMultipleNotesWithSameEntityId() {
 		noteBeanRequest = NotesServicesUtil.getNoteForExistingEntityId(id);
 		id = noteBeanRequest.getEntityId();

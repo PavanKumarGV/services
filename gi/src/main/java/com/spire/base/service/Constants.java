@@ -33,5 +33,8 @@ public class Constants {
     public static final String sourcename="sourcename";
     public static final String status="status";
     public static final String candidate_resume="6079:6005:09c8cccc8ea74ad7a890475063bec46e";
+    public static final String changeStats="6079:6066:28ec518324ed4d8b9562b2b6ffb72804";
+    public static final String test_status ="Test";
+    public static final String test_status1 = "Test1";
 			
 }

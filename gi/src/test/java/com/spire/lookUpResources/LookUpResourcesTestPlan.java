@@ -32,7 +32,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 * Asserting Open Requisition Status in response body
 	 */
 
-	@Test(groups = { "sanity", "verifyLookupservices" })
+	@Test(groups = { "sanity", "verifyLookupservices","P1" })
 	public void verifyLookupservices() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response
@@ -54,7 +54,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 * body
 	 */
 
-	@Test(groups = { "sanity", "verifyLookupservicesByTypeNKeyword" })
+	@Test(groups = { "sanity", "verifyLookupservicesByTypeNKeyword","P1" })
 	public void verifyLookupservicesByTypeNKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response
@@ -75,7 +75,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         Blank demand filter type Validation: Status code 500, Response
 	 *         message
 	 */
-	@Test(groups = { "sanity", "getListOfDemandFilterWithBlankType" })
+	@Test(groups = { "sanity", "getListOfDemandFilterWithBlankType","P2" })
 	public void getListOfDemandFilterWithoutType() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response
@@ -94,7 +94,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         Blank demand filter type Validation: Status code 500, Response
 	 *         message
 	 */
-	@Test(groups = { "sanity", "getListOfDemandFilterWithInvalidType" })
+	@Test(groups = { "sanity", "getListOfDemandFilterWithInvalidType","P2" })
 	public void getListOfDemandFilterWithInvalidType() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response
@@ -114,7 +114,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         message
 	 */
 
-	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNBlankKeyword" })
+	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNBlankKeyword","P2" })
 	public void verifyLookUpServiceByBlankTypeNBlankKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response
@@ -133,7 +133,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         Primary skill Type and Keyword j Validation: Asserting Status
 	 *         code 200, Response Message
 	 */
-	@Test(groups = { "sanity", "verifyLookupservicesByPrimarySkillTypeNKeyword" })
+	@Test(groups = { "sanity", "verifyLookupservicesByPrimarySkillTypeNKeyword","P1" })
 	public void verifyLookupservicesByPrimarySkillTypeNKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response
@@ -155,7 +155,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         message
 	 */
 
-	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNKeyword" })
+	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNKeyword","P2" })
 	public void verifyLookUpServiceByBlankTypeNKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response
@@ -175,7 +175,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         message
 	 */
 
-	@Test(groups = { "sanity", "verifyLookUpServiceByTypeNBlankKeyword" })
+	@Test(groups = { "sanity", "verifyLookUpServiceByTypeNBlankKeyword","P2" })
 	public void verifyLookUpServiceByTypeNBlankKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer();
 		// Executes Get request and returns Response

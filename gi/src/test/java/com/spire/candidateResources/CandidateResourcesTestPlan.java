@@ -119,7 +119,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateStatsWithValidParameter" })
+	@Test(groups = { "sanity", "getCandidateStatsWithValidParameter","P1" })
 	public void getCandidateStatsWithValidParameter() {
 		//Get Requset Bean, pass multiple requisitions
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStats(Constants.requisition_Id,
@@ -146,7 +146,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         Response code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateStatsWithValidParameterGender" })
+	@Test(groups = { "sanity", "getCandidateStatsWithValidParameterGender","P1" })
 	public void getCandidateStatsWithValidParameterGender() {
 		//Get Requset Bean, pass multiple requisitions
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsGender(Constants.requisition_Id,
@@ -171,7 +171,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         parameter Validation: Response code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateStatsWithBlankParameter" })
+	@Test(groups = { "sanity", "getCandidateStatsWithBlankParameter","P2" })
 	public void getCandidateStatsWithBlankParameter() {
 		//Get Requset Bean, pass parameters
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsBlank();
@@ -195,7 +195,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateStatsWithReqIdParameter" })
+	@Test(groups = { "sanity", "getCandidateStatsWithReqIdParameter","P1" })
 	public void getCandidateStatsWithReqIdParameter() {
 		//Get Requset Bean, pass requisitions
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsReqId(Constants.requisition_Id);
@@ -219,7 +219,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateStatsWithAttributeParameter" })
+	@Test(groups = { "sanity", "getCandidateStatsWithAttributeParameter","P1" })
 	public void getCandidateStatsWithAttributeParameter() {
 		//Get Requset Bean, pass attribute
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsAttribute();
@@ -243,7 +243,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateStatsWithInvalidParameter" })
+	@Test(groups = { "sanity", "getCandidateStatsWithInvalidParameter","P2" })
 	public void getCandidateStatsWithInvalidParameter() {
 		//Get Requset Bean, pass invalid req id
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsInvalid();
@@ -267,7 +267,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateListWithValidParameterBASIC" })
+	@Test(groups = { "sanity", "getCandidateListWithValidParameterBASIC","P1" })
 	public void getCandidateListWithValidParameterBASIC() {
 		//Get Requset Bean, pass valid parameter, candidate id and projection type
 		candRequestBean = CandidateResourceServiceUtil.getCandidateListBasic(Constants.candidate_Id);
@@ -290,7 +290,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateListWithValidParameterFULL" })
+	@Test(groups = { "sanity", "getCandidateListWithValidParameterFULL","P1" })
 	public void getCandidateListWithValidParameterFULL() {
 		//Get Requset Bean, pass valid parameter, candidate id and projection type
 		candRequestBean = CandidateResourceServiceUtil.getCandidateListFull(Constants.candidate_Id);
@@ -313,7 +313,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateListWithValidParameterCUSTOM" })
+	@Test(groups = { "sanity", "getCandidateListWithValidParameterCUSTOM","P1" })
 	public void getCandidateListWithValidParameterCUSTOM() {
 		//Get Requset Bean, pass valid parameter, candidate id and projection type
 		candRequestBean = CandidateResourceServiceUtil.getCandidateListCustom(Constants.candidate_Id);
@@ -336,7 +336,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateListWithBlankParameter" })
+	@Test(groups = { "sanity", "getCandidateListWithBlankParameter","P2" })
 	public void getCandidateListWithBlankParameter() {
 		//Get Requset Bean, pass blank candidate id and projection type
 		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlank();
@@ -359,7 +359,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         Response code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateListWithBlankCandidateId" })
+	@Test(groups = { "sanity", "getCandidateListWithBlankCandidateId","P2" })
 	public void getCandidateListWithBlankCandidateId() {
 		//Get Requset Bean, pass blank candidate id and projection type
 		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlankCId();
@@ -380,7 +380,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         parameter(Candidate Id ) Validation: Response code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateListWithBlankProjectionType" })
+	@Test(groups = { "sanity", "getCandidateListWithBlankProjectionType","P2" })
 	public void getCandidateListWithBlankProjectionType() {
 		//Get Requset Bean, pass candidate id
 		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlankPojectiontype(Constants.candidate_Id);
@@ -401,7 +401,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 *         parameter(Candidate Id ) Validation: Response code and body
 	 */
 
-	@Test(groups = { "sanity", "getCandidateListWithInvalidProjectionType" })
+	@Test(groups = { "sanity", "getCandidateListWithInvalidProjectionType","P2" })
 	public void getCandidateListWithInvalidProjectionType() {
 		//Get Requset Bean, pass invalid candidate id and projection type
 		candRequestBean = CandidateResourceServiceUtil.getCandidateListInvalidCandidateId(Constants.candidate_Id);
@@ -434,7 +434,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume
 	 *  Validation: Response code and body
 	 */
-	@Test(groups = { "sanity", "getCandidateResume" })
+	@Test(groups = { "sanity", "getCandidateResume","P1" })
 	public void getCandidateResume(){
 		//Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
@@ -452,7 +452,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with blank
 	 *         candidate id Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithBlankCandidateId" })
+	@Test(groups = { "sanity", "getCandidateResumeWithBlankCandidateId","P2" })
 	public void getCandidateResumeWithBlankCandidateId() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
@@ -468,7 +468,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with invalid
 	 *         candidate id Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithInvalidCandidateId" })
+	@Test(groups = { "sanity", "getCandidateResumeWithInvalidCandidateId","P2" })
 	public void getCandidateResumeWithInvalidCandidateId() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
@@ -485,7 +485,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume without
 	 *         passing headers Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders" })
+	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders","P2" })
 	public void getCandidateResumeWithoutHeaders() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer();
