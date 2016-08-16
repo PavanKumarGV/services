@@ -59,12 +59,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
-		suggestConsumer.getSemilarProfiles(hostName);
+		//suggestConsumer.getSemilarProfiles(hostName);
 		Response responsebody = suggestConsumer.getSemilarProfiles(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response
-				.contains("6079:6005:c3dbcb92dd8e4fd29af671d09d79b4fd"));
+				.contains(Constants.candidate_Id2));
 	}
 
 	/**

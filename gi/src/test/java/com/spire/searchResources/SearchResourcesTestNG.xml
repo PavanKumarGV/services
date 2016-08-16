@@ -9,7 +9,7 @@
 		<listener class-name="com.spire.base.reporter.SpireReport" />
 		<listener class-name="com.spire.base.controller.TestRetryListener" />
 	</listeners>
-	<parameter name="host" value ="http://192.168.2.177:8080"/>
+	<parameter name="host" value ="http://192.168.2.177:8180"/>
 	<parameter name="userId" value="tester@logica.com" />
 	<parameter name="password" value="spire@123" />
 	    <parameter name="healthCheck" value="false"/>	
@@ -17,7 +17,7 @@
 		<groups>
 			<run>
 				<include name="GetSimillerProfiles"/>
-				<include name="verifySuggestRequest"/>
+				<!-- <include name="verifySuggestRequest"/>
 				<include name="verifySuggestValidation"/>
 				<include name="verifySuggestForSkillwithMultipleWords"/>
 				<include name="verifySuggestForSkillwithSpecialCharacter"/>
@@ -40,7 +40,7 @@
 			    <include name="createSavedSearchInputBeanWithSkillAndLocation"/>
 				<include name="createPublicSavedSearchWithSkill"/>
 				<include name="deleteSavedSearchById"/>
-				<include name="deleteSavedSearchByIdNonExisting"/>
+				<include name="deleteSavedSearchByIdNonExisting"/> -->
 			
 				
 			</run>
