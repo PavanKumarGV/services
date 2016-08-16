@@ -17,7 +17,7 @@
 		<groups>
 			<run>
 				<include name="GetSimillerProfiles"/>
-				<!-- <include name="verifySuggestRequest"/>
+				<include name="verifySuggestRequest"/>
 				<include name="verifySuggestValidation"/>
 				<include name="verifySuggestForSkillwithMultipleWords"/>
 				<include name="verifySuggestForSkillwithSpecialCharacter"/>
@@ -40,7 +40,15 @@
 			    <include name="createSavedSearchInputBeanWithSkillAndLocation"/>
 				<include name="createPublicSavedSearchWithSkill"/>
 				<include name="deleteSavedSearchById"/>
-				<include name="deleteSavedSearchByIdNonExisting"/> -->
+				<include name="deleteSavedSearchByIdNonExisting"/>
+				<include name="searchCandidatesWithNoSearchQueryString"/>
+		    	<include name="updateSavedSearchById"/>
+		    	<include name="savedSearchBySearchText"/>
+		    	<include name="updateSavedSearchByIdNonExisting"/>
+		       	<include name="validationOnSavedSearchUsingSearchText"/>
+		    	<include name="savedSearchUsingPartialSearchText"/> -->
+		    	<include name="getCandidatesFromSavedSearch"/>
+		    	<include name="createSavedSearchWithExistingSavedSearchName"/>
 			
 				
 			</run>

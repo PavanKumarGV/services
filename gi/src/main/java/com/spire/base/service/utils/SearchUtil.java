@@ -3,16 +3,14 @@ package com.spire.base.service.utils;
 /**@author  10/08/16*/
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import spire.talent.gi.beans.NoteBean;
-import spire.talent.gi.beans.SavedSearchDetails;
 
-import com.google.gson.Gson;
+//import spire.talent.gi.beans.SavedSearchDetails;
+import com.spire.base.service.utils.SavedSearchDetails;
 import com.spire.base.controller.Logging;
 
 public class SearchUtil {
@@ -39,6 +37,22 @@ public class SearchUtil {
 		searchInputRequest.setPageInfo(getPageInfo());
 
 		return searchInputRequest;
+	}
+	
+	public static SearchInput getSearchInputBeanWithSkillWithoutPageInfo() {
+		SearchInput searchInput = new SearchInput();
+		String searchQueryString = "(skill:ajax)";// ,
+		Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
+
+		List<String> skills = new ArrayList<String>();
+		skills.add("ajax");
+
+		searchAttributeMap.put("skill", skills);
+
+		searchInput.setSearchQueryString(searchQueryString);
+		searchInput.setSearchAttributeMap(searchAttributeMap);
+
+		return searchInput;
 	}
 
 	public static SearchInputRequest getSearchInputBeanWithSkillAndLocation() {
@@ -124,8 +138,8 @@ public class SearchUtil {
 
 		searchInput.setSearchQueryString(searchQueryString);
 		searchInput.setSearchAttributeMap(searchAttributeMap);
-	//	savedSearchDetails.setSearchInput(searchInput);
-		Logging.log("savedSearchDetails..................." + savedSearchDetails);
+		savedSearchDetails.setSearchInput(searchInput);
+		Logging.log("create : savedSearchDetails..................." + savedSearchDetails);
 
 		return savedSearchDetails;
 	}
@@ -156,7 +170,7 @@ public class SearchUtil {
 		
 		searchInput.setSearchQueryString(searchQueryString);
 		searchInput.setSearchAttributeMap(searchAttributeMap);
-		//savedSearchDetails.setSearchInput(searchInput);
+		savedSearchDetails.setSearchInput(searchInput);
 		Logging.log("savedSearchDetails..................." + savedSearchDetails);
 
 		return savedSearchDetails;
@@ -180,10 +194,65 @@ public class SearchUtil {
 
 		searchInput.setSearchQueryString(searchQueryString);
 		searchInput.setSearchAttributeMap(searchAttributeMap);
-	//	savedSearchDetails.setSearchInput(searchInput);
+		savedSearchDetails.setSearchInput(searchInput);
 		Logging.log("savedSearchDetails..................." + savedSearchDetails);
 
 		return savedSearchDetails;
 	}
+	public static SavedSearchDetails createSavedSearchBeanWithExistingSavedSearchName() {
 
+		SavedSearchDetails savedSearchDetails = new SavedSearchDetails();
+		savedSearchDetails.setName("Test Saved Search");
+		savedSearchDetails.setSearchDescription("Test");
+		savedSearchDetails.setCreatedByName("Bhagyasree");
+		savedSearchDetails.setPublicPool(true);
+		SearchInput searchInput = new SearchInput();
+
+		Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
+		List<String> skills = new ArrayList<String>();
+		skills.add("java");
+		searchAttributeMap.put("skill", skills);
+
+		String searchQueryString = "(skill:java)";
+
+		searchInput.setSearchQueryString(searchQueryString);
+		searchInput.setSearchAttributeMap(searchAttributeMap);
+		savedSearchDetails.setSearchInput(searchInput);
+		Logging.log("savedSearchDetails..................." + savedSearchDetails);
+
+		return savedSearchDetails;
+	}
+	public static SearchInputRequest searchCandidatesWithNoSearchQueryString() {
+		SearchInput searchInput = new SearchInput();
+
+		String searchQueryString = "()";// ,
+		Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
+		List<String> skills = new ArrayList<String>();
+	
+
+		searchAttributeMap.put("skill", skills);
+		Logging.log(searchQueryString);
+		
+		searchInput.setSearchQueryString(searchQueryString);
+		searchInput.setSearchAttributeMap(searchAttributeMap);
+		
+		SearchInputRequest searchInputRequest = new SearchInputRequest();
+		searchInputRequest.setSearchInput(searchInput);
+		searchInputRequest.setPageInfo(getPageInfo());
+		
+		return searchInputRequest;
+	}
+	
+	public static SavedSearchDetails updateSavedSearchInputBeanWithSkill(SavedSearchDetails inputBean) {
+
+		inputBean.setName("Test Saved Search _updated" + getRandom(1, 10000));
+		inputBean.setModifiedByName("Bhagyasree S.");
+		
+		Logging.log("update : savedSearchDetails inputBean ..................." + inputBean);
+
+		return inputBean;
+	}
+	
+
+	
 }
