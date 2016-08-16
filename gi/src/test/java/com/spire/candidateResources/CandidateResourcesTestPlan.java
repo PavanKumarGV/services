@@ -447,4 +447,59 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		candConsumer.assertResponse(response);
 
 	}
+	
+	/**
+	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with blank
+	 *         candidate id Validation: Response code: 404
+	 */
+	@Test(groups = { "sanity", "getCandidateResumeWithBlankCandidateId" })
+	public void getCandidateResumeWithBlankCandidateId() {
+		// Get user token
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		// execute Get Request
+		Response response = candConsumer.getCandidateResumeBlank(hostName);
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() != 200, "Response Unsuccessfull");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+
+	}
+
+	/**
+	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with invalid
+	 *         candidate id Validation: Response code: 404
+	 */
+	@Test(groups = { "sanity", "getCandidateResumeWithInvalidCandidateId" })
+	public void getCandidateResumeWithInvalidCandidateId() {
+		// Get user token
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		// execute Get Request
+		Response response = candConsumer.getCandidateResumeInvalid(Constants.candidate_resume, hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() != 200, "Response Successfull, Expected 404 status code");
+		Logging.log("Response unsuccessful");
+
+	}
+
+	/**
+	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume without
+	 *         passing headers Validation: Response code: 404
+	 */
+	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders" })
+	public void getCandidateResumeWithoutHeaders() {
+		// Get user token
+		candConsumer = new CandidateResourcesConsumer();
+		// execute Get Request
+		Response response = candConsumer.getCandidateResume(Constants.candidate_resume, hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		// Asserting response Body
+		Assertion.assertTrue(responseBody.contains("response\": null"), "valid response");
+		Logging.log("Response is null for invalid headers");
+
+	}
 }

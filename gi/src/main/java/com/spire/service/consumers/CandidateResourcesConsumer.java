@@ -138,5 +138,25 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		Assertion.assertTrue(fileType.contains("doc")||fileType.contains("docx")||fileType.contains("pdf")||fileType.contains("txt"), "Get Candidate Resume Unsuccessfull");
 		Logging.log("Get Candidate Resume successful, File Type: "+fileType );
 	}
+	
+	public Response getCandidateResumeBlank(String hostname){
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		//call Get Operation
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
+	
+	public Response getCandidateResumeInvalid(String cid,String hostname){
+		String str1 = cid.substring(0, 10);
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname)+"/"+str1;
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		//call Get Operation
+		Response response = executeGET(serviceEndPoint);
+		return response;
+		
+	}
 
 }
