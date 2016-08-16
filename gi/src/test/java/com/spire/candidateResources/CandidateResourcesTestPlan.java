@@ -497,8 +497,9 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
+		System.out.println(responseBody);
 		// Asserting response Body
-		Assertion.assertTrue(responseBody.contains("response\": null"), "valid response");
+		Assertion.assertTrue(responseBody.contains("null"), "valid response");
 		Logging.log("Response is null for invalid headers");
 
 	}
