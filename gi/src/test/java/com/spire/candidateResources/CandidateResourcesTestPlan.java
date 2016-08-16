@@ -58,8 +58,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println(response);
 		// Asserting response body
-		Assertion.assertTrue(response.contains("6002:6005:19c5a4a6aabb4336a5718e079e26528e"),
-				"not matching with the response body");
+		Assertion.assertTrue(response.contains(Constants.candidate_Id1),"not matching with the response body");
 
 	}
 
@@ -110,7 +109,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println(response);
 		// Asserting Response Body
-		Assertion.assertTrue(response.contains("6002:6005:19c5a4a6aabb4336a5718e079e26528e"),
+		Assertion.assertTrue(response.contains(Constants.candidate_Id1),
 				"not matching with the response body");
 	}
 

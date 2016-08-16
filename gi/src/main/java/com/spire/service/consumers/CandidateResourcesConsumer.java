@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 import com.spire.base.controller.Assertion;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
+import com.spire.base.service.Constants;
 
 import spire.talent.gi.beans.GetCandidateRequestBean;
 
@@ -56,7 +57,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	 */
 	public Response getcandidateprofile(String hostName) {
 		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)
-				+ "/6002%3A6005%3A19c5a4a6aabb4336a5718e079e26528e?projection=full";
+				+ "/"+Constants.candidate_Id1+"?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		//call Get Operation
@@ -82,7 +83,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	}
 
 	public Response getCandidateprofilewithoutprojection(String hostName) {
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) + "?projection=full";
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) +"/"+Constants.candidate_Id1;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		//call Get Operation
@@ -96,8 +97,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	 * Pass parameter Projection type Returns Respsonse
 	 */
 	public Response getCandidateprofilewithoutid(String hostName) {
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)
-				+ "/6002:6005:19c5a4a6aabb4336a5718e079e26528e";
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)+"?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		//call Get Operation
@@ -106,6 +106,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
+
 
 	public Response getCandidateList(GetCandidateRequestBean reqBean, String hostname) {
 		String serviceEndPoint = fetchCandidateURL.replaceAll("hostAddress", hostname);
