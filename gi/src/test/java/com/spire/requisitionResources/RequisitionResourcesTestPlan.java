@@ -80,10 +80,10 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody =reqConsumer.getJobDesByreqID(hostName);  
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******"+response);
-		Assert.assertTrue(response.contains("primarySkill"));
-		Logging.log("contains the primary skill " );
-		Assert.assertTrue(response.contains("jobLevel"));
-		Logging.log("contains the jobLevel " );
+	/*	Assert.assertTrue(response.contains("fileContent"));
+		Logging.log("contains the fileContent " );*/
+		Assert.assertTrue(response.contains("fileName"));
+		Logging.log("contains the fileName " );
 		
 	}
 	
