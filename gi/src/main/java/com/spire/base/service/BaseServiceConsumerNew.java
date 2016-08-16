@@ -203,6 +203,9 @@ public abstract class BaseServiceConsumerNew extends
 		}
 		
 	}
+	
+	/** Takes parameter host, username,password
+	 * Returns Login Response bean*/
 	public LoginResponseBean getUserToken(String userId, String password,String hostName) {
 		LoginRequestBean loginRequestBean = new LoginRequestBean();
 		loginRequestBean.setUserId(userId);

@@ -184,7 +184,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Assertion.assertTrue(responseBody.contains("Automatched")||responseBody.contains("Customer Mapped"), "Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 		
 	}
@@ -218,7 +218,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Assertion.assertTrue(responseBody.contains("Automatched")||responseBody.contains("Customer Mapped"), "Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 		
 	}
@@ -238,7 +238,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Assertion.assertTrue(responseBody.contains("Automatched")||responseBody.contains("Customer Mapped"), "Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 		
 	}
@@ -257,7 +257,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched"), "Automatched requisition not found");
+		Assertion.assertTrue(responseBody.contains("Automatched")||responseBody.contains("Customer Mapped"), "Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 		
 	}
