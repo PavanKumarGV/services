@@ -630,4 +630,22 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		
 
 	}
+	
+	/*
+	 * * Udhay - /requisitions/{requisitionId}
+	 * 
+	 * Search RR with Blank Parameter. The test case should not return 200
+	 * response
+	 * 
+	 * @throws IOException
+	 * 
+	 * @throws ClientProtocolException
+	 **/
+	@Test(groups = { "sanity", "GetReqBlankSrch" })
+	public void GetReqBlankSrch() throws ClientProtocolException, IOException {
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response responsebody = reqConsumer.getRequisitionBlank(hostName);
+		String response = responsebody.readEntity(String.class);
+		System.out.println("***** RESPONSE ******" + response);
+	}
 }
