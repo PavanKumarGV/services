@@ -162,7 +162,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response " + response1);
-		if (response1.getStatus() == 204) {
+		if (response1.getStatus() == 200) {
 			System.out.println("********** pass **************");
 		} else {
 			Assert.fail();

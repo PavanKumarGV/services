@@ -65,7 +65,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response
-				.contains("6002:6005:c7133f48171543998a8ad4190e1353eb"));
+				.contains("6079:6005:c3dbcb92dd8e4fd29af671d09d79b4fd"));
 	}
 
 	/**
