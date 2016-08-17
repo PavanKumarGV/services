@@ -345,7 +345,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("skill"),
+		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
 		Assertion.assertTrue(response.contains("java script"),
 				"full skill not found in response");
@@ -368,7 +368,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("skill"),
+		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
 		Assertion.assertTrue(response.contains("ja"),
 				"partial skill search not found in response");
@@ -392,7 +392,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("institute"),
+		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
 		Assertion.assertTrue(response.contains("M.D. University"),
 				"full institute not found in response");
@@ -416,7 +416,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("institute"),
+		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
 		Assertion.assertTrue(response.contains("Harvard"),
 				"partial institute not found in response");
@@ -440,7 +440,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("education"),
+		Assertion.assertTrue(response.contains(Constants.education),
 				"education not found in the response.");
 		Assertion.assertTrue(
 				response.contains("Diploma in Computer Applications"),
@@ -465,7 +465,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("education"),
+		Assertion.assertTrue(response.contains(Constants.education),
 				"education not found in the response.");
 		Assertion.assertTrue(response.contains("Diploma"),
 				"partial education not found in response");
@@ -489,7 +489,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("employer"),
+		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
 		Assertion.assertTrue(response.contains("WIPRO TECHNOLOGIES Bangalore"),
 				"full employer not found in response");
@@ -513,7 +513,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("employer"),
+		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
 		Assertion.assertTrue(response.contains("WIPRO"),
 				"partial employer not found in response");
@@ -536,7 +536,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("location"),
+		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
 		Assertion.assertTrue(response.contains("Bangalore"),
 				"full location not found in response");
@@ -559,7 +559,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("location"),
+		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
 		Assertion.assertTrue(response.contains("ba"),
 				"partial location not found in response");
@@ -582,7 +582,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("sourcetype"),
+		Assertion.assertTrue(response.contains(Constants.sourcetype),
 				"sourcetype not found in the response.");
 		Assertion.assertTrue(response.contains("Referral - Employee"),
 				"full sourcetype not found in response");
@@ -605,7 +605,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("sourcetype"),
+		Assertion.assertTrue(response.contains(Constants.sourcetype),
 				"sourcetype not found in the response.");
 		Assertion.assertTrue(response.contains("Referral"),
 				"partial sourcetype not found in response");
@@ -628,7 +628,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("sourcename"),
+		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
 		Assertion.assertTrue(response.contains("Media - Alumni"),
 				"full sourcename not found in response");
@@ -651,7 +651,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("sourcename"),
+		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
 		Assertion.assertTrue(response.contains("Alumni"),
 				"partial sourcename not found in response");
@@ -674,7 +674,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("status"),
+		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
 		Assertion.assertTrue(response.contains("Hr Interviewed"),
 				"full status not found in response");
@@ -697,7 +697,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("status"),
+		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
 		Assertion.assertTrue(response.contains("Interviewed"),
 				"partial status not found in response");
@@ -721,7 +721,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 
-		Assertion.assertTrue(response.contains("skill"),
+		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
 
 	}

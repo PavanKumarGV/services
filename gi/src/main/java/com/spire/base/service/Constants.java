@@ -25,10 +25,10 @@ public class Constants {
     public static final String full_status_to_search="Hr%20Interviewed";
     public static final String partial_status_to_search="Interviewed";
     public static final String skill="skill";
-    public static final String institute="institute";
+    public static final String institute="institutename";
     public static final String education="education";
-    public static final String employer="employer";
-    public static final String location="location";
+    public static final String employer="employername";
+    public static final String location="locationname";
     public static final String sourcetype="sourcetype";
     public static final String sourcename="sourcename";
     public static final String status="status";
