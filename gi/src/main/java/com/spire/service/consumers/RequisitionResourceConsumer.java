@@ -26,6 +26,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_REQInvalid1 = getServiceEndPoint("INVALID1_REQ_SEARCH");
 	String searchReqURLEndpoint = getServiceEndPoint("SEARCH_REQUISITION");
 	String endPointURL_JD_BY_SPLCHAR_ID = getServiceEndPoint("SEARCH_REQUISITION_SPL");
+	String endPointURL_JD_BY_Blank_ID = getServiceEndPoint("SEARCH_REQUISITION_Blk");
 
 	
 
@@ -177,10 +178,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 			Assert.fail();
 		}
 		System.out.println("response code:" + response1.getStatus());
-		// Assertion.assertEquals(response1.getStatus(),500,
-		// "response expected 500 but found response code
-		// as:"+response1.getStatus());
-		// Assert.assertEquals(response1.getStatus(), 500);
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
@@ -191,24 +188,22 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getJobDesByBlankSpacereqID(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_REQBlank.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_JD_BY_Blank_ID.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		// String response = response1.readEntity(String.class);
 
 		if (response1.getStatus() != 200) {
 			Logging.log("Status Code Not equal to 200");
-		} else {
+			} else {
 			Assert.fail();
 		}
 		System.out.println("response code:" + response1.getStatus());
-		// Assertion.assertEquals(response1.getStatus(),500,
-		// "response expected 500 but found response code
-		// as:"+response1.getStatus());
-		// Assert.assertEquals(response1.getStatus(), 500);
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
+	
+	
 
 	/*
 	 * 11- 08 -2016 vasista - Get the list of matching requisition id Passing

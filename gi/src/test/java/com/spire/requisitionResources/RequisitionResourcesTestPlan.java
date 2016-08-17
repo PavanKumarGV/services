@@ -520,12 +520,12 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * special char id Should fail
 	 */
 
-	@Test(groups = { "sanity", "GetJobDesByspecialcharID" })
-	public void GetJobDesByspecialcharID() throws ClientProtocolException, IOException {
+	@Test(groups = { "sanity", "GetJobDesBySpecialCharID" })
+	public void GetJobDesBySpecialCharID() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesBySplcharreqID(hostName);
-		Response responsebody = reqConsumer.getJobDesByWrongreqID(hostName);
+		Response responsebody = reqConsumer.getJobDesBySplcharreqID(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 
