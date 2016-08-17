@@ -514,6 +514,56 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	}
 
+	
+	/*
+	 *  Udhaya -Get the job description by requisition id Passing
+	 * special char id Should fail
+	 */
+
+	@Test(groups = { "sanity", "GetJobDesByspecialcharID" })
+	public void GetJobDesByspecialcharID() throws ClientProtocolException, IOException {
+
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		reqConsumer.getJobDesBySplcharreqID(hostName);
+		Response responsebody = reqConsumer.getJobDesByWrongreqID(hostName);
+		String response = responsebody.readEntity(String.class);
+		System.out.println("***** RESPONSE ******" + response);
+
+		// now services is not working so i can't test response
+		/*
+		 * String response = responsebody.readEntity(String.class);
+		 * System.out.println("***** RESPONSE ******"+response);
+		 * Assert.assertTrue(response.contains("primarySkill")); Logging.log(
+		 * "contains the primary skill " );
+		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
+		 * "contains the jobLevel " );
+		 */
+
+	}
+	/*
+	 * Udhaya-Get the job description by requisition id Passing
+	 * Blank id Should fail
+	 */
+
+	@Test(groups = { "sanity", "GetJobDesByBlankSpace" })
+	public void GetJobDesByBlankSpace() throws ClientProtocolException, IOException {
+
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		reqConsumer.getJobDesByBlankSpacereqID(hostName);
+		Response responsebody = reqConsumer.getJobDesByBlankSpacereqID(hostName);
+
+		// now services is not working so i can't test response
+		/*
+		 * String response = responsebody.readEntity(String.class);
+		 * System.out.println("***** RESPONSE ******"+response);
+		 * Assert.assertTrue(response.contains("primarySkill")); Logging.log(
+		 * "contains the primary skill " );
+		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
+		 * "contains the jobLevel " );
+		 */
+
+	}
+	
 	/**
 	 * @author Radharani Patra 16/08/16 Steps: Update Requisition status
 	 *         Validation: Response code: 200

@@ -25,6 +25,9 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_REQBlank = getServiceEndPoint("REQ_BLANK");
 	String endPointURL_REQInvalid1 = getServiceEndPoint("INVALID1_REQ_SEARCH");
 	String searchReqURLEndpoint = getServiceEndPoint("SEARCH_REQUISITION");
+	String endPointURL_JD_BY_SPLCHAR_ID = getServiceEndPoint("SEARCH_REQUISITION_SPL");
+
+	
 
 	String endPointURL_JD_BY_WRONG_ID = getServiceEndPoint("JOB_DES_BY_WRONG_ID");
 	String endPointURL_MATCHING_REQ1 = getServiceEndPoint("MATCHING_REQS_LIMIT_TEN");
@@ -146,6 +149,55 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 		if (response1.getStatus() == 400) {
 			Logging.log("Status Code 400");
+		} else {
+			Assert.fail();
+		}
+		System.out.println("response code:" + response1.getStatus());
+		// Assertion.assertEquals(response1.getStatus(),500,
+		// "response expected 500 but found response code
+		// as:"+response1.getStatus());
+		// Assert.assertEquals(response1.getStatus(), 500);
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	/*
+	 * Udhay- Get the job description by
+	 * requisition id Passing special char requisition id: Testcase should fail
+	 */
+
+	public Response getJobDesBySplcharreqID(String hostName) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_JD_BY_SPLCHAR_ID.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
+		// String response = response1.readEntity(String.class);
+
+		if (response1.getStatus() != 200) {
+			Logging.log("Status Code Not equal to 200");
+		} else {
+			Assert.fail();
+		}
+		System.out.println("response code:" + response1.getStatus());
+		// Assertion.assertEquals(response1.getStatus(),500,
+		// "response expected 500 but found response code
+		// as:"+response1.getStatus());
+		// Assert.assertEquals(response1.getStatus(), 500);
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
+	/*
+	 * Udhay- Get the job description by
+	 * requisition id Passing Blank requisition id: Testcase should fail
+	 */
+
+	public Response getJobDesByBlankSpacereqID(String hostName) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_REQBlank.replaceAll("hostAddress", hostName);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
+		// String response = response1.readEntity(String.class);
+
+		if (response1.getStatus() != 200) {
+			Logging.log("Status Code Not equal to 200");
 		} else {
 			Assert.fail();
 		}
