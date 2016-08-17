@@ -148,7 +148,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		Response response1 = executeGET(serviceEndPoint);
 		// String response = response1.readEntity(String.class);
 
-		if (response1.getStatus() == 400) {
+		if (response1.getStatus() !=200) {
 			Logging.log("Status Code 400");
 		} else {
 			Assert.fail();

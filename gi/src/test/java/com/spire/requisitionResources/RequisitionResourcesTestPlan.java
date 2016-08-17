@@ -502,15 +502,6 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		reqConsumer.getJobDesByWrongreqID(hostName);
 		Response responsebody = reqConsumer.getJobDesByWrongreqID(hostName);
 
-		// now services is not working so i can't test response
-		/*
-		 * String response = responsebody.readEntity(String.class);
-		 * System.out.println("***** RESPONSE ******"+response);
-		 * Assert.assertTrue(response.contains("primarySkill")); Logging.log(
-		 * "contains the primary skill " );
-		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
-		 * "contains the jobLevel " );
-		 */
 
 	}
 
