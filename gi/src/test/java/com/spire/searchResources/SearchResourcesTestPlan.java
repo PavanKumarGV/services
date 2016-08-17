@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.spire.base.service.Constants;
 //import spire.talent.gi.beans.SavedSearchDetails;
 import com.spire.base.service.utils.SavedSearchDetails;
 import com.spire.base.service.utils.SearchUtil;
@@ -42,8 +43,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	@BeforeTest(alwaysRun = true)
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
-		userId = (String) "tester@logica.com";
-		password = (String) "spire@123";
+		userId = Constants.user_Id;
+		password = Constants.password;
 		// userId = (String) ContextManager.getThreadContext().getUserid();
 		// password = (String) ContextManager.getThreadContext().getPassword();
 		Logging.log("Start :: Login with Username: " + userId + "Password: "
@@ -64,12 +65,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
-		suggestConsumer.getSemilarProfiles(hostName);
+		//suggestConsumer.getSemilarProfiles(hostName);
 		Response responsebody = suggestConsumer.getSemilarProfiles(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response
-				.contains("6002:6005:c7133f48171543998a8ad4190e1353eb"));
+				.contains(Constants.candidate_Id2));
 	}
 
 	/**
@@ -173,8 +174,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "GetSimillerProfilesNegetive" })
-	public void GetSimillerProfilesNegetive() throws ClientProtocolException,
+	@Test(groups = { "sanity", "GetSimilarProfilesNegative" })
+	public void GetSimilarProfilesNegative() throws ClientProtocolException,
 			IOException {
 
 		SearchResourcesConsumer suggestConsumer = null;
@@ -184,11 +185,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Response responsebody = suggestConsumer.getSemilarProfiles(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		// Asserting Response Code
 		Assert.assertTrue(response.contains(" "));
 
 	}
-
 	/**
 	 *
 	 * Author - Bhagyasree Test case description - Search candidates for skill

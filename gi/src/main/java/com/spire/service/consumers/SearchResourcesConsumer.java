@@ -20,8 +20,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 
 	String endPointURL = getServiceEndPoint("SEARCH_CANDI_SAVED_SEARCH");
-	String endPointURL1 = getServiceEndPoint("SIMILAR_PROFILES").replace(":",
-			"%3A");
+	String endPointURL1 = getServiceEndPoint("SIMILAR_PROFILES")+Constants.candidate_Id2;
 	String endPointURL2 = getServiceEndPoint("SIMILAR_PROFILES1").replace(":",
 			"%3A");
 	String endPointURLSuggest = getServiceEndPoint("SEARCH_SUGGEST");
@@ -61,8 +60,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 	public Response getSemilarProfiles(String hostName)
 			throws ClientProtocolException, IOException {
-		endPointURL2 = endPointURL1 + Constants.candidate_Id2;
-		String serviceEndPoint = endPointURL2.replaceAll("hostAddress",
+		String serviceEndPoint = endPointURL1.replaceAll("hostAddress",
 				hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
@@ -72,11 +70,10 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 			Assert.fail();
 		}
 		Logging.log("Response Code >>" + response1.getStatus());
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
-
 		return response1;
 
 	}
+
 
 	public Response getSuggest(String hostName) throws ClientProtocolException,
 			IOException {
@@ -164,7 +161,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response " + response1);
-		if (response1.getStatus() == 204) {
+		if (response1.getStatus() == 200) {
 			System.out.println("********** pass **************");
 			Logging.log("Response Code >>" + response1.getStatus());
 		} else {
