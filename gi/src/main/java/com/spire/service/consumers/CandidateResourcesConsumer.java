@@ -9,6 +9,7 @@ import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 import com.spire.base.service.Constants;
 
+
 import spire.talent.gi.beans.GetCandidateRequestBean;
 
 public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
@@ -16,6 +17,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	String fetchCandidateURL = getServiceEndPoint("FETCH_CANDIDATES");
 	String getResumeURL = getServiceEndPoint("GET_RESUME");
 	String getcandidateprofileURL = getServiceEndPoint("GET_CANDIDATE_PROFILE");
+	String deallocUrl = getServiceEndPoint("CANDIDATE_DEALLOCATE");
 
 	public CandidateResourcesConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -158,5 +160,14 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 		
 	}
+	public Response deallocatecandidate(String hostname,String reqBean) {
+		String serviceEndPoint = deallocUrl.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		
+		Entity<String> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, bean);
+		return response;
 
+	}
 }

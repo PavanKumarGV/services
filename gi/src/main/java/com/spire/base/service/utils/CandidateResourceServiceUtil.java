@@ -1,9 +1,12 @@
 package com.spire.base.service.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import spire.talent.gi.beans.CandidateStatsRequestBean;
+
 import spire.talent.gi.beans.GetCandidateRequestBean;
 import spire.talent.gi.beans.GetCandidateRequestBean.ProjectionType;
 
@@ -111,6 +114,8 @@ public class CandidateResourceServiceUtil {
 		req.setCandidateIds(lst);
 		return req;
 	}
+	
+	
 	
 	
 	

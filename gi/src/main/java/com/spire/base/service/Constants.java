@@ -36,5 +36,6 @@ public class Constants {
     public static final String changeStats="6079:6066:28ec518324ed4d8b9562b2b6ffb72804";
     public static final String test_status ="Test";
     public static final String test_status1 = "Test1";
-			
+    public static final String candidate_deallocate = "6079:6005:25ae5f1585aa4f409080c4a09eabc26b";
+	public static final String requisition_deallocate = "6079:6066:5bcc7bd0f80a4011bc5314e580804ec1";		
 }

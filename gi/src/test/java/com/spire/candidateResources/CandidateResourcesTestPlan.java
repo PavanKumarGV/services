@@ -12,11 +12,13 @@ import com.spire.base.controller.TestPlan;
 import com.spire.base.service.BaseServiceConsumerNew;
 import com.spire.base.service.Constants;
 import com.spire.base.service.utils.CandidateResourceServiceUtil;
+import com.spire.base.service.utils.NotesServicesUtil;
 import com.spire.service.consumers.CandidateResourcesConsumer;
 import com.spire.service.consumers.CandidateStatsConsumer;
 
 import junit.framework.Assert;
 import spire.talent.gi.beans.CandidateStatsRequestBean;
+
 import spire.talent.gi.beans.GetCandidateRequestBean;
 
 public class CandidateResourcesTestPlan extends TestPlan {
@@ -28,6 +30,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	CandidateStatsRequestBean candStatsReqBean = null;
 	CandidateStatsConsumer candStatsConsumer = null;
 	GetCandidateRequestBean candRequestBean = null;
+
 
 	/**
 	 * Passing HostName from the xml.
@@ -503,4 +506,30 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		Logging.log("Response is null for invalid headers");
 
 	}
+	
+	@Test(groups = { "sanity", "deallocateCandidates","P1" })
+	public void deallocateCandidates() {
+		// Get user token
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		// execute post Request
+		String inputjson="{\""+Constants.candidate_deallocate+"\":[\""+Constants.requisition_deallocate+"\"]}";
+		Response response = candConsumer.deallocatecandidate(hostName, inputjson);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		System.out.println(responseBody);
+	}
+		
+		
+		
+		
+		
 }
+		
+		
+		
+	
