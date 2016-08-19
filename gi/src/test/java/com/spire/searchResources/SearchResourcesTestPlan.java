@@ -561,7 +561,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
-		Assertion.assertTrue(response.contains("ba"),
+		Assertion.assertTrue(response.contains("Ba"),
 				"partial location not found in response");
 	}
 
