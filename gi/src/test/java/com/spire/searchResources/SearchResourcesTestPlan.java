@@ -347,7 +347,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
-		Assertion.assertTrue(response.contains("java script"),
+		Assertion.assertTrue(response.contains("Java Script"),
 				"full skill not found in response");
 	}
 
@@ -370,7 +370,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
-		Assertion.assertTrue(response.contains("ja"),
+		Assertion.assertTrue(response.contains("Ja"),
 				"partial skill search not found in response");
 	}
 
@@ -394,7 +394,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
-		Assertion.assertTrue(response.contains("M.D. University"),
+		Assertion.assertTrue(response.contains("BANGALORE UNIVERSITY"),
 				"full institute not found in response");
 	}
 
@@ -418,7 +418,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
-		Assertion.assertTrue(response.contains("Harvard"),
+		Assertion.assertTrue(response.contains("UNIVERSITY"),
 				"partial institute not found in response");
 	}
 
@@ -442,9 +442,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.education),
 				"education not found in the response.");
-		Assertion.assertTrue(
+		/*Assertion.assertTrue(
 				response.contains("Diploma in Computer Applications"),
-				"full education not found in response");
+				"full education not found in response");*/
 	}
 
 	/**
@@ -467,8 +467,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.education),
 				"education not found in the response.");
-		Assertion.assertTrue(response.contains("Diploma"),
-				"partial education not found in response");
+		/*Assertion.assertTrue(response.contains("Diploma"),
+				"partial education not found in response");*/
 	}
 
 	/**
@@ -491,7 +491,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
-		Assertion.assertTrue(response.contains("WIPRO TECHNOLOGIES Bangalore"),
+		Assertion.assertTrue(response.contains("Wipro Technologies"),
 				"full employer not found in response");
 	}
 
@@ -515,7 +515,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
-		Assertion.assertTrue(response.contains("WIPRO"),
+		Assertion.assertTrue(response.contains("Wipro"),
 				"partial employer not found in response");
 	}
 
@@ -630,7 +630,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
-		Assertion.assertTrue(response.contains("Media - Alumni"),
+		Assertion.assertTrue(response.contains("Naukri"),
 				"full sourcename not found in response");
 	}
 
@@ -653,7 +653,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
-		Assertion.assertTrue(response.contains("Alumni"),
+		Assertion.assertTrue(response.contains("N"),
 				"partial sourcename not found in response");
 	}
 
@@ -676,7 +676,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
-		Assertion.assertTrue(response.contains("Hr Interviewed"),
+		Assertion.assertTrue(response.contains(Constants.full_status_to_search),
 				"full status not found in response");
 	}
 
@@ -699,7 +699,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
-		Assertion.assertTrue(response.contains("Interviewed"),
+		Assertion.assertTrue(response.contains(Constants.partial_status_to_search),
 				"partial status not found in response");
 	}
 
