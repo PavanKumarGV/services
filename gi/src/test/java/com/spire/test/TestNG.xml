@@ -5,7 +5,7 @@
      <listener class-name="com.spire.base.controller.TestRetryListener"/> 
     <listener class-name="com.spire.base.reporter.SpireEmailReport"/>
 </listeners>
-	<parameter name="host" value ="http://192.168.2.177:8180"/>
+	<parameter name="host" value ="http://192.168.2.202:8180"/>
 	    <parameter name="healthCheck" value="false"/>	
         <test name="Test Cases for service groups">
 		<groups>
