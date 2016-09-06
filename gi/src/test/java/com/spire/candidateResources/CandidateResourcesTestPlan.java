@@ -139,7 +139,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		Logging.log(responseBody);
 		//Asserting response Body
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
 				"Get Candidate Stats Unsuccessful");
 		Logging.log("Get Candidate Stats successful and contains Automatched or Customer Mapped status count");
 	}

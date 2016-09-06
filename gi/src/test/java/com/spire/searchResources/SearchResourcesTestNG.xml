@@ -9,46 +9,15 @@
 		<listener class-name="com.spire.base.reporter.SpireReport" />
 		<listener class-name="com.spire.base.controller.TestRetryListener" />
 	</listeners>
-	<parameter name="host" value ="http://192.168.2.177:8180"/>
+	<parameter name="host" value ="http://192.168.2.4:9190"/>
 	<parameter name="userId" value="tester@logica.com" />
 	<parameter name="password" value="spire@123" />
 	    <parameter name="healthCheck" value="false"/>	
         <test name="CandidateResourcesTestPlan">
 		<groups>
 			<run>
-				<include name="GetSimillerProfiles"/>
-				<include name="verifySuggestRequest"/>
-				<include name="verifySuggestValidation"/>
-				<include name="verifySuggestForSkillwithMultipleWords"/>
-				<include name="verifySuggestForSkillwithSpecialCharacter"/>
-				
-				<include name="getSavedSearch"/>
-				<include name="getSavedSearchById"/>
-				<include name="getSavedSearchByNonExistingId"/>
-				
-				<include name="searchCandidatesWithSkill"/>
-				<include name="searchCandidatesWithSkillAndLocation"/>
-				<include name="verifySuggestValidation"/>
-				
-				<include name="listSavedSearchWithSortByModifiedOnAsc"/>
-				<include name="listSavedSearchWithSortByModifiedOnDsc"/>
-				<include name="listSavedSearchWithSortByCreatedOnAsc"/>
-				<include name="listSavedSearchWithSortByCreatedOnDsc"/> 
-				<include name="verifySuggestRequestForInvalidKeyword"/>
-				<include name="getSavedSearchByIdWithSpace"/>
-				<include name="createSavedSearchWithSkill"/>
-			    <include name="createSavedSearchInputBeanWithSkillAndLocation"/>
-				<include name="createPublicSavedSearchWithSkill"/>
-				<include name="deleteSavedSearchById"/>
-				<include name="deleteSavedSearchByIdNonExisting"/>
-				<include name="searchCandidatesWithNoSearchQueryString"/>
-		    	<include name="updateSavedSearchById"/>
-		    	<include name="savedSearchBySearchText"/>
-		    	<include name="updateSavedSearchByIdNonExisting"/>
-		       	<include name="validationOnSavedSearchUsingSearchText"/>
-		    	<include name="savedSearchUsingPartialSearchText"/> -->
-		    	<include name="getCandidatesFromSavedSearch"/>
-		    	<include name="createSavedSearchWithExistingSavedSearchName"/>
+				<include name="getautocompletewithfullemployerRequest"/>
+			
 			
 				
 			</run>

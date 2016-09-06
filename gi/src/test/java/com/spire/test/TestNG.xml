@@ -10,7 +10,7 @@
         <test name="Test Cases for service groups">
 		<groups>
 			<run>
-				<include name="updateRequisitionStatus"/>
+				<include name="sanity"/>
 				
 			</run>
 		</groups>

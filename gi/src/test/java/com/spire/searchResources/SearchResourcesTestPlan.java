@@ -348,7 +348,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
-		Assertion.assertTrue(response.contains("Java Script"),
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_skill_to_search")),
 				"full skill not found in response");
 	}
 
@@ -371,7 +371,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
-		Assertion.assertTrue(response.contains("Ja"),
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_Skill_to_search")),
 				"partial skill search not found in response");
 	}
 
@@ -395,8 +395,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
-		Assertion.assertTrue(response.contains("BANGALORE UNIVERSITY"),
-				"full institute not found in response");
+	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_institute_to_search")),
+				"full institute not found in response");*/
 	}
 
 	/**
@@ -419,8 +419,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
-		Assertion.assertTrue(response.contains("UNIVERSITY"),
-				"partial institute not found in response");
+		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_institute_to_search")),
+				"partial institute not found in response");*/
 	}
 
 	/**
@@ -492,8 +492,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
-		Assertion.assertTrue(response.contains("Wipro Technologies"),
-				"full employer not found in response");
+	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_employer_to_search")),
+				"full employer not found in response");*/
 	}
 
 	/**
@@ -516,8 +516,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
-		Assertion.assertTrue(response.contains("Wipro"),
-				"partial employer not found in response");
+	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_employer_to_search")),
+				"partial employer not found in response");*/
 	}
 
 	/**
@@ -539,7 +539,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
-		Assertion.assertTrue(response.contains("Bangalore"),
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_location_to_search")),
 				"full location not found in response");
 	}
 
@@ -562,8 +562,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
-		Assertion.assertTrue(response.contains("Ba"),
-				"partial location not found in response");
+		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_location_to_search")),
+				"partial location not found in response");*/
 	}
 
 	/**
@@ -585,8 +585,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.sourcetype),
 				"sourcetype not found in the response.");
-		Assertion.assertTrue(response.contains("Referral - Employee"),
-				"full sourcetype not found in response");
+	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcetype_to_search")),
+				"full sourcetype not found in response");*/
 	}
 
 	/**
@@ -608,8 +608,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.sourcetype),
 				"sourcetype not found in the response.");
-		Assertion.assertTrue(response.contains("Referral"),
-				"partial sourcetype not found in response");
+		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_sourcetype_to_search")),
+				"partial sourcetype not found in response");*/
 	}
 
 	/**
@@ -631,8 +631,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
-		Assertion.assertTrue(response.contains("Naukri"),
-				"full sourcename not found in response");
+		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcename_to_search")),
+				"full sourcename not found in response");*/
 	}
 
 	/**
@@ -654,8 +654,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
-		Assertion.assertTrue(response.contains("N"),
-				"partial sourcename not found in response");
+//		Assertion.assertTrue(response.contains("N"),
+//				"partial sourcename not found in response");
 	}
 
 	/**
@@ -677,8 +677,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
-		Assertion.assertTrue(response.contains(Constants.full_status_to_search),
-				"full status not found in response");
+	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_status_to_search")),
+				"full status not found in response");*/
 	}
 
 	/**
@@ -700,8 +700,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
-		Assertion.assertTrue(response.contains(Constants.partial_status_to_search),
-				"partial status not found in response");
+		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_status_to_search")),
+				"partial status not found in response");*/
 	}
 
 	/**

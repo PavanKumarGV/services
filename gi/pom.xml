@@ -24,6 +24,12 @@
 						<suiteXmlFile>${project.basedir}/src/test/java/com/spire/test/TestNG.xml</suiteXmlFile>
 
 					</suiteXmlFiles>
+					<systemPropertyVariables>
+
+						<browser>${BROWSER}</browser>
+						<host>${HOST}</host>
+
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<!-- Compiler plugin configures the java version to be usedfor compiling 

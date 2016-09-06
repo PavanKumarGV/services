@@ -202,7 +202,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -238,7 +238,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -261,7 +261,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -283,7 +283,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 

@@ -360,7 +360,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_skill_to_search + "&type=" + Constants.skill;
+				+ getServiceEndPoint("full_skill_to_search") + "&type=" + Constants.skill;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
@@ -374,7 +374,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_Skill_to_search
+				+ getServiceEndPoint("partial_Skill_to_search")
 				+ "&type="
 				+ Constants.skill;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -389,7 +389,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_institute_to_search
+				+ getServiceEndPoint("full_institute_to_search")
 				+ "&type="
 				+ Constants.institute;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -404,7 +404,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_institute_to_search
+				+ getServiceEndPoint("partial_institute_to_search")
 				+ "&type="
 				+ Constants.institute;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -419,7 +419,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_education_to_search
+				+ getServiceEndPoint("full_education_to_search")
 				+ "&type="
 				+ Constants.education;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -434,7 +434,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_education_to_search
+				+ getServiceEndPoint("partial_education_to_search")
 				+ "&type="
 				+ Constants.education;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -449,7 +449,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_employer_to_search
+				+ getServiceEndPoint("full_employer_to_search")
 				+ "&type="
 				+ Constants.employer;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -464,7 +464,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_employer_to_search
+				+ getServiceEndPoint("partial_employer_to_search")
 				+ "&type="
 				+ Constants.employer;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -479,7 +479,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_location_to_search
+				+ getServiceEndPoint("full_location_to_search")
 				+ "&type="
 				+ Constants.location;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -494,7 +494,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_location_to_search
+				+ getServiceEndPoint("partial_location_to_search")
 				+ "&type="
 				+ Constants.location;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -509,7 +509,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_sourcetype_to_search
+				+ getServiceEndPoint("full_sourcetype_to_search")
 				+ "&type="
 				+ Constants.sourcetype;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -524,7 +524,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_sourcetype_to_search
+				+ getServiceEndPoint("partial_sourcetype_to_search")
 				+ "&type="
 				+ Constants.sourcetype;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -539,7 +539,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_sourcename_to_search
+				+ getServiceEndPoint("full_sourcename_to_search")
 				+ "&type="
 				+ Constants.sourcename;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -554,7 +554,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_sourcename_to_search
+				+ getServiceEndPoint("partial_sourcename_to_search")
 				+ "&type="
 				+ Constants.sourcename;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -569,7 +569,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.full_status_to_search + "&type=" + Constants.status;
+				+ getServiceEndPoint("full_status_to_search") + "&type=" + Constants.status;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
@@ -582,7 +582,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_status_to_search
+				+ getServiceEndPoint(".partial_status_to_search")
 				+ "&type="
 				+ Constants.status;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -597,7 +597,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ Constants.partial_status_to_search;
+				+ getServiceEndPoint("partial_status_to_search");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
