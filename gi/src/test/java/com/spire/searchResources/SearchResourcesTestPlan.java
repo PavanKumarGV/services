@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.spire.base.service.Constants;
+import com.spire.base.service.ReadingServiceEndPointsProperties;
 //import spire.talent.gi.beans.SavedSearchDetails;
 import com.spire.base.service.utils.SavedSearchDetails;
 import com.spire.base.service.utils.SearchUtil;
@@ -43,8 +44,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	@BeforeTest(alwaysRun = true)
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
-		userId = Constants.user_Id;
-		password = Constants.password;
+		userId = ReadingServiceEndPointsProperties.getServiceEndPoint("user_Id");
+		password = ReadingServiceEndPointsProperties.getServiceEndPoint("password");
 		// userId = (String) ContextManager.getThreadContext().getUserid();
 		// password = (String) ContextManager.getThreadContext().getPassword();
 		Logging.log("Start :: Login with Username: " + userId + "Password: "
@@ -70,7 +71,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response
-				.contains(Constants.candidate_Id2));
+				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id2")));
 	}
 
 	/**

@@ -59,7 +59,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	 */
 	public Response getcandidateprofile(String hostName) {
 		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)
-				+ "/"+Constants.candidate_Id1+"?projection=full";
+				+ "/"+getServiceEndPoint("candidate_Id1")+"?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		//call Get Operation
@@ -85,7 +85,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	}
 
 	public Response getCandidateprofilewithoutprojection(String hostName) {
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) +"/"+Constants.candidate_Id1;
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) +"/"+getServiceEndPoint("candidate_Id1");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		//call Get Operation

@@ -12,6 +12,7 @@ import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
 import com.spire.base.service.Constants;
+import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.RequisitionResourceServiceUtil;
 import com.spire.service.consumers.RequisitionResourceConsumer;
 import com.spire.service.consumers.SearchResourcesConsumer;
@@ -37,8 +38,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@BeforeTest(alwaysRun = true)
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
-		userId = Constants.user_Id;
-		password = Constants.password;
+		userId = ReadingServiceEndPointsProperties.getServiceEndPoint("user_Id");
+		password = ReadingServiceEndPointsProperties.getServiceEndPoint("password");
 		// userId = (String) ContextManager.getThreadContext().getUserid();
 		// password = (String) ContextManager.getThreadContext().getPassword();
 		Logging.log("Start :: Login with Username: " + userId + "Password: " + password + "and hostName: " + hostName);
@@ -562,16 +563,16 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionStatus", "P1" })
 	public void updateRequisitionStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(Constants.changeStats, Constants.test_status);
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, Constants.changeStats,
-				Constants.test_status);
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		// Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
 				"Req not updated");
-		Logging.log("Requisition Status Updated Successfully RFR ID: " + Constants.changeStats);
+		Logging.log("Requisition Status Updated Successfully RFR ID: " + ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
 	}
 
 	/**
@@ -582,16 +583,16 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionStatusWithSameStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(Constants.changeStats, Constants.test_status);
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, Constants.changeStats,
-				Constants.test_status);
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		// Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
 				"Req not updated");
-		Logging.log("Requisition Status Updated Successfully RFR ID: " + Constants.changeStats);
+		Logging.log("Requisition Status Updated Successfully RFR ID: " + ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
 	}
 
 	/**
@@ -601,8 +602,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankRFR", "P2" })
 	public void updateRequisitionWithBlankRFR() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(Constants.changeStats, Constants.test_status);
-		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName, Constants.test_status);
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 
@@ -615,8 +616,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankStatus", "P2" })
 	public void updateRequisitionWithBlankStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(Constants.changeStats, Constants.test_status);
-		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName, Constants.changeStats);
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 
@@ -629,7 +630,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankParameter", "P2" })
 	public void updateRequisitionWithBlankParameter() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(Constants.changeStats, Constants.test_status);
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatusBlnk(reqStatusBean, hostName);
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -644,16 +645,16 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionWithDifferentStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(Constants.changeStats, Constants.test_status1);
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, Constants.changeStats,
-				Constants.test_status1);
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		// Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
 				"Req not updated");
-		Logging.log("Requisition Status Updated Successfully RFR ID: " + Constants.changeStats);
+		Logging.log("Requisition Status Updated Successfully RFR ID: " + ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
 	}
 
 	/**
@@ -663,9 +664,9 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionStatusWithoutheaders", "P2" })
 	public void updateRequisitionStatusWithoutheaders() {
 		reqConsumer = new RequisitionResourceConsumer();
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(Constants.changeStats, Constants.test_status);
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, Constants.changeStats,
-				Constants.test_status);
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
 		

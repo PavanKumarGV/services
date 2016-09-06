@@ -11,6 +11,7 @@ import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
 import com.spire.base.service.BaseServiceConsumerNew;
 import com.spire.base.service.Constants;
+import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.CandidateResourceServiceUtil;
 import com.spire.base.service.utils.NotesServicesUtil;
 import com.spire.service.consumers.CandidateResourcesConsumer;
@@ -38,8 +39,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@BeforeTest(alwaysRun = true)
 	public void setUp() {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
-		userId = Constants.user_Id;
-		password = Constants.password;
+		userId = ReadingServiceEndPointsProperties.getServiceEndPoint("user_Id");
+		password = ReadingServiceEndPointsProperties.getServiceEndPoint("password");
 		Logging.log("Start :: Login with Username: " + userId + "Password: " + password + "and hostName: " + hostName);
 
 	}
@@ -61,7 +62,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println(response);
 		// Asserting response body
-		Assertion.assertTrue(response.contains(Constants.candidate_Id1),"not matching with the response body");
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id1")),"not matching with the response body");
 
 	}
 
@@ -112,7 +113,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println(response);
 		// Asserting Response Body
-		Assertion.assertTrue(response.contains(Constants.candidate_Id1),
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id1")),
 				"not matching with the response body");
 	}
 
@@ -125,8 +126,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateStatsWithValidParameter","P1" })
 	public void getCandidateStatsWithValidParameter() {
 		//Get Requset Bean, pass multiple requisitions
-		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStats(Constants.requisition_Id,
-				Constants.requisition_Id1);
+		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStats(ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id1"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id1"));
 		// Get authentication token
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
@@ -152,8 +153,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateStatsWithValidParameterGender","P1" })
 	public void getCandidateStatsWithValidParameterGender() {
 		//Get Requset Bean, pass multiple requisitions
-		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsGender(Constants.requisition_Id,
-				Constants.requisition_Id1);
+		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsGender(ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id1"));
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candStatsConsumer.getCandidateStats(candStatsReqBean, hostName);
@@ -201,7 +202,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateStatsWithReqIdParameter","P1" })
 	public void getCandidateStatsWithReqIdParameter() {
 		//Get Requset Bean, pass requisitions
-		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsReqId(Constants.requisition_Id);
+		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsReqId(ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id"));
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candStatsConsumer.getCandidateStats(candStatsReqBean, hostName);
@@ -273,7 +274,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateListWithValidParameterBASIC","P1" })
 	public void getCandidateListWithValidParameterBASIC() {
 		//Get Requset Bean, pass valid parameter, candidate id and projection type
-		candRequestBean = CandidateResourceServiceUtil.getCandidateListBasic(Constants.candidate_Id);
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListBasic(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candConsumer.getCandidateList(candRequestBean, hostName);
@@ -283,8 +284,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Get Response body
 		String responseBody = response.readEntity(String.class);
 		//Asserting response Body
-		Assertion.assertTrue(responseBody.contains(Constants.candidate_Id), "Get Candidate List UnSuccessful");
-		Logging.log("Get candidate list successful, candidate id: " + Constants.candidate_Id);
+		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
+		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 	}
 
 	/**
@@ -296,7 +297,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateListWithValidParameterFULL","P1" })
 	public void getCandidateListWithValidParameterFULL() {
 		//Get Requset Bean, pass valid parameter, candidate id and projection type
-		candRequestBean = CandidateResourceServiceUtil.getCandidateListFull(Constants.candidate_Id);
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListFull(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candConsumer.getCandidateList(candRequestBean, hostName);
@@ -306,8 +307,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Get Response body
 		String responseBody = response.readEntity(String.class);
 		//Asserting response Body
-		Assertion.assertTrue(responseBody.contains(Constants.candidate_Id), "Get Candidate List UnSuccessful");
-		Logging.log("Get candidate list successful, candidate id: " + Constants.candidate_Id);
+		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
+		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 	}
 
 	/**
@@ -319,7 +320,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateListWithValidParameterCUSTOM","P1" })
 	public void getCandidateListWithValidParameterCUSTOM() {
 		//Get Requset Bean, pass valid parameter, candidate id and projection type
-		candRequestBean = CandidateResourceServiceUtil.getCandidateListCustom(Constants.candidate_Id);
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListCustom(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candConsumer.getCandidateList(candRequestBean, hostName);
@@ -329,8 +330,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Get Response body
 		String responseBody = response.readEntity(String.class);
 		//Asserting response Body
-		Assertion.assertTrue(responseBody.contains(Constants.candidate_Id), "Get Candidate List UnSuccessful");
-		Logging.log("Get candidate list successful, candidate id: " + Constants.candidate_Id);
+		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
+		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 	}
 
 	/**
@@ -386,7 +387,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateListWithBlankProjectionType","P2" })
 	public void getCandidateListWithBlankProjectionType() {
 		//Get Requset Bean, pass candidate id
-		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlankPojectiontype(Constants.candidate_Id);
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListBlankPojectiontype(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candConsumer.getCandidateList(candRequestBean, hostName);
@@ -395,8 +396,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Get Response body
 		String responseBody = response.readEntity(String.class);
 		//Asserting response Body
-		Assertion.assertTrue(responseBody.contains(Constants.candidate_Id), "Get Candidate List UnSuccessful");
-		Logging.log("Get candidate list successful, candidate id: " + Constants.candidate_Id);
+		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
+		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 	}
 
 	/**
@@ -407,7 +408,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "getCandidateListWithInvalidProjectionType","P2" })
 	public void getCandidateListWithInvalidProjectionType() {
 		//Get Requset Bean, pass invalid candidate id and projection type
-		candRequestBean = CandidateResourceServiceUtil.getCandidateListInvalidCandidateId(Constants.candidate_Id);
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListInvalidCandidateId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candConsumer.getCandidateList(candRequestBean, hostName);
@@ -442,7 +443,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		//execute Get Request
-		Response response = candConsumer.getCandidateResume(Constants.candidate_resume,hostName);
+		Response response = candConsumer.getCandidateResume(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"),hostName);
 		//Asset Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response Unsuccessfull, Expected : 200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -476,7 +477,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		// execute Get Request
-		Response response = candConsumer.getCandidateResumeInvalid(Constants.candidate_resume, hostName);
+		Response response = candConsumer.getCandidateResumeInvalid(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
 		Assertion.assertTrue(response.getStatus() != 200, "Response Successfull, Expected 404 status code");
@@ -493,7 +494,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer();
 		// execute Get Request
-		Response response = candConsumer.getCandidateResume(Constants.candidate_resume, hostName);
+		Response response = candConsumer.getCandidateResume(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
 		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
@@ -512,7 +513,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		// execute post Request
-		String inputjson="{\""+Constants.candidate_deallocate+"\":[\""+Constants.requisition_deallocate+"\"]}";
+		String inputjson="{\""+ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_deallocate")+"\":[\""+ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_deallocate")+"\"]}";
 		Response response = candConsumer.deallocatecandidate(hostName, inputjson);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());

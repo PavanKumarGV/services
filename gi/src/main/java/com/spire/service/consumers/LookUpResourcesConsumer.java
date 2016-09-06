@@ -7,6 +7,12 @@ import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 
 public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
+	
+	public LookUpResourcesConsumer(String username, String password, String hostName) {
+		Logging.log("Inside of Login");
+		System.out.println("Inside of Login");
+		getUserToken(username, password, hostName);
+	}
 
 	String lookUp = getServiceEndPoint("LOOK_UP");
 	String getlistlookupwithspecialcharacter=getServiceEndPoint("LOOK_UP_WITH_SPECIAL_CHARACTER");
@@ -52,7 +58,7 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	}
 	
 	public Response getListOfDemandFilterByPrimarySKillTypeNKeyword(String hostName) {
-		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=PRIMARY_SKILL&keyword=j";
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=PRIMARY_SKILL&keyword=si";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
@@ -60,7 +66,7 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	}
 	
 	public Response getListOfDemandFilterByBlankTypeNKeyword(String hostName){
-		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?keyword=j";
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?keyword=si";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);

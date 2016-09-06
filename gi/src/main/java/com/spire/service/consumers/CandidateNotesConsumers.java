@@ -16,6 +16,12 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 	String endPointURLCandidatenotessearch = getServiceEndPoint("CANDIDATE_NOTES_SEARCH");
 	String createNoteEndPointUrl = getServiceEndPoint("CREATE_NOTE");
 
+	public void getToken(String username, String password, String hostName) {
+		Logging.log("Inside of Login");
+		System.out.println("Inside of Login");
+		getUserToken(username, password, hostName);
+	}
+	
 	public Response getCandidatenoteslist(String hostName,String id) {
 		String serviceEndPoint = endPointURLCandidatenoteslist.replaceAll("hostAddress", hostName)
 				+ "?entityId="+id+"&interval=1";

@@ -20,7 +20,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 
 	String endPointURL = getServiceEndPoint("SEARCH_CANDI_SAVED_SEARCH");
-	String endPointURL1 = getServiceEndPoint("SIMILAR_PROFILES")+Constants.candidate_Id2;
+	String endPointURL1 = getServiceEndPoint("SIMILAR_PROFILES")+getServiceEndPoint("candidate_Id2");
 	String endPointURL2 = getServiceEndPoint("SIMILAR_PROFILES1").replace(":",
 			"%3A");
 	String endPointURLSuggest = getServiceEndPoint("SEARCH_SUGGEST");
