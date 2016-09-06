@@ -71,7 +71,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response
-				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id2")));
+				.contains("id"));
 	}
 
 	/**
