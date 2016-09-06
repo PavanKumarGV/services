@@ -33,7 +33,7 @@ public class RequisitionResourceServiceUtil {
 	public static SearchRequisitionRequestBean getCandidateStasRequisition() {
 		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
 		List<String> list = new ArrayList<String>();
-		list.add("Fulfilled");
+		list.add("Open");
 		list.add("Closed");
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("statusDisplay", list);
@@ -53,7 +53,7 @@ public class RequisitionResourceServiceUtil {
 	{
 		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
 		List<String> list = new ArrayList<String>();
-		list.add("Fulfilled");
+		list.add("Open");
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("statusDisplay", list);
 		searchReqBean.setInSearchCriteria(map);
@@ -69,7 +69,7 @@ public class RequisitionResourceServiceUtil {
 	{
 		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
 		List<String> list = new ArrayList<String>();
-		list.add("Fulfilled");
+		list.add("Open");
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("statusDisplay", list);
 		searchReqBean.setInSearchCriteria(map);
@@ -87,7 +87,7 @@ public class RequisitionResourceServiceUtil {
 	{
 		SearchRequisitionRequestBean searchReqBean = new SearchRequisitionRequestBean();
 		List<String> list = new ArrayList<String>();
-		list.add("Fulfilled");
+		list.add("Open");
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("statusDisplay", list);
 		searchReqBean.setInSearchCriteria(map);

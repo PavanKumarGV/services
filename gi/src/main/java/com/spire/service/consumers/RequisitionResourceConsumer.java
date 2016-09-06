@@ -53,7 +53,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	/* Get RR status code */
 
 	public Response getRequisition(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_JD")+"?projection=true";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -113,7 +113,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getJobDesByreqID(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_JOBDES_BY_ID.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_JOBDES_BY_ID.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_JD");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -211,7 +211,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqsOnlyLimit(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ1.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_MATCHING_REQ1.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?limit=10";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -229,7 +229,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqsOnlyLimit20(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ2.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_MATCHING_REQ2.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?limit=20";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -247,7 +247,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqWithAllFeilds(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ3.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_MATCHING_REQ3.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?offset=5&limit=10";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -265,7 +265,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqWithOfSet(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ4.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_MATCHING_REQ4.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?offset=5";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -283,7 +283,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqIDOnly(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ5.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_MATCHING_REQ5.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {

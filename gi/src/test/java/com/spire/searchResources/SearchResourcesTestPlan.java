@@ -165,7 +165,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		// Asserting Response Code
-		Assert.assertTrue(response.contains(".net"));
+		Assert.assertTrue(response.contains("net"));
 
 	}
 

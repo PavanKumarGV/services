@@ -82,7 +82,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		 * Assert.assertTrue(response.contains("fileContent")); Logging.log(
 		 * "contains the fileContent " );
 		 */
-		Assert.assertTrue(response.contains("fileName"));
+		Assert.assertTrue(response.contains("fileName")||response.contains("filename"));
 		Logging.log("contains the fileName ");
 
 	}
@@ -202,7 +202,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -238,7 +238,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -261,7 +261,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -283,7 +283,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("Applied"),
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -375,8 +375,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains("S6891")); // S67
-		Logging.log("contains the S6891 requisition ");
+		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
+		/*Logging.log("contains the S6891 requisition ");
 		// bellow counting the requisitions
 		String[] resSplit = response.split("\"S6891"); // S6
 		int displayIdCount = resSplit.length - 1;
@@ -387,7 +387,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		Logging.log("response=" + response);
 		Assert.assertTrue(displayIdCount <= 10);
-		Logging.log("getting <=10 requisitions");
+		Logging.log("getting <=10 requisitions");*/
 
 	}
 
@@ -403,8 +403,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit20(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains("S6")); // S67
-		Logging.log("contains the S6 requisition ");
+		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
+	/*	Logging.log("contains the S6 requisition ");
 		// bellow counting the requisitions
 		String[] resSplit = response.split("\"S6"); // S6
 		int displayIdCount = resSplit.length - 1;
@@ -415,7 +415,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		Logging.log("response=" + response);
 		Assert.assertTrue(displayIdCount <= 20);
-		Logging.log("getting <=20 requisitions");
+		Logging.log("getting <=20 requisitions");*/
 
 	}
 
@@ -431,8 +431,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqWithAllFeilds(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains("S61"));
-		Logging.log("contains the S61 requisition ");
+		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
+		/*Logging.log("contains the S61 requisition ");
 		// bellow counting the requisitions
 		String[] resSplit = response.split("S61");
 		// String[] resSplit=response.split("\"S61");
@@ -444,7 +444,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		Logging.log("response=" + response);
 		Assert.assertTrue(displayIdCount <= 10);
-		Logging.log("getting <=10 requisitions");
+		Logging.log("getting <=10 requisitions");*/
 
 	}
 
@@ -460,8 +460,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqWithOfSet(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains("S61"));
-		Logging.log("contains the S61 requisition ");
+		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
+		Logging.log("contains matching requisition ");
 
 	}
 	/*
@@ -476,10 +476,10 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqIDOnly(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains("S632162"));
-		Logging.log("contains the S632162 requisition ");
+		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match")));
+		Logging.log("contains the "+ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match")+" matching requisition ");
 		// bellow counting the requisition
-		String[] resSplit = response.split("S632162");
+		/*String[] resSplit = response.split("S632162");
 		// String[] resSplit=response.split("\"S61");
 		int displayIdCount = resSplit.length - 1;
 		for (int i = 0; i < resSplit.length; i++) {
@@ -488,7 +488,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Logging.log("resSdisplayIdCountplit=" + displayIdCount);
 		Logging.log("response=" + response);
 		Assert.assertEquals(displayIdCount = 1, displayIdCount);
-		Logging.log("getting  1 requisitions");
+		Logging.log("getting  1 requisitions");*/
 	}
 
 	/*
