@@ -39,8 +39,8 @@ public class RequisitionResourceServiceUtil {
 		map.put("statusDisplay", list);
 		searchReqBean.setInSearchCriteria(map);
 		System.out.println(searchReqBean.getInSearchCriteria());
-		searchReqBean.setExprncFromMnth(60);
-		searchReqBean.setExprncToMnth(96);
+		searchReqBean.setExprncFromMnth(0);
+		searchReqBean.setExprncToMnth(100);
 
 		return searchReqBean;
 

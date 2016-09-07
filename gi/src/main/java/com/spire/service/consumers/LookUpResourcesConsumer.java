@@ -58,7 +58,7 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	}
 	
 	public Response getListOfDemandFilterByPrimarySKillTypeNKeyword(String hostName) {
-		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=PRIMARY_SKILL&keyword=si";
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=PRIMARY_SKILL&keyword="+getServiceEndPoint("lookup_Skill_keyword");
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
@@ -66,7 +66,7 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	}
 	
 	public Response getListOfDemandFilterByBlankTypeNKeyword(String hostName){
-		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?keyword=si";
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?keyword="+getServiceEndPoint("lookup_Skill_keyword");
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);

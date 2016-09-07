@@ -73,8 +73,8 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
 		// Asserting Response Body
-		Assertion.assertTrue(responseBody.contains("Closed"), "Closed demand filter is not available.");
-		Logging.log("Closed demand filter is available.");
+		Assertion.assertTrue(responseBody.contains("Closed")||responseBody.contains("Open"), "Closed/Open demand filter is not available.");
+		Logging.log("Closed/Open demand filter is available.");
 	}
 
 	/**
@@ -152,8 +152,8 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
 		// Asserting Response Body
-		Assertion.assertTrue(responseBody.contains("si"), "Siebel primary skill is not available.");
-		Logging.log("Siebel Primary skill is available.");
+		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("lookup_Skill_keyword")), "primary skill is not available.");
+		Logging.log("Primary skill is available.");
 	}
 
 	/**
