@@ -690,4 +690,13 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 	}
+	
+	/**
+	 * @author 07/09/16 Steps: Get recommended requisition by candidate id
+	 *          Validation: Response code: Recommended Requisition Id
+	 */
+	@Test(groups = { "CI", "getRecomendedReqByCandId", "P1" })
+	public void getRecomendedReqByCandId() {
+		reqConsumer = new RequisitionResourceConsumer();
+}
 }

@@ -63,12 +63,13 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = endPointURL1.replaceAll("hostAddress",
 				hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
-		if (response1.getStatus() == 200) {
+	/*	if (response1.getStatus() == 200) {
 			System.out.println("********** pass **************");
 		} else {
 			Assert.fail();
-		}
+		}*/
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 
@@ -162,11 +163,12 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response " + response1);
 		if (response1.getStatus() == 200) {
-			System.out.println("********** pass **************");
-			Logging.log("Response Code >>" + response1.getStatus());
-		} else {
+			System.out.println("********** Fail **************");
 			Logging.log("Response Code >>" + response1.getStatus());
 			Assert.fail();
+		} else {
+			Logging.log("Response Code >>" + response1.getStatus());
+			System.out.println("********** pass **************");
 		}
 
 		return response1;
@@ -830,7 +832,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPointC = EndPointUrlGetCandidatesFromSavedSearch
 				.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPointC);
-
+		Logging.log(" EndPoint URL >>" + serviceEndPointC);
 		Entity<com.spire.base.service.utils.SearchInput> searchInput = Entity
 				.entity(inputBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePOST(serviceEndPointC, searchInput);

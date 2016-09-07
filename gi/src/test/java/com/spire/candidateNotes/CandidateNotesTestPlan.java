@@ -64,13 +64,13 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps: Search Note for entity Validation: Asserting candidate notes in
 	 * response body
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotessearchRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotessearchRequest" },dependsOnGroups={"createNotes"})
 	public void verifycandidatenotessearchRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
-		Response responsebody = candnoteConsumer.getCandidatenotesearch(hostName);
+		Response responsebody = candnoteConsumer.getCandidatenotesearch(hostName,id);
 		String response = responsebody.readEntity(String.class);
-		Assertion.assertTrue(response.contains("Testing1"), "not getting entityid in the response.");
+		Assertion.assertTrue(response.contains("Description"), "not getting entityid in the response.");
 		
 	}
 
@@ -200,7 +200,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearchwithincorrectparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertEquals(responsebody.getStatus(), 200, "expected 200 response but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!= 200, "expected 200 response but found response as:"+responsebody.getStatus());
 		
 		
 

@@ -33,9 +33,9 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 		return response;
 	}
 
-	public Response getCandidatenotesearch(String hostName) {
+	public Response getCandidatenotesearch(String hostName,String id) {
 		String serviceEndPoint = endPointURLCandidatenotessearch.replaceAll("hostAddress", hostName)
-				+ "?entityId=Testing1&searchText=candidate%20selected";
+				+ "?entityId="+id+"&searchText=Description";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
