@@ -70,7 +70,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearch(hostName,id);
 		String response = responsebody.readEntity(String.class);
-		Assertion.assertTrue(response.contains("Description"), "not getting entityid in the response.");
+		Assertion.assertTrue(response.contains("noteDes"), "not getting entityid in the response.");
 		
 	}
 
@@ -200,7 +200,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearchwithincorrectparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!= 200, "expected 200 response but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()!= 200, "expected 400 response but found response as:"+responsebody.getStatus());
 		
 		
 

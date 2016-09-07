@@ -14,6 +14,7 @@ import com.spire.base.controller.TestPlan;
 import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.RequisitionResourceServiceUtil;
+import com.spire.service.consumers.CustomResourceConsumer;
 import com.spire.service.consumers.RequisitionResourceConsumer;
 import com.spire.service.consumers.SearchResourcesConsumer;
 
@@ -30,6 +31,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	SearchRequisitionRequestBean candidatestasBean1 = null;
 	RequisitionResourceConsumer reqConsumer = null;
 	RequisitionStatusBean reqStatusBean = null;
+
 
 	/**
 	 * Passing HostName,UserName and Password from the xml.
@@ -691,12 +693,5 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		System.out.println("***** RESPONSE ******" + response);
 	}
 	
-	/**
-	 * @author 07/09/16 Steps: Get recommended requisition by candidate id
-	 *          Validation: Response code: Recommended Requisition Id
-	 */
-	@Test(groups = { "CI", "getRecomendedReqByCandId", "P1" })
-	public void getRecomendedReqByCandId() {
-		reqConsumer = new RequisitionResourceConsumer();
-}
+	
 }
