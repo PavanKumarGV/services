@@ -91,8 +91,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				hostName);
 		// Executes Get request and returns Response
 		Response responsebody = suggestConsumer.getSuggest(hostName);
+		Logging.log(" RESPONSE BODY>>" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		System.out.println(" RESPONSE>>" + response);
+		Logging.log(" RESPONSE CODE>>" + response);
 		// Asserting Response Code
 		Assert.assertTrue(response.contains("java"));
 

@@ -135,6 +135,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		String responseBody = response.readEntity(String.class);
 		Assertion.assertTrue(responseBody.contains("filename") || responseBody.contains("fileName"),
 				"Resume not present");
+		Logging.log(responseBody);
 		// String[] str = responseBody.split("fileName");
 		// String[] str1 = str[1].substring(3).split("\"");
 		// String fileType = str1[0].substring(str1[0].length()-4,

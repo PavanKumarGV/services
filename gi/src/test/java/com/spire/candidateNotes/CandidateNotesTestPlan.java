@@ -56,7 +56,9 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenoteslist(hostName,id);
 		String response = responsebody.readEntity(String.class);
-		Assertion.assertTrue(response.contains(id), "not getting entityid in the response.");
+		Assertion.assertTrue(response.contains(id), "Not getting entityid in the response.");
+		Logging.log("Listing Notes: "+id);
+		Logging.log("Response Body: "+response);
 		
 	}
 
@@ -64,11 +66,19 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps: Search Note for entity Validation: Asserting candidate notes in
 	 * response body
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotessearchRequest" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "verifycandidatenotessearchRequest" })
 	public void verifycandidatenotessearchRequest() {
+		noteBeanRequest = NotesServicesUtil.getNoteBean();
+		String entityId = noteBeanRequest.getId();
+		String id = noteBeanRequest.getEntityId();
+		Logging.log("Entity ID: "+id);
+		candnoteConsumer = new CandidateNotesConsumers();
+		candnoteConsumer.getToken(userId, password, hostName);
+		candnoteConsumer.createNote(noteBeanRequest, hostName);
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearch(hostName,id);
+		Logging.log("Entity ID: "+id);
 		String response = responsebody.readEntity(String.class);
 		Logging.log(response);
 		Assertion.assertTrue(response.contains(id), "not getting entityid in the response.");
@@ -242,6 +252,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response response = candnoteConsumer.createNote(noteBeanRequestWithBlankEntity, hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull: Expected 500");
 		String responseBody = response.readEntity(String.class);
 		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Notes created");
@@ -258,6 +269,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response response = candnoteConsumer.createNote(noteBeanRequestWithBlankParameter, hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Assertion.assertEquals(response.getStatus(), 400, "Response not successfull: Expected 400");
 		String responseBody = response.readEntity(String.class);
 		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Notes created");

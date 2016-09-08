@@ -127,7 +127,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	public void getCandidateStatsWithValidParameter() {
 		//Get Requset Bean, pass multiple requisitions
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStats(ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id1"),
-				ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id1"));
+				ReadingServiceEndPointsProperties.getServiceEndPoint("stas_requisition_id"));
 		// Get authentication token
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
@@ -154,7 +154,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	public void getCandidateStatsWithValidParameterGender() {
 		//Get Requset Bean, pass multiple requisitions
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsGender(ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id"),
-				ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id1"));
+				ReadingServiceEndPointsProperties.getServiceEndPoint("stas_requisition_id"));
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
 		//Execute POST Request,returns response
 		Response response = candStatsConsumer.getCandidateStats(candStatsReqBean, hostName);
@@ -286,6 +286,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Asserting response Body
 		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
 		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+	Logging.log(responseBody);
 	}
 
 	/**
@@ -309,6 +310,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Asserting response Body
 		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
 		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		Logging.log(responseBody);
 	}
 
 	/**
@@ -332,6 +334,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Asserting response Body
 		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
 		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		Logging.log(responseBody);
 	}
 
 	/**
@@ -355,6 +358,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Asserting response Body
 		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Get Candidate List Successful");
 		Logging.log("Get candidate list Unsuccessful with INVALID_PARAMETER");
+		Logging.log(responseBody);
 	}
 
 	/**
@@ -377,6 +381,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Asserting response Body
 		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Get Candidate List Successful");
 		Logging.log("Get candidate list Unsuccessful with INVALID_PARAMETER");
+		Logging.log(responseBody);
 	}
 
 	/**
@@ -398,6 +403,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Asserting response Body
 		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id")), "Get Candidate List UnSuccessful");
 		Logging.log("Get candidate list successful, candidate id: " + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		Logging.log(responseBody);
 	}
 
 	/**
@@ -419,6 +425,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		//Asserting response Body
 		Assertion.assertTrue(responseBody.contains(""), "Get Candidate List successfull");
 		Logging.log("Response is blank for invalid candidate id");
+		Logging.log(responseBody);
 	}
 
 	/**
@@ -449,6 +456,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		//Assert Response Body
 		candConsumer.assertResponse(response);
+		
 
 	}
 	
@@ -523,6 +531,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
+		Logging.log("RESPONSE: "+responseBody);
 	}
 	
 	@Test(groups = {  "allocateCandidates","P1" })
@@ -539,7 +548,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
-		Logging.log(responseBody);
+	//	Logging.log(responseBody);
+		Logging.log("RESPONSE: "+responseBody);
 	}
 		
 		
