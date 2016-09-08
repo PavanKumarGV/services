@@ -534,7 +534,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-	//	Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);

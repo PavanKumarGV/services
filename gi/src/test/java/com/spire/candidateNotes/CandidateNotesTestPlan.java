@@ -201,7 +201,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearchwithincorrectparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!= 200, "expected 400 response but found response as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus()== 200, "expected 200 response but found response as:"+responsebody.getStatus());
 		
 		
 
