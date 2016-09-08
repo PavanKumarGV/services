@@ -21,8 +21,8 @@
 				<configuration>
 					<!-- Suite testng xml file to consider for test execution -->
 					<suiteXmlFiles>
-						<suiteXmlFile>${project.basedir}/src/test/java/com/spire/test/${TestNGXML}</suiteXmlFile>
-
+					<!--  	<suiteXmlFile>${project.basedir}/src/test/java/com/spire/test/TestNG.xml</suiteXmlFile>-->
+                           <suiteXmlFile>${TestNGXML}</suiteXmlFile>
 					</suiteXmlFiles>
 					<systemPropertyVariables>
 
