@@ -32,7 +32,6 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	RequisitionResourceConsumer reqConsumer = null;
 	RequisitionStatusBean reqStatusBean = null;
 
-
 	/**
 	 * Passing HostName,UserName and Password from the xml.
 	 */
@@ -84,7 +83,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		 * Assert.assertTrue(response.contains("fileContent")); Logging.log(
 		 * "contains the fileContent " );
 		 */
-		Assert.assertTrue(response.contains("fileName")||response.contains("filename"));
+		Assert.assertTrue(response.contains("fileName") || response.contains("filename"));
 		Logging.log("contains the fileName ");
 
 	}
@@ -204,7 +203,10 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
+		Assertion.assertTrue(
+				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
+						|| responseBody.contains("APPLIED") || responseBody.contains("New")
+						|| responseBody.contains("Active") || responseBody.contains("Pending"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -240,7 +242,10 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
+		Assertion.assertTrue(
+				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
+						|| responseBody.contains("APPLIED") || responseBody.contains("New")
+						|| responseBody.contains("Active") || responseBody.contains("Pending"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -263,7 +268,10 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
+		Assertion.assertTrue(
+				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
+						|| responseBody.contains("APPLIED") || responseBody.contains("New")
+						|| responseBody.contains("Active") || responseBody.contains("Pending"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -285,7 +293,10 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
 		Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")||responseBody.contains("APPLIED"),
+		Assertion.assertTrue(
+				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
+						|| responseBody.contains("APPLIED") || responseBody.contains("New")
+						|| responseBody.contains("Active") || responseBody.contains("Pending"),
 				"Automatched requisition not found");
 		Logging.log("Automatched requiistions found");
 
@@ -377,19 +388,18 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
-		/*Logging.log("contains the S6891 requisition ");
-		// bellow counting the requisitions
-		String[] resSplit = response.split("\"S6891"); // S6
-		int displayIdCount = resSplit.length - 1;
-		for (int i = 0; i < resSplit.length; i++) {
-			Logging.log("resSplit=" + resSplit[i]);
-		}
-		Logging.log("resSdisplayIdCountplit=" + displayIdCount);
-
-		Logging.log("response=" + response);
-		Assert.assertTrue(displayIdCount <= 10);
-		Logging.log("getting <=10 requisitions");*/
+		Assert.assertTrue(response
+				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
+		/*
+		 * Logging.log("contains the S6891 requisition "); // bellow counting
+		 * the requisitions String[] resSplit = response.split("\"S6891"); // S6
+		 * int displayIdCount = resSplit.length - 1; for (int i = 0; i <
+		 * resSplit.length; i++) { Logging.log("resSplit=" + resSplit[i]); }
+		 * Logging.log("resSdisplayIdCountplit=" + displayIdCount);
+		 * 
+		 * Logging.log("response=" + response); Assert.assertTrue(displayIdCount
+		 * <= 10); Logging.log("getting <=10 requisitions");
+		 */
 
 	}
 
@@ -405,19 +415,18 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit20(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
-	/*	Logging.log("contains the S6 requisition ");
-		// bellow counting the requisitions
-		String[] resSplit = response.split("\"S6"); // S6
-		int displayIdCount = resSplit.length - 1;
-		for (int i = 0; i < resSplit.length; i++) {
-			Logging.log("resSplit=" + resSplit[i]);
-		}
-		Logging.log("resSdisplayIdCountplit=" + displayIdCount);
-
-		Logging.log("response=" + response);
-		Assert.assertTrue(displayIdCount <= 20);
-		Logging.log("getting <=20 requisitions");*/
+		Assert.assertTrue(response
+				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
+		/*
+		 * Logging.log("contains the S6 requisition "); // bellow counting the
+		 * requisitions String[] resSplit = response.split("\"S6"); // S6 int
+		 * displayIdCount = resSplit.length - 1; for (int i = 0; i <
+		 * resSplit.length; i++) { Logging.log("resSplit=" + resSplit[i]); }
+		 * Logging.log("resSdisplayIdCountplit=" + displayIdCount);
+		 * 
+		 * Logging.log("response=" + response); Assert.assertTrue(displayIdCount
+		 * <= 20); Logging.log("getting <=20 requisitions");
+		 */
 
 	}
 
@@ -433,20 +442,19 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqWithAllFeilds(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
-		/*Logging.log("contains the S61 requisition ");
-		// bellow counting the requisitions
-		String[] resSplit = response.split("S61");
-		// String[] resSplit=response.split("\"S61");
-		int displayIdCount = resSplit.length - 1;
-		for (int i = 0; i < resSplit.length; i++) {
-			Logging.log("resSplit=" + resSplit[i]);
-		}
-		Logging.log("resSdisplayIdCountplit=" + displayIdCount);
-
-		Logging.log("response=" + response);
-		Assert.assertTrue(displayIdCount <= 10);
-		Logging.log("getting <=10 requisitions");*/
+		Assert.assertTrue(response
+				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
+		/*
+		 * Logging.log("contains the S61 requisition "); // bellow counting the
+		 * requisitions String[] resSplit = response.split("S61"); // String[]
+		 * resSplit=response.split("\"S61"); int displayIdCount =
+		 * resSplit.length - 1; for (int i = 0; i < resSplit.length; i++) {
+		 * Logging.log("resSplit=" + resSplit[i]); }
+		 * Logging.log("resSdisplayIdCountplit=" + displayIdCount);
+		 * 
+		 * Logging.log("response=" + response); Assert.assertTrue(displayIdCount
+		 * <= 10); Logging.log("getting <=10 requisitions");
+		 */
 
 	}
 
@@ -462,7 +470,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getMatchingReqWithOfSet(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
+		Assert.assertTrue(response
+				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
 		Logging.log("contains matching requisition ");
 
 	}
@@ -479,18 +488,19 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match")));
-		Logging.log("contains the "+ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match")+" matching requisition ");
+		Logging.log("contains the " + ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match")
+				+ " matching requisition ");
 		// bellow counting the requisition
-		/*String[] resSplit = response.split("S632162");
-		// String[] resSplit=response.split("\"S61");
-		int displayIdCount = resSplit.length - 1;
-		for (int i = 0; i < resSplit.length; i++) {
-			Logging.log("resSplit=" + resSplit[i]);
-		}
-		Logging.log("resSdisplayIdCountplit=" + displayIdCount);
-		Logging.log("response=" + response);
-		Assert.assertEquals(displayIdCount = 1, displayIdCount);
-		Logging.log("getting  1 requisitions");*/
+		/*
+		 * String[] resSplit = response.split("S632162"); // String[]
+		 * resSplit=response.split("\"S61"); int displayIdCount =
+		 * resSplit.length - 1; for (int i = 0; i < resSplit.length; i++) {
+		 * Logging.log("resSplit=" + resSplit[i]); }
+		 * Logging.log("resSdisplayIdCountplit=" + displayIdCount);
+		 * Logging.log("response=" + response);
+		 * Assert.assertEquals(displayIdCount = 1, displayIdCount); Logging.log(
+		 * "getting  1 requisitions");
+		 */
 	}
 
 	/*
@@ -505,13 +515,11 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		reqConsumer.getJobDesByWrongreqID(hostName);
 		Response responsebody = reqConsumer.getJobDesByWrongreqID(hostName);
 
-
 	}
 
-	
 	/*
-	 *  Udhaya -Get the job description by requisition id Passing
-	 * special char id Should fail
+	 * Udhaya -Get the job description by requisition id Passing special char id
+	 * Should fail
 	 */
 
 	@Test(groups = { "sanity", "GetJobDesBySpecialCharID" })
@@ -535,8 +543,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	}
 	/*
-	 * Udhaya-Get the job description by requisition id Passing
-	 * Blank id Should fail
+	 * Udhaya-Get the job description by requisition id Passing Blank id Should
+	 * fail
 	 */
 
 	@Test(groups = { "sanity", "GetJobDesByBlankSpace" })
@@ -557,7 +565,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		 */
 
 	}
-	
+
 	/**
 	 * @author Radharani Patra 16/08/16 Steps: Update Requisition status
 	 *         Validation: Response code: 200
@@ -565,16 +573,20 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionStatus", "P1" })
 	public void updateRequisitionStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE: " + response.getStatus());
 		String responseBody = response.readEntity(String.class);
-		// Logging.log(responseBody);
-		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
+		Logging.log("RESPONSE BODY: "+responseBody);
+		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully")||responseBody.contains("update operation successfully completed"),
 				"Req not updated");
-		Logging.log("Requisition Status Updated Successfully RFR ID: " + ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
+		Logging.log("Requisition Status Updated Successfully RFR ID: "
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats")+" ,"+" Status: "+ReadingServiceEndPointsProperties.getServiceEndPoint("test_status") );
 	}
 
 	/**
@@ -585,16 +597,20 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionStatusWithSameStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE: " + response.getStatus());
 		String responseBody = response.readEntity(String.class);
-		// Logging.log(responseBody);
+		Logging.log("RESPONSE BODY: "+responseBody);
 		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
 				"Req not updated");
-		Logging.log("Requisition Status Updated Successfully RFR ID: " + ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
+		Logging.log("Requisition Status Updated Successfully RFR ID: "
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
 	}
 
 	/**
@@ -604,10 +620,13 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankRFR", "P2" })
 	public void updateRequisitionWithBlankRFR() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
-		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName,
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Not Equal To 200");
 
 	}
 
@@ -618,10 +637,13 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankStatus", "P2" })
 	public void updateRequisitionWithBlankStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
-		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName,
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Not Equal To 200");
 
 	}
 
@@ -632,10 +654,12 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankParameter", "P2" })
 	public void updateRequisitionWithBlankParameter() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatusBlnk(reqStatusBean, hostName);
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Not Equal To 200");
 
 	}
 
@@ -647,16 +671,20 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionWithDifferentStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE: " + response.getStatus());
 		String responseBody = response.readEntity(String.class);
-		// Logging.log(responseBody);
+		Logging.log("RESPONSE BODY: "+responseBody);
 		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
 				"Req not updated");
-		Logging.log("Requisition Status Updated Successfully RFR ID: " + ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
+		Logging.log("Requisition Status Updated Successfully RFR ID: "
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
 	}
 
 	/**
@@ -666,15 +694,17 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionStatusWithoutheaders", "P2" })
 	public void updateRequisitionStatusWithoutheaders() {
 		reqConsumer = new RequisitionResourceConsumer();
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"), ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
-		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName, ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		Logging.log("RESPONSE CODE: " + response.getStatus());
 		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		
 
 	}
-	
+
 	/*
 	 * * Udhay - /requisitions/{requisitionId}
 	 * 
@@ -692,6 +722,5 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 	}
-	
-	
+
 }
