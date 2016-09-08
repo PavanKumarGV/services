@@ -70,6 +70,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearch(hostName,id);
 		String response = responsebody.readEntity(String.class);
+		Logging.log(response);
 		Assertion.assertTrue(response.contains(id), "not getting entityid in the response.");
 		
 	}

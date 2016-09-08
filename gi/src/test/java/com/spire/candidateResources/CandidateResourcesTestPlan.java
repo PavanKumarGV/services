@@ -508,7 +508,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 
 	}
 	
-	@Test(groups = { "sanity", "deallocateCandidates","P1" })
+	@Test(groups = {  "deallocateCandidates","P1" ,"sanity"},dependsOnGroups={"allocateCandidates"})
 	public void deallocateCandidates() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
@@ -523,6 +523,23 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
 		System.out.println(responseBody);
+	}
+	
+	@Test(groups = {  "allocateCandidates","P1" })
+	public void allocateCandidates() {
+		// Get user token
+		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
+		// execute post Request
+		Response response = candConsumer.allocatecandidate(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+	//	Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		System.out.println(responseBody);
+		Logging.log(responseBody);
 	}
 		
 		

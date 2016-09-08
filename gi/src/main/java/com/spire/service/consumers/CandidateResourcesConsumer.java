@@ -8,7 +8,7 @@ import com.spire.base.controller.Assertion;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 import com.spire.base.service.Constants;
-
+import com.spire.base.service.ReadingServiceEndPointsProperties;
 
 import spire.talent.gi.beans.GetCandidateRequestBean;
 
@@ -18,6 +18,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	String getResumeURL = getServiceEndPoint("GET_RESUME");
 	String getcandidateprofileURL = getServiceEndPoint("GET_CANDIDATE_PROFILE");
 	String deallocUrl = getServiceEndPoint("CANDIDATE_DEALLOCATE");
+	String allocUrl = getServiceEndPoint("CANDIDATE_ALLOCATE");
 
 	public CandidateResourcesConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -58,11 +59,11 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	 * Pass parameter id and projection type Returns Respsonse
 	 */
 	public Response getcandidateprofile(String hostName) {
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)
-				+ "/"+getServiceEndPoint("candidate_Id1")+"?projection=full";
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) + "/"
+				+ getServiceEndPoint("candidate_Id1") + "?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		//call Get Operation
+		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -76,7 +77,7 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		//call Get Operation
+		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -85,10 +86,11 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	}
 
 	public Response getCandidateprofilewithoutprojection(String hostName) {
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) +"/"+getServiceEndPoint("candidate_Id1");
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) + "/"
+				+ getServiceEndPoint("candidate_Id1");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		//call Get Operation
+		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -99,16 +101,15 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	 * Pass parameter Projection type Returns Respsonse
 	 */
 	public Response getCandidateprofilewithoutid(String hostName) {
-		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName)+"?projection=full";
+		String serviceEndPoint = getcandidateprofileURL.replaceAll("hostAddress", hostName) + "?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		//call Get Operation
+		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
-
 
 	public Response getCandidateList(GetCandidateRequestBean reqBean, String hostname) {
 		String serviceEndPoint = fetchCandidateURL.replaceAll("hostAddress", hostname);
@@ -119,53 +120,78 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 
 	}
-	
-	public Response getCandidateResume(String cid,String hostname){
-		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname)+"/"+cid;
+
+	public Response getCandidateResume(String cid, String hostname) {
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname) + "/" + cid;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		//call Get Operation
+		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		return response;
-		
+
 	}
-	
-	public void assertResponse(Response response){
+
+	public void assertResponse(Response response) {
 		String responseBody = response.readEntity(String.class);
-		Assertion.assertTrue(responseBody.contains("filename")||responseBody.contains("fileName"),"Resume not present");
-//		String[] str = responseBody.split("fileName");
-//		String[] str1 = str[1].substring(3).split("\"");
-//		String fileType = str1[0].substring(str1[0].length()-4, str1[0].length());
-//		System.out.println("******"+fileType);
-//		//Asserting response Body
-//		Assertion.assertTrue(fileType.contains("doc")||fileType.contains("docx")||fileType.contains("pdf")||fileType.contains("txt"), "Get Candidate Resume Unsuccessfull");
-//		Logging.log("Get Candidate Resume successful, File Type: "+fileType );
+		Assertion.assertTrue(responseBody.contains("filename") || responseBody.contains("fileName"),
+				"Resume not present");
+		// String[] str = responseBody.split("fileName");
+		// String[] str1 = str[1].substring(3).split("\"");
+		// String fileType = str1[0].substring(str1[0].length()-4,
+		// str1[0].length());
+		// System.out.println("******"+fileType);
+		// //Asserting response Body
+		// Assertion.assertTrue(fileType.contains("doc")||fileType.contains("docx")||fileType.contains("pdf")||fileType.contains("txt"),
+		// "Get Candidate Resume Unsuccessfull");
+		// Logging.log("Get Candidate Resume successful, File Type: "+fileType
+		// );
 	}
-	
-	public Response getCandidateResumeBlank(String hostname){
+
+	public Response getCandidateResumeBlank(String hostname) {
 		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		//call Get Operation
+		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		return response;
 	}
-	
-	public Response getCandidateResumeInvalid(String cid,String hostname){
+
+	public Response getCandidateResumeInvalid(String cid, String hostname) {
 		String str1 = cid.substring(0, 10);
-		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname)+"/"+str1;
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname) + "/" + str1;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		//call Get Operation
+		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		return response;
-		
+
 	}
-	public Response deallocatecandidate(String hostname,String reqBean) {
+
+	public Response deallocatecandidate(String hostname, String reqBean) {
 		String serviceEndPoint = deallocUrl.replaceAll("hostAddress", hostname);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		
+
+		Entity<String> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, bean);
+		return response;
+
+	}
+
+	public Response allocatecandidate(String hostname) {
+		String reqBean = "{\"items\": [{\"requisitionId\": \""
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_deallocate")
+				+ "\",\"candidateId\": \""
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_deallocate")
+				+ "\",\"candidateDisplayId\": \""
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_deallocate_displayId")
+				+ "\",\"requisitionDisplayId\": \""
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_deallocate_displayId")
+				+ "\",\"isCurrent\": \"Y\"}]}";
+		String serviceEndPoint = allocUrl.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+
 		Entity<String> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePOST(serviceEndPoint, bean);
 		return response;
