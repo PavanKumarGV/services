@@ -66,7 +66,7 @@ public class SearchUtil {
 		skills.add("java");
 
 		List<String> locations = new ArrayList<String>();
-		locations.add("Bengalore");
+		locations.add("Bangalore");
 		locations.add("Mumbai");
 
 		searchAttributeMap.put("skill", skills);

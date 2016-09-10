@@ -39,7 +39,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 * Asserting Open Requisition Status in response body
 	 */
 
-	@Test(groups = { "sanity", "verifyLookupservices","P1" })
+	@Test(groups = { "sanity", "verifyLookupservices","P1","NA" })
 	public void verifyLookupservices() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -61,7 +61,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 * body
 	 */
 
-	@Test(groups = { "sanity", "verifyLookupservicesByTypeNKeyword","P1" })
+	@Test(groups = { "sanity", "verifyLookupservicesByTypeNKeyword","P1","NA" })
 	public void verifyLookupservicesByTypeNKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -82,7 +82,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         Blank demand filter type Validation: Status code 500, Response
 	 *         message
 	 */
-	@Test(groups = { "sanity", "getListOfDemandFilterWithBlankType","P2" })
+	@Test(groups = { "sanity", "getListOfDemandFilterWithBlankType","P2","NA" })
 	public void getListOfDemandFilterWithoutType() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -101,7 +101,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         Blank demand filter type Validation: Status code 500, Response
 	 *         message
 	 */
-	@Test(groups = { "sanity", "getListOfDemandFilterWithInvalidType","P2" })
+	@Test(groups = { "sanity", "getListOfDemandFilterWithInvalidType","P2","NA" })
 	public void getListOfDemandFilterWithInvalidType() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -121,7 +121,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         message
 	 */
 
-	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNBlankKeyword","P2" })
+	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNBlankKeyword","P2","NA" })
 	public void verifyLookUpServiceByBlankTypeNBlankKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -140,7 +140,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         Primary skill Type and Keyword j Validation: Asserting Status
 	 *         code 200, Response Message
 	 */
-	@Test(groups = { "sanity", "verifyLookupservicesByPrimarySkillTypeNKeyword","P1" })
+	@Test(groups = { "sanity", "verifyLookupservicesByPrimarySkillTypeNKeyword","P1","NA" })
 	public void verifyLookupservicesByPrimarySkillTypeNKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -162,7 +162,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         message
 	 */
 
-	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNKeyword","P2" })
+	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNKeyword","P2","NA" })
 	public void verifyLookUpServiceByBlankTypeNKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -182,7 +182,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	 *         message
 	 */
 
-	@Test(groups = { "sanity", "verifyLookUpServiceByTypeNBlankKeyword","P2" })
+	@Test(groups = { "sanity", "verifyLookUpServiceByTypeNBlankKeyword","P2","NA" })
 	public void verifyLookUpServiceByTypeNBlankKeyword() {
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
@@ -201,7 +201,7 @@ public class LookUpResourcesTestPlan extends TestPlan {
      * Steps: Get list of demand filter by passing special characters
      * Validation: asserting status code
      */
-    @Test(groups={"sanity","verifylistofdemandfilterwithSpecialcharacters"})
+    @Test(groups={"sanity","verifylistofdemandfilterwithSpecialcharacters","NA"})
     public void verifylistofdemandfilterwithSpecialcharacters()
     {
         lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);

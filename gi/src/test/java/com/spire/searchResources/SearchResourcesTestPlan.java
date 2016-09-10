@@ -59,7 +59,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "GetSimillerProfiles" })
+	@Test(groups = { "sanity", "GetSimillerProfiles","NA" })
 	public void GetSimillerProfiles() throws ClientProtocolException,
 			IOException {
 
@@ -73,6 +73,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response
 				.contains("id"));
+		Logging.log("Response: "+response);
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws ClientProtocolException
 	 **/
 
-	@Test(groups = { "sanity", "verifySuggestRequest" })
+	@Test(groups = { "sanity", "verifySuggestRequest","NA" })
 	public void verifySuggestRequest() throws ClientProtocolException,
 			IOException {
 		SearchResourcesConsumer suggestConsumer = null;
@@ -107,7 +108,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws ClientProtocolException
 	 **/
 
-	@Test(groups = { "sanity", "verifySuggestValidation" })
+	@Test(groups = { "sanity", "verifySuggestValidation","NA" })
 	public void verifySuggestValidation() throws ClientProtocolException,
 			IOException {
 		SearchResourcesConsumer suggestConsumer = null;
@@ -131,7 +132,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "verifySuggestForSkillwithMultipleWords" })
+	@Test(groups = { "sanity", "verifySuggestForSkillwithMultipleWords","NA" })
 	public void verifySuggestForSkillwithMultipleWords()
 			throws ClientProtocolException, IOException {
 		SearchResourcesConsumer suggestConsumer = null;
@@ -144,7 +145,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		// Asserting Response Code
-		Assert.assertTrue(response.contains("project planning"));
+		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace( "%20"," ")));
 
 	}
 
@@ -155,7 +156,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "verifySuggestForSkillwithSpecialCharacter" })
+	@Test(groups = { "sanity", "verifySuggestForSkillwithSpecialCharacter","NA" })
 	public void verifySuggestForSkillwithSpecialCharacter()
 			throws ClientProtocolException, IOException {
 		SearchResourcesConsumer suggestConsumer = null;
@@ -178,7 +179,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "GetSimilarProfilesNegative" })
+	@Test(groups = { "sanity", "GetSimilarProfilesNegative","NA" })
 	public void GetSimilarProfilesNegative() throws ClientProtocolException,
 			IOException {
 
@@ -200,7 +201,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * 
 	 */
 
-	@Test(groups = { "sanity", "searchCandidatesWithSkill" })
+	@Test(groups = { "sanity", "searchCandidatesWithSkill","NA" })
 	public void searchCandidatesWithSkill() throws ClientProtocolException,
 			IOException {
 
@@ -230,7 +231,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	}
 
-	@Test(groups = { "sanity", "searchCandidatesWithSkillAndLocation" })
+	@Test(groups = { "sanity", "searchCandidatesWithSkillAndLocation","NA" })
 	public void searchCandidatesWithSkillAndLocation()
 			throws ClientProtocolException, IOException {
 
@@ -265,7 +266,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "getSavedSearch" })
+	@Test(groups = { "sanity", "getSavedSearch","NA" })
 	public void getSavedSearch() throws ClientProtocolException, IOException {
 
 		SearchResourcesConsumer suggestConsumer = null;
@@ -335,7 +336,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti- Get autocomplete with full skill
 	 */
-	@Test(groups = { "sanity", "getautocompletewithfullskillRequest" })
+	@Test(groups = { "sanity", "getautocompletewithfullskillRequest","NA" })
 	public void getautocompletewithfullskillRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -348,7 +349,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
 		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_skill_to_search")),
@@ -358,7 +359,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with partial skill
 	 */
-	@Test(groups = { "sanity", "getautocompletewithpartialskillRequest" })
+	@Test(groups = { "sanity", "getautocompletewithpartialskillRequest","NA" })
 	public void getautocompletewithpartialskillRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -371,7 +372,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
 		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_Skill_to_search")),
@@ -382,7 +383,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti- Get autocomplete with full institute
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithfullinstituteRequest" })
+	@Test(groups = { "sanity", "getautocompletewithfullinstituteRequest","NA" })
 	public void getautocompletewithfullinstituteRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -395,7 +396,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
 	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_institute_to_search")),
@@ -406,7 +407,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti- Get autocomplete with partial institute
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithpartialinstituteRequest" })
+	@Test(groups = { "sanity", "getautocompletewithpartialinstituteRequest","NA" })
 	public void getautocompletewithpartialinstituteRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -419,7 +420,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.institute),
 				"institute not found in the response.");
 		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_institute_to_search")),
@@ -430,7 +431,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti-Get autocomplete with full education
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithfulleducationRequest" })
+	@Test(groups = { "sanity", "getautocompletewithfulleducationRequest","NA" })
 	public void getautocompletewithfulleducationRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -443,7 +444,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.education),
 				"education not found in the response.");
 		/*Assertion.assertTrue(
@@ -455,7 +456,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti-Get autocomplete with partial education
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithpartialeducationRequest" })
+	@Test(groups = { "sanity", "getautocompletewithpartialeducationRequest","NA" })
 	public void getautocompletewithpartialeducationRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -468,7 +469,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.education),
 				"education not found in the response.");
 		/*Assertion.assertTrue(response.contains("Diploma"),
@@ -479,7 +480,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti-Get autocomplete with full employer
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithfullemployerRequest" })
+	@Test(groups = { "sanity", "getautocompletewithfullemployerRequest","NA" })
 	public void getautocompletewithfullemployerRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -492,7 +493,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
 	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_employer_to_search")),
@@ -503,7 +504,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti-Get autocomplete with partial employer
 	 */
 
-	@Test(groups = { "sanity", "getautocompletepartialemployerRequest" })
+	@Test(groups = { "sanity", "getautocompletepartialemployerRequest","NA" })
 	public void getautocompletepartialemployerRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -516,7 +517,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.employer),
 				"employer not found in the response.");
 	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_employer_to_search")),
@@ -526,7 +527,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with full location
 	 */
-	@Test(groups = { "sanity", "getautocompletfulllocationRequest" })
+	@Test(groups = { "sanity", "getautocompletfulllocationRequest","NA" })
 	public void getautocompletfulllocationRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -539,7 +540,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
 		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_location_to_search")),
@@ -549,7 +550,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with partial location
 	 */
-	@Test(groups = { "sanity", "getautocompletpartiallocationRequest" })
+	@Test(groups = { "sanity", "getautocompletpartiallocationRequest","NA" })
 	public void getautocompletpartiallocationRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -562,7 +563,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
 		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_location_to_search")),
@@ -572,7 +573,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with full sourcetype
 	 */
-	@Test(groups = { "sanity", "getautocompletfullsourcetypeRequest" })
+	@Test(groups = { "sanity", "getautocompletfullsourcetypeRequest","NA" })
 	public void getautocompletfullsourcetypeRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -585,7 +586,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.sourcetype),
 				"sourcetype not found in the response.");
 	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcetype_to_search")),
@@ -595,7 +596,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with partial sourcetype
 	 */
-	@Test(groups = { "sanity", "getautocompletpartialsourcetypeRequest" })
+	@Test(groups = { "sanity", "getautocompletpartialsourcetypeRequest","NA" })
 	public void getautocompletpartialsourcetypeRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -608,7 +609,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.sourcetype),
 				"sourcetype not found in the response.");
 		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_sourcetype_to_search")),
@@ -618,7 +619,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with full sourcename
 	 */
-	@Test(groups = { "sanity", "getautocompletfullsourcenameRequest" })
+	@Test(groups = { "sanity", "getautocompletfullsourcenameRequest","NA" })
 	public void getautocompletfullsourcenameRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -631,7 +632,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
 		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcename_to_search")),
@@ -641,7 +642,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with partial sourcename
 	 */
-	@Test(groups = { "sanity", "getautocompletpartialsourcenameRequest" })
+	@Test(groups = { "sanity", "getautocompletpartialsourcenameRequest" ,"NA"})
 	public void getautocompletpartialsourcenameRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -654,7 +655,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.sourcename),
 				"sourcename not found in the response.");
 //		Assertion.assertTrue(response.contains("N"),
@@ -664,7 +665,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with full status
 	 */
-	@Test(groups = { "sanity", "getautocompletfullstatusRequest" })
+	@Test(groups = { "sanity", "getautocompletfullstatusRequest","NA" })
 	public void getautocompletfullstatusRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -677,7 +678,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
 	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_status_to_search")),
@@ -687,7 +688,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with partial status
 	 */
-	@Test(groups = { "sanity", "getautocompletpartialstatusRequest" })
+	@Test(groups = { "sanity", "getautocompletpartialstatusRequest" ,"NA"})
 	public void getautocompletpartialstatusRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -700,7 +701,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.status),
 				"status not found in the response.");
 		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_status_to_search")),
@@ -711,7 +712,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti-Get autocomplete without keyword
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithoutkeywordRequest" })
+	@Test(groups = { "sanity", "getautocompletewithoutkeywordRequest","NA" })
 	public void getautocompletewithoutkeywordRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -724,7 +725,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				"Response expected 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.skill),
 				"skill not found in the response.");
 
@@ -734,7 +735,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * priti-Get autocomplete without type
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithouttypeRequest" })
+	@Test(groups = { "sanity", "getautocompletewithouttypeRequest","NA" })
 	public void getautocompletewithouttypeRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
@@ -746,7 +747,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Assertion.assertTrue(responsebody.getStatus() != 200,
 				"response is unsuccessfull");
 		String response = responsebody.readEntity(String.class);
-
+		Logging.log(" Response Body >>" + response);
 		Assertion
 				.assertTrue(response
 						.contains("Search input cannot be null or empty"),
@@ -762,7 +763,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnAsc" })
+	@Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnAsc","NA" })
 	public void listSavedSearchWithSortByModifiedOnAsc()
 			throws ClientProtocolException, IOException {
 
@@ -789,7 +790,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnDsc" })
+	@Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnDsc","NA" })
 	public void listSavedSearchWithSortByModifiedOnDsc()
 			throws ClientProtocolException, IOException {
 
@@ -816,7 +817,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "listSavedSearchWithSortByCreatedOnAsc" })
+	@Test(groups = { "sanity", "listSavedSearchWithSortByCreatedOnAsc","NA" })
 	public void listSavedSearchWithSortByCreatedOnAsc()
 			throws ClientProtocolException, IOException {
 
@@ -843,7 +844,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "listSavedSearchWithSortByCreatedOnDsc" })
+	@Test(groups = { "sanity", "listSavedSearchWithSortByCreatedOnDsc","NA" })
 	public void listSavedSearchWithSortByCreatedOnDsc()
 			throws ClientProtocolException, IOException {
 
@@ -871,7 +872,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws ClientProtocolException
 	 **/
 
-	@Test(groups = { "sanity", "verifySuggestRequestForInvalidKeyword" })
+	@Test(groups = { "sanity", "verifySuggestRequestForInvalidKeyword","NA" })
 	public void verifySuggestRequestForInvalidKeyword()
 			throws ClientProtocolException, IOException {
 		SearchResourcesConsumer suggestConsumer = null;
@@ -896,7 +897,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "getSavedSearchByIdWithSpace" })
+	@Test(groups = { "sanity", "getSavedSearchByIdWithSpace","NA" })
 	public void getSavedSearchByIdWithSpace() throws ClientProtocolException,
 			IOException {
 
@@ -923,7 +924,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "createSavedSearchWithSkill" })
+	@Test(groups = { "sanity", "createSavedSearchWithSkill","NA" })
 	public void createSavedSearchWithSkill() throws ClientProtocolException,
 			IOException {
 
@@ -958,7 +959,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "createSavedSearchInputBeanWithSkillAndLocation" })
+	@Test(groups = { "sanity", "createSavedSearchInputBeanWithSkillAndLocation","NA" })
 	public void createSavedSearchInputBeanWithSkillAndLocation()
 			throws ClientProtocolException, IOException {
 
@@ -993,7 +994,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "createPublicSavedSearchWithSkill" })
+	@Test(groups = { "sanity", "createPublicSavedSearchWithSkill","NA" })
 	public void createPublicSavedSearchWithSkill()
 			throws ClientProtocolException, IOException {
 
@@ -1028,7 +1029,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "deleteSavedSearchById" })
+	@Test(groups = { "sanity", "deleteSavedSearchById","NA" })
 	public void deleteSavedSearchById() throws ClientProtocolException,
 			IOException {
 		System.out.println("Delete particular saved search by ID that exist");
@@ -1082,7 +1083,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "deleteSavedSearchByIdNonExisting" })
+	@Test(groups = { "sanity", "deleteSavedSearchByIdNonExisting","NA" })
 	public void deleteSavedSearchByIdNonExisting()
 			throws ClientProtocolException, IOException {
 		System.out
@@ -1104,7 +1105,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	}
 
-	@Test(groups = { "sanity", "searchCandidatesWithNoSearchQueryString" })
+	@Test(groups = { "sanity", "searchCandidatesWithNoSearchQueryString","NA" })
 	public void searchCandidatesWithNoSearchQueryString()
 			throws ClientProtocolException, IOException {
 
@@ -1139,7 +1140,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "updateSavedSearchById" })
+	@Test(groups = { "sanity", "updateSavedSearchById","NA" })
 	public void updateSavedSearchById() throws ClientProtocolException,
 			IOException {
 		System.out.println("Update particular saved search by ID that exist");
@@ -1198,7 +1199,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "updateSavedSearchByIdNonExisting" })
+	@Test(groups = { "sanity", "updateSavedSearchByIdNonExisting","NA" })
 	public void updateSavedSearchByIdNonExisting()
 			throws ClientProtocolException, IOException {
 		System.out
@@ -1238,7 +1239,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws ClientProtocolException
 	 **/
 
-	@Test(groups = { "sanity", "savedSearchUsingSearchText" })
+	@Test(groups = { "sanity", "savedSearchUsingSearchText","NA" })
 	public void savedSearchUsingSearchText() throws ClientProtocolException,
 			IOException {
 		SearchResourcesConsumer suggestConsumer = null;
@@ -1264,7 +1265,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws ClientProtocolException
 	 **/
 
-	@Test(groups = { "sanity", "validationOnSavedSearchUsingSearchText" })
+	@Test(groups = { "sanity", "validationOnSavedSearchUsingSearchText","NA" })
 	public void validationOnSavedSearchUsingSearchText()
 			throws ClientProtocolException, IOException {
 		SearchResourcesConsumer suggestConsumer = null;
@@ -1290,7 +1291,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws ClientProtocolException
 	 **/
 
-	@Test(groups = { "sanity", "savedSearchUsingPartialSearchText" })
+	@Test(groups = { "sanity", "savedSearchUsingPartialSearchText","NA" })
 	public void savedSearchUsingPartialSearchText()
 			throws ClientProtocolException, IOException {
 		// Get authentication token
@@ -1320,7 +1321,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * 
 	 */
 
-	@Test(groups = { "sanity", "getCandidatesFromSavedSearch" })
+	@Test(groups = { "sanity", "getCandidatesFromSavedSearch","NA" })
 	public void getCandidatesFromSavedSearch() throws ClientProtocolException,
 			IOException {
 
@@ -1356,7 +1357,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @throws IOException
 	 * @throws ClientProtocolException
 	 **/
-	@Test(groups = { "sanity", "createSavedSearchWithExistingSavedSearchName" })
+	@Test(groups = { "sanity", "createSavedSearchWithExistingSavedSearchName","NA" })
 	public void createSavedSearchWithExistingSavedSearchName()
 			throws ClientProtocolException, IOException {
 

@@ -12,6 +12,7 @@ import org.testng.Assert;
 import com.spire.base.controller.Assertion;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
+import com.spire.base.service.ReadingServiceEndPointsProperties;
 
 import spire.talent.gi.beans.NoteBean;
 import spire.talent.gi.beans.RequisitionStatusBean;
@@ -28,16 +29,15 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_JD_BY_SPLCHAR_ID = getServiceEndPoint("SEARCH_REQUISITION_SPL");
 	String endPointURL_JD_BY_Blank_ID = getServiceEndPoint("SEARCH_REQUISITION_Blk");
 
-	
-
 	String endPointURL_JD_BY_WRONG_ID = getServiceEndPoint("JOB_DES_BY_WRONG_ID");
 	String endPointURL_MATCHING_REQ1 = getServiceEndPoint("MATCHING_REQS_LIMIT_TEN");
 	String endPointURL_MATCHING_REQ2 = getServiceEndPoint("MATCHING_REQS_LIMIT_TWENTY");
 	String endPointURL_MATCHING_REQ3 = getServiceEndPoint("MATCHING_REQS_WITH_ALL_FEILDS");
 	String endPointURL_MATCHING_REQ4 = getServiceEndPoint("MATCHING_REQS_WITH_ID_OFSET");
 	String endPointURL_MATCHING_REQ5 = getServiceEndPoint("MATCHING_REQS_ID_ONLY");
-	String createCandidateStasEndPOint=getServiceEndPoint("CREATE_CANDIDATE_STAS");
+	String createCandidateStasEndPOint = getServiceEndPoint("CREATE_CANDIDATE_STAS");
 	String changeReqURL = getServiceEndPoint("CHANGE_REQ_STATUS");
+	String facetSearchURL = getServiceEndPoint("FACETED_SEARCH");
 
 	public RequisitionResourceConsumer(String username, String password, String hostName) {
 		Logging.log("Inside of Login");
@@ -53,7 +53,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	/* Get RR status code */
 
 	public Response getRequisition(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_JD")+"?projection=true";
+		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName)
+				+ getServiceEndPoint("Requisition_JD") + "?projection=true";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -113,15 +114,17 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getJobDesByreqID(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_JOBDES_BY_ID.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_JD");
+		String serviceEndPoint = endPointURL_JOBDES_BY_ID.replaceAll("hostAddress", hostName)
+				+ getServiceEndPoint("Requisition_JD");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
+		Logging.log("Response Code >>" + response1.getStatus());
 		if (response1.getStatus() == 200) {
 			Logging.log("Status Code 200 ");
 		} else {
 			Assert.fail();
 		}
-		Logging.log("Response Code >>" + response1.getStatus());
+		//Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
 
@@ -148,7 +151,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		Response response1 = executeGET(serviceEndPoint);
 		// String response = response1.readEntity(String.class);
 
-		if (response1.getStatus() !=200) {
+		if (response1.getStatus() != 200) {
 			Logging.log("Status Code 400");
 		} else {
 			Assert.fail();
@@ -162,8 +165,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		return response1;
 	}
 	/*
-	 * Udhay- Get the job description by
-	 * requisition id Passing special char requisition id: Testcase should fail
+	 * Udhay- Get the job description by requisition id Passing special char
+	 * requisition id: Testcase should fail
 	 */
 
 	public Response getJobDesBySplcharreqID(String hostName) throws ClientProtocolException, IOException {
@@ -181,10 +184,10 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
-	
+
 	/*
-	 * Udhay- Get the job description by
-	 * requisition id Passing Blank requisition id: Testcase should fail
+	 * Udhay- Get the job description by requisition id Passing Blank
+	 * requisition id: Testcase should fail
 	 */
 
 	public Response getJobDesByBlankSpacereqID(String hostName) throws ClientProtocolException, IOException {
@@ -195,15 +198,13 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 		if (response1.getStatus() != 200) {
 			Logging.log("Status Code Not equal to 200");
-			} else {
+		} else {
 			Assert.fail();
 		}
 		System.out.println("response code:" + response1.getStatus());
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
-	
-	
 
 	/*
 	 * 11- 08 -2016 vasista - Get the list of matching requisition id Passing
@@ -211,7 +212,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqsOnlyLimit(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ1.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?limit=10";
+		String serviceEndPoint = endPointURL_MATCHING_REQ1.replaceAll("hostAddress", hostName)
+				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?limit=10";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -229,7 +231,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqsOnlyLimit20(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ2.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?limit=20";
+		String serviceEndPoint = endPointURL_MATCHING_REQ2.replaceAll("hostAddress", hostName)
+				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?limit=20";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -247,7 +250,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqWithAllFeilds(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ3.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?offset=5&limit=10";
+		String serviceEndPoint = endPointURL_MATCHING_REQ3.replaceAll("hostAddress", hostName)
+				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?offset=5&limit=10";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -265,7 +269,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqWithOfSet(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ4.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match_First_Two_Chars")+"?offset=5";
+		String serviceEndPoint = endPointURL_MATCHING_REQ4.replaceAll("hostAddress", hostName)
+				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?offset=5";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -283,7 +288,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getMatchingReqIDOnly(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_MATCHING_REQ5.replaceAll("hostAddress", hostName)+getServiceEndPoint("Requisition_Match");
+		String serviceEndPoint = endPointURL_MATCHING_REQ5.replaceAll("hostAddress", hostName)
+				+ getServiceEndPoint("Requisition_Match");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		if (response1.getStatus() == 200) {
@@ -294,8 +300,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
-	
-	public String getTotalCount(Response response){
+
+	public String getTotalCount(Response response) {
 		String responseBody = response.readEntity(String.class);
 		Assertion.assertTrue(responseBody.contains("totalResults"), "Requisition count not found");
 		String[] str = responseBody.split("totalResults");
@@ -304,42 +310,44 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		String str3 = str2[1].substring(0, str2[1].length() - 1);
 		return str3.substring(0, str3.length() - 1);
 	}
+
 	/**
 	 * priti
+	 * 
 	 * @param hostName
 	 * @param searchReqrequestBean
 	 * @return
 	 */
-	public Response createcandidatestas(String hostName,SearchRequisitionRequestBean searchReqrequestBean)
-	{
-		String serviceEndPoint = createCandidateStasEndPOint.replaceAll("hostAddress",hostName);
+	public Response createcandidatestas(String hostName, SearchRequisitionRequestBean searchReqrequestBean) {
+		String serviceEndPoint = createCandidateStasEndPOint.replaceAll("hostAddress", hostName);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean, MediaType.APPLICATION_JSON_TYPE);
+		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean,
+				MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePOST(serviceEndPoint, searchBean);
 		return response;
-		
-		
+
 	}
-	public Response changeReqStatus(RequisitionStatusBean serviceBean,String hostname,String reqId,String stats) {
-		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname)+reqId+"/"+stats;
+
+	public Response changeReqStatus(RequisitionStatusBean serviceBean, String hostname, String reqId, String stats) {
+		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname) + reqId + "/" + stats;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePUT(serviceEndPoint, bean);
 		return response;
 	}
-	
-	public Response changeReqStatusBlnkRR(RequisitionStatusBean serviceBean,String hostname,String stats) {
-		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname)+stats;
+
+	public Response changeReqStatusBlnkRR(RequisitionStatusBean serviceBean, String hostname, String stats) {
+		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname) + stats;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePUT(serviceEndPoint, bean);
 		return response;
 	}
-	
-	public Response changeReqStatusBlnk(RequisitionStatusBean serviceBean,String hostname) {
+
+	public Response changeReqStatusBlnk(RequisitionStatusBean serviceBean, String hostname) {
 		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname);
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
@@ -348,5 +356,26 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		return response;
 	}
 
+	public Response requisitionFacetedSearch(String hostname) {
+		String reqBean = "{\"calculateRecordCount\":true,\"facetedSearchCriteriaBeans\": [{\"type\": \"LOCATION\",\"values\": [\""
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("req_facet_location") + "\"]}]}";
+		String serviceEndPoint = facetSearchURL.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+
+		Entity<String> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, bean);
+		return response;
+	}
+	
+	public Response requisitionFacetedSearchForOpen(String hostname) {
+		String reqBean = "{ \"inSearchCriteria\":{\"statusDisplay\":[\"Open\"]},\"calculateRecordCount\":true}";
+		String serviceEndPoint = facetSearchURL.replaceAll("hostAddress", hostname);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Entity<String> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
+		Response response = executePOST(serviceEndPoint, bean);
+		return response;
+	}
 
 }

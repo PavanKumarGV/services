@@ -11,7 +11,7 @@
 		<groups>
 			<run>
 				<include name="CI"/>
-			<!--  	<include name="sanity"/>-->
+			    <include name="NA"/>
 			</run>
 		</groups>
 		<packages>

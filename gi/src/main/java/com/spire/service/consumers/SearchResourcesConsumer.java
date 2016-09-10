@@ -20,13 +20,13 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 
 	String endPointURL = getServiceEndPoint("SEARCH_CANDI_SAVED_SEARCH");
-	String endPointURL1 = getServiceEndPoint("SIMILAR_PROFILES")+getServiceEndPoint("candidate_Id2");
+	String endPointURL1 = getServiceEndPoint("SIMILAR_PROFILES")+getServiceEndPoint("similar_profile_candId");
 	String endPointURL2 = getServiceEndPoint("SIMILAR_PROFILES1").replace(":",
 			"%3A");
 	String endPointURLSuggest = getServiceEndPoint("SEARCH_SUGGEST");
 	String endPointURLSuggestValidation = getServiceEndPoint("SUGGEST_VALIDATION");
 	String endPointURLSuggestForSkillwithMultipleWords = getServiceEndPoint(
-			"SEARCH_SUGGESTFORMULTIPLEWORDS").replace(" ", "%20");
+			"SEARCH_SUGGESTFORMULTIPLEWORDS");
 	String endPointURLSuggestForSkillwithSpecialCharacter = getServiceEndPoint("SEARCH_SUGGESTWITHSPECIALCHARACTER");
 	String searchCandidateEndPointUrl = getServiceEndPoint("SEARCH_CANDIDATE");
 	String endPointURLSavedSearch = getServiceEndPoint("SAVED_SEARCH");
@@ -117,7 +117,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 			throws ClientProtocolException, IOException {
 
 		String serviceEndPointM = endPointURLSuggestForSkillwithMultipleWords
-				.replaceAll("hostAddress", hostName);
+				.replaceAll("hostAddress", hostName)+getServiceEndPoint("suggest_Multiple_words");
 		System.out.println(" EndPoint URL >>" + serviceEndPointM);
 		Response responseM = executeGET(serviceEndPointM);
 		if (responseM.getStatus() == 200) {
@@ -164,10 +164,10 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		Logging.log("Response " + response1);
 		if (response1.getStatus() == 200) {
 			System.out.println("********** Fail **************");
-			Logging.log("Response Code >>" + response1.getStatus());
+			//Logging.log("Response Code >>" + response1.getStatus());
 			Assert.fail();
 		} else {
-			Logging.log("Response Code >>" + response1.getStatus());
+			//Logging.log("Response Code >>" + response1.getStatus());
 			System.out.println("********** pass **************");
 		}
 

@@ -48,7 +48,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * Get Candidate Profile, provide id and projection parameter type
 	 * Verify:Response code and asserting response.
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfileRequest" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfileRequest","NA" })
 	public void verifyGetCandidateProfileRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		// Get authentication token
@@ -69,7 +69,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	/**
 	 * Get Candidate Profile without any parameter Verify:Response code
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutanyparameterRequest" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutanyparameterRequest","NA" })
 	public void verifyGetCandidateProfilewithoutanyparameterRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		// Get authentication token
@@ -85,7 +85,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * GET Candidate profile without id Verify:Response code
 	 * 
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutidRequest" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutidRequest","NA" })
 	public void verifyGetCandidateProfilewithoutidRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		// Get authentication token
@@ -100,7 +100,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	/**
 	 * GET Candidate profile without projection Verify:Response code
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutprojectionRequest" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutprojectionRequest","NA" })
 	public void verifyGetCandidateProfilewithoutprojectionRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		// Get authentication token
@@ -458,7 +458,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * priti- GET candidate profile without headers Validation on response code
 	 *
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutheaderRequest" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutheaderRequest","NA" })
 	public void verifyGetCandidateProfilewithoutheaderRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		Response responsebody = candConsumer.getcandidateprofile(hostName);
@@ -471,7 +471,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume Validation:
 	 *         Response code and body
 	 */
-	@Test(groups = { "sanity", "getCandidateResume", "P1" })
+	@Test(groups = { "sanity", "getCandidateResume", "P1","NA" })
 	public void getCandidateResume() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
@@ -490,7 +490,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with blank
 	 *         candidate id Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithBlankCandidateId", "P2" })
+	@Test(groups = { "sanity", "getCandidateResumeWithBlankCandidateId", "P2","NA" })
 	public void getCandidateResumeWithBlankCandidateId() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
@@ -506,7 +506,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with invalid
 	 *         candidate id Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithInvalidCandidateId", "P2" })
+	@Test(groups = { "sanity", "getCandidateResumeWithInvalidCandidateId", "P2","NA" })
 	public void getCandidateResumeWithInvalidCandidateId() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
@@ -524,7 +524,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume without
 	 *         passing headers Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders", "P2" })
+	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders", "P2","NA" })
 	public void getCandidateResumeWithoutHeaders() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer();

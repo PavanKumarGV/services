@@ -50,7 +50,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * in response body
 	 */
 
-	@Test(groups = { "sanity", "verifycandidatenoteslistRequest" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "verifycandidatenoteslistRequest","NA" },dependsOnGroups={"createNotes"})
 	public void verifycandidatenoteslistRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
@@ -66,7 +66,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps: Search Note for entity Validation: Asserting candidate notes in
 	 * response body
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotessearchRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotessearchRequest","NA" })
 	public void verifycandidatenotessearchRequest() {
 		noteBeanRequest = NotesServicesUtil.getNoteBean();
 		String entityId = noteBeanRequest.getId();
@@ -90,7 +90,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * error response.
 	 */
 
-	@Test(groups = { "sanity", "verifycandidatenotelistwithoutintervalRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithoutintervalRequest","NA" })
 	public void verifycandidatenotelistwithoutintervalRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
@@ -106,7 +106,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps:Get candidate notes list without Entity Id Validation:asserting the
 	 * error response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithoutentityidRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithoutentityidRequest","NA" })
 	public void verifycandidatenotelistwithoutentityidRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
@@ -123,7 +123,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * error response.
 	 */
 
-	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutsearchtextRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutsearchtextRequest","NA" })
 	public void verifycandidatenotesearchwithoutsearchtextRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
@@ -139,7 +139,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps:Search Note for entity without entity id Validation:asserting the
 	 * error response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutentityidRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutentityidRequest","NA" })
 	public void verifycandidatenotesearchwithoutentityidRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
@@ -155,7 +155,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps:List Note without any parameter Validation:asserting the error
 	 * response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutanyparameterRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutanyparameterRequest","NA" })
 	public void verifycandidatenotesearchwithoutanyparameterRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
@@ -172,7 +172,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps:Search Note without any parameter Validation:asserting the error
 	 * response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithoutanyparameterRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithoutanyparameterRequest","NA" })
 	public void verifycandidatenotelistwithoutanyparameterRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
@@ -188,7 +188,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps:List notes with incorrect parameter
 	 * Validation:asserting the error response
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest","NA" })
 	public void verifycandidatenotelistwithincorrectparameterRequest()
 	{
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -204,7 +204,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * Steps:search notes with incorrect parameter
 	 * Validation:asserting the error response
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest","NA" })
 	public void verifycandidatenotesearchwithincorrectparameterRequest()
 	{
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -246,7 +246,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 *         Validation: asserting the error response
 	 */
 
-	@Test(groups = { "sanity", "createNotesWithBlankEntityId","P1" })
+	@Test(groups = { "sanity", "createNotesWithBlankEntityId","P1","NA" })
 	public void createNotesWithBlankEntityId() {
 		noteBeanRequestWithBlankEntity = NotesServicesUtil.getNoteBeanWithBlankEntity();
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -263,7 +263,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 10/08/16 Steps:Create Note without any parameter
 	 *         Validation: asserting the error response
 	 */
-	@Test(groups = { "sanity", "createNotesWithBlankParameter","P2" })
+	@Test(groups = { "sanity", "createNotesWithBlankParameter","P2","NA" })
 	public void createNotesWithBlankParameter() {
 		noteBeanRequestWithBlankParameter = NotesServicesUtil.getNoteBeanWithBlankParameter();
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -280,7 +280,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 10/08/16 Steps:Create Note with only entity id
 	 *         Validation: Successfull Note creation in response body
 	 */
-	@Test(groups = { "sanity", "createNotesWithOnlyEntityId","P2" })
+	@Test(groups = { "sanity", "createNotesWithOnlyEntityId","P2","NA" })
 	public void createNotesWithOnlyEntityId() {
 		noteBeanRequestWithOnlyEntityId = NotesServicesUtil.getNoteBeanWithOnlyEntityId();
 		String entityId1 = noteBeanRequestWithOnlyEntityId.getId();
@@ -300,7 +300,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 *         Validation: Successfull Note creation in response body
 	 */
 
-	@Test(groups = { "sanity", "createNotesWithDuplicateId","P1" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "createNotesWithDuplicateId","P1","NA" },dependsOnGroups={"createNotes"})
 	public void createNotesWithDuplicateId() {
 		noteBeanRequest = NotesServicesUtil.getNoteBeanWithExistingEntityId(entityId);
 		entityId = noteBeanRequest.getId();
@@ -321,7 +321,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 11/08/16 Steps:Create Multiple Note with same entity id
 	 *         Validation: Successfull Note creation in response body
 	 */
-	@Test(groups = { "sanity", "createMultipleNotesWithSameEntityId","P2" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "createMultipleNotesWithSameEntityId","P2","NA" },dependsOnGroups={"createNotes"})
 	public void createMultipleNotesWithSameEntityId() {
 		noteBeanRequest = NotesServicesUtil.getNoteForExistingEntityId(id);
 		id = noteBeanRequest.getEntityId();

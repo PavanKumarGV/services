@@ -44,8 +44,8 @@ public class CustomServicesTestPlan extends TestPlan {
 	 * 07/09/16 Steps: Get recommended requisition by candidate id Validation:
 	 * Response code: Recommended Requisition Id
 	 */
-	@Test(groups = { "CI", "getRecomendedReqByCandId", "P1" })
-	public void getRecomendedReqByCandId() {
+	@Test(groups = { "CI", "getRecomendedReqByCandIdAndLimit", "P1" })
+	public void getRecomendedReqByCandIdAndLimit() {
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
 		Response response = CustomConsumer.getrequisitionsuggestionbyallvalidinput(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -64,8 +64,8 @@ public class CustomServicesTestPlan extends TestPlan {
 	 * 07/09/16 Steps: Get recommended requisition by candidate id Validation:
 	 * Response code: 400
 	 */
-	@Test(groups = { "CI", "verifygetreqSuggestionByID" })
-	public void verifygetreqSuggestionByID() {
+	@Test(groups = { "CI", "getRecomendedReqByCandId" })
+	public void getRecomendedReqByCandId() {
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
 		Response response = CustomConsumer.getreqsuggestionbyid(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -84,8 +84,8 @@ public class CustomServicesTestPlan extends TestPlan {
 	 * 07/09/16 Steps: Get recommended requisition by limit Validation: Response
 	 * code: 400
 	 */
-	@Test(groups = { "CI", "verifygetreqsuggestionbylimit" })
-	public void verifygetreqsuggestionbylimit() {
+	@Test(groups = { "CI", "getRecomendedReqByLimit" })
+	public void getRecomendedReqByLimit() {
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
 		Response response = CustomConsumer.getreqsuggestionbylimit(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -104,8 +104,8 @@ public class CustomServicesTestPlan extends TestPlan {
 	 * 07/09/16 Steps: Get recommended requisition by blank field Validation:
 	 * Response code: 400
 	 */
-	@Test(groups = { "CI", "verifyreqsuggestionwithoutidandlimit" })
-	public void verifyreqsuggestionwithoutidandlimit() {
+	@Test(groups = { "CI", "getRecomendedReqwithoutidandlimit" })
+	public void getRecomendedReqwithoutidandlimit() {
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
 		Response response = CustomConsumer.getreqsuggestionwithoutidnadlimit(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -174,6 +174,46 @@ public class CustomServicesTestPlan extends TestPlan {
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
 		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		System.out.println("printing response bdy");
+		System.out.println("response--" + responseBody);
+		Logging.log("response--" + responseBody);
+	}
+	
+	/**
+	 * 07/09/16 Steps: Get recommended Candidate by invalid requisition id Validation:
+	 * Response code: 200
+	 */
+	@Test(groups = { "CI", "getMatchScoreForRequisitions" })
+	public void getMatchScoreForRequisitions() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getMatchScores(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("\"response\": []"), "Response is blank");
+		Logging.log("Response is successful");
+	}
+	
+	/**
+	 * 07/09/16 Steps: Get recommended Candidate by invalid requisition id Validation:
+	 * Response code: 200
+	 */
+	@Test(groups = { "CI", "getMatchScoreForRequisitionsWithInvalidId" })
+	public void getMatchScoreForRequisitionsWithInvalidId() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getMatchScoresInvalidId(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() != 200, "Response	unsuccessfull, Expected status code not equal to 200");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);

@@ -70,7 +70,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * Vasista -Get the job description by requisition id
 	 */
 
-	@Test(groups = { "sanity", "GetJobDesByID" })
+	@Test(groups = { "sanity", "GetJobDesByID","NA" })
 	public void GetJobDesByID() throws ClientProtocolException, IOException {
 
 		RequisitionResourceConsumer reqConsumer = null;
@@ -143,7 +143,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         mandatory field Validation: Success Response Code, validate list
 	 *         of requiistion in response body
 	 */
-	@Test(groups = { "sanity", "searchRequisitionWithInSearchCriteria", "P1" })
+	@Test(groups = { "sanity", "searchRequisitionWithInSearchCriteria", "P1","NA" })
 	public void searchRequisitionWithInSearchCriteria() {
 		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getSearchRequisition();
@@ -166,7 +166,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         mandatory field Validation: Success Response Code, validate list
 	 *         of requiistion in response body
 	 */
-	@Test(groups = { "sanity", "searchRequisitionWithoutSearchCriteria", "P1" })
+	@Test(groups = { "sanity", "searchRequisitionWithoutSearchCriteria", "P1","NA" })
 	public void searchRequisitionWithoutSearchCriteria() {
 		// Get Request Bean
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getSearchRequisitionWithoutCriteria();
@@ -192,7 +192,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         month and to month Validation: Success Response Code, validate
 	 *         list of requiistion in response body
 	 */
-	@Test(groups = { "sanity", "getcandidatestas" })
+	@Test(groups = { "sanity", "getcandidatestas","NA" })
 	public void getcandidatestas() {
 		candidatestasBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisition();
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -217,7 +217,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         without any field Validation: Response Code
 	 */
 
-	@Test(groups = { "sanity", "candidatestasRequisitionWithoutSearchCriteria" })
+	@Test(groups = { "sanity", "candidatestasRequisitionWithoutSearchCriteria","NA" })
 	public void candidatestasRequisitionWithoutSearchCriteria() {
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandiadteStasRequisitionWithoutCriteria();
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -232,7 +232,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         with only insearchcriteria Validation: Response Code and
 	 *         asserting response.
 	 */
-	@Test(groups = { "sanity", "candidatestasRequisitionWithonlyinsearchcriteria" })
+	@Test(groups = { "sanity", "candidatestasRequisitionWithonlyinsearchcriteria","NA" })
 	public void candidatestasRequisitionWithonlyinsearchcriteria() {
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisitionwithInsearchcriteria();
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -257,7 +257,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         validation:Response code and asserting response.
 	 */
 
-	@Test(groups = { "sanity", "candidatestasRequisitionWithinsearchcriteriaandrecordcountTrue" })
+	@Test(groups = { "sanity", "candidatestasRequisitionWithinsearchcriteriaandrecordcountTrue","NA" })
 	public void candidatestasRequisitionWithinsearchcriteriaandrecordcountTrue() {
 		searchReqrequestBean1 = RequisitionResourceServiceUtil
 				.getCandidateStasRequisitionwithsearchandcalculatedrecordtrue();
@@ -282,7 +282,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         with insearchcriteria and calculatedrecordcount as false
 	 *         validation:Response code and asserting response.
 	 */
-	@Test(groups = { "sanity", "candidatestasRequisitionWithinsearchcriteriaandrecordcountfalse" })
+	@Test(groups = { "sanity", "candidatestasRequisitionWithinsearchcriteriaandrecordcountfalse","NA" })
 	public void candidatestasRequisitionWithinsearchcriteriaandrecordcountfalse() {
 		searchReqrequestBean1 = RequisitionResourceServiceUtil
 				.getCandidateStasRequisitionwithsearchandcalculatedrecordfalse();
@@ -308,7 +308,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         Success Response Code, validate list of requiistion in response
 	 *         body, return count of req present
 	 */
-	@Test(groups = { "sanity", "searchRequisitionWithStatusAndExperienceRange", "P1" })
+	@Test(groups = { "sanity", "searchRequisitionWithStatusAndExperienceRange", "P1","NA" })
 	public void searchRequisitionWithOpenStatusAndExperienceRange() {
 		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getOpenNClosedRequisitionWithExp();
@@ -335,7 +335,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         Validation: Success Response Code, validate list of requiistion
 	 *         in response body, return count of req present
 	 */
-	@Test(groups = { "sanity", "searchRequisitionWithStatusAndCount", "P1" })
+	@Test(groups = { "sanity", "searchRequisitionWithStatusAndCount", "P1","NA" })
 	public void searchRequisitionWithStatusAndCount() {
 		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getRequisitionWithCount();
@@ -359,7 +359,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 *         Validation: Success Response Code, validate list of requiistion
 	 *         in response body, return count of req present
 	 */
-	@Test(groups = { "sanity", "searchRequisitionWithStatusAndCountFalse", "P1" })
+	@Test(groups = { "sanity", "searchRequisitionWithStatusAndCountFalse", "P1","NA" })
 	public void searchRequisitionWithStatusAndCountFalse() {
 		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getRequisitionWithCountFalse();
@@ -381,13 +381,14 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * valid id Should get less than or equals to 10
 	 */
 
-	@Test(groups = { "sanity", "GetMatchingReqOnlyLimit10" })
+	@Test(groups = { "sanity", "GetMatchingReqOnlyLimit10","NA" })
 	public void GetMatchingReqOnlyLimit10() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
+		Logging.log("Response >>" +response);
 		Assert.assertTrue(response
 				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
 		/*
@@ -408,13 +409,14 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * valid id Should get less than or equals to 20
 	 */
 
-	@Test(groups = { "sanity", "GetMatchingReqonlyLimit20" })
+	@Test(groups = { "sanity", "GetMatchingReqonlyLimit20","NA" })
 	public void GetMatchingReqonlyLimit20() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit20(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
+		Logging.log("Response >>" +response);
 		Assert.assertTrue(response
 				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars"))); // S67
 		/*
@@ -435,13 +437,14 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * valid req id ,offset =5 and limit =10
 	 */
 
-	@Test(groups = { "sanity", "GetMatchingReqWithAllFeilds" })
+	@Test(groups = { "sanity", "GetMatchingReqWithAllFeilds","NA" })
 	public void GetMatchingReqWithAllFeilds() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqWithAllFeilds(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
+		Logging.log("Response >>" +response);
 		Assert.assertTrue(response
 				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
 		/*
@@ -463,13 +466,14 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * valid req id ,offset =5 and limit =10
 	 */
 
-	@Test(groups = { "sanity", "GetMatchingReqWithOffSet" })
+	@Test(groups = { "sanity", "GetMatchingReqWithOffSet","NA" })
 	public void GetMatchingReqWithOffSet() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqWithOfSet(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
+		Logging.log("Response >>" +response);
 		Assert.assertTrue(response
 				.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match_First_Two_Chars")));
 		Logging.log("contains matching requisition ");
@@ -480,13 +484,14 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * valid req id ,offset =5 and limit =10
 	 */
 
-	@Test(groups = { "sanity", "GetMatchingReqID" })
+	@Test(groups = { "sanity", "GetMatchingReqID","NA" })
 	public void GetMatchingReqID() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqIDOnly(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
+		Logging.log("Response >>" +response);
 		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match")));
 		Logging.log("contains the " + ReadingServiceEndPointsProperties.getServiceEndPoint("Requisition_Match")
 				+ " matching requisition ");
@@ -508,7 +513,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * invalid id Should fail
 	 */
 
-	@Test(groups = { "sanity", "GetJobDesByWrongID" })
+	@Test(groups = { "sanity", "GetJobDesByWrongID","NA" })
 	public void GetJobDesByWrongID() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -522,7 +527,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * Should fail
 	 */
 
-	@Test(groups = { "sanity", "GetJobDesBySpecialCharID" })
+	@Test(groups = { "sanity", "GetJobDesBySpecialCharID","NA" })
 	public void GetJobDesBySpecialCharID() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -547,7 +552,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * fail
 	 */
 
-	@Test(groups = { "sanity", "GetJobDesByBlankSpace" })
+	@Test(groups = { "sanity", "GetJobDesByBlankSpace","NA" })
 	public void GetJobDesByBlankSpace() throws ClientProtocolException, IOException {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -721,6 +726,44 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Response responsebody = reqConsumer.getRequisitionBlank(hostName);
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
+	}
+	
+	/**
+	 *  Steps: Get requisition faceted search
+	 *          Validation: Response code: not equal to 200
+	 */
+	@Test(groups = { "sanity", "getRequisitionFacetedSearchForLocation", "NA" })
+	public void getRequisitionFacetedSearchForLocation() {
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response = reqConsumer.requisitionFacetedSearch(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("RESPONSE: " + responseBody);
+		Assertion.assertFalse(responseBody.contains("facetedSearchMapFacetTypeByCount\": null"), "Location Facet not present");
+	}
+	
+	/**
+	 *  Steps: Get requisition faceted search for Open Requisition
+	 *          Validation: Response code: not equal to 200
+	 */
+	@Test(groups = { "sanity", "getRequisitionFacetedSearchForOpenReq", "NA" })
+	public void getRequisitionFacetedSearchForOpenReq() {
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		Response response = reqConsumer.requisitionFacetedSearchForOpen(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("RESPONSE: " + responseBody);
+		Assertion.assertFalse(responseBody.contains("facetedSearchMapFacetTypeByCount\": null"), "Location Facet not present");
 	}
 
 }
