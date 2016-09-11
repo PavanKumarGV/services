@@ -198,7 +198,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
 		Logging.log("response--" + responseBody);
-		Assertion.assertTrue(responseBody.contains("\"response\": []"), "Response is blank");
+		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidateId_matchScore")), "Response is blank");
 		Logging.log("Response is successful");
 	}
 	
