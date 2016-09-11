@@ -18,7 +18,7 @@ public class CustomResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getrequisitionsuggestionbyallvalidinput(String hostName) {
 		String serviceEndPoint = endPointURL_REQ_Suggestion.replaceAll("hostAddress", hostName) + "/"
-				+ getServiceEndPoint("custom_candidate_id") + "/" + getServiceEndPoint("custom_candidate_limit");
+				+ getServiceEndPoint("custom_candidate_id") + "?limit=" + getServiceEndPoint("custom_candidate_limit");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
@@ -53,7 +53,7 @@ public class CustomResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getreqsuggestionwithinvalidid(String hostName) {
 		String serviceEndPoint = endPointURL_REQ_Suggestion.replaceAll("hostAddress", hostName) + "/"
-				+ getServiceEndPoint("custom_invalid_candidate_id") + "/"
+				+ getServiceEndPoint("custom_invalid_candidate_id") + "?limit="
 				+ getServiceEndPoint("custom_candidate_limit");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);

@@ -51,7 +51,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus()==200, "Response	unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -71,7 +71,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() != 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -144,7 +144,7 @@ public class CustomServicesTestPlan extends TestPlan {
 	 * 07/09/16 Steps: Get recommended Candidate by requisition id Validation:
 	 * Response code: 200
 	 */
-	@Test(groups = { "CI", "getRecomendedCanByReqId" })
+	@Test(groups = {  "getRecomendedCanByReqId" })
 	public void getRecomendedCanByReqId() {
 
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
@@ -165,7 +165,7 @@ public class CustomServicesTestPlan extends TestPlan {
 	 * 07/09/16 Steps: Get recommended Candidate by invalid requisition id Validation:
 	 * Response code: 200
 	 */
-	@Test(groups = { "CI", "getRecomendedCanByInvalidReqId" })
+	@Test(groups = {  "getRecomendedCanByInvalidReqId" })
 	public void getRecomendedCanByInvalidReqId() {
 
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
