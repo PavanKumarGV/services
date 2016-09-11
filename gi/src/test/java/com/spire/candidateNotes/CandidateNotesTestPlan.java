@@ -237,7 +237,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log("RESPONSE BODY >>" + responseBody);
 		Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
-		Logging.log("Notes Created successfully with entity id: " + entityId);
+		Logging.log("Notes Created successfully with id: " + entityId);
 
 	}
 
@@ -292,7 +292,8 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
-		Logging.log("Notes Created successfully with entity id: " + entityId1);
+		Logging.log("Response: "+responseBody);
+		//Logging.log("Notes Created successfully with id: " + entityId1);
 	}
 	
 	/**
@@ -313,7 +314,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains(entityId), "Notes creation failed");
-		Logging.log("Notes Created successfully with entity id: " + entityId);
+		Logging.log("Notes Created successfully with id: " + entityId);
 
 	}
 	
@@ -334,6 +335,6 @@ public class CandidateNotesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
-		Logging.log("Notes Created successfully with entity id: " + entityId);
+		Logging.log("Notes Created successfully with id: " + entityId);
 }
 }
