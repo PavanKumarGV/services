@@ -36,6 +36,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	SearchInput SearchBeanRequest = null;
 	static String Input = null;
 	SearchUtil searchUtil = null;
+	static String savedSearchId = null;
 
 	/**
 	 * Passing HostName,UserName and Password from the xml.
@@ -92,6 +93,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 				hostName);
 		// Executes Get request and returns Response
 		Response responsebody = suggestConsumer.getSuggest(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected status 200");
+		Logging.log("Response successful");
 		Logging.log(" RESPONSE BODY>>" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		System.out.println(" RESPONSE>>" + response);
@@ -142,6 +145,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes Get request and returns Response
 		Response responsebody = suggestConsumer
 				.getSuggestForSkillwithMultipleWords(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200,
+				"response code expected equal to 200 but found as:"
+						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		// Asserting Response Code
@@ -166,6 +172,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes Get request and returns Response
 		Response responsebody = suggestConsumer
 				.getSuggestForSkillwithSpecialCharacter(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200,
+				"response code expected equal to 200 but found as:"
+						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		// Asserting Response Code
@@ -186,7 +195,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
-		suggestConsumer.getSemilarProfilesNegi(hostName);
+		Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:"
+						+ responsebody.getStatus());
+		String response = responsebody.readEntity(String.class);
+		Logging.log("Response: "+response);
 		//Response responsebody = suggestConsumer.getSemilarProfiles(hostName);
 		//String response = responsebody.readEntity(String.class);
 		//System.out.println("***** RESPONSE ******" + response);
@@ -218,16 +232,15 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes POST request and returns Response
 		Response responsebody = suggestConsumer.searchCandidate(inputBean,
 				hostName);
-		System.out.println("***** RESPONSE : responsebody : ******"
-				+ responsebody);
-		Logging.log("responsebody " + responsebody);
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+				"Response not successful");
+		Logging.log("Response Code: " + responsebody.getStatus());
 
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE : response : ******" + response);
-		Logging.log("response " + response);
+		Logging.log("Response Body: " + response);
 		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200,
-				"Response not successful");
+		
 
 	}
 
@@ -276,11 +289,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		suggestConsumer.getSavedSearch(hostName);
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer.getSavedSearch(hostName);
+		// Asserting Response Code
+				Assertion.assertEquals(responsebody.getStatus(), 200,
+						"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200,
-				"Response not successful");
+		
 
 	}
 
@@ -301,11 +315,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes get request and returns Response
 		suggestConsumer.getSavedSearchById(hostName);
 		Response responsebody = suggestConsumer.getSavedSearchById(hostName);
+		// Asserting Response Code
+				Assertion.assertEquals(responsebody.getStatus(), 200,
+						"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200,
-				"Response not successful");
+		
 
 	}
 
@@ -327,9 +342,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer
 				.getSavedSearchByNonExistingId(hostName);
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus()!=200,
+				"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
-		Logging.log("response " + response);
+		Logging.log("Response " + response);
 
 	}
 
@@ -774,6 +792,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer
 				.listSavedSearchWithSortByModifiedOnAsc(hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+				"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("responsebody " + responsebody);
@@ -801,6 +822,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer
 				.listSavedSearchWithSortByModifiedOnDsc(hostName);
+		// Asserting Response Code
+				Assertion.assertEquals(responsebody.getStatus(), 200,
+						"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("responsebody " + responsebody);
@@ -828,6 +852,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer
 				.listSavedSearchWithSortByCreatedOnAsc(hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+				"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("responsebody " + responsebody);
@@ -855,6 +882,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer
 				.listSavedSearchWithSortByCreatedOnDsc(hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+				"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("responsebody " + responsebody);
@@ -882,6 +912,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer
 				.getSuggestForInvalidKeyword(hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+				"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("responsebody " + responsebody);
@@ -909,6 +942,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		suggestConsumer.getSavedSearchById(hostName);
 		Response responsebody = suggestConsumer
 				.getSavedSearchByIdWithSpace(hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+				"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		Logging.log("responsebody " + responsebody);
 		System.out.println("***** RESPONSE ******" + response);
@@ -941,16 +977,17 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes POST request and returns Response
 		Response responsebody = suggestConsumer.createSavedSearchWithSkill(
 				inputBean, hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+				"Response not successful");
 		System.out.println("***** RESPONSE : responsebody : ******"
 				+ responsebody);
-		Logging.log("responsebody " + responsebody);
+		Logging.log("response " + responsebody.getStatus());
 
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE : response : ******" + response);
 		Logging.log("response " + response);
-		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200,
-				"Response not successful");
+	
 	}
 
 	/**
@@ -1011,6 +1048,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Executes POST request and returns Response
 		Response responsebody = suggestConsumer
 				.createPublicSavedSearchWithSkill(inputBean, hostName);
+		// Asserting Response Code
+				Assertion.assertEquals(responsebody.getStatus(), 200,
+						"Response not successful");
 		System.out.println("***** RESPONSE : responsebody : ******"
 				+ responsebody);
 		Logging.log("responsebody " + responsebody);
@@ -1018,9 +1058,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE : response : ******" + response);
 		Logging.log("response " + response);
-		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200,
-				"Response not successful");
+		savedSearchId = suggestConsumer.getIdFromResponse(response);
+		
 	}
 
 	/**
@@ -1321,7 +1360,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * 
 	 */
 
-	@Test(groups = { "sanity", "getCandidatesFromSavedSearch","NA" })
+	@Test(groups = { "sanity", "getCandidatesFromSavedSearch","NA" },dependsOnGroups={"createPublicSavedSearchWithSkill"})
 	public void getCandidatesFromSavedSearch() throws ClientProtocolException,
 			IOException {
 
@@ -1335,9 +1374,11 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Get authentication token
 		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(
 				userId, password, hostName);
+		System.out.println("****"+savedSearchId);
 		// Executes POST request and returns Response
 		Response responsebody = suggestConsumer.getCandidatesFromSavedSearch(
-				inputBean, hostName);
+				inputBean, hostName,savedSearchId);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		System.out.println("***** RESPONSE : responsebody : ******"
 				+ responsebody);
 		Logging.log("responsebody " + responsebody);

@@ -41,11 +41,12 @@ public class SearchUtil {
 	
 	public static SearchInput getSearchInputBeanWithSkillWithoutPageInfo() {
 		SearchInput searchInput = new SearchInput();
-		String searchQueryString = "(skill:ajax)";// ,
+		String searchQueryString = "(skill:MySQL or skill:ajax)";// ,
 		Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
 
 		List<String> skills = new ArrayList<String>();
 		skills.add("ajax");
+		skills.add("MySQL");
 
 		searchAttributeMap.put("skill", skills);
 

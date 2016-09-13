@@ -57,6 +57,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void GetRequisitionSearch() throws ClientProtocolException, IOException {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisition(hostName);
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response.contains("primarySkill"));
@@ -77,14 +78,17 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesByreqID(hostName);
 		Response responsebody = reqConsumer.getJobDesByreqID(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		/*
 		 * Assert.assertTrue(response.contains("fileContent")); Logging.log(
 		 * "contains the fileContent " );
 		 */
+		Logging.log("Response: "+response);
 		Assert.assertTrue(response.contains("fileName") || response.contains("filename"));
-		Logging.log("contains the fileName ");
+		Logging.log("Response Successful, Able to get JD");
 
 	}
 
@@ -102,6 +106,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void GetRequInvalidSrch() throws ClientProtocolException, IOException {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisitionInvalid(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		/*
@@ -110,6 +116,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
 		 * "contains the jobLevel " );
 		 */
+		Logging.log("Response: "+response);
 
 	}
 
@@ -127,6 +134,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void GetRequInvalidInputSrch() throws ClientProtocolException, IOException {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisitionInvalidInput(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		/*
@@ -386,6 +395,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("Response >>" +response);
@@ -414,6 +425,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqsOnlyLimit20(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("Response >>" +response);
@@ -442,6 +455,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqWithAllFeilds(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("Response >>" +response);
@@ -471,6 +486,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqWithOfSet(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("Response >>" +response);
@@ -489,6 +506,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getMatchingReqIDOnly(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		Logging.log("Response >>" +response);
@@ -519,6 +538,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesByWrongreqID(hostName);
 		Response responsebody = reqConsumer.getJobDesByWrongreqID(hostName);
+		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Logging.log("Response successful");
 
 	}
 
@@ -533,6 +554,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesBySplcharreqID(hostName);
 		Response responsebody = reqConsumer.getJobDesBySplcharreqID(hostName);
+		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 
@@ -558,6 +581,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesByBlankSpacereqID(hostName);
 		Response responsebody = reqConsumer.getJobDesByBlankSpacereqID(hostName);
+		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Logging.log("Response successful");
 
 		// now services is not working so i can't test response
 		/*
@@ -724,6 +749,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void GetReqBlankSrch() throws ClientProtocolException, IOException {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisitionBlank(hostName);
+		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 	}
