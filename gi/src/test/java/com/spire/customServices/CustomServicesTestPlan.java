@@ -51,7 +51,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus()==200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -71,7 +71,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -91,7 +91,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() != 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -111,7 +111,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() != 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -131,7 +131,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() != 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -144,7 +144,7 @@ public class CustomServicesTestPlan extends TestPlan {
 	 * 07/09/16 Steps: Get recommended Candidate by requisition id Validation:
 	 * Response code: 200
 	 */
-	@Test(groups = {  "getRecomendedCanByReqId" })
+	@Test(groups = { "getRecomendedCanByReqId" })
 	public void getRecomendedCanByReqId() {
 
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
@@ -152,7 +152,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -160,12 +160,12 @@ public class CustomServicesTestPlan extends TestPlan {
 		System.out.println("response--" + responseBody);
 		Logging.log("response--" + responseBody);
 	}
-	
+
 	/**
-	 * 07/09/16 Steps: Get recommended Candidate by invalid requisition id Validation:
-	 * Response code: 200
+	 * 07/09/16 Steps: Get recommended Candidate by invalid requisition id
+	 * Validation: Response code: 200
 	 */
-	@Test(groups = {  "getRecomendedCanByInvalidReqId" })
+	@Test(groups = { "getRecomendedCanByInvalidReqId" })
 	public void getRecomendedCanByInvalidReqId() {
 
 		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
@@ -173,7 +173,7 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -181,10 +181,10 @@ public class CustomServicesTestPlan extends TestPlan {
 		System.out.println("response--" + responseBody);
 		Logging.log("response--" + responseBody);
 	}
-	
+
 	/**
-	 * 07/09/16 Steps: Get recommended Candidate by invalid requisition id Validation:
-	 * Response code: 200
+	 * 07/09/16 Steps: Get match score for requisition by invalid requisition id
+	 * Validation: Response code: 200
 	 */
 	@Test(groups = { "CI", "getMatchScoreForRequisitions" })
 	public void getMatchScoreForRequisitions() {
@@ -193,17 +193,19 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() == 200, "Response	unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
 		Logging.log("response--" + responseBody);
-		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidateId_matchScore")), "Response is blank");
+		Assertion.assertTrue(
+				responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidateId_matchScore")),
+				"Response is blank");
 		Logging.log("Response is successful");
 	}
-	
+
 	/**
-	 * 07/09/16 Steps: Get recommended Candidate by invalid requisition id Validation:
+	 * 07/09/16 Steps: Get match score by invalid requisition id Validation:
 	 * Response code: 200
 	 */
 	@Test(groups = { "CI", "getMatchScoreForRequisitionsWithInvalidId" })
@@ -213,7 +215,8 @@ public class CustomServicesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() != 200, "Response	unsuccessfull, Expected status code not equal to 200");
+		Assertion.assertTrue(response.getStatus() != 200,
+				"Response	unsuccessfull, Expected status code not equal to 200");
 		Logging.log("Response successful");
 		// Get Response body
 		String responseBody = response.readEntity(String.class);
@@ -221,4 +224,196 @@ public class CustomServicesTestPlan extends TestPlan {
 		System.out.println("response--" + responseBody);
 		Logging.log("response--" + responseBody);
 	}
+
+	/**
+	 * 21/09/16 Steps: Get match score by valid requisition id and invalid
+	 * application status Validation: Response code: 400
+	 */
+	@Test(groups = { "CI", "getMatchScoreForRequisitionsWithInvalidApplicantionStatus" })
+	public void getMatchScoreForRequisitionsWithInvalidApplicantionStatus() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getMatchScoresWithInvalidStatus(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 400, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Response Successful");
+		Logging.log("Response 400 for invalid applicantion status");
+	}
+
+	/**
+	 * 21/09/16 Steps: Get match score by valid requisition id and NOT_APPLIED
+	 * application status Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getMatchScoreForRequisitionsWithNOT_AAPLIEDApplicantionStatus" })
+	public void getMatchScoreForRequisitionsWithNOT_AAPLIEDApplicantionStatus() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getMatchScoresWithNOT_APPLIEDStatus(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("NOT_APPLIED"), "No candidate is present with NOT_APPLIED status");
+		Logging.log("Response is successful");
+	}
+
+	/**
+	 * 21/09/16 Steps: Get recommended candidates by valid requisition id
+	 * Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getRecommendedCandidatesByRequisitionId" })
+	public void getRecommendedCandidatesByRequisitionId() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getRecommendedCandsByReqId(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("null"), "Recommended candidates available for the req id: "
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("GET_REC_CANDID_REQID"));
+		Logging.log("No Recommended candidates available for requisition id: "
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("GET_REC_CANDID_REQID"));
+
+	}
+
+	/**
+	 * 21/09/16 Steps: Get recommended candidates by valid requisition id
+	 * Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getRecommendedCandidatesByInvalidRequisitionId" })
+	public void getRecommendedCandidatesByInvalidRequisitionId() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getRecommendedCandsByInvalidReqId(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
+		// Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("SYSTEM_ERROR"), "Recommended candidates available for the req id: "
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("GET_REC_CANDID_REQID").substring(1));
+		Logging.log("No Recommended candidates available for requisition id: "
+				+ ReadingServiceEndPointsProperties.getServiceEndPoint("GET_REC_CANDID_REQID").substring(1));
+
+	}
+
+	/**
+	 * 21/09/16 Steps: Get recommended candidates by valid requisition id
+	 * Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getRecommendedCandidatesByBlankRequisitionId" })
+	public void getRecommendedCandidatesByBlankRequisitionId() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getRecommendedCandsByBlankReqId(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
+		// Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Recommended candidates available");
+		Logging.log("Requsition id can not be blank or null");
+
+	}
+
+	/**
+	 * 21/09/16 Steps: Get candidate status count for the requisition provided
+	 * Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getCandidateStatusCountPerRequisition" })
+	public void getCandidateStatusCountPerRequisition() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getCandidateStatus(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		// Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("New")||responseBody.contains("Inactive")||responseBody.contains("Active")||responseBody.contains("Hired"), "Requisition has no candidates tagged");
+		Logging.log("Multiple candidates tagged to the requisition "+ReadingServiceEndPointsProperties.getServiceEndPoint("GetStatusForRequisitionId")+" with statuses.");
+
+	}
+	
+	/**
+	 * 21/09/16 Steps: Get candidate status count for blank requisition provided
+	 * Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getCandidateStatusCountForBlankRequisition" })
+	public void getCandidateStatusCountForBlankRequisition() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getCandidateStatusBlank(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		// Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("{}"), "Requisition candidates tagged");
+		Logging.log("No candidates tagged with requisition");
+
+	}
+	
+	/**
+	 * 21/09/16 Steps: Get candidate status count for blank requisition provided
+	 * Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getCandidatesForParticularStatusForRequisition" })
+	public void getCandidatesForParticularStatusForRequisition() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getCandidateForParticularStatus(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		// Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+//		Assertion.assertTrue(responseBody.contains("{}"), "Requisition candidates tagged");
+		Logging.log("No candidates tagged with requisition");
+
+	}
+	
+	/**
+	 * 21/09/16 Steps: Get candidate status count for blank requisition provided
+	 * Validation: Response code: 200
+	 */
+	@Test(groups = { "CI", "getCandidatesForParticularStatusWithoutRequisition" })
+	public void getCandidatesForParticularStatusWithoutRequisition() {
+		CustomConsumer = new CustomResourceConsumer(userId, password, hostName);
+		Response response = CustomConsumer.getCandidateForParticularStatusWithoutReq(hostName);
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		// Asset Response Code
+		Assertion.assertTrue(response.getStatus() == 400, "Response unsuccessfull, Expected 200 status code");
+		// Logging.log("Response successful");
+		// Get Response body
+		String responseBody = response.readEntity(String.class);
+		Logging.log("response--" + responseBody);
+		Assertion.assertTrue(responseBody.contains("INVALID_PARAMETER"), "Requisition candidates tagged");
+		Logging.log("No candidates tagged with requisition");
+
+	}
+
 }
