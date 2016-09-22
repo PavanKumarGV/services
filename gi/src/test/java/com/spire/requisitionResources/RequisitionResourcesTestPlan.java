@@ -106,7 +106,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void GetRequInvalidSrch() throws ClientProtocolException, IOException {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisitionInvalid(hostName);
-		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
@@ -134,7 +134,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void GetRequInvalidInputSrch() throws ClientProtocolException, IOException {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisitionInvalidInput(hostName);
-		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
@@ -637,7 +637,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE: " + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		Logging.log("RESPONSE BODY: "+responseBody);
-		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
+		Assertion.assertTrue(responseBody.contains("Bulk update operation successfully completed"),
 				"Req not updated");
 		Logging.log("Requisition Status Updated Successfully RFR ID: "
 				+ ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
@@ -711,7 +711,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE: " + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		Logging.log("RESPONSE BODY: "+responseBody);
-		Assertion.assertTrue(responseBody.contains("The requisition status has been updated successfully"),
+		Assertion.assertTrue(responseBody.contains("Bulk update operation successfully completed"),
 				"Req not updated");
 		Logging.log("Requisition Status Updated Successfully RFR ID: "
 				+ ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
@@ -731,7 +731,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Logging.log("RESPONSE CODE: " + response.getStatus());
-		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
+		Assertion.assertTrue(response.getStatus() == 200, "Response not successfull");
 
 	}
 

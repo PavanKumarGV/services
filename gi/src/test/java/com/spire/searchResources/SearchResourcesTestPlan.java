@@ -1368,9 +1368,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Logging.log("Get candidates from saved search");
 
 		// Get input bean
-		com.spire.base.service.utils.SearchInput inputBean = SearchUtil
+	/*	com.spire.base.service.utils.SearchInput inputBean = SearchUtil
 				.getSearchInputBeanWithSkillWithoutPageInfo();
-		Logging.log("inputBean " + inputBean);
+		Logging.log("inputBean " + inputBean);*/
+		String inputBean = "{\"searchInput\": {\"searchQueryString\": \"(skill:MySQL or skill:ajax)\",\"searchAttributeMap\": {\"skill\": [\"MySQL\",\"ajax\"]}}}}";
 		// Get authentication token
 		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(
 				userId, password, hostName);

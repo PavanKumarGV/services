@@ -123,6 +123,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		System.out.println(" EndPoint URL >>" + serviceEndPointM);
 		Logging.log(" EndPoint URL >>" + serviceEndPointM);
 		Response responseM = executeGET(serviceEndPointM);
+		Logging.log("Response Code >>" + responseM.getStatus());
 	/*	if (responseM.getStatus() == 200) {
 			System.out.println("RESPONSE CODE >>" + responseM.getStatus());
 			Logging.log("Response Code >>" + responseM.getStatus());
@@ -845,14 +846,15 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	}
 
 	public Response getCandidatesFromSavedSearch(
-			com.spire.base.service.utils.SearchInput inputBean, String hostName,String id)
+		//	com.spire.base.service.utils.SearchInput inputBean, String hostName,String id)
+		String inputBean, String hostName,String id)
 			throws ClientProtocolException, IOException {
 
 		String serviceEndPointC = EndPointUrlGetCandidatesFromSavedSearch
 				.replaceAll("hostAddress", hostName)+id+"/candidates";
 		System.out.println(" EndPoint URL >>" + serviceEndPointC);
 		Logging.log(" EndPoint URL >>" + serviceEndPointC);
-		Entity<com.spire.base.service.utils.SearchInput> searchInput = Entity
+		Entity<String> searchInput = Entity
 				.entity(inputBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePOST(serviceEndPointC, searchInput);
 		// Logging.log(searchInput.toString());
