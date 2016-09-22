@@ -196,7 +196,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
 		Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
-		Assertion.assertTrue(responsebody.getStatus() != 200,
+		Assertion.assertTrue(responsebody.getStatus() == 200,
 				"response code expected not equal to 200 but found as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
