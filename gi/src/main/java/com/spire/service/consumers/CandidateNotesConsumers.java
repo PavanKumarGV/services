@@ -121,9 +121,6 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("Response Code >>"+response.getStatus());
 		return response;
-		
-		
-		
 	}
 	
 	public Response getCandidatenotesearchwithincorrectparameter(String hostname)

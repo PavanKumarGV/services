@@ -26,7 +26,7 @@ public class GetCandidateRequestBean {
 
 	public enum ProjectionType {
 
-		BASIC("basic"), FULL("full"), CUSTOM("custom");
+		BASIC("basic"), FULL("full"), CUSTOM("custom"), INVALID("notvalid");
 
 		String projectionType;
 

@@ -9,17 +9,12 @@ import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
-import com.spire.base.service.BaseServiceConsumerNew;
-import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.CandidateResourceServiceUtil;
-import com.spire.base.service.utils.NotesServicesUtil;
 import com.spire.service.consumers.CandidateResourcesConsumer;
 import com.spire.service.consumers.CandidateStatsConsumer;
 
-import junit.framework.Assert;
 import spire.talent.gi.beans.CandidateStatsRequestBean;
-
 import spire.talent.gi.beans.GetCandidateRequestBean;
 
 public class CandidateResourcesTestPlan extends TestPlan {
@@ -48,7 +43,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * Get Candidate Profile, provide id and projection parameter type
 	 * Verify:Response code and asserting response.
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfileRequest","NA" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfileRequest", "NA" })
 	public void verifyGetCandidateProfileRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		// Get authentication token
@@ -69,7 +64,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	/**
 	 * Get Candidate Profile without any parameter Verify:Response code
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutanyparameterRequest","NA" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutanyparameterRequest", "NA" })
 	public void verifyGetCandidateProfilewithoutanyparameterRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		// Get authentication token
@@ -82,25 +77,44 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	}
 
 	/**
-	 * GET Candidate profile without id Verify:Response code
-	 * 
-	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutidRequest","NA" })
-	public void verifyGetCandidateProfilewithoutidRequest() {
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/profile
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate service without candidate Id. Invalid Rest URL build in the absence of candidateId.
+	* </p>
+	* <p>
+	* <b>Input :</b>blank candidateId 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 404 with proper error message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P4</font>
+	* </p>
+	*/
+	@Test(groups = { "sanity", "verifyGetCandidateProfileWithoutCandidateId", "NA" })
+	public void verifyGetCandidateProfileWithoutCandidateId() {
+		Logging.log("Service Name: generic-services/api/candidates/profile"
+				+ "\nDescription: Get candidate service without candidate Id. Invalid Rest URL build in the absence of candidateId"
+				+ "\nInput: blank candidateId" + "\nExpected Output: Response status 404 with proper error message");
 		candConsumer = new CandidateResourcesConsumer();
-		// Get authentication token
 		candConsumer.getToken(userId, password, hostName);
-		// Executes Get request and returns Response
 		Response responsebody = candConsumer.getCandidateprofilewithoutid(hostName);
-		// Asserting Response Code
-		Assertion.assertTrue(responsebody.getStatus() != 200,
-				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() == 404,
+				"response code expected not equal to 404 but found as:" + responsebody.getStatus());
 	}
 
 	/**
 	 * GET Candidate profile without projection Verify:Response code
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutprojectionRequest","NA" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutprojectionRequest", "NA" })
 	public void verifyGetCandidateProfilewithoutprojectionRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		// Get authentication token
@@ -432,25 +446,44 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	}
 
 	/**
-	 * @author Radharani Patra 12/08/16 Steps:Get Candidate List with
-	 *         parameter(Candidate Id ) Validation: Response code and body
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/candidates/list
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Testing candidate list service with list of candidateIds as input and
+	 * invalid projection type. failure response 400 with candidates expected.
+	 * </p>
+	 * <p>
+	 * <b>Input :</b>Using valid candidateId and invalid projection type
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 400
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Negative - NonFunctional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 * @author Radharani Patra
+	 * @since 12/08/16
 	 */
-
 	@Test(groups = { "sanity", "getCandidateListWithInvalidProjectionType", "P2" })
 	public void getCandidateListWithInvalidProjectionType() {
-		// Get Requset Bean, pass invalid candidate id and projection type
-		candRequestBean = CandidateResourceServiceUtil.getCandidateListInvalidCandidateId(
+		Logging.log("Service Name: generic-services/api/candidates/list"
+				+ "\nDescription:  Testing candidate list service with list of candidateIds as input and invalid projection type. Failure response status 400 expected."
+				+ "\nInput: Using valid candidateId and invalid projection type" + "\nExpected Output: Response status 400");
+		candRequestBean = CandidateResourceServiceUtil.getCandidateListInvalidProjectionType(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
-		// Execute POST Request,returns response
 		Response response = candConsumer.getCandidateList(candRequestBean, hostName);
-		Assertion.assertEquals(response.getStatus(), 200, "Response successfull, Expected : 200");
+		Assertion.assertEquals(response.getStatus(), 400, "Response successfull, Expected : 400");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Get Response body
 		String responseBody = response.readEntity(String.class);
-		// Asserting response Body
-		Assertion.assertTrue(responseBody.contains(""), "Get Candidate List successfull");
-		Logging.log("Response is blank for invalid candidate id");
+		Assertion.assertTrue(responseBody.contains("not one of declared Enum instance names"), "Get Candidate List successfull");
 		Logging.log(responseBody);
 	}
 
@@ -458,7 +491,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * priti- GET candidate profile without headers Validation on response code
 	 *
 	 */
-	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutheaderRequest","NA" })
+	@Test(groups = { "sanity", "verifyGetCandidateProfilewithoutheaderRequest", "NA" })
 	public void verifyGetCandidateProfilewithoutheaderRequest() {
 		candConsumer = new CandidateResourcesConsumer();
 		Response responsebody = candConsumer.getcandidateprofile(hostName);
@@ -467,64 +500,130 @@ public class CandidateResourcesTestPlan extends TestPlan {
 
 	}
 
-	/**
-	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume Validation:
-	 *         Response code and body
-	 */
-	@Test(groups = { "sanity", "getCandidateResume", "P1","NA" })
+ 	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/resume
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate Resume with valid candidateId
+	* </p>
+	* <p>
+	* <b>Input :</b>candidateId that valid and exist in the system
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* @author Radharani Patra
+	* @since 16/08/16
+	*/
+	@Test(groups = { "sanity", "getCandidateResume", "P1", "NA" })
 	public void getCandidateResume() {
-		// Get user token
+		Logging.log("Service Name: generic-services/api/candidates/resume"
+				+ "\nDescription: Verifying candidates notes search service with incorrect parameter and expecting failure response."
+				+ "\nInput: Using Id that not present in the system" + "\nExpected Output: Response status 204");
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
-		// execute Get Request
 		Response response = candConsumer
 				.getCandidateResume(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
-		// Asset Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response Unsuccessfull, Expected : 200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Assert Response Body
-		candConsumer.assertResponse(response);
-
+		String resStr = response.readEntity(String.class);
+		Assertion.assertFalse(resStr.contains("SYSTEM_ERROR"), "SYSTEM_ERROR occured");
+		Assertion.assertTrue(resStr.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume_test_fileName")),"Actual File Name not Found");
+		Assertion.assertTrue(resStr.contains("filename") || resStr.contains("fileName"),
+				"Resume not present");
+		Logging.log("Service Response Message: "+ resStr);
 	}
 
 	/**
-	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with blank
-	 *         candidate id Validation: Response code: 404
-	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithBlankCandidateId", "P2","NA" })
-	public void getCandidateResumeWithBlankCandidateId() {
-		// Get user token
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/resume
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate Resume with invalid candidateId with special characters.
+	* </p>
+	* <p>
+	* <b>Input :</b>blank candidateId 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500 with proper error message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Boundary Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#007D77> P4</font>
+	* </p>
+	* @author Radharani Patra
+	* @since 16/08/16
+	*/
+	@Test(groups = { "sanity", "getCandidateResumeWithBlankCandidateId", "P2", "NA" })
+	public void getCandidateResumeWithInvalidCandidateId_SplCharactors() {
+		Logging.log("Service Name: generic-services/api/candidates/resume"
+				+ "\nDescription: Get candidate Resume with invalid candidateId with special characters."
+				+ "\nInput: blank candidateId" + "\nExpected Output: Response status 500 with proper error message");
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
-		// execute Get Request
-		Response response = candConsumer.getCandidateResumeBlank(hostName);
-		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() != 200, "Response Unsuccessfull");
+		Response response = candConsumer.getCandidateResumeInvalidSplCharIds(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
+		Assertion.assertTrue(response.getStatus() == 500, "Response Expected as 500 Server internal error");
+		Assertion.assertTrue(response.readEntity(String.class).equals("SYSTEM_ERROR"), "Expecting system error due to invalid special charector Ids");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-
 	}
 
+	 
 	/**
-	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume with invalid
-	 *         candidate id Validation: Response code: 404
-	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithInvalidCandidateId", "P2","NA" })
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/resume
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate Resume with invalid candidateId
+	* </p>
+	* <p>
+	* <b>Input :</b>blank candidateId 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500 with proper error message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Boundary Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#E6A001> P3</font>
+	* </p>
+	* @author Radharani Patra
+	* @since 16/08/16
+	*/
+	@Test(groups = { "sanity", "getCandidateResumeWithInvalidCandidateId", "P3", "NA" })
 	public void getCandidateResumeWithInvalidCandidateId() {
-		// Get user token
+		Logging.log("Service Name: generic-services/api/candidates/resume"
+				+ "\nDescription: Get candidate Resume with invalid candidateId with special characters."
+				+ "\nInput: blank candidateId" + "\nExpected Output: Response status 500 with proper error message");
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
-		// execute Get Request
 		Response response = candConsumer.getCandidateResumeInvalid(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() != 200, "Response Successfull, Expected 404 status code");
+		Assertion.assertTrue(response.getStatus() == 204, "Response Successfull, Expected 204 status code");
 		Logging.log("Response unsuccessful");
-
 	}
 
 	/**
 	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume without
 	 *         passing headers Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders", "P2","NA" })
+	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders", "P2", "NA" })
 	public void getCandidateResumeWithoutHeaders() {
 		// Get user token
 		candConsumer = new CandidateResourcesConsumer();
@@ -545,40 +644,85 @@ public class CandidateResourcesTestPlan extends TestPlan {
 
 	}
 
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/candidates/deallocate
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Testing deallocate candidate service with valid parameters and expecting
+	 * success response.
+	 * </p>
+	 * <p>
+	 * <b>Input :</b>Valid and allocated existing entity requisitionId,
+	 * candidateId, requisitionDisplayId, candidateDisplayId, isCurrent=Y
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#C90000> P1</font>
+	 * </p>
+	 */
 	@Test(groups = { "deallocateCandidates", "P1", "sanity" }, dependsOnGroups = { "allocateCandidates" })
 	public void deallocateCandidates() {
-		// Get user token
+		Logging.log("Service Name: generic-services/api/candidates/deallocate"
+				+ "\nDescription: Testing deallocate candidate service with valid parameters of allocated entities and expecting success response."
+				+ "\nInput: Valid and allocated existing entity data for requisitionId, candidateId, requisitionDisplayId, candidateDisplayId, isCurrent=Y"
+				+ "\nExpected Output: Response status 200");
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
-		// execute post Request
 		String inputjson = "{\"" + ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_deallocate")
 				+ "\":[\"" + ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_deallocate") + "\"]}";
 		Response response = candConsumer.deallocatecandidate(hostName, inputjson);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		// Asset Response Code
 		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
-		// Get Response body
 		String responseBody = response.readEntity(String.class);
-		System.out.println(responseBody);
 		Logging.log("RESPONSE: " + responseBody);
 	}
 
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/candidates/allocate
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Testing allocate candidate service with valid parameters and expecting
+	 * success response.
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> requisitionId, candidateId, requisitionDisplayId,
+	 * candidateDisplayId, isCurrent=Y
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#C90000> P1</font>
+	 * </p>
+	 */
 	@Test(groups = { "allocateCandidates", "P1" })
 	public void allocateCandidates() {
-		// Get user token
+		Logging.log("Service Name: generic-services/api/candidates/allocate"
+				+ "\nDescription: Testing allocate candidate service with valid parameters and expecting success response."
+				+ "\nInput: Valid and existing data for requisitionId, candidateId, requisitionDisplayId, candidateDisplayId, isCurrent=Y"
+				+ "\nExpected Output: Response status 200");
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
-		// execute post Request
 		Response response = candConsumer.allocatecandidate(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		// Asset Response Code
 		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
-		// Get Response body
 		String responseBody = response.readEntity(String.class);
-		System.out.println(responseBody);
-		// Logging.log(responseBody);
 		Logging.log("RESPONSE: " + responseBody);
 	}
 
