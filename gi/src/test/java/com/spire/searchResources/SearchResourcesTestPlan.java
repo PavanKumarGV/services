@@ -1,7 +1,5 @@
 package com.spire.searchResources;
 
-import org.testng.annotations.Test;
-
 import java.io.IOException;
 
 import javax.ws.rs.core.Response;
@@ -10,21 +8,20 @@ import org.apache.http.client.ClientProtocolException;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.spire.base.service.Constants;
-import com.spire.base.service.ReadingServiceEndPointsProperties;
-//import spire.talent.gi.beans.SavedSearchDetails;
-import com.spire.base.service.utils.SavedSearchDetails;
-import com.spire.base.service.utils.SearchUtil;
-
-import spire.talent.gi.beans.SearchInput;
+import org.testng.annotations.Test;
 
 import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
+import com.spire.base.service.Constants;
+import com.spire.base.service.ReadingServiceEndPointsProperties;
+//import spire.talent.gi.beans.SavedSearchDetails;
+import com.spire.base.service.utils.SavedSearchDetails;
+import com.spire.base.service.utils.SearchUtil;
 import com.spire.service.consumers.SearchResourcesConsumer;
+
+import spire.talent.gi.beans.SearchInput;
 
 public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
@@ -151,8 +148,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		System.out.println("***** RESPONSE ******" + response);
 		// Asserting Response Code
-		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace( "%20"," ")));
-
+		Assert.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace( "%20"," ").toLowerCase()));
 	}
 
 	/**
@@ -1541,9 +1537,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		System.out.println("***** RESPONSE : response : ******" + response);
 		Logging.log("response " + response);
 		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200,
+		Assertion.assertEquals(responsebody.getStatus(), 500,
 				"Response not successful");
-
 	}
 
 	/**
