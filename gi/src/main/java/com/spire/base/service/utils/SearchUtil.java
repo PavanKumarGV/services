@@ -59,7 +59,7 @@ public class SearchUtil {
 	public static SearchInputRequest getSearchInputBeanWithSkillAndLocation() {
 		SearchInput searchInput = new SearchInput();
 
-		String searchQueryString = "(skill:java and skill:MySQL) AND (location:Bengalore AND location:Mumbai)";
+		String searchQueryString = "(skill:java and skill:MySQL) AND (location:Bangalore AND location:Mumbai)";
 		Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
 
 		List<String> skills = new ArrayList<String>();
