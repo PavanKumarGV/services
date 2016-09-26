@@ -354,176 +354,366 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti- Get autocomplete with full skill
 	 */
-	@Test(groups = { "sanity", "getautocompletewithfullskillRequest","NA" })
-	public void getautocompletewithfullskillRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with full skill search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing full skill present 
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+
+	@Test(groups = { "sanity", "getautocompletewithfullskillRequest", "NA" })
+	public void getAutoCompleteWithFullSkillRequest() {
+		Logging.log(
+				"Service Name: /generic-services/api/search/auto_complete \n Verifying autocomplete with full skill  search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefullskillsearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefullskillsearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.skill),
-				"skill not found in the response.");
-		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_skill_to_search")),
-				"full skill not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.skill), "skill not found in the response.");
+		/*
+		 * Assertion.assertTrue(response.contains(
+		 * ReadingServiceEndPointsProperties.getServiceEndPoint(
+		 * "full_skill_to_search")), "full skill not found in response");
+		 */
 	}
 
 	/**
 	 * priti-Get autocomplete with partial skill
 	 */
-	@Test(groups = { "sanity", "getautocompletewithpartialskillRequest","NA" })
-	public void getautocompletewithpartialskillRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with partial skill search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b>passing  partial skill 
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletewithpartialskillRequest", "NA" })
+	public void getAutoCompleteWithPartialSkillRequest() {
+		Logging.log(
+				"Service Name: /generic-services/api/search/auto_complete \n Verifying autocomplete with partial skill  search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletepartialskillsearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletepartialskillsearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.skill),
-				"skill not found in the response.");
-		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_Skill_to_search")),
-				"partial skill search not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.skill), "skill not found in the response.");
+		/*
+		 * Assertion.assertTrue(response.contains(
+		 * ReadingServiceEndPointsProperties.getServiceEndPoint(
+		 * "partial_Skill_to_search")),
+		 * "partial skill search not found in response");
+		 */
 	}
 
 	/**
 	 * priti- Get autocomplete with full institute
 	 */
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with full institute search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing with full institute
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
 
-	@Test(groups = { "sanity", "getautocompletewithfullinstituteRequest","NA" })
-	public void getautocompletewithfullinstituteRequest() {
+	@Test(groups = { "sanity", "getautocompletewithfullinstituteRequest", "NA" })
+	public void getAutoCompleteWithFullInstituteRequest() {
+		Logging.log(
+				"Service Name: /generic-services/api/search/auto_complete \n Verifying autocomplete with full institute  search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefullinstitutesearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefullinstitutesearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.institute),
-				"institute not found in the response.");
-	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_institute_to_search")),
-				"full institute not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.institute), "institute not found in the response.");
+		/*
+		 * Assertion.assertTrue(response.contains(
+		 * ReadingServiceEndPointsProperties.getServiceEndPoint(
+		 * "full_institute_to_search")), "full institute not found in response"
+		 * );
+		 */
 	}
 
 	/**
 	 * priti- Get autocomplete with partial institute
 	 */
-
-	@Test(groups = { "sanity", "getautocompletewithpartialinstituteRequest","NA" })
-	public void getautocompletewithpartialinstituteRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with partial institute search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing with partial institute
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletewithpartialinstituteRequest", "NA" })
+	public void getAutoCompleteWithPartialInstituteRequest() {
+		Logging.log(
+				"Service Name: /generic-services/api/search/auto_complete \n Verifying autocomplete with partial institute  search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletepartialinstitutesearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletepartialinstitutesearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.institute),
-				"institute not found in the response.");
-		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_institute_to_search")),
-				"partial institute not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.institute), "institute not found in the response.");
+		/*
+		 * Assertion.assertTrue(response.contains(
+		 * ReadingServiceEndPointsProperties.getServiceEndPoint(
+		 * "partial_institute_to_search")),
+		 * "partial institute not found in response");
+		 */
 	}
 
 	/**
 	 * priti-Get autocomplete with full education
 	 */
-
-	@Test(groups = { "sanity", "getautocompletewithfulleducationRequest","NA" })
-	public void getautocompletewithfulleducationRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b>
+	 * generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying full Education search service with correct parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> Using Id that not present in the system
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletewithfulleducationRequest", "NA" })
+	public void getAutoCompleteWithFullEducationRequest() {
+		Logging.log("Service Name: /generic-services/api/search/auto_complete \n Verifying Education search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefulleducationsearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefulleducationsearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as: " + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.education),
-				"education not found in the response.");
-		/*Assertion.assertTrue(
-				response.contains("Diploma in Computer Applications"),
-				"full education not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.education), "education not found in the response.");
+		/*
+		 * Assertion.assertTrue( response.contains(
+		 * "Diploma in Computer Applications"),
+		 * "full education not found in response");
+		 */
 	}
 
 	/**
 	 * priti-Get autocomplete with partial education
 	 */
-
-	@Test(groups = { "sanity", "getautocompletewithpartialeducationRequest","NA" })
-	public void getautocompletewithpartialeducationRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with partial education search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> education present in the system
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletewithpartialeducationRequest", "NA" })
+	public void getAutoCompleteWithPartialEducationRequest() {
+		Logging.log(
+				"Service Name: /generic-services/api/search/auto_complete \n Verifying autocomplete with partial education search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletepartialeducationsearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletepartialeducationsearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.education),
-				"education not found in the response.");
-		/*Assertion.assertTrue(response.contains("Diploma"),
-				"partial education not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.education), "education not found in the response.");
+		/*
+		 * Assertion.assertTrue(response.contains("Diploma"),
+		 * "partial education not found in response");
+		 */
 	}
 
 	/**
 	 * priti-Get autocomplete with full employer
 	 */
-
-	@Test(groups = { "sanity", "getautocompletewithfullemployerRequest","NA" })
-	public void getautocompletewithfullemployerRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying full employer search service with correct parameter and
+	 * expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> Using Id that not present in the system
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletewithfullemployerRequest", "NA" })
+	public void getAutoCompleteWithFullEmployerRequest() {
+		Logging.log("Service Name: generic-services/api/search/auto_complete \n Verifying full employer search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefullemployersearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefullemployersearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.employer),
-				"employer not found in the response.");
-	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_employer_to_search")),
-				"full employer not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.employer), "employer not found in the response.");
+		/*
+		 * Assertion.assertTrue(response.contains(
+		 * ReadingServiceEndPointsProperties.getServiceEndPoint(
+		 * "full_employer_to_search")), "full employer not found in response");
+		 */
 	}
 
 	/**
 	 * priti-Get autocomplete with partial employer
 	 */
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with partial employer search service with correct parameter and
+	 * expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> Using Id that not present in the system
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
 
 	@Test(groups = { "sanity", "getautocompletepartialemployerRequest","NA" })
-	public void getautocompletepartialemployerRequest() {
+	public void getAutoCompletePartialEmployerRequest() {
+		Logging.log("Service Name: generic-services/api/search/auto_complete \n Verifying full employer search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
@@ -532,7 +722,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Assertion.assertEquals(
 				200,
 				responsebody.getStatus(),
-				"Response expected 200 but found as:"
+				"Expected 200 status response but found actual response as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
@@ -545,31 +735,79 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with full location
 	 */
-	@Test(groups = { "sanity", "getautocompletfulllocationRequest","NA" })
-	public void getautocompletfulllocationRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with full location search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing full location
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletfulllocationRequest", "NA" })
+	public void getAutoCompletFullLocationRequest() {
+		Logging.log("Service Name: generic-services/api/search/auto_complete \n Verifying full employer search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefulllocationsearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefulllocationsearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.location),
-				"location not found in the response.");
-		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_location_to_search")),
-				"full location not found in response");
+		Assertion.assertTrue(response.contains(Constants.location), "location not found in the response.");
+		Assertion.assertTrue(
+				response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_location_to_search")),
+				"Response is Empty. So full location not found in response");
 	}
 
 	/**
 	 * priti-Get autocomplete with partial location
 	 */
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with partial location search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing partial location
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	
 	@Test(groups = { "sanity", "getautocompletpartiallocationRequest","NA" })
-	public void getautocompletpartiallocationRequest() {
+	public void getAutoCompletPartialLocationRequest() {
+		Logging.log("Service Name: generic-services/api/search/auto_complete \n Verifying with partial location search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
@@ -584,38 +822,62 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.location),
 				"location not found in the response.");
-		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_location_to_search")),
-				"partial location not found in response");*/
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_location_to_search")),
+				"Response is Empty. So partial location not found in response");
 	}
 
 	/**
 	 * priti-Get autocomplete with full sourcetype
 	 */
-	@Test(groups = { "sanity", "getautocompletfullsourcetypeRequest","NA" })
-	public void getautocompletfullsourcetypeRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with full sourcetype search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing full sourcetype
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletfullsourcetypeRequest", "NA" })
+	public void getAutoCompletFullSourceTypeRequest() {
+		Logging.log(
+				"Service Name: generic-services/api/search/auto_complete \n Verifying full sourcetype search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefullsourcetypesearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefullsourcetypesearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.sourcetype),
-				"sourcetype not found in the response.");
-	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcetype_to_search")),
-				"full sourcetype not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.sourcetype), "sourcetype not found in the response.");
+
+		Assertion.assertTrue(
+				response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcetype_to_search")),
+				"Response is empty.So full sourcetype not found in response");
+
 	}
 
 	/**
 	 * priti-Get autocomplete with partial sourcetype
 	 */
 	@Test(groups = { "sanity", "getautocompletpartialsourcetypeRequest","NA" })
-	public void getautocompletpartialsourcetypeRequest() {
+	public void getAutoCompletPartialSourceTypeRequest() {
 		SearchResourcesConsumer suggestConsumer = null;
 		suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
@@ -624,7 +886,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Assertion.assertEquals(
 				200,
 				responsebody.getStatus(),
-				"Response expected 200 but found as:"
+				"Expected 200 status response but found actual response as:"
 						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
@@ -637,70 +899,138 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete with full sourcename
 	 */
-	@Test(groups = { "sanity", "getautocompletfullsourcenameRequest","NA" })
-	public void getautocompletfullsourcenameRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with full sourcename search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing full sourcename
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletfullsourcenameRequest", "NA" })
+	public void getAutoCompletFullSourceNameRequest() {
+		Logging.log(
+				"Service Name: generic-services/api/search/auto_complete \n Verifying autocomplete with full sourcename search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefullsourcenamesearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefullsourcenamesearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.sourcename),
-				"sourcename not found in the response.");
-		/*Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcename_to_search")),
-				"full sourcename not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.sourcename), "sourcename not found in the response.");
+		Assertion.assertTrue(
+				response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcename_to_search")),
+				"Response is Empty. So full sourcename not found in response");
+
 	}
 
 	/**
 	 * priti-Get autocomplete with partial sourcename
 	 */
-	@Test(groups = { "sanity", "getautocompletpartialsourcenameRequest" ,"NA"})
-	public void getautocompletpartialsourcenameRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with partial sourcename search service with
+	 * correct parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing with partial sourcename
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletpartialsourcenameRequest", "NA" })
+	public void getAutoCompletPartialSourceNameRequest() {
+		Logging.log(
+				"Service Name: generic-services/api/search/auto_complete \n Verifying autocomplete with partial sourcename search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletepartialsourcenamesearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletepartialsourcenamesearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.sourcename),
-				"sourcename not found in the response.");
-//		Assertion.assertTrue(response.contains("N"),
-//				"partial sourcename not found in response");
+		Assertion.assertTrue(response.contains(Constants.sourcename), "sourcename not found in the response.");
+		// Assertion.assertTrue(response.contains("N"),
+		// "partial sourcename not found in response");
 	}
 
 	/**
 	 * priti-Get autocomplete with full status
 	 */
-	@Test(groups = { "sanity", "getautocompletfullstatusRequest","NA" })
-	public void getautocompletfullstatusRequest() {
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete with full status search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> passing full location
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "getautocompletfullstatusRequest", "NA" })
+	public void getAutoCompletFullStatusRequest() {
+		Logging.log(
+				"Service Name: generic-services/api/search/auto_complete \n Verifying autocomplete  with full status search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletefullstatussearch(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletefullstatussearch(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Response expected 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.status),
-				"status not found in the response.");
-	/*	Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_status_to_search")),
-				"full status not found in response");*/
+		Assertion.assertTrue(response.contains(Constants.status), "status not found in the response.");
+
+		Assertion.assertTrue(
+				response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_status_to_search")),
+				"response is empty so full status not found in response");
+
 	}
 
 	/**
@@ -729,47 +1059,90 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/**
 	 * priti-Get autocomplete without keyword
 	 */
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete without keyword search service with correct
+	 * parameter and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> without keyword
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
 
-	@Test(groups = { "sanity", "getautocompletewithoutkeywordRequest","NA" })
-	public void getautocompletewithoutkeywordRequest() {
+	@Test(groups = { "sanity", "getautocompletewithoutkeywordRequest", "NA" })
+	public void getAutoCompleteWithOutKeywordRequest() {
+		Logging.log(
+				"Service Name: generic-services/api/search/auto_complete \n Verifying autocomplete without keyword search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletewithoutkey(hostName);
-		Assertion.assertEquals(
-				200,
-				responsebody.getStatus(),
-				"Response expected 200 but found as:"
-						+ responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletewithoutkey(hostName);
+		Assertion.assertEquals(200, responsebody.getStatus(),
+				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.skill),
-				"skill not found in the response.");
+		Assertion.assertTrue(response.contains(Constants.skill), "skill not found in the response.");
 
 	}
 
 	/**
 	 * priti-Get autocomplete without type
 	 */
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/auto_complete
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying autocomplete without type search service with correct parameter
+	 * and expecting pass response.
+	 * 
+	 * </p>
+	 * <p>
+	 * <b>Input :</b>autocomplete without type in the system
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 200
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Positive - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * </p>
+	 */
 
-	@Test(groups = { "sanity", "getautocompletewithouttypeRequest","NA" })
-	public void getautocompletewithouttypeRequest() {
+	@Test(groups = { "sanity", "getautocompletewithouttypeRequest", "NA" })
+	public void getAutoCompleteWithOutTypeRequest() {
+		Logging.log(
+				"Service Name: generic-services/api/search/auto_complete \n Verifying autocomplete without type and  search service with correct parameter and expecting pass response.");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		Response responsebody = suggestConsumer
-				.getautocompletewithouttype(hostName);
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getautocompletewithouttype(hostName);
 		// Assertion.assertEquals(200, responsebody.getStatus(),
 		// "Response expected 200 but found as:"+responsebody.getStatus());
-		Assertion.assertTrue(responsebody.getStatus() != 200,
-				"response is unsuccessfull");
+		Assertion.assertTrue(responsebody.getStatus() != 200, "response is unsuccessfull");
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion
-				.assertTrue(response
-						.contains("Search input cannot be null or empty"),
-						"Search input cannot be null or empty not found in the response.");
+		Assertion.assertTrue(response.contains("Search input cannot be null or empty"),
+				"Search input cannot be null or empty not found in the response.");
 		// Assertion.assertTrue(response.contains("ja"),
 		// "full institute not found in response");
 	}
