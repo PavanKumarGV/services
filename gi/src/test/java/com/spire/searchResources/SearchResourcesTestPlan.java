@@ -1841,63 +1841,118 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Create saved search with skill and location
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
+     * 
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Create Saved Search with skill and location
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> savedSearch object
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 200
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Positive - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree 
+     *             </p>
+     */
+    
     @Test(groups = { "sanity", "createSavedSearchInputBeanWithSkillAndLocation", "NA" })
     public void createSavedSearchInputBeanWithSkillAndLocation() throws ClientProtocolException, IOException {
-
-	System.out.println("Create Saved Search with skill and location");
 	Logging.log("Create Saved Search with skill and location");
 	searchUtil = new SearchUtil();
 	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkillAndLocation();
-	Logging.log("inputBean " + inputBean);
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+			+ "\nDescription: Create saved search with skill and Location." + "\nInput: " + inputBean
+			+ "\nExpected Output: Response status 200");
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 	// Executes POST request and returns Response
 	Response responsebody = suggestConsumer.createSavedSearchInputBeanWithSkillAndLocation(inputBean, hostName);
-	System.out.println("***** RESPONSE : responsebody : ******" + responsebody);
+	Logging.log("***** RESPONSE : responsebody : ******" + responsebody);
 	Logging.log("responsebody " + responsebody);
 
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : response : ******" + response);
+	Logging.log("***** RESPONSE : response : ******" + response);
 	Logging.log("response " + response);
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
     }
 
-    /**
-     * Bhagyasree - Create a public saved search with skill
-     * 
-     * @throws IOException
-     * @throws ClientProtocolException
-     **/
-    @Test(groups = { "sanity", "createPublicSavedSearchWithSkill", "NA" })
-    public void createPublicSavedSearchWithSkill() throws ClientProtocolException, IOException {
+	/**
+	 * Bhagyasree - Create a public saved search with skill
+	 * 
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 **/
+	/**
+	 * @throws IOException
+	 * @throws ClientProtocolException
+	 * 
+	 *             <p>
+	 *             <b>Target Service URL :</b>
+	 *             /generic-services/api/search/save_search
+	 *             </p>
+	 *             <p>
+	 *             <b>Test Case Description :</b>
+	 *             </p>
+	 *             <p>
+	 *             Create saved search with skill
+	 *             </p>
+	 *             <p>
+	 *             <b>Input :</b> savedSearch object
+	 *             </p>
+	 *             <p>
+	 *             <b>Expected Output :</b> Response status 200
+	 *             </p>
+	 *             <p>
+	 *             <b>Category :</b> Positive - Functional Test Case
+	 *             </p>
+	 *             <p>
+	 *             <b>Bug Level :</b><font color=#C90000> P1</font>
+	 *             </p>
+	 *             <p>
+	 * @author Bhagyasree
+	 *         </p>
+	 */
+	@Test(groups = { "sanity", "createPublicSavedSearchWithSkill", "NA" })
+	public void createPublicSavedSearchWithSkill() throws ClientProtocolException, IOException {
+		Logging.log("Create  a public Saved Search with skill");
+		searchUtil = new SearchUtil();
+		// Executes get request and returns Response
+		SavedSearchDetails inputBean = SearchUtil.createPublicSavedSearchInputBeanWithSkill();
+		Logging.log("Service Name: /generic-services/api/search/save_search"
+				+ "\nDescription: Create saved search with skill." + "\nInput: " + inputBean
+				+ "\nExpected Output: Response status 200");
+		// Get authentication token
+		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		// Executes POST request and returns Response
+		Response responsebody = suggestConsumer.createPublicSavedSearchWithSkill(inputBean, hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+		Logging.log("***** RESPONSE : responsebody : ******" + responsebody);
+		Logging.log("responsebody " + responsebody);
 
-	System.out.println("Create  a public Saved Search with skill");
-	Logging.log("Create  a public Saved Search with skill");
-	searchUtil = new SearchUtil();
-	// Executes get request and returns Response
-	SavedSearchDetails inputBean = SearchUtil.createPublicSavedSearchInputBeanWithSkill();
-	Logging.log("inputBean " + inputBean);
-	// Get authentication token
-	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-	// Executes POST request and returns Response
-	Response responsebody = suggestConsumer.createPublicSavedSearchWithSkill(inputBean, hostName);
-	// Asserting Response Code
-	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
-	System.out.println("***** RESPONSE : responsebody : ******" + responsebody);
-	Logging.log("responsebody " + responsebody);
+		String response = responsebody.readEntity(String.class);
+		Logging.log("***** RESPONSE : response : ******" + response);
+		Logging.log("response " + response);
+		savedSearchId = suggestConsumer.getIdFromResponse(response);
 
-	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : response : ******" + response);
-	Logging.log("response " + response);
-	savedSearchId = suggestConsumer.getIdFromResponse(response);
-
-    }
+	}
 
     /**
      * @throws IOException
