@@ -1,7 +1,5 @@
 package com.spire.searchResources;
 
-import org.testng.annotations.Test;
-
 import java.io.IOException;
 
 import javax.ws.rs.core.Response;
@@ -12,27 +10,22 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.core.JsonParser;
+import com.google.gson.JsonObject;
+import com.spire.base.controller.Assertion;
+import com.spire.base.controller.ContextManager;
+import com.spire.base.controller.Logging;
+import com.spire.base.controller.TestPlan;
 import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
 // import spire.talent.gi.beans.SavedSearchDetails;
 import com.spire.base.service.utils.SavedSearchDetails;
 import com.spire.base.service.utils.SearchUtil;
+import com.spire.service.consumers.SearchResourcesConsumer;
 
 import spire.talent.gi.beans.SearchInput;
 
-import com.spire.base.controller.Assertion;
-import com.spire.base.controller.ContextManager;
-import com.spire.base.controller.Logging;
-import com.spire.base.controller.TestPlan;
-import com.spire.service.consumers.SearchResourcesConsumer;
-
-/**
- * @author jyoti
- *
- * @param <SearchCriteriaBean>
- */
 /**
  * @author jyoti
  *
@@ -44,11 +37,26 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     String		    userId;
     String		    password;
 
-    SearchResourcesConsumer candConsumer      = null;
-    SearchInput		    SearchBeanRequest = null;
-    static String	    Input	      = null;
-    SearchUtil		    searchUtil	      = null;
-    static String	    savedSearchId     = null;
+    SearchResourcesConsumer candConsumer		 = null;
+    SearchInput		    SearchBeanRequest		 = null;
+    static String	    Input			 = null;
+    SearchUtil		    searchUtil			 = null;
+    static String	    savedSearchId		 = null;
+
+    public static String    SKILL_WITH_SPECIAL_CHARACTER = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("skill_with_special_character");
+    public static String    SKILL_JAVA			 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("skill_java");
+    public static String    SKILL_MYSQL			 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("skill_mysql");
+    public static String    LOCATION_MUMBAI		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("location_mumbai");
+    public static String    LOCATION_BANGALORE		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("location_bangalore");
+    public static String    INVALID_KEYWORD		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("invalid_keyword");
+    public static String    SEARCH_TEXT			 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("search_text");
 
     /**
      * Passing HostName,UserName and Password from the xml.
@@ -155,8 +163,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.suggestValidation(hostName);
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
@@ -191,7 +197,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
     /**
      * Author - Bhagyasree Test case description - Get suggestion when passing
-     * keyword having SpecialCharacters(Like C#, .Net, C++)
+     * keyword having SpecialCharacters
      * 
      * @throws IOException
      * @throws ClientProtocolException
@@ -204,9 +210,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             <b>Test Case Description :</b>
      *             </p>
      *             <p>
-     *             Get suggestion when passing keyword having
-     *             SpecialCharacters(Like C#, .Net, C++) and expecting success
-     *             response.
+     *             Get suggestion when passing keyword having SpecialCharacters
+     *             and expecting success response.
      *             </p>
      *             <p>
      *             <b>Input :</b> .net
@@ -223,9 +228,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      */
     @Test(groups = { "sanity", "verifySuggestForSkillwithSpecialCharacter", "NA" })
     public void verifySuggestForSkillwithSpecialCharacter() throws ClientProtocolException, IOException {
-	Logging.log("Service Name: /generic-services/api/search/_suggest?keyword=.net"
+
+	Logging.log("Service Name: /generic-services/api/search/_suggest?keyword=" + SKILL_WITH_SPECIAL_CHARACTER
 		+ "\nDescription: Get suggestion when passing keyword having SpecialCharacters(Like C#, .Net, C++) and expecting success response."
-		+ "\nInput: .net " + "\nExpected Output: Response status 200");
+		+ "\nInput: " + SKILL_WITH_SPECIAL_CHARACTER + "\nExpected Output: Response status 200");
 
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
@@ -234,14 +240,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.getSuggestForSkillwithSpecialCharacter(hostName);
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 200,
 		"response code expected equal to 200 but found as:" + responsebody.getStatus());
-	Assert.assertTrue(response.contains(".net"), "Response doesnot contain .net as skill");
+	Assert.assertTrue(response.contains(SKILL_WITH_SPECIAL_CHARACTER), "Response doesnot contain .net as skill");
     }
 
     /**
@@ -304,7 +308,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     public void searchCandidatesWithSkill() throws ClientProtocolException, IOException {
 	// Get input bean
 	com.spire.base.service.utils.SearchInputRequest inputBean = SearchUtil.getSearchInputBeanWithSkill();
-	Logging.log("inputBean " + inputBean);
 
 	Logging.log("Service Name: /generic-services/api/search/_candidates"
 		+ "\nDescription: Verifying 'Get Candidates by Savedsearch' Service as per given skills as correct parameter and expecting success response."
@@ -317,15 +320,14 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.searchCandidate(inputBean, hostName);
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
 	Assertion.assertTrue(
-		StringUtils.containsIgnoreCase(response, "MySQL") || StringUtils.containsIgnoreCase(response, "java"),
-		"Response does not contain MySQL or java as skill");
+		StringUtils.containsIgnoreCase(response, SKILL_MYSQL)
+			&& StringUtils.containsIgnoreCase(response, SKILL_JAVA),
+		"Response does not contain " + SKILL_MYSQL + " and " + SKILL_JAVA + " as skill");
     }
 
     /**
@@ -371,17 +373,17 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
 	Assertion.assertTrue(
-		StringUtils.containsIgnoreCase(response, "MySQL") && StringUtils.containsIgnoreCase(response, "java")
-			&& StringUtils.containsIgnoreCase(response, "Bangalore")
-			&& StringUtils.containsIgnoreCase(response, "Mumbai"),
-		"Response does not contain MySQL/java/Bangalore/Mumbai");
+		StringUtils.containsIgnoreCase(response, SKILL_MYSQL)
+			&& StringUtils.containsIgnoreCase(response, SKILL_JAVA)
+			&& StringUtils.containsIgnoreCase(response, LOCATION_BANGALORE)
+			&& StringUtils.containsIgnoreCase(response, LOCATION_MUMBAI),
+		"Response does not contain " + SKILL_MYSQL + "/" + SKILL_JAVA + "/" + LOCATION_BANGALORE + "/"
+			+ LOCATION_MUMBAI);
     }
 
     /**
@@ -473,14 +475,11 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.getSavedSearchByNonExistingId(hostName);
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 500, "Response not successful");
-	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"),
-		"getSavedSearchById found a non existent id : 12345678");
+	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"), "getSavedSearchById found a non existent id");
     }
 
     /**
@@ -900,8 +899,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// comparing modifiedOn dates if all are in ascending order
@@ -914,7 +911,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
 		modifiedOnArr[i] = savedSearchDetail.getLong("modifiedOn");
 	    }
-	    Assertion.assertTrue(isSortedInAscOrder(modifiedOnArr), "modifiedOn is not sorted in ascending order");
+	    Assertion.assertTrue(SearchUtil.isSortedInAscOrder(modifiedOnArr),
+		    "modifiedOn is not sorted in ascending order");
 	}
     }
 
@@ -965,8 +963,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// comparing modifiedOn dates if all are in descending order
@@ -979,7 +975,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
 		modifiedOnArr[i] = savedSearchDetail.getLong("modifiedOn");
 	    }
-	    Assertion.assertTrue(isSortedInDscOrder(modifiedOnArr), "modifiedOn is not sorted in descending order");
+	    Assertion.assertTrue(SearchUtil.isSortedInDscOrder(modifiedOnArr),
+		    "modifiedOn is not sorted in descending order");
 	}
     }
 
@@ -1035,8 +1032,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// comparing createdOn dates if all are in ascending order
@@ -1049,26 +1044,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
 		createdOnArr[i] = savedSearchDetail.getLong("createdOn");
 	    }
-	    Assertion.assertTrue(isSortedInAscOrder(createdOnArr), "createdOn is not sorted in ascending order");
+	    Assertion.assertTrue(SearchUtil.isSortedInAscOrder(createdOnArr),
+		    "createdOn is not sorted in ascending order");
 	}
-    }
-
-    private boolean isSortedInAscOrder(long[] data) {
-	for (int i = 0; i < data.length - 1; i++) {
-	    if (data[i] > data[i + 1]) {
-		return false;
-	    }
-	}
-	return true;
-    }
-
-    private boolean isSortedInDscOrder(long[] data) {
-	for (int i = 0; i < data.length - 1; i++) {
-	    if (data[i] < data[i + 1]) {
-		return false;
-	    }
-	}
-	return true;
     }
 
     /**
@@ -1122,8 +1100,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// comparing createdOn dates if all are in descending order
@@ -1136,7 +1112,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
 		createdOnArr[i] = savedSearchDetail.getLong("createdOn");
 	    }
-	    Assertion.assertTrue(isSortedInDscOrder(createdOnArr), "createdOn is not sorted in descending order");
+	    Assertion.assertTrue(SearchUtil.isSortedInDscOrder(createdOnArr),
+		    "createdOn is not sorted in descending order");
 	}
     }
 
@@ -1149,7 +1126,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
-     *             /generic-services/api/search/_suggest?keyword=zxcvbnm
+     *             /generic-services/api/search/_suggest?keyword={invalidKeyword}
      *             </p>
      *             <p>
      *             <b>Test Case Description :</b>
@@ -1174,9 +1151,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      */
     @Test(groups = { "sanity", "verifySuggestRequestForInvalidKeyword", "NA" })
     public void verifySuggestRequestForInvalidKeyword() throws ClientProtocolException, IOException {
-	Logging.log("Service Name: /generic-services/api/search/_suggest?keyword=zxcvbnm"
+	Logging.log("Service Name: /generic-services/api/search/_suggest?keyword=" + INVALID_KEYWORD
 		+ "\nDescription: Get suggestion when passing invalid keyword and expecting empty response."
-		+ "\nInput: zxcvbnm" + "\nExpected Output: Response status 200 with empty values");
+		+ "\nInput: " + INVALID_KEYWORD + "\nExpected Output: Response status 200 with empty values");
 
 	SearchResourcesConsumer suggestConsumer = null;
 
@@ -1187,14 +1164,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.getSuggestForInvalidKeyword(hostName);
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 200,
 		"response code expected equal to 200 but found as:" + responsebody.getStatus());
-	Assert.assertFalse(response.contains("zxcvbnm"), "Response contains zxcvbnm as keyword");
+	Assert.assertFalse(response.contains(INVALID_KEYWORD), "Response contains " + INVALID_KEYWORD + " as keyword");
     }
 
     /**
@@ -1229,7 +1204,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      */
     @Test(groups = { "sanity", "getSavedSearchByIdWithSpace", "NA" })
     public void getSavedSearchByIdWithSpace() throws ClientProtocolException, IOException {
-	System.out.println("Create Saved Search with skill before getting ");
 	Logging.log("Create Saved Search with skill before getting");
 
 	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
@@ -1241,12 +1215,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// Executes POST request and returns Response
 	Response responsebody = suggestConsumer.createSavedSearchWithSkill(inputBean, hostName);
 
-	System.out.println("***** RESPONSE : responsebody : ******" + responsebody);
-	Logging.log("response " + responsebody.getStatus());
+	Logging.log("Create responsebody " + responsebody.getStatus());
 
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : response : ******" + response);
-	Logging.log("response " + response);
+	Logging.log("Create response " + response);
 
 	JSONObject obj = new JSONObject(response);
 	JSONObject res = obj.getJSONObject("response");
@@ -1263,8 +1235,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response getresponsebody = suggestConsumer.getSavedSearchByIdWithSpace(hostName, id);
 	String getresponse = getresponsebody.readEntity(String.class);
 
-	System.out.println("***** GET RESPONSE CODE ******" + getresponsebody.getStatus()
-		+ "\n***** GET RESPONSE ******" + getresponse);
 	Logging.log("***** GET RESPONSE CODE ******" + getresponsebody.getStatus() + "\n***** GET RESPONSE ******"
 		+ getresponse);
 
@@ -1279,29 +1249,53 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
+     * 
+     *             Updated by Jyoti
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Create saved search with skill
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> savedSearch object
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 200
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Positive - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     */
     @Test(groups = { "sanity", "createSavedSearchWithSkill", "NA" })
     public void createSavedSearchWithSkill() throws ClientProtocolException, IOException {
-
-	System.out.println("Create Saved Search with skill");
 	Logging.log("Create Saved Search with skill");
-	searchUtil = new SearchUtil();
 	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
-	Logging.log("inputBean " + inputBean);
+
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Create saved search with skill." + "\nInput: " + inputBean
+		+ "\nExpected Output: Response status 200");
+
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 
 	// Executes POST request and returns Response
 	Response responsebody = suggestConsumer.createSavedSearchWithSkill(inputBean, hostName);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE : responsebody : ******" + responsebody);
+	Logging.log("***** RESPONSE : response : ******" + response);
+
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
-	System.out.println("***** RESPONSE : responsebody : ******" + responsebody);
-	Logging.log("response " + responsebody.getStatus());
-
-	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : response : ******" + response);
-	Logging.log("response " + response);
-
+	Assertion.assertTrue(response.contains("Savedsearch created successfully"), "Savedsearch creation failed");
     }
 
     /**
@@ -1364,71 +1358,124 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - delete particular saved search by ID that exist
+     * Bhagyasree
      * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
+     * 
+     *             Updated by Jyoti
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchIdToBeDeleted}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             delete particular saved search by ID that exist
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> savedSearchIdToBeDeleted like
+     *             57e9ddcfb73f2a272ace61af
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 200
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Positive - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     */
     @Test(groups = { "sanity", "deleteSavedSearchById", "NA" })
     public void deleteSavedSearchById() throws ClientProtocolException, IOException {
-	System.out.println("Delete particular saved search by ID that exist");
-	Logging.log("Delete particular saved search by ID that exist");
-
 	/* starts - create saved search before deleting */
 	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
-	Logging.log("inputBean " + inputBean);
+	Logging.log("create saved search before deleting : inputBean " + inputBean);
+
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 	// Executes POST request and returns Response
 	Response createResponsebody = suggestConsumer.createSavedSearchWithSkill(inputBean, hostName);
-	System.out.println("***** RESPONSE : createResponsebody : ******" + createResponsebody);
-	Logging.log("createResponsebody " + createResponsebody);
 
 	String createResponse = createResponsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : createResponse : ******" + createResponse);
-	Logging.log("createResponse " + createResponse);
+	Logging.log("***** RESPONSE : createResponsebody : ****** " + createResponsebody);
+	Logging.log("***** RESPONSE : createResponse : ******" + createResponse);
 
 	JSONObject createResponseJson = new JSONObject(createResponse);
-	System.out.println("***** RESPONSE : createResponseJson : ******" + createResponseJson);
 	JSONObject responseJson = createResponseJson.getJSONObject("response");
 	String id = responseJson.getString("id");
-	System.out.println("***** RESPONSE : id : ******" + id);
-	Logging.log("id " + id);
 
+	Logging.log("***** RESPONSE : createResponseJson : ******" + createResponseJson);
+	Logging.log("***** RESPONSE : id : ******" + id);
 	/* ends - create saved search before deleting */
 
 	// Executes DELETE request and returns Response
 	/* starts - delete saved search */
+	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={blankInput}"
+		+ "\nDescription: Delete particular saved search by ID that exist and expecting success response."
+		+ "\nInput: id :" + id + "\nExpected Output: Response status 200");
+
 	Response responsebody = suggestConsumer.deleteSavedSearchById(hostName, id);
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
-	Logging.log("response " + response);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+	Assertion.assertTrue(response.contains("Savedsearch deleted successfully"), "Savedsearch deletion failed");
 	/* ends - delete saved search */
     }
 
     /**
-     * Bhagyasree - delete particular saved search by ID that doesnt exist
+     * Bhagyasree 
      * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
+     * 
+     *             Updated by Jyoti
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{invalidSavedSearchId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             delete particular saved search by ID that does not exist
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> invalidSavedSearchId like 123454321
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 500
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     */
     @Test(groups = { "sanity", "deleteSavedSearchByIdNonExisting", "NA" })
     public void deleteSavedSearchByIdNonExisting() throws ClientProtocolException, IOException {
-	System.out.println("Delete particular saved search by ID that doesnt exist");
-	Logging.log("Delete particular saved search by ID that doesnt exist");
+	Logging.log("Service Name: /generic-services/api/search/save_search/{invalidSavedSearchId}"
+		+ "\nDescription: Delete particular saved search by ID that does not exist and expecting failure response."
+		+ "\nInput: invalidSavedSearchId :\nExpected Output: Response status 500");
+	
 	// Get authentication token
-	SearchResourcesConsumer suggestConsumer = null;
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
 	// Executes DELETE request and returns Response
 	Response responsebody = suggestConsumer.deleteSavedSearchByIdNonExisting(hostName);
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
-	Logging.log("response " + response);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 500, "Deleted Successfully");
-
+	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"), "Savedsearch deleted successfully");
     }
 
     @Test(groups = { "sanity", "searchCandidatesWithNoSearchQueryString", "NA" })
@@ -1487,7 +1534,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      */
     @Test(groups = { "sanity", "updateSavedSearchById", "NA" })
     public void updateSavedSearchById() throws ClientProtocolException, IOException {
-	System.out.println("Update particular saved search by ID that exist");
 	Logging.log("Update particular saved search by ID that exist");
 
 	/* starts - create saved search before updating */
@@ -1498,19 +1544,16 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 
 	Response createResponsebody = suggestConsumer.createSavedSearchWithSkill(inputBean, hostName);
-	System.out.println("***** RESPONSE : createResponsebody : ******" + createResponsebody);
 	Logging.log("createResponsebody " + createResponsebody);
 
 	String createResponse = createResponsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : createResponse : ******" + createResponse);
 	Logging.log("createResponse " + createResponse);
 
 	JSONObject createResponseJson = new JSONObject(createResponse);
-	System.out.println("***** RESPONSE : createResponseJson : ******" + createResponseJson);
 	JSONObject responseJson = createResponseJson.getJSONObject("response");
 	String id = responseJson.getString("id");
-	System.out.println("***** RESPONSE : id : ******" + id);
-	Logging.log("id " + id);
+
+	Logging.log("***** RESPONSE : id : ****** " + id);
 	/* ends - create saved search before updating */
 
 	// Executes PUT request and returns Response
@@ -1522,12 +1565,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		+ "\nExpected Output: Response status 200");
 
 	Response updateteResponsebody = suggestConsumer.updateSavedSearchWithSkill(inputBean, hostName, id);
-	System.out.println("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
-	Logging.log("updateteResponsebody " + updateteResponsebody);
+	Logging.log("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
 
 	String updateResponse = updateteResponsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : updateResponse : ******" + updateResponse);
-	Logging.log("updateResponse " + updateResponse);
+	Logging.log("***** RESPONSE : updateResponse : ******" + updateResponse);
 
 	// Asserting Response Code
 	Assertion.assertEquals(updateteResponsebody.getStatus(), 200, "Response not successful");
@@ -1567,7 +1608,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      */
     @Test(groups = { "sanity", "updateSavedSearchByIdNonExisting", "NA" })
     public void updateSavedSearchByIdNonExisting() throws ClientProtocolException, IOException {
-	System.out.println("Update particular saved search by ID that doesnt exist");
 	Logging.log("Update particular saved search by ID that doesnt exist");
 
 	/* starts - create saved search before updating */
@@ -1583,16 +1623,14 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	/* starts - update saved search */
 	inputBean = SearchUtil.updateSavedSearchInputBeanWithSkill(inputBean);
 
-	Logging.log("Service Name: /generic-services/api/search/save_search/2233445500"
+	Logging.log("Service Name: /generic-services/api/search/save_search/" + id
 		+ "\nDescription: Update particular saved search by ID that does not exist" + "\nInput: " + inputBean
 		+ "\nExpected Output: Response status 500");
 
 	Response updateteResponsebody = suggestConsumer.updateSavedSearchWithSkill(inputBean, hostName, id);
-	System.out.println("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
 	Logging.log("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
 
 	String updateResponse = updateteResponsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : updateResponse : ******" + updateResponse);
 	Logging.log("***** RESPONSE : updateResponse : ****** " + updateResponse);
 
 	// Asserting Response Code
@@ -1636,7 +1674,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     public void savedSearchUsingSearchText() throws ClientProtocolException, IOException {
 	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={searchText}"
 		+ "\nDescription: Verifying saved search service for searching searchText with correct parameter and expecting success response."
-		+ "\nInput: searchText = bhagyasree " + "\nExpected Output: Response status 200");
+		+ "\nInput: searchText = " + SEARCH_TEXT + "\nExpected Output: Response status 200");
 
 	SearchResourcesConsumer suggestConsumer = null;
 
@@ -1648,14 +1686,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println(
-		"***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
-	Assertion.assertTrue(StringUtils.containsIgnoreCase(response, "bhagyasree"),
-		"searchText=bhagyasree is not found in response");
+	Assertion.assertTrue(StringUtils.containsIgnoreCase(response, SEARCH_TEXT),
+		"searchText=" + SEARCH_TEXT + " is not found in response");
 
     }
 
@@ -1704,8 +1740,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.validationOnSavedSearchUsingSearchText(hostName);
 	String response = responsebody.readEntity(String.class);
 
-	System.out.println("RESPONSE >>" + response);
-	Logging.log("RESPONSE >>" + response);
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertEquals(responsebody.getStatus(), 400, "Search Text is not empty");
@@ -1739,73 +1774,115 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
     /**
      *
-     * Author - Bhagyasree Test case description - Search candidates for skill
-     * search
+     * Author - Bhagyasree 
      * 
-     * 
+     *             Updated by Jyoti
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchId}/candidates
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Search candidates for given skill
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> savedSearchId like 57e9ddcfb73f2a272ace61af and searchInput
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 200
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Positive - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
      */
-
     @Test(groups = { "sanity", "getCandidatesFromSavedSearch", "NA" },
 	    dependsOnGroups = { "createPublicSavedSearchWithSkill" })
     public void getCandidatesFromSavedSearch() throws ClientProtocolException, IOException {
-
-	System.out.println("Get candidates from saved search");
-	Logging.log("Get candidates from saved search");
-
-	// Get input bean
-	/*
-	 * com.spire.base.service.utils.SearchInput inputBean = SearchUtil
-	 * .getSearchInputBeanWithSkillWithoutPageInfo();
-	 * Logging.log("inputBean " + inputBean);
-	 */
 	String inputBean = "{\"searchInput\": {\"searchQueryString\": \"(skill:MySQL or skill:ajax)\",\"searchAttributeMap\": {\"skill\": [\"MySQL\",\"ajax\"]}}}}";
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search/{savedSearchId}/candidates"
+		+ "\nDescription: Get candidates from saved search and expecting success response."
+		+ "\nInput: "+inputBean + "\nExpected Output: Response status 200");
+	
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-	System.out.println("****" + savedSearchId);
+	
 	// Executes POST request and returns Response
 	Response responsebody = suggestConsumer.getCandidatesFromSavedSearch(inputBean, hostName, savedSearchId);
-	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
-	System.out.println("***** RESPONSE : responsebody : ******" + responsebody);
-	Logging.log("responsebody " + responsebody);
-
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : response : ******" + response);
-	Logging.log("response " + response);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
 	// Asserting Response Code
-	// Assertion.assertEquals(responsebody.getStatus(), 200,
-	// "Response not successful");
-
+	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+	
+	//check if candidates are present in elastic search for given skills as searchInput
+	JSONObject obj = new JSONObject(response);
+	JSONArray entities = obj.getJSONObject("response").getJSONArray("entities");
+	if(entities!=null){
+	    Logging.log("Number of candidates present in elastic search for given skills as searchInput : "+entities.length());
+	}
     }
 
     /**
-     * Bhagyasree - Create a duplicate saved search
+     * Bhagyasree
      * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
+     *             Updated by Jyoti
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Create a duplicate saved search
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> saved search details with existing name
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     */
     @Test(groups = { "sanity", "createSavedSearchWithExistingSavedSearchName", "NA" })
     public void createSavedSearchWithExistingSavedSearchName() throws ClientProtocolException, IOException {
-
-	System.out.println("Create a duplicate saved search ");
-	Logging.log("Create a duplicate saved search ");
-	searchUtil = new SearchUtil();
-	// Executes get request and returns Response
 	SavedSearchDetails inputBean = SearchUtil.createSavedSearchBeanWithExistingSavedSearchName();
-	Logging.log("inputBean " + inputBean);
+
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Creating a duplicate saved search and expecting failure response." + "\nInput: "
+		+ inputBean + "\nExpected Output: Response status 400");
+
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
 	// Executes POST request and returns Response
 	Response responsebody = suggestConsumer.createSavedSearchWithExistingSavedSearchName(inputBean, hostName);
 
 	// Executes POST request and returns Response
 	Response responsebody1 = suggestConsumer.createSavedSearchWithExistingSavedSearchName(inputBean, hostName);
-
 	String response = responsebody1.readEntity(String.class);
-	System.out.println("***** RESPONSE : response : ******" + response);
-	Logging.log("response " + response);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
 	// Asserting Response Code
-	Assertion.assertTrue(responsebody1.getStatus() != 200,
-		"response code expected not equal to 200 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(responsebody1.getStatus() == 400,
+		"response code expected equal to 400 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. Savedsearch cannot be created using existing name"),
+		"Savedsearch created with an existing name");
     }
 
 }
