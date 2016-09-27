@@ -144,7 +144,7 @@ public class RequisitionResourceServiceUtil {
 		return searchReqBean;
 	}
 	
-	public static RequisitionStatusBean changereqStatus(String rid,String status){
+	public static RequisitionStatusBean changeReqStatus(String rid,String status){
 		RequisitionStatusBean reqStstusChange = new RequisitionStatusBean();
 		reqStstusChange.setId(rid);
 		reqStstusChange.setStatusDisplay(status);
