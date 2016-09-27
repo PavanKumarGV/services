@@ -84,7 +84,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	* <b>Test Case Description :</b>
 	* </p>
 	* <p>
-	* Get candidate service without candidate Id. Invalid Rest URL build in the absence of candidateId.
+	* Get candidate service without candidate Id. Invalid Rest service URL build in the absence of candidateId.
 	* </p>
 	* <p>
 	* <b>Input :</b>blank candidateId 
@@ -619,29 +619,45 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		Logging.log("Response unsuccessful");
 	}
 
+	
 	/**
-	 * @author Radharani Patra 16/08/16 Steps:Get Candidate Resume without
-	 *         passing headers Validation: Response code: 404
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/candidates/resume
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Get candidate Resume with valid candidateId without headers
+	 * </p>
+	 * <p>
+	 * <b>Input :</b>valid candidateId request without headers
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 403 with proper error message
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Negative - Non Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :<font color=#007D77> P4</font>
+	 * </p>
+	 * 
+	 * @author Radharani Patra
+	 * @since 16/08/16
 	 */
-	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders", "P2", "NA" })
+	@Test(groups = { "sanity", "getCandidateResumeWithoutHeaders", "P4", "NA" })
 	public void getCandidateResumeWithoutHeaders() {
-		// Get user token
+		Logging.log("Service Name: generic-services/api/candidates/resume"
+				+ "\nDescription: Get candidate Resume with valid candidateId without headers."
+				+ "\nInput: Valid candidateId request without headers"
+				+ "\nExpected Output: Response status 403 with proper error message");
 		candConsumer = new CandidateResourcesConsumer();
-		// execute Get Request
 		Response response = candConsumer
-				.getCandidateResume(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
+				.getCandidateResumeWithoutHeaders(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Asset Response Code
-		Assertion.assertTrue(response.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+		Assertion.assertTrue(response.getStatus() == 403, "Response unSuccessfull, Expected 403 status code");
 		Logging.log("Response successful");
-		// Get Response body
-		/*
-		 * String responseBody = response.readEntity(String.class);
-		 * System.out.println(responseBody); // Asserting response Body
-		 * Assertion.assertTrue(responseBody.contains(""), "valid response");
-		 * Logging.log("Response is null for invalid headers");
-		 */
-
 	}
 
 	/**

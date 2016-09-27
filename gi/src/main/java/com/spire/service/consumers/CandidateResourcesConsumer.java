@@ -63,7 +63,6 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 				+ getServiceEndPoint("candidate_Id1") + "?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -128,7 +127,15 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		return response;
-
+	}
+	
+	public Response getCandidateResumeWithoutHeaders(String cid, String hostname) {
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname) + "/" + cid;
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		NO_HEADERS=false;
+		Response response = executeGET(serviceEndPoint);
+		return response;
 	}
 
 	public Response getCandidateResumeInvalidSplCharIds(String cid, String hostname) {
