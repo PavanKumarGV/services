@@ -158,7 +158,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	/*
 	 * get Similar Profile with invalid Test case
 	 */
-
 	public Response getSemilarProfilesNegi(String hostName)
 			throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL2.replaceAll("hostAddress",
@@ -167,15 +166,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response " + response1);
-	/*	if (response1.getStatus() == 200) {
-			System.out.println("********** Fail **************");
-			//Logging.log("Response Code >>" + response1.getStatus());
-			Assert.fail();
-		} else {
-			//Logging.log("Response Code >>" + response1.getStatus());
-			System.out.println("********** pass **************");
-		}*/
-
 		return response1;
 	}
 
