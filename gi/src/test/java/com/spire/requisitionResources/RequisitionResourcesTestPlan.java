@@ -1,7 +1,9 @@
 package com.spire.requisitionResources;
 
 import java.io.IOException;
+
 import javax.ws.rs.core.Response;
+
 import org.apache.http.client.ClientProtocolException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -11,12 +13,9 @@ import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
-import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.RequisitionResourceServiceUtil;
-import com.spire.service.consumers.CustomResourceConsumer;
 import com.spire.service.consumers.RequisitionResourceConsumer;
-import com.spire.service.consumers.SearchResourcesConsumer;
 
 import spire.talent.gi.beans.RequisitionStatusBean;
 import spire.talent.gi.beans.SearchRequisitionRequestBean;
