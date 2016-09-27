@@ -4,10 +4,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.spire.base.controller.Assertion;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
-import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
 
 import spire.talent.gi.beans.GetCandidateRequestBean;
@@ -131,7 +129,6 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 	
 	public Response getCandidateResumeWithoutHeaders(String cid, String hostname) {
 		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname) + "/" + cid;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		NO_HEADERS=false;
 		Response response = executeGET(serviceEndPoint);
@@ -140,7 +137,6 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 
 	public Response getCandidateResumeInvalidSplCharIds(String cid, String hostname) {
 		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname) + "/" + cid+"@#%";
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		return response;

@@ -466,7 +466,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * <b>Category :</b> Negative - NonFunctional Test Case
 	 * </p>
 	 * <p>
-	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * <b>Bug Level :</b><font color=#E6A001> P3</font>
 	 * </p>
 	 * @author Radharani Patra
 	 * @since 12/08/16
