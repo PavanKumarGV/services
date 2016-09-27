@@ -12,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.google.gson.JsonObject;
 import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
@@ -119,8 +118,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get error code when keyword is blank
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -146,6 +143,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "verifySuggestValidation", "NA" })
@@ -196,9 +196,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Author - Bhagyasree Test case description - Get suggestion when passing
-     * keyword having SpecialCharacters
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -224,6 +221,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "verifySuggestForSkillwithSpecialCharacter", "NA" })
@@ -272,10 +272,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     *
-     * Author - Bhagyasree Test case description - Search candidates for skill
-     * search Updated by Jyoti
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -302,6 +298,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "searchCandidatesWithSkill", "NA" })
@@ -331,7 +330,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Updated by Jyoti
      * <p>
      * <b>Target Service URL :</b> /generic-services/api/search/_candidates
      * </p>
@@ -354,6 +352,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * </p>
      * <p>
      * <b>Bug Level :</b><font color=#C90000> P1</font>
+     * </p>
+     * <p>
+     * @author Bhagyasree & jyoti
      * </p>
      */
     @Test(groups = { "sanity", "searchCandidatesWithSkillAndLocation", "NA" })
@@ -431,8 +432,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get particular saved search by ID that doesnt not exist
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -459,6 +458,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "getSavedSearchByNonExistingId" })
@@ -849,9 +851,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * 12.08.2016 Bhagyasree - Get list of saved search based on sort by
-     * Modified On Ascending
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -877,6 +876,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
+     *             12.08.2016
      *             </p>
      */
     @Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnAsc", "NA" })
@@ -917,9 +920,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * 12.08.2016 Bhagyasree - Get list of saved search based on sort by
-     * Modified On Descending
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -945,6 +945,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
+     *             12.08.2016
      *             </p>
      */
     @Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnDsc", "NA" })
@@ -981,9 +985,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * 12.08.2016 Bhagyasree - Get list of saved search based on sort by
-     * CreatedOn Ascending
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      * 
@@ -1010,6 +1011,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
+     *             12.08.2016
      *             </p>
      */
     @Test(groups = { "sanity", "listSavedSearchWithSortByCreatedOnAsc", "NA" })
@@ -1050,8 +1055,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * 12.08.2016 Bhagyasree - Get list of saved search based on sort by
-     * CreatedOn Descending
      * 
      * @throws IOException
      * @throws ClientProtocolException
@@ -1079,6 +1082,10 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
+     *             12.08.2016
      *             </p>
      */
     @Test(groups = { "sanity", "listSavedSearchWithSortByCreatedOnDsc", "NA" })
@@ -1118,8 +1125,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get suggestion when passing Invalid keyword
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      * 
@@ -1148,6 +1153,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             <p>
      *             <b>Bug Level :</b><font color=#E6A001> P3</font>
      *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
+     *             </p>
      */
     @Test(groups = { "sanity", "verifySuggestRequestForInvalidKeyword", "NA" })
     public void verifySuggestRequestForInvalidKeyword() throws ClientProtocolException, IOException {
@@ -1173,8 +1181,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get particular existing saved search by ID followed by space
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -1200,6 +1206,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "getSavedSearchByIdWithSpace", "NA" })
@@ -1245,8 +1254,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Create saved search with skill
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      * 
@@ -1272,6 +1279,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "createSavedSearchWithSkill", "NA" })
@@ -1358,8 +1368,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      * 
@@ -1386,6 +1394,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "deleteSavedSearchById", "NA" })
@@ -1429,12 +1440,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree 
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     * 
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/{invalidSavedSearchId}
@@ -1456,6 +1463,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "deleteSavedSearchByIdNonExisting", "NA" })
@@ -1503,8 +1513,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - update particular saved search by ID that exist
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -1530,6 +1538,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "updateSavedSearchById", "NA" })
@@ -1577,8 +1588,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - update particular saved search by ID that doesnt exist
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -1604,6 +1613,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "updateSavedSearchByIdNonExisting", "NA" })
@@ -1641,11 +1653,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get saved search when passing search text
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/search?searchText={searchText}
@@ -1668,6 +1677,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "savedSearchUsingSearchText", "NA" })
@@ -1696,8 +1708,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Validation on search text in saved search when passing null
-     * 
      * @throws IOException
      * @throws ClientProtocolException
      *             Updated by Jyoti
@@ -1723,6 +1733,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "validationOnSavedSearchUsingSearchText", "NA" })
@@ -1773,10 +1786,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     *
-     * Author - Bhagyasree 
-     * 
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/{savedSearchId}/candidates
@@ -1798,6 +1807,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "getCandidatesFromSavedSearch", "NA" },
@@ -1830,7 +1842,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree
      * 
      * @throws IOException
      * @throws ClientProtocolException
@@ -1856,6 +1867,9 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             </p>
      *             <p>
      *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *             <p>
+     *             @author Bhagyasree & jyoti
      *             </p>
      */
     @Test(groups = { "sanity", "createSavedSearchWithExistingSavedSearchName", "NA" })
