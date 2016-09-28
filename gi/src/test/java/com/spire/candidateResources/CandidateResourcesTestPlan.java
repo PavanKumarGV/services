@@ -593,7 +593,6 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		Response response = candConsumer.getCandidateResumeInvalidSplCharIds(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
 		Assertion.assertTrue(response.getStatus() == 500, "Response Expected as 500 Server internal error");
-		Assertion.assertTrue(response.readEntity(String.class).equals("SYSTEM_ERROR"), "Expecting system error due to invalid special charector Ids");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 	}
 
