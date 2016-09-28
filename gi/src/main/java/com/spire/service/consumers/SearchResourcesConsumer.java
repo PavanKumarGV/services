@@ -210,7 +210,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 		String serviceEndPoint = endPointURLSavedSearch.replaceAll(
 				"hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response responseS = executeGET(serviceEndPoint);
 		/*if (responseS.getStatus() == 200) {
@@ -231,7 +230,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 		String serviceEndPoint = endPointURLSavedSearchById.replaceAll(
 				"hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response responseS = executeGET(serviceEndPoint);
 	/*	if (responseS.getStatus() == 200) {
@@ -481,10 +479,8 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 				+ getServiceEndPoint("partial_employer_to_search")
 				+ "&type="
 				+ Constants.employer;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
