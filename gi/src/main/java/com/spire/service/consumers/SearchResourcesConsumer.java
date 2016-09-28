@@ -38,8 +38,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	String endPointURLListSavedSearchWithSortByCreatedOnAsc = getServiceEndPoint("SAVED_SEARCH_LIST_SORT_BY_CREATED_ON_ASC");
 	String endPointURLListSavedSearchWithSortByCreatedOnDsc = getServiceEndPoint("SAVED_SEARCH_LIST_SORT_BY_MODIFIED_ON_DSC");
 	String endPointURLSuggestForInvalidKeyword = getServiceEndPoint("SEARCH_SUGGESTFORINVALIDKEYWORD");
-	String endPointURLSavedSearchByIdWithSpace = getServiceEndPoint(
-			"SAVED_SEARCHBYIDWITHSPACE").replace(" ", "%20");;
+	String endPointURLSavedSearchByIdWithSpace = getServiceEndPoint("SAVED_SEARCHBYIDWITHSPACE");
 	String createSavedSearchCandidateEndPointUrl = getServiceEndPoint("CREATE_SAVEDSEARCH");
 	String endPointURLSavedSearchByIdNonExisting = getServiceEndPoint("DELETE_SAVED_SEARCHBYIDNONEXISTING");
 	String createSavedSearchInputBeanWithSkillAndLocationEndPointUrl = getServiceEndPoint("CREATE_SAVEDSEARCHWITHSKILLLOCATION");
@@ -635,11 +634,13 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 	}
 
-	public Response getSavedSearchByIdWithSpace(String hostName)
+	public Response getSavedSearchByIdWithSpace(String hostName, String id)
 			throws ClientProtocolException, IOException {
 
 		String serviceEndPoint = endPointURLSavedSearchByIdWithSpace
 				.replaceAll("hostAddress", hostName);
+		serviceEndPoint = serviceEndPoint + "/" + id;
+		serviceEndPoint = serviceEndPoint.replace(" ", "%20");
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response responseS = executeGET(serviceEndPoint);
