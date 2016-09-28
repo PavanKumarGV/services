@@ -115,6 +115,15 @@ public class CandidateResourceServiceUtil {
 		return req;
 	}
 	
+	public static GetCandidateRequestBean getCandidateListInvalidProjectionType(String cId){
+		GetCandidateRequestBean req = new GetCandidateRequestBean();
+		List<String> lst = new ArrayList<String>();
+		lst.add(cId);
+		req.setCandidateIds(lst);
+		req.setProjectionType(ProjectionType.INVALID);
+		return req;
+	}
+	
 	
 	
 	

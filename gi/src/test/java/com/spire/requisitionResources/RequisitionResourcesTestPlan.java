@@ -1,7 +1,9 @@
 package com.spire.requisitionResources;
 
 import java.io.IOException;
+
 import javax.ws.rs.core.Response;
+
 import org.apache.http.client.ClientProtocolException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -11,12 +13,9 @@ import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
-import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.RequisitionResourceServiceUtil;
-import com.spire.service.consumers.CustomResourceConsumer;
 import com.spire.service.consumers.RequisitionResourceConsumer;
-import com.spire.service.consumers.SearchResourcesConsumer;
 
 import spire.talent.gi.beans.RequisitionStatusBean;
 import spire.talent.gi.beans.SearchRequisitionRequestBean;
@@ -47,24 +46,45 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	}
 
+	
 	/**
-	 * Udhay - Get -RequisitionSearch
-	 * 
-	 * @throws IOException
-	 * @throws ClientProtocolException
-	 **/
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get requisition using valid existing requisitionId.
+	* </p>
+	* <p>
+	* <b>Input :</b>Valid requisitionId 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper requisition
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* @author Udhay
+	*/
 	@Test(groups = { "sanity", "GetRequisitionSearch" })
 	public void GetRequisitionSearch() throws ClientProtocolException, IOException {
+		Logging.log("Service Name: generic-services/api/requisitions"
+				+ "\nDescription: Get requisition using valid existing requisitionId."
+				+ "\nInput: Valid requisitionId " + "\nExpected Output: Response status 200 with proper requisition");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisition(hostName);
 		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response.contains("primarySkill"));
+		Assert.assertEquals(responsebody.getStatus(), 200);
 		Logging.log("contains the primary skill ");
 		Assert.assertTrue(response.contains("jobLevel"));
 		Logging.log("contains the jobLevel ");
-
 	}
 
 	/*
@@ -73,7 +93,6 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "GetJobDesByID","NA" })
 	public void GetJobDesByID() throws ClientProtocolException, IOException {
-
 		RequisitionResourceConsumer reqConsumer = null;
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesByreqID(hostName);
@@ -81,15 +100,9 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
-		/*
-		 * Assert.assertTrue(response.contains("fileContent")); Logging.log(
-		 * "contains the fileContent " );
-		 */
 		Logging.log("Response: "+response);
 		Assert.assertTrue(response.contains("fileName") || response.contains("filename"));
 		Logging.log("Response Successful, Able to get JD");
-
 	}
 
 	/*
@@ -603,7 +616,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionStatus", "P1" })
 	public void updateRequisitionStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
@@ -627,7 +640,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionStatusWithSameStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
@@ -650,7 +663,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankRFR", "P2" })
 	public void updateRequisitionWithBlankRFR() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName,
@@ -664,17 +677,41 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps: Update Requisition with status:
 	 *         invalid request blank status id Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "updateRequisitionWithBlankStatus", "P2" })
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update requisition without status field. Invalid Rest service URL build in the absence of Status Field.
+	* </p>
+	* <p>
+	* <b>Input :</b>blank Status Field
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 404 or 405 with proper error message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#007D77> P4</font>
+	* </p>
+	*/
+	@Test(groups = { "sanity", "updateRequisitionWithBlankStatus", "P4" })
 	public void updateRequisitionWithBlankStatus() {
+		Logging.log("Service Name: generic-services/api/requisitions"
+				+ "\nDescription: Update requisition without status field. Invalid Rest service URL build in the absence of Status Field"
+				+ "\nInput: blank Status Field" + "\nExpected Output: Response status 404 or 405 with proper error message");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
-				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
-				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),"");
 		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName,
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
-		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Not Equal To 200");
-
+		Assertion.assertTrue((response.getStatus() == 404 || response.getStatus() == 405), "Response not successfull");
+		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Equal To 404 or 405");
 	}
 
 	/**
@@ -684,7 +721,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionWithBlankParameter", "P2" })
 	public void updateRequisitionWithBlankParameter() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatusBlnk(reqStatusBean, hostName);
@@ -701,7 +738,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionWithDifferentStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
@@ -724,7 +761,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionStatusWithoutheaders", "P2" })
 	public void updateRequisitionStatusWithoutheaders() {
 		reqConsumer = new RequisitionResourceConsumer();
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,

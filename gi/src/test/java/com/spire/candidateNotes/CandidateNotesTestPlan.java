@@ -21,7 +21,6 @@ import com.spire.service.consumers.CandidateResourcesConsumer;
 
 public class CandidateNotesTestPlan extends TestPlan {
 
-
 	String hostName;
 	CandidateNotesConsumers candnoteConsumer = null;
 	NoteBean noteBeanRequest = null;
@@ -29,7 +28,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	NoteBean noteBeanRequestWithBlankParameter = null;
 	NoteBean noteBeanRequestWithOnlyEntityId = null;
 	static String entityId = null;
-	static String id =null;
+	static String id = null;
 	String userId;
 	String password;
 
@@ -50,39 +49,37 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * in response body
 	 */
 
-	@Test(groups = { "sanity", "verifycandidatenoteslistRequest","NA" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "verifycandidatenoteslistRequest", "NA" }, dependsOnGroups = { "createNotes" })
 	public void verifycandidatenoteslistRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
-		Response responsebody = candnoteConsumer.getCandidatenoteslist(hostName,id);
+		Response responsebody = candnoteConsumer.getCandidatenoteslist(hostName, id);
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains(id), "Not getting entityid in the response.");
-		Logging.log("Listing Notes: "+id);
-		Logging.log("Response Body: "+response);
-		
+		Logging.log("Listing Notes: " + id);
+		Logging.log("Response Body: " + response);
 	}
 
 	/**
 	 * Steps: Search Note for entity Validation: Asserting candidate notes in
 	 * response body
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotessearchRequest","NA" })
+	@Test(groups = { "sanity", "verifycandidatenotessearchRequest", "NA" })
 	public void verifycandidatenotessearchRequest() {
 		noteBeanRequest = NotesServicesUtil.getNoteBean();
 		String entityId = noteBeanRequest.getId();
 		String id = noteBeanRequest.getEntityId();
-		Logging.log("Entity ID: "+id);
+		Logging.log("Entity ID: " + id);
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		candnoteConsumer.createNote(noteBeanRequest, hostName);
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
-		Response responsebody = candnoteConsumer.getCandidatenotesearch(hostName,id);
-		Logging.log("Entity ID: "+id);
+		Response responsebody = candnoteConsumer.getCandidatenotesearch(hostName, id);
+		Logging.log("Entity ID: " + id);
 		String response = responsebody.readEntity(String.class);
 		Logging.log(response);
 		Assertion.assertTrue(response.contains(id), "not getting entityid in the response.");
-		
 	}
 
 	/**
@@ -90,32 +87,35 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * error response.
 	 */
 
-	@Test(groups = { "sanity", "verifycandidatenotelistwithoutintervalRequest","NA" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithoutintervalRequest", "NA" })
 	public void verifycandidatenotelistwithoutintervalRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenoteslistwithoutInterval(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-		Assertion.assertTrue(response.contains("interval cannot be null"), "not getting in response body as interval cannot be null");
-		
+		Assertion.assertTrue(response.contains("interval cannot be null"),
+				"not getting in response body as interval cannot be null");
+
 	}
 
 	/**
 	 * Steps:Get candidate notes list without Entity Id Validation:asserting the
 	 * error response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithoutentityidRequest","NA" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithoutentityidRequest", "NA" })
 	public void verifycandidatenotelistwithoutentityidRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenoteslistwithoutEntityid(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in response body");
-		
+
 	}
 
 	/**
@@ -123,98 +123,124 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * error response.
 	 */
 
-	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutsearchtextRequest","NA" })
+	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutsearchtextRequest", "NA" })
 	public void verifycandidatenotesearchwithoutsearchtextRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotessearchwithoutsearchtext(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("searchText cannot be null"), "not getting in the response body");
-		
+
 	}
 
 	/**
 	 * Steps:Search Note for entity without entity id Validation:asserting the
 	 * error response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutentityidRequest","NA" })
+	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutentityidRequest", "NA" })
 	public void verifycandidatenotesearchwithoutentityidRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotessearchwithoutentityid(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in the response body");
-		
+
 	}
 
 	/**
 	 * Steps:List Note without any parameter Validation:asserting the error
 	 * response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutanyparameterRequest","NA" })
+	@Test(groups = { "sanity", "verifycandidatenotesearchwithoutanyparameterRequest", "NA" })
 	public void verifycandidatenotesearchwithoutanyparameterRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearchwithoutanyparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in the response body");
 		Assertion.assertTrue(response.contains("searchText cannot be null"), "not getting in the response body");
-		
+
 	}
 
 	/**
 	 * Steps:Search Note without any parameter Validation:asserting the error
 	 * response.
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithoutanyparameterRequest","NA" })
+	@Test(groups = { "sanity", "verifycandidatenotelistwithoutanyparameterRequest", "NA" })
 	public void verifycandidatenotelistwithoutanyparameterRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotelistwithoutanyparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Assertion.assertTrue(response.contains("entityId cannot be null"), "not getting in the response body");
 		Assertion.assertTrue(response.contains("interval cannot be null"), "not getting in the response body");
-		
+
 	}
+
 	/**
-	 * Steps:List notes with incorrect parameter
-	 * Validation:asserting the error response
+	 * Steps:List notes with incorrect parameter Validation:asserting the error
+	 * response
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest","NA" })
-	public void verifycandidatenotelistwithincorrectparameterRequest()
-	{
+	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest", "NA" })
+	public void verifycandidatenotelistwithincorrectparameterRequest() {
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotelistwithincorrectparameter(hostName);
 		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()!=200, "response code expected not equal to 200 but found as:"+responsebody.getStatus());
+		Assertion.assertTrue(responsebody.getStatus() != 200,
+				"response code expected not equal to 200 but found as:" + responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
-		Assertion.assertTrue(response.contains("The requested resource is not available"), "not matching with response body");
-		
+		Assertion.assertTrue(response.contains("The requested resource is not available"),
+				"not matching with response body");
+
 	}
+
 	/**
-	 * Steps:search notes with incorrect parameter
-	 * Validation:asserting the error response
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/notes/search
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Verifying candidates notes search service with incorrect parameter and
+	 * expecting failure response.
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> Using Id that not present in the system
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 204
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Negative - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#E6A001> P3</font>
+	 * </p>
 	 */
-	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest","NA" })
-	public void verifycandidatenotesearchwithincorrectparameterRequest()
-	{
+	@Test(groups = { "sanity", "verifycandidatenotelistwithincorrectparameterRequest", "NA" })
+	public void verifycandidatenotesearchwithincorrectparameterRequest() {
+		Logging.log("Service Name: generic-services/api/notes/search"
+				+ "\nDescription: Verifying candidates notes search service with incorrect parameter and expecting failure response."
+				+ "\nInput: Using Id that not present in the system" + "\nExpected Output: Response status 204");
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response responsebody = candnoteConsumer.getCandidatenotesearchwithincorrectparameter(hostName);
-		System.out.println(responsebody);
-		Assertion.assertTrue(responsebody.getStatus()== 200, "expected 200 response but found response as:"+responsebody.getStatus());
-		
-		
-
+		Assertion.assertTrue(responsebody.getStatus() == 204,
+				"Expected 204 status response but found actual response as: " + responsebody.getStatus());
 	}
 
 	/**
@@ -222,12 +248,12 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 *         Validation: Successfull Note creation in response body
 	 */
 
-	@Test(groups = { "createNotes","P1" })
+	@Test(groups = { "createNotes", "P1" })
 	public void createNotes() {
 		noteBeanRequest = NotesServicesUtil.getNoteBean();
 		entityId = noteBeanRequest.getId();
 		id = noteBeanRequest.getEntityId();
-		Logging.log("Entity ID: "+entityId);
+		Logging.log("Entity ID: " + entityId);
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response response = candnoteConsumer.createNote(noteBeanRequest, hostName);
@@ -238,7 +264,6 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
 		Logging.log("Notes Created successfully with id: " + entityId);
-
 	}
 
 	/**
@@ -246,7 +271,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 *         Validation: asserting the error response
 	 */
 
-	@Test(groups = { "sanity", "createNotesWithBlankEntityId","P1","NA" })
+	@Test(groups = { "sanity", "createNotesWithBlankEntityId", "P1", "NA" })
 	public void createNotesWithBlankEntityId() {
 		noteBeanRequestWithBlankEntity = NotesServicesUtil.getNoteBeanWithBlankEntity();
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -263,7 +288,7 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 10/08/16 Steps:Create Note without any parameter
 	 *         Validation: asserting the error response
 	 */
-	@Test(groups = { "sanity", "createNotesWithBlankParameter","P2","NA" })
+	@Test(groups = { "sanity", "createNotesWithBlankParameter", "P2", "NA" })
 	public void createNotesWithBlankParameter() {
 		noteBeanRequestWithBlankParameter = NotesServicesUtil.getNoteBeanWithBlankParameter();
 		candnoteConsumer = new CandidateNotesConsumers();
@@ -280,11 +305,11 @@ public class CandidateNotesTestPlan extends TestPlan {
 	 * @author Radharani Patra 10/08/16 Steps:Create Note with only entity id
 	 *         Validation: Successfull Note creation in response body
 	 */
-	@Test(groups = { "sanity", "createNotesWithOnlyEntityId","P2","NA" })
+	@Test(groups = { "sanity", "createNotesWithOnlyEntityId", "P2", "NA" })
 	public void createNotesWithOnlyEntityId() {
 		noteBeanRequestWithOnlyEntityId = NotesServicesUtil.getNoteBeanWithOnlyEntityId();
 		String entityId1 = noteBeanRequestWithOnlyEntityId.getId();
-		Logging.log("entityId: "+entityId1);
+		Logging.log("entityId: " + entityId1);
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response response = candnoteConsumer.createNote(noteBeanRequestWithOnlyEntityId, hostName);
@@ -292,20 +317,20 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
-		Logging.log("Response: "+responseBody);
-		//Logging.log("Notes Created successfully with id: " + entityId1);
+		Logging.log("Response: " + responseBody);
+		// Logging.log("Notes Created successfully with id: " + entityId1);
 	}
-	
+
 	/**
-	 * @author Radharani Patra 11/08/16 Steps:Create Note with existing entity id
-	 *         Validation: Successfull Note creation in response body
+	 * @author Radharani Patra 11/08/16 Steps:Create Note with existing entity
+	 *         id Validation: Successfull Note creation in response body
 	 */
 
-	@Test(groups = { "sanity", "createNotesWithDuplicateId","P1","NA" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "createNotesWithDuplicateId", "P1", "NA" }, dependsOnGroups = { "createNotes" })
 	public void createNotesWithDuplicateId() {
 		noteBeanRequest = NotesServicesUtil.getNoteBeanWithExistingEntityId(entityId);
 		entityId = noteBeanRequest.getId();
-		Logging.log("Entity ID: "+entityId);
+		Logging.log("Entity ID: " + entityId);
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response response = candnoteConsumer.createNote(noteBeanRequest, hostName);
@@ -317,16 +342,16 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log("Notes Created successfully with id: " + entityId);
 
 	}
-	
+
 	/**
-	 * @author Radharani Patra 11/08/16 Steps:Create Multiple Note with same entity id
-	 *         Validation: Successfull Note creation in response body
+	 * @author Radharani Patra 11/08/16 Steps:Create Multiple Note with same
+	 *         entity id Validation: Successfull Note creation in response body
 	 */
-	@Test(groups = { "sanity", "createMultipleNotesWithSameEntityId","P2","NA" },dependsOnGroups={"createNotes"})
+	@Test(groups = { "sanity", "createMultipleNotesWithSameEntityId", "P2", "NA" }, dependsOnGroups = { "createNotes" })
 	public void createMultipleNotesWithSameEntityId() {
 		noteBeanRequest = NotesServicesUtil.getNoteForExistingEntityId(id);
 		id = noteBeanRequest.getEntityId();
-		Logging.log("Entity ID: "+entityId);
+		Logging.log("Entity ID: " + entityId);
 		candnoteConsumer = new CandidateNotesConsumers();
 		candnoteConsumer.getToken(userId, password, hostName);
 		Response response = candnoteConsumer.createNote(noteBeanRequest, hostName);
@@ -336,5 +361,5 @@ public class CandidateNotesTestPlan extends TestPlan {
 		Logging.log(responseBody);
 		Assertion.assertTrue(responseBody.contains("Notes SuccessFul Created"), "Notes creation failed");
 		Logging.log("Notes Created successfully with id: " + entityId);
-}
+	}
 }

@@ -93,7 +93,6 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
-
 	}
 
 	/**

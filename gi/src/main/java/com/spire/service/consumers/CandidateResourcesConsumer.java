@@ -63,7 +63,6 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 				+ getServiceEndPoint("candidate_Id1") + "?projection=full";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
@@ -128,31 +127,21 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 		// call Get Operation
 		Response response = executeGET(serviceEndPoint);
 		return response;
-
 	}
-
-	public void assertResponse(Response response) {
-		String responseBody = response.readEntity(String.class);
-		Assertion.assertTrue(responseBody.contains("filename") || responseBody.contains("fileName"),
-				"Resume not present");
-		Logging.log(responseBody);
-		// String[] str = responseBody.split("fileName");
-		// String[] str1 = str[1].substring(3).split("\"");
-		// String fileType = str1[0].substring(str1[0].length()-4,
-		// str1[0].length());
-		// System.out.println("******"+fileType);
-		// //Asserting response Body
-		// Assertion.assertTrue(fileType.contains("doc")||fileType.contains("docx")||fileType.contains("pdf")||fileType.contains("txt"),
-		// "Get Candidate Resume Unsuccessfull");
-		// Logging.log("Get Candidate Resume successful, File Type: "+fileType
-		// );
-	}
-
-	public Response getCandidateResumeBlank(String hostname) {
-		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname);
+	
+	public Response getCandidateResumeWithoutHeaders(String cid, String hostname) {
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname) + "/" + cid;
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		// call Get Operation
+		NO_HEADERS=false;
+		Response response = executeGET(serviceEndPoint);
+		return response;
+	}
+
+	public Response getCandidateResumeInvalidSplCharIds(String cid, String hostname) {
+		String serviceEndPoint = getResumeURL.replaceAll("hostAddress", hostname) + "/" + cid+"@#%";
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
 		return response;
 	}
@@ -190,12 +179,9 @@ public class CandidateResourcesConsumer extends BaseServiceConsumerNew {
 				+ ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_deallocate_displayId")
 				+ "\",\"isCurrent\": \"Y\"}]}";
 		String serviceEndPoint = allocUrl.replaceAll("hostAddress", hostname);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-
 		Entity<String> bean = Entity.entity(reqBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePOST(serviceEndPoint, bean);
 		return response;
-
 	}
 }
