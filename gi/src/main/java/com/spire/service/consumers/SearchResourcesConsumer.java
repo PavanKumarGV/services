@@ -53,7 +53,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	public SearchResourcesConsumer(String username, String password,
 			String hostName) {
 		Logging.log("Inside of Login");
-		System.out.println("Inside of Login");
 		getUserToken(username, password, hostName);
 	}
 
@@ -61,7 +60,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 			throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL1.replaceAll("hostAddress",
 				hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 	/*	if (response1.getStatus() == 200) {
@@ -369,63 +368,63 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	}
 
 	/**
-	 * priti 13-08-16
+	 * @Author  Pritisudha Pattanaik 13-08-16
 	 */
-	public Response getautocompletefullskillsearch(String hostName) {
+	public Response getAutoCompleteFullSkillSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("full_skill_to_search") + "&type=" + Constants.skill;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 
 	}
 
-	public Response getautocompletepartialskillsearch(String hostName) {
+	public Response getAutoCompletePartialSkillSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("partial_Skill_to_search")
 				+ "&type="
 				+ Constants.skill;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletefullinstitutesearch(String hostName) {
+	public Response getAutoCompleteFullInstituteSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("full_institute_to_search")
 				+ "&type="
 				+ Constants.institute;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletepartialinstitutesearch(String hostName) {
+	public Response getAutoCompletePartialInstituteSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("partial_institute_to_search")
 				+ "&type="
 				+ Constants.institute;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
@@ -437,45 +436,45 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 				+ getServiceEndPoint("full_education_to_search")
 				+ "&type="
 				+ Constants.education;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletepartialeducationsearch(String hostName) {
+	public Response getAutoCompletePartialEducationSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("partial_education_to_search")
 				+ "&type="
 				+ Constants.education;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletefullemployersearch(String hostName) {
+	public Response getAutoCompleteFullEmployerSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("full_employer_to_search")
 				+ "&type="
 				+ Constants.employer;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletepartialemployersearch(String hostName) {
+	public Response getAutoCompletePartialEmployerSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
@@ -490,7 +489,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 	}
 
-	public Response getautocompletefulllocationsearch(String hostName) {
+	public Response getAutoCompleteFullLocationSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
@@ -505,32 +504,32 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 	}
 
-	public Response getautocompletepartiallocationsearch(String hostName) {
+	public Response getAutoCompletePartialLocationSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("partial_location_to_search")
 				+ "&type="
 				+ Constants.location;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletefullsourcetypesearch(String hostName) {
+	public Response getAutoCompleteFullSourceTypeSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("full_sourcetype_to_search")
 				+ "&type="
 				+ Constants.sourcetype;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
@@ -550,65 +549,65 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 	}
 
-	public Response getautocompletefullsourcenamesearch(String hostName) {
+	public Response getAutoCompleteFullSourceNameSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("full_sourcename_to_search")
 				+ "&type="
 				+ Constants.sourcename;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletepartialsourcenamesearch(String hostName) {
+	public Response getAutoCompletePartialSourceNameSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("partial_sourcename_to_search")
 				+ "&type="
 				+ Constants.sourcename;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletefullstatussearch(String hostName) {
+	public Response getAutoCompleteFullStatusSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
 				+ getServiceEndPoint("full_status_to_search") + "&type=" + Constants.status;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletepartialstatussearch(String hostName) {
+	public Response getAutoCompletePartialStatusSearch(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
-				+ getServiceEndPoint(".partial_status_to_search")
+				+ getServiceEndPoint("partial_status_to_search")
 				+ "&type="
 				+ Constants.status;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
 
-	public Response getautocompletewithouttype(String hostName) {
+	public Response getAutoCompleteWithOutType(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName)
 				+ "?keyword="
@@ -622,13 +621,13 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 	}
 
-	public Response getautocompletewithoutkey(String hostName) {
+	public Response getAutoCompleteWithOutKey(String hostName) {
 		String serviceEndPoint = endpointURLautocomplete.replaceAll(
 				"hostAddress", hostName) + "?type=" + Constants.skill;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 
