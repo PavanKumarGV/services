@@ -84,7 +84,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	/* Get RR status code for Blank RR ID */
 	public Response getRequisitionBlank(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_REQBlank.replaceAll("hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 	/*	if (response1.getStatus() != 200) {
 			System.out.println("********** pass **************");
@@ -116,7 +115,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	public Response getJobDesByreqID(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_JOBDES_BY_ID.replaceAll("hostAddress", hostName)
 				+ getServiceEndPoint("Requisition_JD");
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response Code >>" + response1.getStatus());
 	/*	if (response1.getStatus() == 200) {
@@ -130,7 +128,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response searchRequisition(String hostName, SearchRequisitionRequestBean searchReqrequestBean) {
 		String serviceEndPoint = searchReqURLEndpoint.replaceAll("hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean,
 				MediaType.APPLICATION_JSON_TYPE);
@@ -147,7 +144,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getJobDesByWrongreqID(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_JD_BY_WRONG_ID.replaceAll("hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		// String response = response1.readEntity(String.class);
 
@@ -156,7 +152,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		} else {
 			Assert.fail();
 		}*/
-		System.out.println("response code:" + response1.getStatus());
 		// Assertion.assertEquals(response1.getStatus(),500,
 		// "response expected 500 but found response code
 		// as:"+response1.getStatus());
@@ -171,7 +166,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getJobDesBySplcharreqID(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_JD_BY_SPLCHAR_ID.replaceAll("hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		// String response = response1.readEntity(String.class);
 
@@ -192,7 +186,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getJobDesByBlankSpacereqID(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_JD_BY_Blank_ID.replaceAll("hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		// String response = response1.readEntity(String.class);
 
@@ -320,7 +313,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 	public Response createcandidatestas(String hostName, SearchRequisitionRequestBean searchReqrequestBean) {
 		String serviceEndPoint = createCandidateStasEndPOint.replaceAll("hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean,
 				MediaType.APPLICATION_JSON_TYPE);
@@ -331,7 +323,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response changeReqStatus(RequisitionStatusBean serviceBean, String hostname, String reqId, String stats) {
 		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname) + reqId + "/" + stats;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePUT(serviceEndPoint, bean);
@@ -340,7 +331,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response changeReqStatusBlnkRR(RequisitionStatusBean serviceBean, String hostname, String stats) {
 		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname) + stats;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePUT(serviceEndPoint, bean);
@@ -349,7 +339,6 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response changeReqStatusBlnk(RequisitionStatusBean serviceBean, String hostname) {
 		String serviceEndPoint = changeReqURL.replaceAll("hostAddress", hostname);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<RequisitionStatusBean> bean = Entity.entity(serviceBean, MediaType.APPLICATION_JSON_TYPE);
 		Response response = executePUT(serviceEndPoint, bean);

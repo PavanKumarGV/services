@@ -393,21 +393,25 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * @throws IOException
      * @throws ClientProtocolException
      **/
-    @Test(groups = { "sanity", "getSavedSearch", "NA" })
-    public void getSavedSearch() throws ClientProtocolException, IOException {
-
-	SearchResourcesConsumer suggestConsumer = null;
-	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-	suggestConsumer.getSavedSearch(hostName);
-	// Executes get request and returns Response
-	Response responsebody = suggestConsumer.getSavedSearch(hostName);
-	// Asserting Response Code
-	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
-	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
-
-    }
+    @Test(groups = { "sanity", "getSavedSearch","NA" })
+	public void getSavedSearch() throws ClientProtocolException, IOException {
+	    	Logging.log("Service Name: generic-services/api/search/save_search/list?sortBy=modifiedOn&orderBy=dsc&offset=0&limit=10"
+			+ "\nDescription: get saved search and expecting 200 response."
+			+ "\nInput: No Input" + "\nExpected Output: 200 Response");
+		SearchResourcesConsumer suggestConsumer = null;
+		// Get authentication token
+		suggestConsumer = new SearchResourcesConsumer(userId, password,
+				hostName);
+		// Executes get request and returns Response
+		Response responsebody = suggestConsumer.getSavedSearch(hostName);
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,
+						"Response not successful");
+		String response = responsebody.readEntity(String.class);
+		
+		Assertion.assertTrue(response.contains("total"),"Response not successful");
+		
+	}
 
     /**
      * Bhagyasree - Get particular saved search by ID that exist
@@ -416,20 +420,26 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * @throws ClientProtocolException
      **/
     @Test(groups = { "sanity", "getSavedSearchById" })
-    public void getSavedSearchById() throws ClientProtocolException, IOException {
+	public void getSavedSearchById() throws ClientProtocolException,
+			IOException {
+	    Logging.log("Service Name: generic-services/api/search/save_search/57aaca44435c53041aac3b3d"
+			+ "\nDescription: get saved search and expecting 200 response."
+			+ "\nInput: Id to be searched" + "\nExpected Output: 200 Response");
+		SearchResourcesConsumer suggestConsumer = null;
+		// Get authentication token
+		suggestConsumer = new SearchResourcesConsumer(userId, password,
+				hostName);
+		// Executes get request and returns Response
+		Response responsebody = suggestConsumer.getSavedSearchById(hostName);
+		// Asserting Response Code
+				Assertion.assertEquals(responsebody.getStatus(), 200,
+						"Response not successful");
+		String response = responsebody.readEntity(String.class);
+		//TODO: No response is coming as of now should assert on Actual value
+		Assertion.assertTrue(response.contains("hasError\":false"),"Response not successful");
+		
 
-	SearchResourcesConsumer suggestConsumer = null;
-	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-	// Executes get request and returns Response
-	suggestConsumer.getSavedSearchById(hostName);
-	Response responsebody = suggestConsumer.getSavedSearchById(hostName);
-	// Asserting Response Code
-	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
-	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
-
-    }
+	}
 
     /**
      * @throws IOException
@@ -865,23 +875,25 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @author Pritisudha
 	 */
 
-	@Test(groups = { "sanity", "getautocompletepartialemployerRequest", "NA" })
-	public void getAutoCompletePartialEmployerRequest() {
-		Logging.log("Service Name: /generic-services/api/search/auto_complete"
-				+ "\nDescription:  Verifying autocomplete with partial employer search service with correct parameter and expecting pass response."
-				+ "\nInput: Valid keyword that exist in the system and valid type.Keyword is \"Wellsf\" and type is \"employername\""
-				+ "\nExpected Output: Response status 200");
+	@Test(groups = { "sanity", "getautocompletepartialemployerRequest","NA" })
+	public void getautocompletepartialemployerRequest() {
+	    Logging.log("Service Name: generic-services/api/search/auto_complete?keyword=google&type=employername"
+			+ "\nDescription: get saved search and expecting 200 response."
+			+ "\nInput: partial employee to be searched" + "\nExpected Output: 200 Response");
 		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-		Response responsebody = suggestConsumer.getAutoCompletePartialEmployerSearch(hostName);
-		Assertion.assertEquals(200, responsebody.getStatus(),
-				"Expected 200 status response but found actual response as:" + responsebody.getStatus());
+		suggestConsumer = new SearchResourcesConsumer(userId, password,
+				hostName);
+		Response responsebody = suggestConsumer
+				.getAutoCompletePartialEmployerSearch(hostName);
+		Assertion.assertEquals(
+				200,
+				responsebody.getStatus(),
+				"Response expected 200 but found as:"
+						+ responsebody.getStatus());
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
-		Assertion.assertTrue(response.contains(Constants.employer), "employer not found in the response.");
-		Assertion.assertTrue(
-				response.toLowerCase().contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_employer_to_search").toLowerCase()),
-				"partial employer not found in response");
+		Assertion.assertTrue(response.contains(Constants.employer),
+				"employer not found in the response.");
 	}
 
 
