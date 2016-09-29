@@ -215,23 +215,14 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 	}
 
-	public Response getSavedSearchById(String hostName)
+	public Response getSavedSearchById(String hostName, String id)
 			throws ClientProtocolException, IOException {
 
 		String serviceEndPoint = endPointURLSavedSearchById.replaceAll(
 				"hostAddress", hostName);
+		serviceEndPoint = serviceEndPoint + "/" + id;
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Response responseS = executeGET(serviceEndPoint);
-	/*	if (responseS.getStatus() == 200) {
-			System.out.println("RESPONSE CODE >>" + responseS.getStatus());
-			Logging.log("Response Code >>" + responseS.getStatus());
-		} else {
-			Logging.log("Response Code >>" + responseS.getStatus());
-			Assert.fail();
-		}
-*/
-		return responseS;
-
+		return executeGET(serviceEndPoint);
 	}
 
 	public Response getSavedSearchByNonExistingId(String hostName)

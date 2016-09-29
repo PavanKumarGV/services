@@ -56,7 +56,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	    .getServiceEndPoint("invalid_keyword");
     public static String    SEARCH_TEXT			 = ReadingServiceEndPointsProperties
 	    .getServiceEndPoint("search_text");
-
+    public static String    PARTIAL_SEARCH_TEXT		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("partial_search_text");
     /**
      * Passing HostName,UserName and Password from the xml.
      */
@@ -428,32 +429,73 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	}
 
     /**
-     * Bhagyasree - Get particular saved search by ID that exist
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{existingSavedSearchId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Get particular saved search by ID that exist
+     *             and expecting success response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> existingSavedSearchId
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 200
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Positive - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
+     *             </p>
+     */
     @Test(groups = { "sanity", "getSavedSearchById" })
-	public void getSavedSearchById() throws ClientProtocolException,
-			IOException {
-	    Logging.log("Service Name: generic-services/api/search/save_search/57aaca44435c53041aac3b3d"
-			+ "\nDescription: get saved search and expecting 200 response."
-			+ "\nInput: Id to be searched" + "\nExpected Output: 200 Response");
-		SearchResourcesConsumer suggestConsumer = null;
-		// Get authentication token
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
-				hostName);
-		// Executes get request and returns Response
-		Response responsebody = suggestConsumer.getSavedSearchById(hostName);
-		// Asserting Response Code
-				Assertion.assertEquals(responsebody.getStatus(), 200,
-						"Response not successful");
-		String response = responsebody.readEntity(String.class);
-		//TODO: No response is coming as of now should assert on Actual value
-		Assertion.assertTrue(response.contains("hasError\":false"),"Response not successful");
-		
+    public void getSavedSearchById() throws ClientProtocolException, IOException {
+	Logging.log("create saved search before calling get");
+	
+	/* starts - create saved search before calling get */
+	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
+	Logging.log("inputBean " + inputBean);
 
-	}
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	Response createResponsebody = suggestConsumer.createSavedSearchWithSkill(inputBean, hostName);
+	Logging.log("createResponsebody " + createResponsebody);
+
+	String createResponse = createResponsebody.readEntity(String.class);
+	Logging.log("createResponse " + createResponse);
+
+	JSONObject createResponseJson = new JSONObject(createResponse);
+	JSONObject responseJson = createResponseJson.getJSONObject("response");
+	String id = responseJson.getString("id");
+
+	Logging.log("***** RESPONSE : id : ****** " + id);
+	/* ends - create saved search before calling get */
+	
+	Logging.log("Service Name: generic-services/api/search/save_search/{existingSavedSearchId}"
+		+ "\nDescription: get saved search and expecting 200 response." + "\nInput: Id to be searched"
+		+ "\nExpected Output: 200 Response");
+	
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.getSavedSearchById(hostName, id);
+	String response = responsebody.readEntity(String.class);
+	
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+	
+	// Response should have id
+	Assertion.assertTrue(response.contains(id), "getSavedSearchById is failed as response doesnot have id : "+id);
+    }
 
     /**
      * @throws IOException
@@ -2404,27 +2446,54 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get saved search when passing partial search text
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
-
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/search?searchText={partialSearchText}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Get saved search when passing partial search text and
+     *             expecting success response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> partialSearchText = jav
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 200
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Positive - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#C90000> P1</font>
+     *             </p>
+     *             <p>
+     * @author Bhagyasree & jyoti
+     *         </p>
+     */
     @Test(groups = { "sanity", "savedSearchUsingPartialSearchText", "NA" })
     public void savedSearchUsingPartialSearchText() throws ClientProtocolException, IOException {
+	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText=" + PARTIAL_SEARCH_TEXT
+		+ "\nDescription: Get saved search when passing partial search text and expecting success response."
+		+ "\nInput: searchText = " + PARTIAL_SEARCH_TEXT + "\nExpected Output: Response status 200");
+
 	// Get authentication token
-	SearchResourcesConsumer suggestConsumer = null;
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
 	// Executes GET request and returns Response
 	Response responsebody = suggestConsumer.getSavedSearchUsingPartialSearchText(hostName);
 	String response = responsebody.readEntity(String.class);
-	System.out.println("RESPONSE >>" + response);
-	Logging.log("RESPONSE >>" + response);
-	String skill = "jav";
-	// Asserting Response Code
-	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
-	Assert.assertTrue(response.contains(skill), "Response body doesnt contain the partial text");
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 200,
+		"response code expected equal to 200 but found as:" + responsebody.getStatus());
+	Assert.assertTrue(response.contains(PARTIAL_SEARCH_TEXT), "Response body doesnt contain the partial text "+PARTIAL_SEARCH_TEXT);
     }
 
     /**
