@@ -146,7 +146,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	 */
 
 	public Response getJobDesByWrongreqID(String hostName) throws ClientProtocolException, IOException {
-		String serviceEndPoint = endPointURL_JD_BY_WRONG_ID.replaceAll("hostAddress", hostName);
+		String serviceEndPoint = endPointURL_JD_BY_WRONG_ID.replaceAll("hostAddress", hostName)+"89797wrongId";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		// String response = response1.readEntity(String.class);
