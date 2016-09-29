@@ -248,28 +248,43 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assert.assertTrue(response.contains(SKILL_WITH_SPECIAL_CHARACTER), "Response doesnot contain .net as skill");
     }
 
-    /**
-     * Vasista - Get -Similler profiles
-     * 
-     * @throws IOException
-     * @throws ClientProtocolException
-     **/
-    @Test(groups = { "sanity", "GetSimilarProfilesNegative", "NA" })
-    public void GetSimilarProfilesNegative() throws ClientProtocolException, IOException {
-
-	SearchResourcesConsumer suggestConsumer = null;
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-	Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
-	Assertion.assertTrue(responsebody.getStatus() == 200,
-		"response code expected not equal to 200 but found as:" + responsebody.getStatus());
-	String response = responsebody.readEntity(String.class);
-	Logging.log("Response: " + response);
-	// Response responsebody = suggestConsumer.getSemilarProfiles(hostName);
-	// String response = responsebody.readEntity(String.class);
-	// System.out.println("***** RESPONSE ******" + response);
-	// Assert.assertTrue(response.contains(" "));
-
-    }
+     
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/similar_profiles
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Search with invalid candidateId for finding similar profile.
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> Invalid candidateId that doesn't exist in the system.
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 204
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Negative - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#007D77> P4</font>
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "GetSimilarProfilesNegative", "NA" })
+	public void GetSimilarProfilesNegative() throws ClientProtocolException, IOException {
+		Logging.log("Service Name: generic-services/api/search/similar_profiles"
+				+ "\nDescription: Search with invalid candidateId for finding similar profile."
+				+ "\nInput: Invalid candidateId \nExpected Output: Response status 204");
+		SearchResourcesConsumer suggestConsumer = null;
+		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
+		Assertion.assertTrue(responsebody.getStatus() == 204,
+				"response code expected not equal to 204 but found as:" + responsebody.getStatus());
+		String response = responsebody.readEntity(String.class);
+		Logging.log("Response: " + response);
+	}
 
     /**
      * @throws IOException

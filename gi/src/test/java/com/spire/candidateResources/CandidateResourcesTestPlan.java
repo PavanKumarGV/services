@@ -262,25 +262,42 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	}
 
 	/**
-	 * @author Radharani Patra 12/08/16 Steps:Get Candidate stats with Invalid
-	 *         parameter(Requisition Id ) blank attribute Validation: Response
-	 *         code and body
-	 */
-
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/stats
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate with invalid candidateId and status.
+	* </p>
+	* <p>
+	* <b>Input :</b>Invalid candidateId and status that not existing in the system
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 204 with proper error message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* @author Radharani Patra
+	* @since 12/08/16
+	*/
 	@Test(groups = { "sanity", "getCandidateStatsWithInvalidParameter", "P2" })
 	public void getCandidateStatsWithInvalidParameter() {
-		// Get Requset Bean, pass invalid req id
+		Logging.log("Service Name: generic-services/api/candidates/stats"
+				+ "\nDescription: Get candidate with invalid candidateId and status."
+				+ "\nInput: Invalid candidateId and status that not existing in the system" + "\nExpected Output: Error Response status with proper error message");
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsInvalid();
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
-		// Execute POST Request,returns response
 		Response response = candStatsConsumer.getCandidateStats(candStatsReqBean, hostName);
-		// Asserting Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Response successfull, Expected : 200");
+		Assertion.assertTrue(response.getStatus()!=200, "Response successfull, Expected  200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Get Response body
 		String responseBody = response.readEntity(String.class);
 		Logging.log(responseBody);
-		// Asserting response Body
 		Assertion.assertTrue(responseBody.contains(""), "Get Candidate Stats Successful");
 		Logging.log("Get Candidate Stats successful with invalid parameter Returning Blank Response ");
 	}
@@ -466,7 +483,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	 * <b>Category :</b> Negative - NonFunctional Test Case
 	 * </p>
 	 * <p>
-	 * <b>Bug Level :</b><font color=#81017F> P2</font>
+	 * <b>Bug Level :</b><font color=#E6A001> P3</font>
 	 * </p>
 	 * @author Radharani Patra
 	 * @since 12/08/16
@@ -576,7 +593,6 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		candConsumer = new CandidateResourcesConsumer(userId, password, hostName);
 		Response response = candConsumer.getCandidateResumeInvalidSplCharIds(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_resume"), hostName);
 		Assertion.assertTrue(response.getStatus() == 500, "Response Expected as 500 Server internal error");
-		Assertion.assertTrue(response.readEntity(String.class).equals("SYSTEM_ERROR"), "Expecting system error due to invalid special charector Ids");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 	}
 
