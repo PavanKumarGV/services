@@ -190,7 +190,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	String response = responsebody.readEntity(String.class);
 	System.out.println("***** RESPONSE ******" + response);
 	// Asserting Response Code
-	Assert.assertTrue(response.contains(
+	Assert.assertTrue(StringUtils.containsIgnoreCase(response,
 		ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace("%20", " ")));
 
     }
@@ -198,7 +198,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     /**
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/_suggest?keyword=.net
@@ -639,8 +638,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	@Test(groups = { "sanity", "getautocompletewithfullinstituteRequest", "NA" })
 	public void getAutoCompleteWithFullInstituteRequest() {
-		Logging.log(
-				"Service Name: /generic-services/api/search/auto_complete \n Verifying autocomplete with full institute  search service with correct parameter and expecting pass response.");
 		
 		Logging.log("Service Name: /generic-services/api/search/auto_complete"
 				+ "\nDescription:  Verifying autocomplete with full institute search service with correct parameter and expecting pass response."
@@ -656,7 +653,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		
 		  Assertion.assertTrue(response.toLowerCase().contains(
 		  ReadingServiceEndPointsProperties.getServiceEndPoint(
-		  "full_institute_to_search").toLowerCase()), "full institute not found in response"
+		  "full_institute_to_search").replaceAll("%20", " ").toLowerCase()), "full institute not found in response"
 		  );
 		 
 	}
@@ -755,7 +752,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Assertion.assertTrue(response.contains(Constants.education), "education not found in the response.");
 		Assertion.assertTrue(response.toLowerCase().contains(
 				  ReadingServiceEndPointsProperties.getServiceEndPoint(
-						  "full_education_to_search").toLowerCase()),
+						  "full_education_to_search").replaceAll("%20", " ").toLowerCase()),
 				"full education not found in response");
 
 	}
@@ -855,7 +852,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Assertion.assertTrue(response.contains(Constants.employer), "employer not found in the response.");
 
 		Assertion.assertTrue(
-				response.toLowerCase().contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_employer_to_search").toLowerCase()),
+				response.toLowerCase().contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_employer_to_search").replaceAll("%20", " ").toLowerCase()),
 				"full employer not found in response");
 
 	}
@@ -1209,7 +1206,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		String response = responsebody.readEntity(String.class);
 		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.sourcename), "sourcename not found in the response.");
-		 Assertion.assertTrue(response.toLowerCase().contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_sourcename_to_search").toLowerCase()),
+		 Assertion.assertTrue(response.toLowerCase().contains(ReadingServiceEndPointsProperties.getServiceEndPoint("partial_sourcename_to_search").replaceAll("%20", " ").toLowerCase()),
 		 "partial sourcename not found in response");
 	}
 
@@ -2102,27 +2099,58 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"), "Savedsearch deleted successfully");
     }
 
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/_candidates
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Search candidates with no query string and expecting failure response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> searchInput with no search query string
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 500
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Bhagyasree & jyoti
+     *             </p>
+     */
     @Test(groups = { "sanity", "searchCandidatesWithNoSearchQueryString", "NA" })
     public void searchCandidatesWithNoSearchQueryString() throws ClientProtocolException, IOException {
-
-	System.out.println("Search candidates with no query string");
-	Logging.log("Search candidates with no query string");
-	searchUtil = new SearchUtil();
+	
 	com.spire.base.service.utils.SearchInputRequest inputBean = SearchUtil
 		.searchCandidatesWithNoSearchQueryString();
-	Logging.log("inputBean " + inputBean);
+	
+	Logging.log("Service Name: /generic-services/api/search/_candidates"
+		+ "\nDescription: Search candidates with no query string and expecting failure response."
+		+ "\nInput: " + inputBean + "\nExpected Output: Response status 500");
+	
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
 	// Executes GET request and returns Response
 	Response responsebody = suggestConsumer.searchCandidate(inputBean, hostName);
-	System.out.println("***** RESPONSE : responsebody : ******" + responsebody);
-	Logging.log("responsebody " + responsebody);
-
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE : response : ******" + response);
-	Logging.log("response " + response);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
 	// Asserting Response Code
-	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+	Assertion.assertTrue(responsebody.getStatus() == 500,
+		"response code expected equal to 500 but found as:" + responsebody.getStatus());
+	Assert.assertTrue(response.contains("search candidate has failed"), "Response is successful without search query string");
 
     }
 
