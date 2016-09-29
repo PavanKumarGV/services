@@ -1,7 +1,9 @@
 package com.spire.requisitionResources;
 
 import java.io.IOException;
+
 import javax.ws.rs.core.Response;
+
 import org.apache.http.client.ClientProtocolException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -11,12 +13,9 @@ import com.spire.base.controller.Assertion;
 import com.spire.base.controller.ContextManager;
 import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
-import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.RequisitionResourceServiceUtil;
-import com.spire.service.consumers.CustomResourceConsumer;
 import com.spire.service.consumers.RequisitionResourceConsumer;
-import com.spire.service.consumers.SearchResourcesConsumer;
 
 import spire.talent.gi.beans.RequisitionStatusBean;
 import spire.talent.gi.beans.SearchRequisitionRequestBean;
@@ -47,24 +46,45 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	}
 
+	
 	/**
-	 * Udhay - Get -RequisitionSearch
-	 * 
-	 * @throws IOException
-	 * @throws ClientProtocolException
-	 **/
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get requisition using valid existing requisitionId.
+	* </p>
+	* <p>
+	* <b>Input :</b>Valid requisitionId 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper requisition
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* @author Udhay
+	*/
 	@Test(groups = { "sanity", "GetRequisitionSearch" })
 	public void GetRequisitionSearch() throws ClientProtocolException, IOException {
+		Logging.log("Service Name: generic-services/api/requisitions"
+				+ "\nDescription: Get requisition using valid existing requisitionId."
+				+ "\nInput: Valid requisitionId " + "\nExpected Output: Response status 200 with proper requisition");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisition(hostName);
 		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
 		Assert.assertTrue(response.contains("primarySkill"));
+		Assert.assertEquals(responsebody.getStatus(), 200);
 		Logging.log("contains the primary skill ");
 		Assert.assertTrue(response.contains("jobLevel"));
 		Logging.log("contains the jobLevel ");
-
 	}
 
 	/*
@@ -73,7 +93,9 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "GetJobDesByID","NA" })
 	public void GetJobDesByID() throws ClientProtocolException, IOException {
-
+	    Logging.log("Service Name: generic-services/api/requisitions/jd/6100:6066:4f12a7a0193542c5a3bf5f179a1b4913"
+			+ "\nDescription: Get Job Description service with Id as parameter and expecting 200 response."
+			+ "\nInput: Job description Id" + "\nExpected Output: 200 Response");
 		RequisitionResourceConsumer reqConsumer = null;
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesByreqID(hostName);
@@ -81,13 +103,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
-		/*
-		 * Assert.assertTrue(response.contains("fileContent")); Logging.log(
-		 * "contains the fileContent " );
-		 */
 		Logging.log("Response: "+response);
-		Assert.assertTrue(response.contains("fileName") || response.contains("filename"));
+		Assertion.assertTrue(response.contains("fileName") || response.contains("filename"),"Response unsuccessfull, Expected 200 status code");
 		Logging.log("Response Successful, Able to get JD");
 
 	}
@@ -177,6 +194,9 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "searchRequisitionWithoutSearchCriteria", "P1","NA" })
 	public void searchRequisitionWithoutSearchCriteria() {
+	    Logging.log("Service Name: generic-services/api/requisitions/search"
+			+ "\nDescription: Search Requisition using no criteria as parameter and expecting 200 response."
+			+ "\nInput: No criteria for search" + "\nExpected Output: 200 Response");
 		// Get Request Bean
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getSearchRequisitionWithoutCriteria();
 		// Get user Token
@@ -184,17 +204,13 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		// Execute POST Request
 		Response response = reqConsumer.searchRequisition(hostName, searchReqrequestBean1);
 		// Assering Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:400");
+		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		/*
-		 * String responseBody = response.readEntity(String.class);
-		 * Logging.log(responseBody);
-		 * Assertion.assertTrue(responseBody.contains("Open"),
-		 * "Open requisition not found"); Logging.log("Open requiistions found"
-		 * );
-		 */
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Hired")
+			|| responseBody.contains("APPLIED") || responseBody.contains("New")
+			|| responseBody.contains("Active") || responseBody.contains("Pending"), "Response not successfull");
 	}
-
 	/**
 	 * @author Pritisudha Pattanaik 11/08/16 Steps:Post - Get candidate stats
 	 *         for search criteria with insearchcriteria,and experience from
@@ -228,12 +244,18 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "candidatestasRequisitionWithoutSearchCriteria","NA" })
 	public void candidatestasRequisitionWithoutSearchCriteria() {
+	    Logging.log("Service Name: generic-services/api/requisitions/candidate/stats"
+			+ "\nDescription: Get Candidates as per Status and expecting 200 response."
+			+ "\nInput: No criteria for search" + "\nExpected Output: 200 Response");
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandiadteStasRequisitionWithoutCriteria();
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response response = reqConsumer.createcandidatestas(hostName, searchReqrequestBean1);
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Hired")
+			|| responseBody.contains("APPLIED") || responseBody.contains("New")
+			|| responseBody.contains("Active") || responseBody.contains("Pending"), "Response not successfull");
 	}
 
 	/**
@@ -347,19 +369,19 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "searchRequisitionWithStatusAndCount", "P1","NA" })
 	public void searchRequisitionWithStatusAndCount() {
 		// Get Request Bean
+	    Logging.log("Service Name: generic-services/api/requisitions/search"
+			+ "\nDescription: Search Requisition With Status and Count and expecting 200 response."
+			+ "\nInput: No criteria for search" + "\nExpected Output: 200 Response");
 		searchReqrequestBean = RequisitionResourceServiceUtil.getRequisitionWithCount();
 		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		// Execute POST Request
 		Response response = reqConsumer.searchRequisition(hostName, searchReqrequestBean);
-		// Assering Response Code
+		// Asserting Response Code
 		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Asseting response body
-		String count = reqConsumer.getTotalCount(response);
-		// Assertion.assertTrue(responseBody.contains("totalResults"),
-		// "Requisition count not found");
-		Logging.log("Total Requisition count: " + count);
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("totalResults"),"Response was not successfull");
 	}
 
 	/**
@@ -534,12 +556,15 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "GetJobDesByWrongID","NA" })
 	public void GetJobDesByWrongID() throws ClientProtocolException, IOException {
-
+	    Logging.log("Service Name: generic-services/api/requisitions/jd/abc"
+			+ "\nDescription: Get Job Description using worng id as parameter and expecting 500 response."
+			+ "\nInput: Using wrong ID that not present in the system" + "\nExpected Output: 500 Response");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqConsumer.getJobDesByWrongreqID(hostName);
 		Response responsebody = reqConsumer.getJobDesByWrongreqID(hostName);
-		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Assertion.assertTrue(responsebody.getStatus() == 500, "Response unsuccessfull, Expected status code not equal to 500");
 		Logging.log("Response successful");
+		String response = responsebody.readEntity(String.class);
+		Assertion.assertTrue(response.contains("Unable to get JD/RESUME for ID") , "Response unsuccessfull, Expected status code not equal to 500");
 
 	}
 
@@ -550,24 +575,16 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "GetJobDesBySpecialCharID","NA" })
 	public void GetJobDesBySpecialCharID() throws ClientProtocolException, IOException {
-
+	    Logging.log("Service Name: generic-services/api/requisitions/jd/6079%3A6066%3A0004C4D081D743BF8D72846537638DD2%40%23%24"
+			+ "\nDescription: Get Job Description special character as parameter and expecting 500 response."
+			+ "\nInput: Special charater with ID" + "\nExpected Output: 500 Response");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesBySplcharreqID(hostName);
 		Response responsebody = reqConsumer.getJobDesBySplcharreqID(hostName);
-		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Assertion.assertTrue(responsebody.getStatus() == 500, "Response unsuccessfull, Expected status code not equal to 500");
 		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
-
-		// now services is not working so i can't test response
-		/*
-		 * String response = responsebody.readEntity(String.class);
-		 * System.out.println("***** RESPONSE ******"+response);
-		 * Assert.assertTrue(response.contains("primarySkill")); Logging.log(
-		 * "contains the primary skill " );
-		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
-		 * "contains the jobLevel " );
-		 */
+		Assertion.assertTrue(response.contains("Unable to get JD/RESUME for ID"),"Response unsuccessfull, Expected status code not equal to 500" );
 
 	}
 	/*
@@ -578,22 +595,18 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "GetJobDesByBlankSpace","NA" })
 	public void GetJobDesByBlankSpace() throws ClientProtocolException, IOException {
 
+	    Logging.log("Service Name: generic-services/api/requisitions/jd/"
+			+ "\nDescription: Get Job Description service with Blank Space as parameter and expecting 404 response."
+			+ "\nInput: Using Blank Keyword " + "\nExpected Output: 404 Response");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		reqConsumer.getJobDesByBlankSpacereqID(hostName);
-		Response responsebody = reqConsumer.getJobDesByBlankSpacereqID(hostName);
-		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Response response = reqConsumer.getJobDesByBlankSpacereqID(hostName);
+		Assertion.assertTrue(response.getStatus() == 404, "Response unsuccessfull, Expected status code not equal to 404");
 		Logging.log("Response successful");
 
-		// now services is not working so i can't test response
-		/*
-		 * String response = responsebody.readEntity(String.class);
-		 * System.out.println("***** RESPONSE ******"+response);
-		 * Assert.assertTrue(response.contains("primarySkill")); Logging.log(
-		 * "contains the primary skill " );
-		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
-		 * "contains the jobLevel " );
-		 */
-
+		String responseBody = response.readEntity(String.class);
+	        Assertion.assertTrue(responseBody.contains("Requisition doesn't exist for requisition id"), "Request Unsuccessful: Expected Empty Response but response was: " +responseBody);
+	        
 	}
 
 	/**
@@ -603,7 +616,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "updateRequisitionStatus", "P1" })
 	public void updateRequisitionStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
@@ -627,7 +640,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionStatusWithSameStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
@@ -649,14 +662,18 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "updateRequisitionWithBlankRFR", "P2" })
 	public void updateRequisitionWithBlankRFR() {
+	    Logging.log("Service Name: generic-services/api/requisitions/Closed"
+			+ "\nDescription: Update Requisition using blank RFR parameter and expecting 405 response."
+			+ "\nInput: Blank RFR Parameter to update Requisition Status" + "\nExpected Output: 405 Response");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName,
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
-		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Not Equal To 200");
+		Assertion.assertTrue(response.getStatus() == 405, "Response not successfull");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("405"), "Response not successfull");
 
 	}
 
@@ -664,17 +681,41 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 * @author Radharani Patra 16/08/16 Steps: Update Requisition with status:
 	 *         invalid request blank status id Validation: Response code: 404
 	 */
-	@Test(groups = { "sanity", "updateRequisitionWithBlankStatus", "P2" })
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update requisition without status field. Invalid Rest service URL build in the absence of Status Field.
+	* </p>
+	* <p>
+	* <b>Input :</b>blank Status Field
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 404 or 405 with proper error message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#007D77> P4</font>
+	* </p>
+	*/
+	@Test(groups = { "sanity", "updateRequisitionWithBlankStatus", "P4" })
 	public void updateRequisitionWithBlankStatus() {
+		Logging.log("Service Name: generic-services/api/requisitions"
+				+ "\nDescription: Update requisition without status field. Invalid Rest service URL build in the absence of Status Field"
+				+ "\nInput: blank Status Field" + "\nExpected Output: Response status 404 or 405 with proper error message");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
-				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
-				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
+				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),"");
 		Response response = reqConsumer.changeReqStatusBlnkRR(reqStatusBean, hostName,
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"));
-		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Not Equal To 200");
-
+		Assertion.assertTrue((response.getStatus() == 404 || response.getStatus() == 405), "Response not successfull");
+		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Equal To 404 or 405");
 	}
 
 	/**
@@ -683,13 +724,17 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "updateRequisitionWithBlankParameter", "P2" })
 	public void updateRequisitionWithBlankParameter() {
+	    Logging.log("Service Name: generic-services/api/requisitions/"
+			+ "\nDescription: Update Requisition using blank parameter and expecting 404 response."
+			+ "\nInput: Blank Parameter to update Requisition Status" + "\nExpected Output: 404 Response");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatusBlnk(reqStatusBean, hostName);
-		Assertion.assertTrue(response.getStatus() != 200, "Response not successfull");
-		Logging.log("RESPONSE CODE: " + response.getStatus()+" , "+"Expected Response: Not Equal To 200");
+		Assertion.assertTrue(response.getStatus() == 404, "Response not successfull");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.contains("404"), "Response not successfull");
 
 	}
 
@@ -701,7 +746,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 			"updateRequisitionStatus" })
 	public void updateRequisitionWithDifferentStatus() {
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
@@ -723,8 +768,11 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 */
 	@Test(groups = { "sanity", "updateRequisitionStatusWithoutheaders", "P2" })
 	public void updateRequisitionStatusWithoutheaders() {
+	    Logging.log("Service Name: generic-services/api/requisitions/6100:6066:1419f6338d734d1296d4928f14b00e8d/Closed"
+			+ "\nDescription: Update Requisition Status using no header and expecting 200 response."
+			+ "\nInput: No header to update Requisition Status" + "\nExpected Output: 200 Response");
 		reqConsumer = new RequisitionResourceConsumer();
-		reqStatusBean = RequisitionResourceServiceUtil.changereqStatus(
+		reqStatusBean = RequisitionResourceServiceUtil.changeReqStatus(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("changeStats"),
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Response response = reqConsumer.changeReqStatus(reqStatusBean, hostName,
@@ -732,6 +780,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 				ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
 		Logging.log("RESPONSE CODE: " + response.getStatus());
 		Assertion.assertTrue(response.getStatus() == 200, "Response not successfull");
+		String responseBody = response.readEntity(String.class);
+		Assertion.assertTrue(responseBody.isEmpty(), "Response not successfull");
 
 	}
 
@@ -747,12 +797,16 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	 **/
 	@Test(groups = { "sanity", "GetReqBlankSrch" })
 	public void GetReqBlankSrch() throws ClientProtocolException, IOException {
+	    Logging.log("Service Name: generic-services/api/requisitions/jd/abc"
+			+ "\nDescription: Get Job Description using worng id as parameter and expecting 404 response."
+			+ "\nInput: Using wrong ID that not present in the system" + "\nExpected Output: 404 Response");
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
 		Response responsebody = reqConsumer.getRequisitionBlank(hostName);
-		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected status code not equal to 200");
+		Assertion.assertTrue(responsebody.getStatus() == 404, "Response unsuccessfull, Expected status code not equal to 404");
 		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
+		Assertion.assertTrue(response.contains("The requested resource is not available"),"Response unsuccessfull");
+
 	}
 	
 	/**

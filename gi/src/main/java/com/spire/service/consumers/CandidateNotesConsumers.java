@@ -4,8 +4,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.http.impl.client.BasicResponseHandler;
-
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
 
@@ -21,7 +19,12 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 		System.out.println("Inside of Login");
 		getUserToken(username, password, hostName);
 	}
-	
+	/**
+	 * 
+	 * @param hostName
+	 * @param id
+	 * @return
+	 */
 	public Response getCandidatenoteslist(String hostName,String id) {
 		String serviceEndPoint = endPointURLCandidatenoteslist.replaceAll("hostAddress", hostName)
 				+ "?entityId="+id+"&interval=1";
@@ -45,8 +48,6 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 	}
 
 	public Response getCandidatenoteslistwithoutInterval(String hostName) {
-		// String serviceEndPoint = lookUp.replaceAll("hostAddress",
-		// hostName)+"?type=REQUISITION_STATUS";
 		String serviceEndPoint = endPointURLCandidatenoteslist.replaceAll("hostAddress", hostName)
 				+ "?entityId=Testing1";
 		System.out.println(" EndPoint URL >>" + serviceEndPoint);
@@ -121,9 +122,6 @@ public class CandidateNotesConsumers extends BaseServiceConsumerNew {
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("Response Code >>"+response.getStatus());
 		return response;
-		
-		
-		
 	}
 	
 	public Response getCandidatenotesearchwithincorrectparameter(String hostname)

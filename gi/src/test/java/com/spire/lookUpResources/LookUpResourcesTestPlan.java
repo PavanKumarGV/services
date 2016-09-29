@@ -93,7 +93,6 @@ public class LookUpResourcesTestPlan extends TestPlan {
 		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		String responseBody = response.readEntity(String.class);
 		System.out.println("RESPONSE CODE >>" + responseBody);
-
 	}
 
 	/**
@@ -123,16 +122,18 @@ public class LookUpResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNBlankKeyword","P2","NA" })
 	public void verifyLookUpServiceByBlankTypeNBlankKeyword() {
+
+	    	Logging.log("Service Name: /generic-services/api/lookup/demand/filter/match"
+				+ "\nDescription: Verifying Lookup service with Blank parameter and expecting failure response."
+				+ "\nInput: Using Blank Keyword that not present in the system" + "\nExpected Output: Response status 400");
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
 		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNBlankKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		// Asserting Response Code
-		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertTrue(response.getStatus()==400, "response code expected equal to 400 but found as:"+response.getStatus());
 		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
-
+		Assertion.assertTrue(responseBody.contains("free text/type can't be blank"), "response is not correct");
 	}
 
 	/**
@@ -164,16 +165,17 @@ public class LookUpResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNKeyword","P2","NA" })
 	public void verifyLookUpServiceByBlankTypeNKeyword() {
+	    	Logging.log("Service Name: generic-services/api/lookup/demand/filtermatch?keyword=ja"
+			+ "\nDescription: Verifying Lookup service with Blank Type and Keyword parameter and expecting failure response."
+			+ "\nInput: Using Blank Type and Keyword " + "\nExpected Output: Response status 404");
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
 		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		// Asserting Response Code
-		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertTrue(response.getStatus()==404, "response code expected equal to 404 but found as:"+response.getStatus());
 		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
-
+		Assertion.assertTrue(responseBody.contains("HTTP Status 404"),"Expected 404 as status but actual is different");
 	}
 
 	/**
@@ -184,15 +186,17 @@ public class LookUpResourcesTestPlan extends TestPlan {
 
 	@Test(groups = { "sanity", "verifyLookUpServiceByTypeNBlankKeyword","P2","NA" })
 	public void verifyLookUpServiceByTypeNBlankKeyword() {
+	    	Logging.log("Service Name: generic-services/api/lookup/demand/filtermatch?type=REQUISITION_STATUS"
+			+ "\nDescription: Verifying Lookup service with Blank Type and Keyword parameter and expecting failure response."
+			+ "\nInput: Using Blank Keyword " + "\nExpected Output: Response status 404");
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 		// Executes Get request and returns Response
 		Response response = lookUpConsumer.getListOfDemandFilterByTypeNBlankKeyword(hostName);
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		// Asserting Response Code
-		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
+		Assertion.assertTrue(response.getStatus()==404, "response code expected equal to 404 but found as: "+response.getStatus());
 		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
+		Assertion.assertTrue(responseBody.contains("HTTP Status 404"),"Expected 404 as status but actual is different");
 
 	}
 	
@@ -201,15 +205,21 @@ public class LookUpResourcesTestPlan extends TestPlan {
      * Steps: Get list of demand filter by passing special characters
      * Validation: asserting status code
      */
-    @Test(groups={"sanity","verifylistofdemandfilterwithSpecialcharacters","NA"})
-    public void verifylistofdemandfilterwithSpecialcharacters()
-    {
-        lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
-     // Executes Get request and returns Response
-        Response response=lookUpConsumer.getListOfDemandFilterWithSpecialCharacter(hostName);
-        Logging.log("RESPONSE CODE >>" + response.getStatus());
-     // Asserting Response Code
-        Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull: Expected Response Code 200 but found :"+response.getStatus());
-        
-    }
+	 @Test(groups={"sanity","verifylistofdemancharactersdfilterwithSpecialcharacters","NA"})
+	    public void verifylistofdemandfilterwithSpecialcharacters()
+	    {
+		Logging.log("Service Name: generic-services/api/lookup/demand/filter?type=!%40%23%24%40"
+			+ "\nDescription: Verifying Lookup service with Special Character as parameter and expecting Empty response."
+			+ "\nInput: Special Characters " + "\nExpected Output: Empty Response");
+	        lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+	        // Executes Get request and returns Response
+	        Response response=lookUpConsumer.getListOfDemandFilterWithSpecialCharacter(hostName);
+	        Logging.log("RESPONSE CODE >>" + response.getStatus());
+	        // Asserting Response Code
+	        //TODO: Expect 204 from service
+	        Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull: Expected Response Code 200 but found :"+response.getStatus());
+	        String responseBody = response.readEntity(String.class);
+	        Assertion.assertTrue(responseBody.contains("\"response\":{}"), "Request Unsuccessful: Expected Empty Response but response was: " +responseBody);
+	        
+	    }
 }

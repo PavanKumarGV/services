@@ -157,7 +157,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	/*
 	 * get Similar Profile with invalid Test case
 	 */
-
 	public Response getSemilarProfilesNegi(String hostName)
 			throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL2.replaceAll("hostAddress",
@@ -166,15 +165,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response " + response1);
-	/*	if (response1.getStatus() == 200) {
-			System.out.println("********** Fail **************");
-			//Logging.log("Response Code >>" + response1.getStatus());
-			Assert.fail();
-		} else {
-			//Logging.log("Response Code >>" + response1.getStatus());
-			System.out.println("********** pass **************");
-		}*/
-
 		return response1;
 	}
 
@@ -210,7 +200,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 		String serviceEndPoint = endPointURLSavedSearch.replaceAll(
 				"hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response responseS = executeGET(serviceEndPoint);
 		/*if (responseS.getStatus() == 200) {
@@ -231,7 +220,6 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 		String serviceEndPoint = endPointURLSavedSearchById.replaceAll(
 				"hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response responseS = executeGET(serviceEndPoint);
 	/*	if (responseS.getStatus() == 200) {
@@ -481,10 +469,8 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 				+ getServiceEndPoint("partial_employer_to_search")
 				+ "&type="
 				+ Constants.employer;
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response = executeGET(serviceEndPoint);
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
 		Logging.log("RESPONSE CODE >>" + response.getStatus());
 		return response;
 	}
