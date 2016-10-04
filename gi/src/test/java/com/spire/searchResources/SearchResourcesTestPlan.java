@@ -1,6 +1,11 @@
 package com.spire.searchResources;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.ws.rs.core.Response;
 
@@ -18,12 +23,10 @@ import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
 import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
-// import spire.talent.gi.beans.SavedSearchDetails;
 import com.spire.base.service.utils.SavedSearchDetails;
+import com.spire.base.service.utils.SearchInput;
 import com.spire.base.service.utils.SearchUtil;
 import com.spire.service.consumers.SearchResourcesConsumer;
-
-import spire.talent.gi.beans.SearchInput;
 
 /**
  * @author jyoti
@@ -58,6 +61,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	    .getServiceEndPoint("search_text");
     public static String    PARTIAL_SEARCH_TEXT		 = ReadingServiceEndPointsProperties
 	    .getServiceEndPoint("partial_search_text");
+    public static String BLANK_ID = "          ";
     /**
      * Passing HostName,UserName and Password from the xml.
      */
@@ -240,7 +244,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.getSuggestForSkillwithSpecialCharacter(hostName);
 	String response = responsebody.readEntity(String.class);
 
-	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 200,
@@ -548,6 +551,55 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 500, "Response not successful");
 	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"), "getSavedSearchById found a non existent id");
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{blankId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Get saved search by blankId and expecting failure response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> blankId
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "getSavedSearchByBlankId" })
+    public void getSavedSearchByBlankId() throws ClientProtocolException, IOException {
+	Logging.log("Service Name: generic-services/api/search/save_search/{blankId}"
+		+ "\nDescription: get saved search and expecting failure response." + "\nInput: blankId" 
+		+ "\nExpected Output: 400 Response");
+	
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.getSavedSearchById(hostName, BLANK_ID);
+	String response = responsebody.readEntity(String.class);
+	
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 400, "getSavedSearchByBlankId is successful");
+	
+	// Response should have id
+	Assertion.assertTrue(response.contains("Invalid input. SavedSearch Id cannot be null or empty."), "getSavedSearchById is successful using blankId");
     }
 
     /**
@@ -2140,6 +2192,57 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assertion.assertEquals(responsebody.getStatus(), 500, "Deleted Successfully");
 	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"), "Savedsearch deleted successfully");
     }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * 
+     *             Updated by Jyoti
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchIdToBeDeleted}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             delete saved search by blank Id
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> blank Id
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Non Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#007D77> P4</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "deleteSavedSearchByBlankId", "NA" })
+    public void deleteSavedSearchByBlankId() throws ClientProtocolException, IOException {
+	// Executes DELETE request and returns Response
+	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={blankInput}"
+		+ "\nDescription: Delete saved search by blank ID and expecting failure response."
+		+ "\nInput: blank Id \nExpected Output: Response status 400");
+	
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	Response responsebody = suggestConsumer.deleteSavedSearchById(hostName, BLANK_ID);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 400, "Response not successful");
+	Assertion.assertTrue(!response.contains("Savedsearch deleted successfully"), "Savedsearch deletion successful");
+    }
 
     /**
      * @throws IOException
@@ -2199,7 +2302,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     /**
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search
@@ -2274,7 +2376,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     /**
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/{InvalidSavedSearchId}
@@ -2333,6 +2434,134 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assertion.assertEquals(updateteResponsebody.getStatus(), 500, "Non existent ID updated Succesfully");
 	Assertion.assertTrue(updateResponse.contains("Invalid Savedsearch Id"),
 		"Savedsearch update succeeded with Invalid Savedsearch Id");
+	/* ends - update saved search */
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Update saved search by blank Id and expecting failure response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> blank Id & savedSearch Object
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 500
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "updateSavedSearchByBlankId", "NA" })
+    public void updateSavedSearchByBlankId() throws ClientProtocolException, IOException {
+	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
+	inputBean = SearchUtil.updateSavedSearchInputBeanWithSkill(inputBean);
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/" + BLANK_ID
+		+ "\nDescription: Update saved search by blank Id" + "\nInput: " + inputBean
+		+ "\nExpected Output: Response status 500");
+
+	Response updateteResponsebody = suggestConsumer.updateSavedSearchWithSkill(inputBean, hostName, BLANK_ID);
+	Logging.log("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
+
+	String updateResponse = updateteResponsebody.readEntity(String.class);
+	Logging.log("***** RESPONSE : updateResponse : ****** " + updateResponse);
+
+	// Asserting Response Code
+	Assertion.assertEquals(updateteResponsebody.getStatus(), 500, "Blank Id updated Succesfully");
+	Assertion.assertTrue(updateResponse.contains("Invalid Savedsearch Id"),
+		"Savedsearch update succeeded with blank Id");
+	/* ends - update saved search */
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Update particular saved search by ID without proper savedSearch Object and
+     *             expecting failure response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> savedSearchId & incomplete savedSearch Object
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "updateSavedSearchWithoutSavedSearchObj", "NA" })
+    public void updateSavedSearchWithoutSavedSearchObj() throws ClientProtocolException, IOException {
+	Logging.log("Update particular saved search by ID without proper savedSearch Object");
+
+	/* starts - create saved search before updating */
+	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
+	Logging.log("inputBean " + inputBean);
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	Response createResponsebody = suggestConsumer.createSavedSearchWithSkill(inputBean, hostName);
+	Logging.log("createResponsebody " + createResponsebody);
+
+	String createResponse = createResponsebody.readEntity(String.class);
+	Logging.log("createResponse " + createResponse);
+
+	JSONObject createResponseJson = new JSONObject(createResponse);
+	JSONObject responseJson = createResponseJson.getJSONObject("response");
+	String id = responseJson.getString("id");
+
+	Logging.log("***** RESPONSE : id : ****** " + id);
+	/* ends - create saved search before updating */
+
+	/* starts - update saved search */
+	inputBean = SearchUtil.updateSavedSearchInputBeanWithSkill(inputBean);
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/" + id
+		+ "\nDescription: pdate particular saved search by ID without proper savedSearch Object and expecting failure response." + "\nInput: " + null
+		+ "\nExpected Output: Response status 400");
+
+	Response updateteResponsebody = suggestConsumer.updateSavedSearchWithSkill(new SavedSearchDetails(), hostName, id);
+	Logging.log("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
+
+	String updateResponse = updateteResponsebody.readEntity(String.class);
+	Logging.log("***** RESPONSE : updateResponse : ****** " + updateResponse);
+
+	// Asserting Response Code
+	Assertion.assertEquals(updateteResponsebody.getStatus(), 400, "Improper savedSearch updated Succesfully");
+	Assertion.assertTrue(updateResponse.contains("Invalid input. Name cannot be null or empty."),
+		"Savedsearch update succeeded without proper savedSearch Object");
 	/* ends - update saved search */
     }
 
@@ -2505,6 +2734,55 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             <b>Test Case Description :</b>
      *             </p>
      *             <p>
+     *             Search candidates with no searchInput
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> no searchInput
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "getCandidatesFromSavedSearchWithNoSearchInput", "NA" })
+    public void getCandidatesFromSavedSearchWithNoSearchInput() throws ClientProtocolException, IOException {
+	String inputBean = "{\"searchInput\": {\"searchQueryString\": \"(skill:MySQL or skill:ajax)\",\"searchAttributeMap\": {\"skill\": [\"MySQL\",\"ajax\"]}}}}";
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search/{savedSearchId}/candidates"
+		+ "\nDescription: Get candidates from saved search without searchInput and expecting failure response."
+		+ "\nInput: inputBean : "+inputBean + "\nExpected Output: Response status 400");
+	
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.getCandidatesFromSavedSearch(null, hostName, savedSearchId);
+	String response = responsebody.readEntity(String.class);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400, "Expected 400 status code but found "+responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchInputRequest cannot be null or empty"), "Response successful");
+    }
+    
+    /**
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchId}/candidates
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
      *             Search candidates for given skill
      *             </p>
      *             <p>
@@ -2556,7 +2834,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * 
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search
@@ -2609,5 +2886,203 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assertion.assertTrue(response.contains("Invalid input. Savedsearch cannot be created using existing name"),
 		"Savedsearch created with an existing name");
     }
+    
+    /**
+     * 
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Create a saved search without searchQueryString
+     * </p>
+     * <p>
+     * <b>Input :</b> searchInput without searchQueryString where searchQueyString is mandatory input
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 400
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "createSavedSearchWithoutSearchQueryString", "NA" })
+    public void createSavedSearchWithoutSearchQueryString() throws ClientProtocolException, IOException {
+	SavedSearchDetails savedSearchDetails = new SavedSearchDetails();
+	Random rand = new Random();
+	savedSearchDetails.setName("Test Saved Search"+rand.nextInt());
+	savedSearchDetails.setSearchDescription("Test");
+	savedSearchDetails.setCreatedByName("Jyoti");
+	savedSearchDetails.setPublicPool(true);
+	SearchInput searchInput = new SearchInput();
 
+	Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
+	List<String> skills = new ArrayList<String>();
+	skills.add("java");
+	searchAttributeMap.put("skill", skills);
+	searchInput.setSearchAttributeMap(searchAttributeMap);
+	savedSearchDetails.setSearchInput(searchInput);
+	Logging.log("savedSearchDetails..................." + savedSearchDetails);
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Creating a saved search without searchQueryString and expecting failure response." + "\nInput: "
+		+ savedSearchDetails + "\nExpected Output: Response status 400");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.createSavedSearchWithSkill(savedSearchDetails, hostName);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400,
+		"response code expected equal to 400 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchQueryString cannot be null or empty."),
+		"Savedsearch created without searchQueryString");
+    }
+    
+    /**
+     * 
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Create a saved search without searchAttributeMap
+     * </p>
+     * <p>
+     * <b>Input :</b> searchInput without searchAttributeMap where searchAttributeMap is mandatory input
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 400
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "createSavedSearchWithoutSearchAttributeMap", "NA" })
+    public void createSavedSearchWithoutSearchAttributeMap() throws ClientProtocolException, IOException {
+	SavedSearchDetails savedSearchDetails = new SavedSearchDetails();
+	Random rand = new Random();
+	savedSearchDetails.setName("Test Saved Search"+rand.nextInt());
+	savedSearchDetails.setSearchDescription("Test");
+	savedSearchDetails.setCreatedByName("Jyoti");
+	savedSearchDetails.setPublicPool(true);
+	SearchInput searchInput = new SearchInput();
+	searchInput.setSearchQueryString("(skill:java)");
+	savedSearchDetails.setSearchInput(searchInput);
+	
+	Logging.log("savedSearchDetails..................." + savedSearchDetails);
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Creating saved search without searchAttributeMap and expecting failure response." + "\nInput: "
+		+ savedSearchDetails + "\nExpected Output: Response status 400");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.createSavedSearchWithSkill(savedSearchDetails, hostName);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400,
+		"response code expected equal to 400 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchAttributeMap cannot be null or empty."),
+		"Savedsearch created without searchAttributeMap");
+    }
+
+    /**
+     * 
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Create a saved search without searchDescription
+     * </p>
+     * <p>
+     * <b>Input :</b> searchInput without searchDescription where searchDescription is mandatory input
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 400
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "createSavedSearchWithoutSearchDescription", "NA" })
+    public void createSavedSearchWithoutSearchDescription() throws ClientProtocolException, IOException {
+	SavedSearchDetails savedSearchDetails = new SavedSearchDetails();
+	Random rand = new Random();
+	savedSearchDetails.setName("Test Saved Search"+rand.nextInt());
+	savedSearchDetails.setCreatedByName("Jyoti");
+	savedSearchDetails.setPublicPool(true);
+	SearchInput searchInput = new SearchInput();
+	Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
+	List<String> skills = new ArrayList<String>();
+	skills.add("java");
+	searchAttributeMap.put("skill", skills);
+	searchInput.setSearchQueryString("(skill:java)");
+	savedSearchDetails.setSearchInput(searchInput);
+	
+	Logging.log("savedSearchDetails..................." + savedSearchDetails);
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Creating saved search without searchDescription and expecting failure response." + "\nInput: "
+		+ savedSearchDetails + "\nExpected Output: Response status 400");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.createSavedSearchWithSkill(savedSearchDetails, hostName);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400,
+		"response code expected equal to 400 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchDescription cannot be null or empty."),
+		"Savedsearch created without searchDescription");
+    }
 }
