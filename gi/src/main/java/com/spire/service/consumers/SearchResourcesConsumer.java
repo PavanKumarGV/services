@@ -49,6 +49,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	String updateSavedSearchCandidateEndPointUrl = getServiceEndPoint("UPDATE_SAVED_SEARCHBYID");
 	String endPointURLSavedSearchUsingSearchText = getServiceEndPoint("SAVEDSEARCH_SEARCHTEXT");
 	String EndPointUrlGetCandidatesFromSavedSearch = getServiceEndPoint("GET_CANDIDATE_SAVEDSEARCH");
+	String endPointURLListSavedSearch = getServiceEndPoint("SAVED_SEARCH_LIST");
 
 	public SearchResourcesConsumer(String username, String password,
 			String hostName) {
@@ -325,6 +326,16 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 		return responseS;
 
+	}
+	
+	public Response listSavedSearch(String hostName, String sortBy, String orderBy, String offset, String limit)
+		throws ClientProtocolException, IOException {
+
+        	String serviceEndPoint = endPointURLListSavedSearch
+        			.replaceAll("hostAddress", hostName);
+        	serviceEndPoint = serviceEndPoint + "?sortBy="+sortBy+"&orderBy="+orderBy+"&offset="+offset+"&limit="+limit;
+        	Logging.log(" EndPoint URL >>" + serviceEndPoint);
+        	return executeGET(serviceEndPoint);
 	}
 
 	public Response getSuggestForInvalidKeyword(String hostName)
@@ -791,6 +802,15 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 
 	}
+	
+	public Response getSavedSearchUsingSearchText(String hostName, String searchText, String offset, String limit)
+		throws ClientProtocolException, IOException {
+
+        	String serviceEndPoint = endPointURLSavedSearchUsingSearchText
+        			.replaceAll("hostAddress", hostName) + searchText + "&offset=" + offset + "&limit=" + limit;
+        	Logging.log(" EndPoint URL >>" + serviceEndPoint);
+        	return executeGET(serviceEndPoint);
+        }
 
 	public Response validationOnSavedSearchUsingSearchText(String hostName)
 			throws ClientProtocolException, IOException {
