@@ -51,17 +51,21 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	}
 
 	/* Get RR status code */
-
 	public Response getRequisition(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName)
 				+ getServiceEndPoint("Requisition_JD") + "?projection=true";
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
-	/*	if (response1.getStatus() == 200) {
-			System.out.println("********** pass **************");
-		} else {
-			Assert.fail();
-		}*/
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
+	/* Get RR details using valid & invalid requisition and projection combinations */
+	public Response getRequisition(String hostName, String reqId, String projection) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName)
+				+ reqId + "?projection=" + projection;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}

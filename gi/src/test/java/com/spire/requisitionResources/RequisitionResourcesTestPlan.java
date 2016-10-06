@@ -69,22 +69,119 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	* <p>
 	* <b>Bug Level :</b><font color=#C90000> P1</font>
 	* </p>
-	* @author Udhay
+	* @author Udhay & Jyoti
 	*/
-	@Test(groups = { "sanity", "GetRequisitionSearch" })
-	public void GetRequisitionSearch() throws ClientProtocolException, IOException {
+	@Test(groups = { "sanity", "testGetRequisitionSearchValidRequisitionAndProjection_PositiveFunctional" })
+	public void testGetRequisitionSearchValidRequisitionAndProjection_PositiveFunctional() throws ClientProtocolException, IOException {
 		Logging.log("Service Name: generic-services/api/requisitions"
 				+ "\nDescription: Get requisition using valid existing requisitionId."
 				+ "\nInput: Valid requisitionId " + "\nExpected Output: Response status 200 with proper requisition");
+		
+		// Get authentication token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
 		Response responsebody = reqConsumer.getRequisition(hostName);
-		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
 		String response = responsebody.readEntity(String.class);
-		Assert.assertTrue(response.contains("primarySkill"));
-		Assert.assertEquals(responsebody.getStatus(), 200);
-		Logging.log("contains the primary skill ");
-		Assert.assertTrue(response.contains("jobLevel"));
-		Logging.log("contains the jobLevel ");
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
+		Assert.assertTrue(response.contains("primarySkill")); Logging.log("contains the primary skill ");
+		Assert.assertTrue(response.contains("jobLevel")); Logging.log("contains the jobLevel ");
+	}
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get requisition using valid existing requisitionId & Invalid projection
+	* </p>
+	* <p>
+	* <b>Input :</b>Valid requisitionId & Invalid projection
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper requisition
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* @author Jyoti
+	*/
+	@Test(groups = { "sanity", "testGetRequisitionSearchInvalidProjection_NegativeFunctional" })
+	public void testGetRequisitionSearchInvalidProjection_NegativeFunctional() throws ClientProtocolException, IOException {
+	    
+		Logging.log("Service Name: generic-services/api/requisitions"
+				+ "\nDescription: Get requisition using valid existing requisitionId & invalid projection"
+				+ "\nInput: Valid requisitionId & Invalid projection" + "\nExpected Output: Response status 200 with proper requisition");
+		
+		// Get authentication token
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
+		Response responsebody = reqConsumer.getRequisition(hostName, RequisitionResourceConsumer.getServiceEndPoint("Requisition_JD"), "abc");
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
+		Assert.assertTrue(response.contains("primarySkill"));  Logging.log("contains the primary skill ");
+		Assert.assertTrue(response.contains("jobLevel")); Logging.log("contains the jobLevel ");
+	}
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get requisition using Invalid requisitionId & valid projection
+	* </p>
+	* <p>
+	* <b>Input :</b>Invalid requisitionId & valid projection
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper requisition
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* @author Jyoti
+	*/
+	@Test(groups = { "sanity", "testGetRequisitionSearchInvalidRequisition_NegativeFunctional" })
+	public void testGetRequisitionSearchInvalidRequisition_NegativeFunctional() throws ClientProtocolException, IOException {
+	    
+		Logging.log("Service Name: generic-services/api/requisitions"
+				+ "\nDescription: Get requisition using invalid requisitionId & valid projection"
+				+ "\nInput: Invalid requisitionId & valid projection" + "\nExpected Output: Response status 200 with proper requisition");
+		
+		// Get authentication token
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
+		Response responsebody = reqConsumer.getRequisition(hostName, "abc", "full");
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
+		Assert.assertTrue(response.contains("primarySkill"));  Logging.log("contains the primary skill ");
+		Assert.assertTrue(response.contains("jobLevel")); Logging.log("contains the jobLevel ");
 	}
 
 	/*
