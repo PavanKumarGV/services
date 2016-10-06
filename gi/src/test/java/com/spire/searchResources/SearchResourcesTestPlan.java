@@ -95,23 +95,52 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Vasista - Get -Similler profiles
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
-    @Test(groups = { "sanity", "GetSimillerProfiles", "NA" })
-    public void GetSimillerProfiles() throws ClientProtocolException, IOException {
+     * <p>
+     * <b>Target Service URL :</b> generic-services/api/search/similar_profiles
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Search with valid candidateId for finding similar profile.
+     * </p>
+     * <p>
+     * <b>Input :</b> valid candidateId that exists in the system.
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Positive - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P2</font>
+     * </p>
+     * <p>
+     * @author Vasista & Jyoti
+     * </p>
+     */    
+    @Test(groups = { "sanity", "testGetSimilarProfilesUsingValidId_PositiveFunctional", "NA" })
+    public void testGetSimilarProfilesUsingValidId_PositiveFunctional() throws ClientProtocolException, IOException {
+	
+	Logging.log("Service Name: generic-services/api/search/similar_profiles"
+		+ "\nDescription: Search with valid candidateId for finding similar profile."
+		+ "\nInput: Valid candidateId \nExpected Output: Response status 200");
 
-	SearchResourcesConsumer suggestConsumer = null;
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-	// suggestConsumer.getSemilarProfiles(hostName);
-	Response responsebody = suggestConsumer.getSemilarProfiles(hostName);
-	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
+	// Executes GET request and returns Response
+	Response responsebody = suggestConsumer.getSimilarProfiles(hostName);
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
 	Assert.assertTrue(response.contains("id"));
-	Logging.log("Response: " + response);
     }
 
     /**
@@ -194,26 +223,54 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Author - Bhagyasree Test case description - Get suggestion when passing
-     * keyword having multiple words(Like project planning, project management)
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
-    @Test(groups = { "sanity", "verifySuggestForSkillwithMultipleWords", "NA" })
-    public void verifySuggestForSkillwithMultipleWords() throws ClientProtocolException, IOException {
-	SearchResourcesConsumer suggestConsumer = null;
+     * <p>
+     * <b>Target Service URL :</b> generic-services/api/search/_suggest?keyword=
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Get suggestion when passing keyword having multiple words(Like project planning, project management)
+     * </p>
+     * <p>
+     * <b>Input :</b> Android Development
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Positive - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P2</font>
+     * </p>
+     * <p>
+     * @author Bhagyasree & Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetVerifySuggestForSkillwithMultipleWords_PositiveFunctional", "NA" })
+    public void testGetVerifySuggestForSkillwithMultipleWords_PositiveFunctional() throws ClientProtocolException, IOException {
+	
+	Logging.log("Service Name: /generic-services/api/search/_suggest?keyword="
+		+ "\nDescription: Get suggestion when passing keyword having multiple words(Like project planning, project management)"
+		+ "\nInput: Android Development \nExpected Output: Response status 500");
+
 	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
 	// Executes Get request and returns Response
 	Response responsebody = suggestConsumer.getSuggestForSkillwithMultipleWords(hostName);
+	String response = responsebody.readEntity(String.class);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
+	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 200,
 		"response code expected equal to 200 but found as:" + responsebody.getStatus());
-	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
-	// Asserting Response Code
-	Assert.assertTrue(StringUtils.containsIgnoreCase(response,
-		ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace("%20", " ")));
+	Assertion.assertTrue(StringUtils.containsIgnoreCase(response,
+		ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace("%20", " ")),"System doesn't contain required skill");
 
     }
 
@@ -267,7 +324,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		"response code expected equal to 200 but found as:" + responsebody.getStatus());
 	Assert.assertTrue(response.contains(SKILL_WITH_SPECIAL_CHARACTER), "Response doesnot contain .net as skill");
     }
-
      
 	/**
 	 * <p>
@@ -283,7 +339,54 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * <b>Input :</b> Invalid candidateId that doesn't exist in the system.
 	 * </p>
 	 * <p>
-	 * <b>Expected Output :</b> Response status 204
+	 * <b>Expected Output :</b> Response status 500
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Negative - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#E6A001> P3</font>
+	 * </p>
+	 * <p>
+	 * @author Jyoti
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "testGetSimilarProfilesUsingInvalidId_NegativeFunctional", "NA" })
+	public void testGetSimilarProfilesUsingInvalidId_NegativeFunctional() throws ClientProtocolException, IOException {
+		Logging.log("Service Name: generic-services/api/search/similar_profiles"
+				+ "\nDescription: Search with invalid candidateId for finding similar profile."
+				+ "\nInput: Invalid candidateId \nExpected Output: Response status 500");
+		
+		// Get authentication token
+		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
+		Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus() == 500,
+				"response code expected not equal to 500 but found as:" + responsebody.getStatus());
+		Assertion.assertTrue(response.contains("Unable to fetch the recommended similar profiles"), "Able to fetch the recommended similar profiles using invalid id");
+	}
+	
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/similar_profiles
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Search with blankId for finding similar profile.
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> blankId that doesn't exist in the system.
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 500
 	 * </p>
 	 * <p>
 	 * <b>Category :</b> Negative - Functional Test Case
@@ -291,19 +394,29 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * <p>
 	 * <b>Bug Level :</b><font color=#007D77> P4</font>
 	 * </p>
+	 * <p>
+	 * @author Jyoti
+	 * </p>
 	 */
-	@Test(groups = { "sanity", "GetSimilarProfilesNegative", "NA" })
-	public void GetSimilarProfilesNegative() throws ClientProtocolException, IOException {
+	@Test(groups = { "sanity", "testGetSimilarProfilesWithBlankId_NegativeFunctional", "NA" })
+	public void testGetSimilarProfilesWithBlankId_NegativeFunctional() throws ClientProtocolException, IOException {
 		Logging.log("Service Name: generic-services/api/search/similar_profiles"
-				+ "\nDescription: Search with invalid candidateId for finding similar profile."
-				+ "\nInput: Invalid candidateId \nExpected Output: Response status 204");
-		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-		Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
-		Assertion.assertTrue(responsebody.getStatus() == 204,
-				"response code expected not equal to 204 but found as:" + responsebody.getStatus());
+				+ "\nDescription: Search with blankId for finding similar profile."
+				+ "\nInput: Invalid blankId \nExpected Output: Response status 500");
+		
+		// Get authentication token
+		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
+		Response responsebody = suggestConsumer.getSimilarProfilesUsingBlankId(hostName, BLANK_ID);
 		String response = responsebody.readEntity(String.class);
-		Logging.log("Response: " + response);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus() == 500,
+				"response code expected not equal to 500 but found as:" + responsebody.getStatus());
+		Assertion.assertTrue(response.contains("Unable to fetch the recommended similar profiles"), "Able to fetch the recommended similar profiles using invalid id");
 	}
 
     /**
