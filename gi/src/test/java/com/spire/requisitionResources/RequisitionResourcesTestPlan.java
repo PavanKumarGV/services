@@ -30,6 +30,13 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	SearchRequisitionRequestBean candidatestasBean1 = null;
 	RequisitionResourceConsumer reqConsumer = null;
 	RequisitionStatusBean reqStatusBean = null;
+	
+	public static String MATCHING_KEYWORD_VALID_TYPE = ReadingServiceEndPointsProperties.getServiceEndPoint("matching_keyword_valid_type");
+	public static String MATCHING_KEYWORD_VALID_KEYWORD = ReadingServiceEndPointsProperties.getServiceEndPoint("matching_keyword_valid_keyword");
+	public static String VALID_OFFSET = ReadingServiceEndPointsProperties.getServiceEndPoint("valid_offset");
+	public static String VALID_LIMIT = ReadingServiceEndPointsProperties.getServiceEndPoint("valid_limit");
+	public static String INVALID_OFFSET_OR_LIMIT = ReadingServiceEndPointsProperties.getServiceEndPoint("invalid_offset_or_limit");
+	public static String INVALID_TYPE_OR_KEYWORD = ReadingServiceEndPointsProperties.getServiceEndPoint("invalid_type_or_keyword");
 
 	/**
 	 * Passing HostName,UserName and Password from the xml.
@@ -644,6 +651,349 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		 * Assert.assertEquals(displayIdCount = 1, displayIdCount); Logging.log(
 		 * "getting  1 requisitions");
 		 */
+	}
+	
+      /**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/match/{type}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of matching keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> valid type, keyword, offset & limit
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetMatchingKeyword_PositiveFunctional","NA" })
+	public void testGetMatchingKeyword_PositiveFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/match/{type}"
+			+ "\nDescription: Get the list of matching keywords using given parameters and expecting success response." 
+		        + "\nInput: valid type, keyword, offset & limit \nExpected Output: Response status 200");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getMatchingKeyword(hostName, MATCHING_KEYWORD_VALID_TYPE, MATCHING_KEYWORD_VALID_KEYWORD, VALID_OFFSET, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+	}
+	
+      /**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/match/{type}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of matching keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> Invalid type & valid keyword, offset & limit
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetMatchingKeywordUsingInvalidType_NegativeFunctional","NA" })
+	public void testGetMatchingKeywordUsingInvalidType_NegativeFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/match/{type}"
+			+ "\nDescription: Get the list of matching keywords using given parameters and expecting failure response." 
+		        + "\nInput: Invalid type & valid keyword, offset & limit \nExpected Output: Response status 500");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getMatchingKeyword(hostName, INVALID_TYPE_OR_KEYWORD, MATCHING_KEYWORD_VALID_KEYWORD, VALID_OFFSET, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 500, "Response successful, Expected 500 status code");
+	}
+	
+      /**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/match/{type}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of matching keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> Invalid keyword & valid type, offset & limit
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetMatchingKeywordUsingInvalidKeyword_NegativeFunctional","NA" })
+	public void testGetMatchingKeywordUsingInvalidKeyword_NegativeFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/match/{type}"
+			+ "\nDescription: Get the list of matching keywords using given parameters and expecting failure response." 
+		        + "\nInput: Invalid keyword & valid type, offset & limit \nExpected Output: Response status 500");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getMatchingKeyword(hostName, MATCHING_KEYWORD_VALID_TYPE, INVALID_TYPE_OR_KEYWORD, VALID_OFFSET, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 500, "Response successful, Expected 500 status code");
+	}
+	
+      /**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/match/{type}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of matching keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> Invalid offset & valid type, keyword & limit
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetMatchingKeywordUsingInvalidOffset_NegativeFunctional","NA" })
+	public void testGetMatchingKeywordUsingInvalidOffset_NegativeFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/match/{type}"
+			+ "\nDescription: Get the list of matching keywords using given parameters and expecting failure response." 
+		        + "\nInput: Invalid offset & valid type, keyword & limit \nExpected Output: Response status 500");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getMatchingKeyword(hostName, MATCHING_KEYWORD_VALID_TYPE, MATCHING_KEYWORD_VALID_KEYWORD, INVALID_OFFSET_OR_LIMIT, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 500, "Response successful, Expected 500 status code");
+	}
+	
+      /**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/match/{type}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of matching keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> Invalid limit & valid type, keyword & offset
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetMatchingKeywordUsingInvalidLimit_NegativeFunctional","NA" })
+	public void testGetMatchingKeywordUsingInvalidLimit_NegativeFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/match/{type}"
+			+ "\nDescription: Get the list of matching keywords using given parameters and expecting failure response." 
+		        + "\nInput: Invalid limit & valid type, keyword & offset \nExpected Output: Response status 500");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getMatchingKeyword(hostName, MATCHING_KEYWORD_VALID_TYPE, MATCHING_KEYWORD_VALID_KEYWORD, VALID_OFFSET, INVALID_OFFSET_OR_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 500, "Response successful, Expected 500 status code");
+	}
+	
+      /**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/match/{type}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of matching keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> valid types
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Boundary Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetMatchingKeywordValidTypes_BoundaryCase","NA" })
+	public void testGetMatchingKeywordValidTypes_BoundaryCase() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/match/{type}"
+			+ "\nDescription: Get the list of matching keywords using given parameters and expecting success response." 
+		        + "\nInput: valid types \nExpected Output: Response status 200");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getMatchingKeyword(hostName, MATCHING_KEYWORD_VALID_TYPE, MATCHING_KEYWORD_VALID_KEYWORD, VALID_OFFSET, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+	}
+	
+      /**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/match/{type}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of matching keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> valid keywords
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Boundary Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetMatchingKeywordValidKeywords_BoundaryCase","NA" })
+	public void testGetMatchingKeywordValidKeywords_BoundaryCase() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/match/{type}"
+			+ "\nDescription: Get the list of matching keywords using given parameters and expecting success response." 
+		        + "\nInput: valid keywords \nExpected Output: Response status 200");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getMatchingKeyword(hostName, MATCHING_KEYWORD_VALID_TYPE, MATCHING_KEYWORD_VALID_KEYWORD, VALID_OFFSET, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
 	}
 
 	/*

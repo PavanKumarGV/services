@@ -34,6 +34,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_MATCHING_REQ2 = getServiceEndPoint("MATCHING_REQS_LIMIT_TWENTY");
 	String endPointURL_MATCHING_REQ3 = getServiceEndPoint("MATCHING_REQS_WITH_ALL_FEILDS");
 	String endPointURL_MATCHING_REQ4 = getServiceEndPoint("MATCHING_REQS_WITH_ID_OFSET");
+	String endPointURLMatchingKeyword = getServiceEndPoint("MATCHING_KEYWORD");
 	String endPointURL_MATCHING_REQ5 = getServiceEndPoint("MATCHING_REQS_ID_ONLY");
 	String createCandidateStasEndPOint = getServiceEndPoint("CREATE_CANDIDATE_STAS");
 	String changeReqURL = getServiceEndPoint("CHANGE_REQ_STATUS");
@@ -297,6 +298,14 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		}*/
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
+	}
+	
+	/*Get the list of matching keywords*/
+	public Response getMatchingKeyword(String hostName, String type, String keyword, String offset, String limit) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURLMatchingKeyword.replaceAll("hostAddress", hostName)
+				+ type + "?keyword=" + keyword + "&offset=" + offset + "&limit" + limit;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	public String getTotalCount(Response response) {
