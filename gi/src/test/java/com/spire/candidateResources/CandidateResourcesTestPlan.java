@@ -1,5 +1,8 @@
 package com.spire.candidateResources;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.core.Response;
 
 import org.testng.annotations.BeforeTest;
@@ -13,8 +16,11 @@ import com.spire.base.service.ReadingServiceEndPointsProperties;
 import com.spire.base.service.utils.CandidateResourceServiceUtil;
 import com.spire.service.consumers.CandidateResourcesConsumer;
 import com.spire.service.consumers.CandidateStatsConsumer;
+import com.spire.service.consumers.CandidateStatusConsumer;
 
+import spire.talent.gi.beans.CandidateSpireStatusPojo;
 import spire.talent.gi.beans.CandidateStatsRequestBean;
+import spire.talent.gi.beans.CandidateStatusPojo;
 import spire.talent.gi.beans.GetCandidateRequestBean;
 
 public class CandidateResourcesTestPlan extends TestPlan {
@@ -26,6 +32,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	CandidateStatsRequestBean candStatsReqBean = null;
 	CandidateStatsConsumer candStatsConsumer = null;
 	GetCandidateRequestBean candRequestBean = null;
+	CandidateStatusConsumer candStatusConsumer = null;
 
 	/**
 	 * Passing HostName from the xml.
@@ -757,5 +764,432 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		Logging.log("RESPONSE: " + responseBody);
 	}
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/status
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate status for given valid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>valid candidateId and valid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper  message
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#81017F> P2</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 04-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateStatus_PositiveFunctional", "P2", "NA" })
+	public void testPutCandidateStatus_PositiveFunctional() {
+		Logging.log("Service Name: generic-services/api/candidates/status"
+				+ "\nDescription: Update the candidate status for given valid candidate Id."
+				+ "\nInput: Valid candidateId and valid status " + "\nExpected Output: Response status 200 with proper  message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateStatusPojo testInput = new CandidateStatusPojo();
+		testInput.setCandidateId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		testInput.setClientStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
+		List<CandidateStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 200, "Response Expected as 200");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/status
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate status for given invalid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>Invalid candidateId and valid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400 with proper message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non-Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 04-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateStatus_NegativeNonFunctional", "P2", "NA" })
+	public void testPutCandidateStatus_NegativeNonFunctional() {
+		Logging.log("Service Name: generic-services/api/candidates/status"
+				+ "\nDescription: Update the candidate status for given invalid candidate Id."
+				+ "\nInput: Invalid candidateId and valid status" + "\nExpected Output: Response status 400 with proper message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateStatusPojo testInput = new CandidateStatusPojo();
+		testInput.setCandidateId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id_invalid"));
+		testInput.setClientStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
+		List<CandidateStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 400, "Response Expected as 400 ");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/status
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate with invalid status for given valid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>Valid candidateId and invalid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400 with proper message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non-Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 04-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateStatus_NegativeNonFunctional", "P2", "NA" })
+	public void testPutCandidateStatus_NegativeNonFunctional2() {
+		Logging.log("Service Name: generic-services/api/candidates/status"
+				+ "\nDescription: Update the candidate with invalid status for given valid candidate Id."
+				+ "\nInput: Valid candidateId and invalid status" + "\nExpected Output: Response status 400 with proper message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateStatusPojo testInput = new CandidateStatusPojo();
+		testInput.setCandidateId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		testInput.setClientStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1_invalid"));
+		List<CandidateStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 400, "Response Expected as 400 ");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/status
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate with invalid status for given invalid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>Invalid candidateId and invalid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400 with proper message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non-Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 04-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateStatus_NegativeNonFunctional", "P2", "NA" })
+	public void testPutCandidateStatus_NegativeNonFunctional3() {
+		Logging.log("Service Name: generic-services/api/candidates/status"
+				+ "\nDescription: Update the candidate with invalid status for given invalid candidate Id."
+				+ "\nInput: Invalid candidateId and invalid status" + "\nExpected Output: Response status 400 with proper message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateStatusPojo testInput = new CandidateStatusPojo();
+		testInput.setCandidateId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id_invalid"));
+		testInput.setClientStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1_invalid"));
+		List<CandidateStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 400, "Response Expected as 400 ");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/status
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate status for given valid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>valid candidateId and valid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper  message
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Boundary Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level : <font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 04-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateStatus_PositiveFunctional", "P2", "NA" })
+	public void testPutCandidateStatus_BoundaryCase() {
+		Logging.log("Service Name: generic-services/api/candidates/status"
+				+ "\nDescription: Update the candidate status for given valid candidate Id."
+				+ "\nInput: Valid candidateId and valid status " + "\nExpected Output: Response status 200 with proper  message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateStatusPojo testInput = new CandidateStatusPojo();
+		List<CandidateStatusPojo> testInputList = new ArrayList<>();
+		
+		testInput.setCandidateId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id2"));
+		testInput.setClientStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status2"));
+		testInputList.add(testInput);
+		
+		testInput = new CandidateStatusPojo();
+		testInput.setCandidateId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		testInput.setClientStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 200, "Response Expected as 200");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+    /**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/spireStatus
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate status for given valid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>valid candidateId and valid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper  message
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#81017F> P2</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 05-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateSpireStatus_PositiveFunctional", "P2", "NA" })
+	public void testPutCandidateSpireStatus_PositiveFunctional() {
+		Logging.log("Service Name: generic-services/api/candidates/spireStatus"
+				+ "\nDescription: Update the candidate status for given valid candidate Id."
+				+ "\nInput: Valid candidateId and valid status " + "\nExpected Output: Response status 200 with proper  message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateSpireStatusPojo testInput = new CandidateSpireStatusPojo();
+		testInput.setId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		testInput.setStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
+		List<CandidateSpireStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateSpireStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 200, "Response Expected as 200");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/spireStatus
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate status for given invalid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>Invalid candidateId and valid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400 with proper message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non-Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 05-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateSpireStatus_NegativeNonFunctional", "P2", "NA" })
+	public void testPutCandidateSpireStatus_NegativeNonFunctional() {
+		Logging.log("Service Name: generic-services/api/candidates/spireStatus"
+				+ "\nDescription: Update the candidate status for given invalid candidate Id."
+				+ "\nInput: Invalid candidateId and valid status" + "\nExpected Output: Response status 400 with proper message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateSpireStatusPojo testInput = new CandidateSpireStatusPojo();
+		testInput.setId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id_invalid"));
+		testInput.setStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1"));
+		List<CandidateSpireStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateSpireStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 400, "Response Expected as 400 ");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/spireStatus
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate with invalid status for given valid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>Valid candidateId and invalid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400 with proper message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non-Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 05-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateSpireStatus_NegativeNonFunctional", "P2", "NA" })
+	public void testPutCandidateSpireStatus_NegativeNonFunctional2() {
+		Logging.log("Service Name: generic-services/api/candidates/spireStatus"
+				+ "\nDescription: Update the candidate with invalid status for given valid candidate Id."
+				+ "\nInput: Valid candidateId and invalid status" + "\nExpected Output: Response status 400 with proper message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateSpireStatusPojo testInput = new CandidateSpireStatusPojo();
+		testInput.setId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		testInput.setStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1_invalid"));
+		List<CandidateSpireStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateSpireStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 400, "Response Expected as 400 ");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/spireStatus
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate with invalid status for given invalid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>Invalid candidateId and invalid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400 with proper message
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Non-Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :<font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 05-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateSpireStatus_NegativeNonFunctional", "P2", "NA" })
+	public void testPutCandidateSpireStatus_NegativeNonFunctional3() {
+		Logging.log("Service Name: generic-services/api/candidates/spireStatus"
+				+ "\nDescription: Update the candidate with invalid status for given invalid candidate Id."
+				+ "\nInput: Invalid candidateId and invalid status" + "\nExpected Output: Response status 400 with proper message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateSpireStatusPojo testInput = new CandidateSpireStatusPojo();
+		testInput.setId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id_invalid"));
+		testInput.setStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status1_invalid"));
+		List<CandidateSpireStatusPojo> testInputList = new ArrayList<>();
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateSpireStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 400, "Response Expected as 400 ");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+	
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/candidates/spireStatus
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Update the candidate status for given valid candidate Id.
+	* </p>
+	* <p>
+	* <b>Input :</b>valid candidateId and valid status 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200 with proper  message
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Boundary Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level : <font color=#E6A001> P3</font>
+	* </p>
+	* @author Santhosh Ramanan
+	* @since 05-Oct-2016
+	*/
+	@Test(groups = { "sanity", "testPutCandidateSpireStatus_PositiveFunctional", "P2", "NA" })
+	public void testPutCandidateSpireStatus_BoundaryCase() {
+		Logging.log("Service Name: generic-services/api/candidates/spireStatus"
+				+ "\nDescription: Update the candidate status for given valid candidate Id."
+				+ "\nInput: Valid candidateId and valid status " + "\nExpected Output: Response status 200 with proper  message");
+		candStatusConsumer = new CandidateStatusConsumer(userId, password, hostName);
+		CandidateSpireStatusPojo testInput = new CandidateSpireStatusPojo();
+		List<CandidateSpireStatusPojo> testInputList = new ArrayList<>();
+		
+		testInput.setId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id2"));
+		testInput.setStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status2"));
+		testInputList.add(testInput);
+		
+		testInput = new CandidateSpireStatusPojo();
+		testInput.setId(ReadingServiceEndPointsProperties.getServiceEndPoint("candidate_Id"));
+		testInput.setStatus(ReadingServiceEndPointsProperties.getServiceEndPoint("test_status"));
+		testInputList.add(testInput);
+		Response response = candStatusConsumer.putCandidateSpireStatus(testInputList,hostName);
+		Assertion.assertTrue(response.getStatus() == 200, "Response Expected as 200");
+		Logging.log("RESPONSE CODE >>" + response.getStatus());
+	}
+
 
 }
