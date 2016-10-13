@@ -23,6 +23,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	String endPointURL1 = getServiceEndPoint("SIMILAR_PROFILES")+getServiceEndPoint("similar_profile_candId");
 	String endPointURL2 = getServiceEndPoint("SIMILAR_PROFILES1").replace(":",
 			"%3A");
+	String endPointURLSimilarProfileUsingBlankId = getServiceEndPoint("SIMILAR_PROFILES");
 	String endPointURLSuggest = getServiceEndPoint("SEARCH_SUGGEST");
 	String endPointURLSuggestValidation = getServiceEndPoint("SUGGEST_VALIDATION");
 	String endPointURLSuggestForSkillwithMultipleWords = getServiceEndPoint(
@@ -49,6 +50,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 	String updateSavedSearchCandidateEndPointUrl = getServiceEndPoint("UPDATE_SAVED_SEARCHBYID");
 	String endPointURLSavedSearchUsingSearchText = getServiceEndPoint("SAVEDSEARCH_SEARCHTEXT");
 	String EndPointUrlGetCandidatesFromSavedSearch = getServiceEndPoint("GET_CANDIDATE_SAVEDSEARCH");
+	String endPointURLListSavedSearch = getServiceEndPoint("SAVED_SEARCH_LIST");
 
 	public SearchResourcesConsumer(String username, String password,
 			String hostName) {
@@ -56,21 +58,12 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		getUserToken(username, password, hostName);
 	}
 
-	public Response getSemilarProfiles(String hostName)
+	public Response getSimilarProfiles(String hostName)
 			throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL1.replaceAll("hostAddress",
 				hostName);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Response response1 = executeGET(serviceEndPoint);
-	/*	if (response1.getStatus() == 200) {
-			System.out.println("********** pass **************");
-		} else {
-			Assert.fail();
-		}*/
-		Logging.log("Response Code >>" + response1.getStatus());
-		return response1;
-
+		return executeGET(serviceEndPoint);
 	}
 
 
@@ -120,17 +113,7 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 				.replaceAll("hostAddress", hostName)+getServiceEndPoint("suggest_Multiple_words");
 		System.out.println(" EndPoint URL >>" + serviceEndPointM);
 		Logging.log(" EndPoint URL >>" + serviceEndPointM);
-		Response responseM = executeGET(serviceEndPointM);
-		Logging.log("Response Code >>" + responseM.getStatus());
-	/*	if (responseM.getStatus() == 200) {
-			System.out.println("RESPONSE CODE >>" + responseM.getStatus());
-			Logging.log("Response Code >>" + responseM.getStatus());
-		} else {
-			Logging.log("Response Code >>" + responseM.getStatus());
-			Assert.fail();
-		}*/
-
-		return responseM;
+		return executeGET(serviceEndPointM);
 
 	}
 
@@ -161,11 +144,19 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 			throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL2.replaceAll("hostAddress",
 				hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Response response1 = executeGET(serviceEndPoint);
-		Logging.log("Response " + response1);
-		return response1;
+		return executeGET(serviceEndPoint);
+	}
+	
+	/*
+	 * get Similar Profile using blankId
+	 */
+	public Response getSimilarProfilesUsingBlankId(String hostName, String blankId)
+			throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURLSimilarProfileUsingBlankId.replaceAll("hostAddress",
+				hostName) + blankId;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	public Response searchCandidate(
@@ -325,6 +316,16 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 
 		return responseS;
 
+	}
+	
+	public Response listSavedSearch(String hostName, String sortBy, String orderBy, String offset, String limit)
+		throws ClientProtocolException, IOException {
+
+        	String serviceEndPoint = endPointURLListSavedSearch
+        			.replaceAll("hostAddress", hostName);
+        	serviceEndPoint = serviceEndPoint + "?sortBy="+sortBy+"&orderBy="+orderBy+"&offset="+offset+"&limit="+limit;
+        	Logging.log(" EndPoint URL >>" + serviceEndPoint);
+        	return executeGET(serviceEndPoint);
 	}
 
 	public Response getSuggestForInvalidKeyword(String hostName)
@@ -791,6 +792,15 @@ public class SearchResourcesConsumer extends BaseServiceConsumerNew {
 		return response;
 
 	}
+	
+	public Response getSavedSearchUsingSearchText(String hostName, String searchText, String offset, String limit)
+		throws ClientProtocolException, IOException {
+
+        	String serviceEndPoint = endPointURLSavedSearchUsingSearchText
+        			.replaceAll("hostAddress", hostName) + searchText + "&offset=" + offset + "&limit=" + limit;
+        	Logging.log(" EndPoint URL >>" + serviceEndPoint);
+        	return executeGET(serviceEndPoint);
+        }
 
 	public Response validationOnSavedSearchUsingSearchText(String hostName)
 			throws ClientProtocolException, IOException {

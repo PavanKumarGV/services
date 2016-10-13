@@ -34,6 +34,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	String endPointURL_MATCHING_REQ2 = getServiceEndPoint("MATCHING_REQS_LIMIT_TWENTY");
 	String endPointURL_MATCHING_REQ3 = getServiceEndPoint("MATCHING_REQS_WITH_ALL_FEILDS");
 	String endPointURL_MATCHING_REQ4 = getServiceEndPoint("MATCHING_REQS_WITH_ID_OFSET");
+	String endPointURLMatchingKeyword = getServiceEndPoint("MATCHING_KEYWORD");
 	String endPointURL_MATCHING_REQ5 = getServiceEndPoint("MATCHING_REQS_ID_ONLY");
 	String createCandidateStasEndPOint = getServiceEndPoint("CREATE_CANDIDATE_STAS");
 	String changeReqURL = getServiceEndPoint("CHANGE_REQ_STATUS");
@@ -51,17 +52,21 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	}
 
 	/* Get RR status code */
-
 	public Response getRequisition(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName)
 				+ getServiceEndPoint("Requisition_JD") + "?projection=true";
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Response response1 = executeGET(serviceEndPoint);
-	/*	if (response1.getStatus() == 200) {
-			System.out.println("********** pass **************");
-		} else {
-			Assert.fail();
-		}*/
+		Logging.log("Response Code >>" + response1.getStatus());
+		return response1;
+	}
+	
+	/* Get RR details using valid & invalid requisition and projection combinations */
+	public Response getRequisition(String hostName, String reqId, String projection) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURL_REQ.replaceAll("hostAddress", hostName)
+				+ reqId + "?projection=" + projection;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		Response response1 = executeGET(serviceEndPoint);
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
 	}
@@ -293,6 +298,14 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		}*/
 		Logging.log("Response Code >>" + response1.getStatus());
 		return response1;
+	}
+	
+	/*Get the list of matching keywords*/
+	public Response getMatchingKeyword(String hostName, String type, String keyword, String offset, String limit) throws ClientProtocolException, IOException {
+		String serviceEndPoint = endPointURLMatchingKeyword.replaceAll("hostAddress", hostName)
+				+ type + "?keyword=" + keyword + "&offset=" + offset + "&limit" + limit;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	public String getTotalCount(Response response) {

@@ -1,6 +1,11 @@
 package com.spire.searchResources;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.ws.rs.core.Response;
 
@@ -18,12 +23,10 @@ import com.spire.base.controller.Logging;
 import com.spire.base.controller.TestPlan;
 import com.spire.base.service.Constants;
 import com.spire.base.service.ReadingServiceEndPointsProperties;
-// import spire.talent.gi.beans.SavedSearchDetails;
 import com.spire.base.service.utils.SavedSearchDetails;
+import com.spire.base.service.utils.SearchInput;
 import com.spire.base.service.utils.SearchUtil;
 import com.spire.service.consumers.SearchResourcesConsumer;
-
-import spire.talent.gi.beans.SearchInput;
 
 /**
  * @author jyoti
@@ -58,6 +61,24 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	    .getServiceEndPoint("search_text");
     public static String    PARTIAL_SEARCH_TEXT		 = ReadingServiceEndPointsProperties
 	    .getServiceEndPoint("partial_search_text");
+    public static String BLANK_ID = "          ";
+    public static String    SAVED_SEARCH_LIST_SORT_BY		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_sort_by");
+    public static String    SAVED_SEARCH_LIST_ORDER_BY		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_order_by");
+    public static String    SAVED_SEARCH_LIST_OFFSET		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_offset");
+    public static String    SAVED_SEARCH_LIST_LIMIT		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_limit");
+    public static String    SAVED_SEARCH_LIST_INVALID_OFFSET     = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_invalid_offset");
+    public static String    SAVED_SEARCH_LIST_INVALID_LIMIT     = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_invalid_limit");
+    public static String    SAVED_SEARCH_LIST_INVALID_ORDER_BY		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_invalid_order_by");
+    public static String    SAVED_SEARCH_LIST_INVALID_SORT_BY		 = ReadingServiceEndPointsProperties
+	    .getServiceEndPoint("saved_search_list_invalid_sort_by");
+    
     /**
      * Passing HostName,UserName and Password from the xml.
      */
@@ -74,23 +95,52 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Vasista - Get -Similler profiles
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
-    @Test(groups = { "sanity", "GetSimillerProfiles", "NA" })
-    public void GetSimillerProfiles() throws ClientProtocolException, IOException {
+     * <p>
+     * <b>Target Service URL :</b> generic-services/api/search/similar_profiles
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Search with valid candidateId for finding similar profile.
+     * </p>
+     * <p>
+     * <b>Input :</b> valid candidateId that exists in the system.
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Positive - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P2</font>
+     * </p>
+     * <p>
+     * @author Vasista & Jyoti
+     * </p>
+     */    
+    @Test(groups = { "sanity", "testGetSimilarProfilesUsingValidId_PositiveFunctional", "NA" })
+    public void testGetSimilarProfilesUsingValidId_PositiveFunctional() throws ClientProtocolException, IOException {
+	
+	Logging.log("Service Name: generic-services/api/search/similar_profiles"
+		+ "\nDescription: Search with valid candidateId for finding similar profile."
+		+ "\nInput: Valid candidateId \nExpected Output: Response status 200");
 
-	SearchResourcesConsumer suggestConsumer = null;
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-	// suggestConsumer.getSemilarProfiles(hostName);
-	Response responsebody = suggestConsumer.getSemilarProfiles(hostName);
-	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
+	// Executes GET request and returns Response
+	Response responsebody = suggestConsumer.getSimilarProfiles(hostName);
 	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
 	Assert.assertTrue(response.contains("id"));
-	Logging.log("Response: " + response);
     }
 
     /**
@@ -173,26 +223,54 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Author - Bhagyasree Test case description - Get suggestion when passing
-     * keyword having multiple words(Like project planning, project management)
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
-    @Test(groups = { "sanity", "verifySuggestForSkillwithMultipleWords", "NA" })
-    public void verifySuggestForSkillwithMultipleWords() throws ClientProtocolException, IOException {
-	SearchResourcesConsumer suggestConsumer = null;
+     * <p>
+     * <b>Target Service URL :</b> generic-services/api/search/_suggest?keyword=
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Get suggestion when passing keyword having multiple words(Like project planning, project management)
+     * </p>
+     * <p>
+     * <b>Input :</b> Android Development
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Positive - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P2</font>
+     * </p>
+     * <p>
+     * @author Bhagyasree & Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetVerifySuggestForSkillwithMultipleWords_PositiveFunctional", "NA" })
+    public void testGetVerifySuggestForSkillwithMultipleWords_PositiveFunctional() throws ClientProtocolException, IOException {
+	
+	Logging.log("Service Name: /generic-services/api/search/_suggest?keyword="
+		+ "\nDescription: Get suggestion when passing keyword having multiple words(Like project planning, project management)"
+		+ "\nInput: Android Development \nExpected Output: Response status 500");
+
 	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
 	// Executes Get request and returns Response
 	Response responsebody = suggestConsumer.getSuggestForSkillwithMultipleWords(hostName);
+	String response = responsebody.readEntity(String.class);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
+	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 200,
 		"response code expected equal to 200 but found as:" + responsebody.getStatus());
-	String response = responsebody.readEntity(String.class);
-	System.out.println("***** RESPONSE ******" + response);
-	// Asserting Response Code
-	Assert.assertTrue(StringUtils.containsIgnoreCase(response,
-		ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace("%20", " ")));
+	Assertion.assertTrue(StringUtils.containsIgnoreCase(response,
+		ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace("%20", " ")),"System doesn't contain required skill");
 
     }
 
@@ -240,14 +318,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Response responsebody = suggestConsumer.getSuggestForSkillwithSpecialCharacter(hostName);
 	String response = responsebody.readEntity(String.class);
 
-	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 200,
 		"response code expected equal to 200 but found as:" + responsebody.getStatus());
 	Assert.assertTrue(response.contains(SKILL_WITH_SPECIAL_CHARACTER), "Response doesnot contain .net as skill");
     }
-
      
 	/**
 	 * <p>
@@ -263,7 +339,54 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * <b>Input :</b> Invalid candidateId that doesn't exist in the system.
 	 * </p>
 	 * <p>
-	 * <b>Expected Output :</b> Response status 204
+	 * <b>Expected Output :</b> Response status 500
+	 * </p>
+	 * <p>
+	 * <b>Category :</b> Negative - Functional Test Case
+	 * </p>
+	 * <p>
+	 * <b>Bug Level :</b><font color=#E6A001> P3</font>
+	 * </p>
+	 * <p>
+	 * @author Jyoti
+	 * </p>
+	 */
+	@Test(groups = { "sanity", "testGetSimilarProfilesUsingInvalidId_NegativeFunctional", "NA" })
+	public void testGetSimilarProfilesUsingInvalidId_NegativeFunctional() throws ClientProtocolException, IOException {
+		Logging.log("Service Name: generic-services/api/search/similar_profiles"
+				+ "\nDescription: Search with invalid candidateId for finding similar profile."
+				+ "\nInput: Invalid candidateId \nExpected Output: Response status 500");
+		
+		// Get authentication token
+		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
+		Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus() == 500,
+				"response code expected not equal to 500 but found as:" + responsebody.getStatus());
+		Assertion.assertTrue(response.contains("Unable to fetch the recommended similar profiles"), "Able to fetch the recommended similar profiles using invalid id");
+	}
+	
+	/**
+	 * <p>
+	 * <b>Target Service URL :</b> generic-services/api/search/similar_profiles
+	 * </p>
+	 * <p>
+	 * <b>Test Case Description :</b>
+	 * </p>
+	 * <p>
+	 * Search with blankId for finding similar profile.
+	 * </p>
+	 * <p>
+	 * <b>Input :</b> blankId that doesn't exist in the system.
+	 * </p>
+	 * <p>
+	 * <b>Expected Output :</b> Response status 500
 	 * </p>
 	 * <p>
 	 * <b>Category :</b> Negative - Functional Test Case
@@ -271,19 +394,29 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * <p>
 	 * <b>Bug Level :</b><font color=#007D77> P4</font>
 	 * </p>
+	 * <p>
+	 * @author Jyoti
+	 * </p>
 	 */
-	@Test(groups = { "sanity", "GetSimilarProfilesNegative", "NA" })
-	public void GetSimilarProfilesNegative() throws ClientProtocolException, IOException {
+	@Test(groups = { "sanity", "testGetSimilarProfilesWithBlankId_NegativeFunctional", "NA" })
+	public void testGetSimilarProfilesWithBlankId_NegativeFunctional() throws ClientProtocolException, IOException {
 		Logging.log("Service Name: generic-services/api/search/similar_profiles"
-				+ "\nDescription: Search with invalid candidateId for finding similar profile."
-				+ "\nInput: Invalid candidateId \nExpected Output: Response status 204");
-		SearchResourcesConsumer suggestConsumer = null;
-		suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
-		Response responsebody = suggestConsumer.getSemilarProfilesNegi(hostName);
-		Assertion.assertTrue(responsebody.getStatus() == 204,
-				"response code expected not equal to 204 but found as:" + responsebody.getStatus());
+				+ "\nDescription: Search with blankId for finding similar profile."
+				+ "\nInput: Invalid blankId \nExpected Output: Response status 500");
+		
+		// Get authentication token
+		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
+		Response responsebody = suggestConsumer.getSimilarProfilesUsingBlankId(hostName, BLANK_ID);
 		String response = responsebody.readEntity(String.class);
-		Logging.log("Response: " + response);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus() == 500,
+				"response code expected not equal to 500 but found as:" + responsebody.getStatus());
+		Assertion.assertTrue(response.contains("Unable to fetch the recommended similar profiles"), "Able to fetch the recommended similar profiles using invalid id");
 	}
 
     /**
@@ -548,6 +681,55 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 500, "Response not successful");
 	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"), "getSavedSearchById found a non existent id");
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{blankId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Get saved search by blankId and expecting failure response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> blankId
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "getSavedSearchByBlankId" })
+    public void getSavedSearchByBlankId() throws ClientProtocolException, IOException {
+	Logging.log("Service Name: generic-services/api/search/save_search/{blankId}"
+		+ "\nDescription: get saved search and expecting failure response." + "\nInput: blankId" 
+		+ "\nExpected Output: 400 Response");
+	
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.getSavedSearchById(hostName, BLANK_ID);
+	String response = responsebody.readEntity(String.class);
+	
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 400, "getSavedSearchByBlankId is successful");
+	
+	// Response should have id
+	Assertion.assertTrue(response.contains("Invalid input. SavedSearch Id cannot be null or empty."), "getSavedSearchById is successful using blankId");
     }
 
     /**
@@ -1451,7 +1633,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     /**
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/list?sortBy=modifiedOn&orderBy=asc
@@ -1483,14 +1664,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     @Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnAsc", "NA" })
     public void listSavedSearchWithSortByModifiedOnAsc() throws ClientProtocolException, IOException {
 
-	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy=createdOn&orderBy=asc"
+	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy=modifiedOn&orderBy=asc"
 		+ "\nDescription: Verifying saved search list service with correct parameter and expecting success response."
 		+ "\nInput: Using sortBy & orderBy " + "\nExpected Output: Response status 200");
 
-	SearchResourcesConsumer suggestConsumer = null;
-
 	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 
 	// Executes get request and returns Response
 	Response responsebody = suggestConsumer.listSavedSearchWithSortByModifiedOnAsc(hostName);
@@ -1505,22 +1684,23 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// comparing modifiedOn dates if all are in ascending order
 	JSONObject obj = new JSONObject(response);
 	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
-	final int n = savedSearchDetails.length();
-	if (n >= 2) {
-	    long[] modifiedOnArr = new long[n];
-	    for (int i = 0; i < n; i++) {
-		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
-		modifiedOnArr[i] = savedSearchDetail.getLong("modifiedOn");
-	    }
-	    Assertion.assertTrue(SearchUtil.isSortedInAscOrder(modifiedOnArr),
-		    "modifiedOn is not sorted in ascending order");
+	if(savedSearchDetails!=null){
+        	final int n = savedSearchDetails.length();
+        	if (n >= 2) {
+        	    long[] modifiedOnArr = new long[n];
+        	    for (int i = 0; i < n; i++) {
+        		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
+        		modifiedOnArr[i] = savedSearchDetail.getLong("modifiedOn");
+        	    }
+        	    Assertion.assertTrue(SearchUtil.isSortedInAscOrder(modifiedOnArr),
+        		    "modifiedOn is not sorted in ascending order");
+        	}
 	}
     }
 
     /**
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/list?sortBy=modifiedOn&orderBy=dsc
@@ -1551,11 +1731,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      */
     @Test(groups = { "sanity", "listSavedSearchWithSortByModifiedOnDsc", "NA" })
     public void listSavedSearchWithSortByModifiedOnDsc() throws ClientProtocolException, IOException {
-
-	SearchResourcesConsumer suggestConsumer = null;
+	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy=modifiedOn&orderBy=dsc"
+		+ "\nDescription: Verifying saved search list service with correct parameter and expecting success response."
+		+ "\nInput: Using sortBy & orderBy " + "\nExpected Output: Response status 200");
 
 	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 
 	// Executes get request and returns Response
 	Response responsebody = suggestConsumer.listSavedSearchWithSortByModifiedOnDsc(hostName);
@@ -1570,23 +1751,313 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// comparing modifiedOn dates if all are in descending order
 	JSONObject obj = new JSONObject(response);
 	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
-	final int n = savedSearchDetails.length();
-	if (n >= 2) {
-	    long[] modifiedOnArr = new long[n];
-	    for (int i = 0; i < n; i++) {
-		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
-		modifiedOnArr[i] = savedSearchDetail.getLong("modifiedOn");
-	    }
-	    Assertion.assertTrue(SearchUtil.isSortedInDscOrder(modifiedOnArr),
-		    "modifiedOn is not sorted in descending order");
+	if(savedSearchDetails!=null){
+        	final int n = savedSearchDetails.length();
+        	if (n >= 2) {
+        	    long[] modifiedOnArr = new long[n];
+        	    for (int i = 0; i < n; i++) {
+        		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
+        		modifiedOnArr[i] = savedSearchDetail.getLong("modifiedOn");
+        	    }
+        	    Assertion.assertTrue(SearchUtil.isSortedInDscOrder(modifiedOnArr),
+        		    "modifiedOn is not sorted in descending order");
+        	}
 	}
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/list
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search list service with correct query parameters
+     * and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> Using valid sortBy, orderBy, offset & limit
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Positive - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#C90000> P1</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetListSavedSearchWithValidOffsetLimit_PositiveFunctional", "NA" })
+    public void testGetListSavedSearchWithValidOffsetLimit_PositiveFunctional() throws ClientProtocolException, IOException {
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy="+SAVED_SEARCH_LIST_SORT_BY+"&orderBy="+SAVED_SEARCH_LIST_ORDER_BY+"&offset="+SAVED_SEARCH_LIST_OFFSET+"&limit="+SAVED_SEARCH_LIST_LIMIT
+		+ "\nDescription: Verifying saved search list service with given parametera and expecting success response."
+		+ "\nInput: Using valid sortBy, orderBy, offset & limit " + "\nExpected Output: Response status 200");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.listSavedSearch(hostName, SAVED_SEARCH_LIST_SORT_BY, SAVED_SEARCH_LIST_ORDER_BY, SAVED_SEARCH_LIST_OFFSET, SAVED_SEARCH_LIST_LIMIT);
+	String response = responsebody.readEntity(String.class);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+
+	JSONObject obj = new JSONObject(response);
+	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
+	if(savedSearchDetails!=null){
+    	    	Assertion.assertTrue(savedSearchDetails.length()<=Integer.parseInt(SAVED_SEARCH_LIST_LIMIT), "savedSearchList is showing items more than specified limit : "+SAVED_SEARCH_LIST_LIMIT);
+	}
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/list
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search list service with given query parameters
+     * and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> Using invalid offset and valid sortBy, orderBy & limit
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative- Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P2</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetListSavedSearchWithInvalidOffset_NegativeFunctional", "NA" })
+    public void testGetListSavedSearchWithInvalidOffset_NegativeFunctional() throws ClientProtocolException, IOException {
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy="+SAVED_SEARCH_LIST_SORT_BY+"&orderBy="+SAVED_SEARCH_LIST_ORDER_BY+"&offset="+SAVED_SEARCH_LIST_INVALID_OFFSET+"&limit="+SAVED_SEARCH_LIST_LIMIT
+		+ "\nDescription: Verifying saved search list service with correct parameter and expecting success response."
+		+ "\nInput: Using invalid offset and valid sortBy, orderBy & limit " + "\nExpected Output: Response status 200");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.listSavedSearch(hostName, SAVED_SEARCH_LIST_SORT_BY, SAVED_SEARCH_LIST_ORDER_BY, SAVED_SEARCH_LIST_INVALID_OFFSET, SAVED_SEARCH_LIST_INVALID_OFFSET); //SAVED_SEARCH_LIST_LIMIT
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	JSONObject obj = new JSONObject(response);
+	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
+	if(savedSearchDetails!=null){
+    	    	Assertion.assertTrue(savedSearchDetails.length()>Integer.parseInt(SAVED_SEARCH_LIST_INVALID_OFFSET), "savedSearchList is coming with invalid offset : "+SAVED_SEARCH_LIST_INVALID_OFFSET);
+	}
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/list
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search list service with given query parameters
+     * and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> Using invalid limit and valid sortBy, orderBy & offset
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P2</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetListSavedSearchWithInvalidLimit_NegativeFunctional", "NA" })
+    public void testGetListSavedSearchWithInvalidLimit_NegativeFunctional() throws ClientProtocolException, IOException {
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy="+SAVED_SEARCH_LIST_SORT_BY+"&orderBy="+SAVED_SEARCH_LIST_ORDER_BY+"&offset="+SAVED_SEARCH_LIST_OFFSET+"&limit="+SAVED_SEARCH_LIST_INVALID_LIMIT
+		+ "\nDescription: Verifying saved search list service with correct parameter and expecting success response."
+		+ "\nInput: Using invalid limit and valid sortBy, orderBy & offset " + "\nExpected Output: Response status 200");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.listSavedSearch(hostName, SAVED_SEARCH_LIST_SORT_BY, SAVED_SEARCH_LIST_ORDER_BY, SAVED_SEARCH_LIST_OFFSET, SAVED_SEARCH_LIST_INVALID_LIMIT); 
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// comparing modifiedOn dates if all are in ascending order
+	JSONObject obj = new JSONObject(response);
+	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
+	if(savedSearchDetails!=null){
+    	    	Assertion.assertTrue(savedSearchDetails.length()>Integer.parseInt(SAVED_SEARCH_LIST_INVALID_LIMIT), "savedSearchList is coming with invalid limit : "+SAVED_SEARCH_LIST_INVALID_LIMIT);
+	}
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/list
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search list service with given query parameters
+     * and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> Using invalid orderBy and valid sortBy, limit & offset
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P2</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetListSavedSearchWithInvalidOrderBy_NegativeFunctional", "NA" })
+    public void testGetListSavedSearchWithInvalidOrderBy_NegativeFunctional() throws ClientProtocolException, IOException {
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy="+SAVED_SEARCH_LIST_SORT_BY+"&orderBy="+SAVED_SEARCH_LIST_INVALID_ORDER_BY+"&offset="+SAVED_SEARCH_LIST_OFFSET+"&limit="+SAVED_SEARCH_LIST_LIMIT
+		+ "\nDescription: Verifying saved search list service with correct parameter and expecting success response."
+		+ "\nInput: Using invalid orderBy and valid sortBy, limit & offset " + "\nExpected Output: Response status 200");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.listSavedSearch(hostName, SAVED_SEARCH_LIST_SORT_BY, SAVED_SEARCH_LIST_INVALID_ORDER_BY, SAVED_SEARCH_LIST_OFFSET, SAVED_SEARCH_LIST_LIMIT); 
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// comparing modifiedOn dates if all are in ascending order even if we pass invalid orderBy as param
+	JSONObject obj = new JSONObject(response);
+	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
+	if(savedSearchDetails!=null){
+    	final int n = savedSearchDetails.length();
+    	if (n >= 2) {
+    	    long[] modifiedOnArr = new long[n];
+    	    for (int i = 0; i < n; i++) {
+    		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
+    		modifiedOnArr[i] = savedSearchDetail.getLong("modifiedOn");
+    	    }
+    	    Assertion.assertTrue(SearchUtil.isSortedInAscOrder(modifiedOnArr),
+    		    "modifiedOn is not sorted in ascending order");
+    	}
+	}
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/list
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search list service with given query parameters
+     * and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> Using invalid sortBy and valid orderBy, limit & offset 
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 500
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#81017F> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetListSavedSearchWithInvalidSortBy_NegativeFunctional", "NA" })
+    public void testGetListSavedSearchWithInvalidSortBy_NegativeFunctional() throws ClientProtocolException, IOException {
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/list?sortBy="+SAVED_SEARCH_LIST_INVALID_SORT_BY+"&orderBy="+SAVED_SEARCH_LIST_ORDER_BY+"&offset="+SAVED_SEARCH_LIST_OFFSET+"&limit="+SAVED_SEARCH_LIST_LIMIT
+		+ "\nDescription: Verifying saved search list service with correct parameter and expecting failure response."
+		+ "\nInput: Using invalid sortBy and valid orderBy, limit & offset " + "\nExpected Output: Response status 500");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes get request and returns Response
+	Response responsebody = suggestConsumer.listSavedSearch(hostName, SAVED_SEARCH_LIST_INVALID_SORT_BY, SAVED_SEARCH_LIST_ORDER_BY, SAVED_SEARCH_LIST_OFFSET, SAVED_SEARCH_LIST_LIMIT);
+	String response = responsebody.readEntity(String.class);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 500, "Response not successful");
+	Assertion.assertTrue(response.contains("The field 'abc' could not be found"), "listSavedSearch is working with invalid sortBy : "+SAVED_SEARCH_LIST_INVALID_SORT_BY);
     }
 
     /**
      * @throws IOException
      * @throws ClientProtocolException
      * 
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/list?sortBy=createdOn&orderBy=asc
@@ -1622,10 +2093,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		+ "\nDescription: Verifying saved search list service with correct parameter and expecting success response."
 		+ "\nInput: Using sortBy & orderBy " + "\nExpected Output: Response status 200");
 
-	SearchResourcesConsumer suggestConsumer = null;
-
 	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 
 	// Executes get request and returns Response
 	Response responsebody = suggestConsumer.listSavedSearchWithSortByCreatedOnAsc(hostName);
@@ -1640,15 +2109,17 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// comparing createdOn dates if all are in ascending order
 	JSONObject obj = new JSONObject(response);
 	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
-	final int n = savedSearchDetails.length();
-	if (n >= 2) {
-	    long[] createdOnArr = new long[n];
-	    for (int i = 0; i < n; i++) {
-		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
-		createdOnArr[i] = savedSearchDetail.getLong("createdOn");
-	    }
-	    Assertion.assertTrue(SearchUtil.isSortedInAscOrder(createdOnArr),
-		    "createdOn is not sorted in ascending order");
+	if(savedSearchDetails!=null){
+        	final int n = savedSearchDetails.length();
+        	if (n >= 2) {
+        	    long[] createdOnArr = new long[n];
+        	    for (int i = 0; i < n; i++) {
+        		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
+        		createdOnArr[i] = savedSearchDetail.getLong("createdOn");
+        	    }
+        	    Assertion.assertTrue(SearchUtil.isSortedInAscOrder(createdOnArr),
+        		    "createdOn is not sorted in ascending order");
+        	}
 	}
     }
 
@@ -1657,7 +2128,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * @throws IOException
      * @throws ClientProtocolException
      * 
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/list?sortBy=createdOn&orderBy=dsc
@@ -1692,10 +2162,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		+ "\nDescription: Verifying saved search list service with correct parameter and expecting success response."
 		+ "\nInput: Using sortBy & orderBy " + "\nExpected Output: Response status 200");
 
-	SearchResourcesConsumer suggestConsumer = null;
-
 	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
 
 	// Executes get request and returns Response
 	Response responsebody = suggestConsumer.listSavedSearchWithSortByCreatedOnDsc(hostName);
@@ -1710,15 +2178,17 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// comparing createdOn dates if all are in descending order
 	JSONObject obj = new JSONObject(response);
 	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
-	final int n = savedSearchDetails.length();
-	if (n >= 2) {
-	    long[] createdOnArr = new long[n];
-	    for (int i = 0; i < n; i++) {
-		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
-		createdOnArr[i] = savedSearchDetail.getLong("createdOn");
-	    }
-	    Assertion.assertTrue(SearchUtil.isSortedInDscOrder(createdOnArr),
-		    "createdOn is not sorted in descending order");
+	if(savedSearchDetails!=null){
+        	final int n = savedSearchDetails.length();
+        	if (n >= 2) {
+        	    long[] createdOnArr = new long[n];
+        	    for (int i = 0; i < n; i++) {
+        		JSONObject savedSearchDetail = savedSearchDetails.getJSONObject(i);
+        		createdOnArr[i] = savedSearchDetail.getLong("createdOn");
+        	    }
+        	    Assertion.assertTrue(SearchUtil.isSortedInDscOrder(createdOnArr),
+        		    "createdOn is not sorted in descending order");
+        	}
 	}
     }
 
@@ -1726,7 +2196,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * @throws IOException
      * @throws ClientProtocolException
      * 
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/_suggest?keyword={invalidKeyword}
@@ -2077,7 +2546,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 
 	// Executes DELETE request and returns Response
 	/* starts - delete saved search */
-	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={blankInput}"
+	Logging.log("Service Name: /generic-services/api/search/save_search/" + id
 		+ "\nDescription: Delete particular saved search by ID that exist and expecting success response."
 		+ "\nInput: id :" + id + "\nExpected Output: Response status 200");
 
@@ -2140,6 +2609,57 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assertion.assertEquals(responsebody.getStatus(), 500, "Deleted Successfully");
 	Assertion.assertTrue(response.contains("Invalid Savedsearch Id"), "Savedsearch deleted successfully");
     }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * 
+     *             Updated by Jyoti
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchIdToBeDeleted}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             delete saved search by blank Id
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> blank Id
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Non Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#007D77> P4</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "deleteSavedSearchByBlankId", "NA" })
+    public void deleteSavedSearchByBlankId() throws ClientProtocolException, IOException {
+	// Executes DELETE request and returns Response
+	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={blankInput}"
+		+ "\nDescription: Delete saved search by blank ID and expecting failure response."
+		+ "\nInput: blank Id \nExpected Output: Response status 400");
+	
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	Response responsebody = suggestConsumer.deleteSavedSearchById(hostName, BLANK_ID);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 400, "Response not successful");
+	Assertion.assertTrue(!response.contains("Savedsearch deleted successfully"), "Savedsearch deletion successful");
+    }
 
     /**
      * @throws IOException
@@ -2199,7 +2719,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     /**
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search
@@ -2274,7 +2793,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     /**
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search/{InvalidSavedSearchId}
@@ -2335,6 +2853,134 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		"Savedsearch update succeeded with Invalid Savedsearch Id");
 	/* ends - update saved search */
     }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Update saved search by blank Id and expecting failure response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> blank Id & savedSearch Object
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 500
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "updateSavedSearchByBlankId", "NA" })
+    public void updateSavedSearchByBlankId() throws ClientProtocolException, IOException {
+	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
+	inputBean = SearchUtil.updateSavedSearchInputBeanWithSkill(inputBean);
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/" + BLANK_ID
+		+ "\nDescription: Update saved search by blank Id" + "\nInput: " + inputBean
+		+ "\nExpected Output: Response status 500");
+
+	Response updateteResponsebody = suggestConsumer.updateSavedSearchWithSkill(inputBean, hostName, BLANK_ID);
+	Logging.log("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
+
+	String updateResponse = updateteResponsebody.readEntity(String.class);
+	Logging.log("***** RESPONSE : updateResponse : ****** " + updateResponse);
+
+	// Asserting Response Code
+	Assertion.assertEquals(updateteResponsebody.getStatus(), 500, "Blank Id updated Succesfully");
+	Assertion.assertTrue(updateResponse.contains("Invalid Savedsearch Id"),
+		"Savedsearch update succeeded with blank Id");
+	/* ends - update saved search */
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchId}
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
+     *             Update particular saved search by ID without proper savedSearch Object and
+     *             expecting failure response.
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> savedSearchId & incomplete savedSearch Object
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "updateSavedSearchWithoutSavedSearchObj", "NA" })
+    public void updateSavedSearchWithoutSavedSearchObj() throws ClientProtocolException, IOException {
+	Logging.log("Update particular saved search by ID without proper savedSearch Object");
+
+	/* starts - create saved search before updating */
+	SavedSearchDetails inputBean = SearchUtil.createSavedSearchInputBeanWithSkill();
+	Logging.log("inputBean " + inputBean);
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	Response createResponsebody = suggestConsumer.createSavedSearchWithSkill(inputBean, hostName);
+	Logging.log("createResponsebody " + createResponsebody);
+
+	String createResponse = createResponsebody.readEntity(String.class);
+	Logging.log("createResponse " + createResponse);
+
+	JSONObject createResponseJson = new JSONObject(createResponse);
+	JSONObject responseJson = createResponseJson.getJSONObject("response");
+	String id = responseJson.getString("id");
+
+	Logging.log("***** RESPONSE : id : ****** " + id);
+	/* ends - create saved search before updating */
+
+	/* starts - update saved search */
+	inputBean = SearchUtil.updateSavedSearchInputBeanWithSkill(inputBean);
+
+	Logging.log("Service Name: /generic-services/api/search/save_search/" + id
+		+ "\nDescription: pdate particular saved search by ID without proper savedSearch Object and expecting failure response." + "\nInput: " + null
+		+ "\nExpected Output: Response status 400");
+
+	Response updateteResponsebody = suggestConsumer.updateSavedSearchWithSkill(new SavedSearchDetails(), hostName, id);
+	Logging.log("***** RESPONSE : updateteResponsebody : ******" + updateteResponsebody);
+
+	String updateResponse = updateteResponsebody.readEntity(String.class);
+	Logging.log("***** RESPONSE : updateResponse : ****** " + updateResponse);
+
+	// Asserting Response Code
+	Assertion.assertEquals(updateteResponsebody.getStatus(), 400, "Improper savedSearch updated Succesfully");
+	Assertion.assertTrue(updateResponse.contains("Invalid input. Name cannot be null or empty."),
+		"Savedsearch update succeeded without proper savedSearch Object");
+	/* ends - update saved search */
+    }
 
     /**
      * @throws IOException
@@ -2389,6 +3035,177 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assertion.assertTrue(StringUtils.containsIgnoreCase(response, SEARCH_TEXT),
 		"searchText=" + SEARCH_TEXT + " is not found in response");
 
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/search?searchText={searchText}
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search service for searching searchText with
+     * correct parameters and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> searchText = bhagyasree and valid offset and limit
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Positive - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#C90000> P1</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetSavedSearchUsingSearchTextWithValidOffsetLimit_PositiveFunctional", "NA" })
+    public void testGetSavedSearchUsingSearchTextWithValidOffsetLimit_PositiveFunctional() throws ClientProtocolException, IOException {
+	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={searchText}&offset="+SAVED_SEARCH_LIST_OFFSET+"&limit="+SAVED_SEARCH_LIST_LIMIT
+		+ "\nDescription: Verifying saved search service for searching searchText with correct parameter and expecting success response."
+		+ "\nInput: searchText = " + SEARCH_TEXT + " and valid offset and limit\nExpected Output: Response status 200");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes GET request and returns Response
+	Response responsebody = suggestConsumer.getSavedSearchUsingSearchText(hostName, SEARCH_TEXT, SAVED_SEARCH_LIST_OFFSET, SAVED_SEARCH_LIST_LIMIT);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+	Assertion.assertTrue(StringUtils.containsIgnoreCase(response, SEARCH_TEXT),
+		"searchText=" + SEARCH_TEXT + " is not found in response");
+	
+	JSONObject obj = new JSONObject(response);
+	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
+	if(savedSearchDetails!=null){
+    	    	Assertion.assertTrue(savedSearchDetails.length()<=Integer.parseInt(SAVED_SEARCH_LIST_LIMIT), "savedSearch using search text is showing items more than specified limit : "+SAVED_SEARCH_LIST_LIMIT);
+	}
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/search?searchText={searchText}
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search service for searching searchText with
+     * given parameters and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> searchText = bhagyasree and invalid offset and valid limit
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetSavedSearchUsingSearchTextWithInvalidOffset_NegativeFunctional", "NA" })
+    public void testGetSavedSearchUsingSearchTextWithInvalidOffset_NegativeFunctional() throws ClientProtocolException, IOException {
+	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={searchText}&offset="+SAVED_SEARCH_LIST_INVALID_OFFSET+"&limit="+SAVED_SEARCH_LIST_LIMIT
+		+ "\nDescription: Verifying saved search service for searching searchText with given parameter and expecting success response."
+		+ "\nInput: searchText = " + SEARCH_TEXT + " and invalid offset and valid limit\nExpected Output: Response status 200");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes GET request and returns Response
+	Response responsebody = suggestConsumer.getSavedSearchUsingSearchText(hostName, SEARCH_TEXT, SAVED_SEARCH_LIST_INVALID_OFFSET, SAVED_SEARCH_LIST_LIMIT);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+	Assertion.assertTrue(StringUtils.containsIgnoreCase(response, SEARCH_TEXT),
+		"searchText=" + SEARCH_TEXT + " is not found in response");
+	
+	JSONObject obj = new JSONObject(response);
+	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
+	if(savedSearchDetails!=null){
+	    Assertion.assertTrue(savedSearchDetails.length()>Integer.parseInt(SAVED_SEARCH_LIST_INVALID_OFFSET), "savedSearch using searchText is coming with invalid offset : "+SAVED_SEARCH_LIST_INVALID_OFFSET);
+	}
+    }
+    
+    /**
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search/search?searchText={searchText}
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Verifying saved search service for searching searchText with
+     * given parameters and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> searchText = bhagyasree and invalid limit and valid offset
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetSavedSearchUsingSearchTextWithInvalidLimit_NegativeFunctional", "NA" })
+    public void testGetSavedSearchUsingSearchTextWithInvalidLimit_NegativeFunctional() throws ClientProtocolException, IOException {
+	Logging.log("Service Name: /generic-services/api/search/save_search/search?searchText={searchText}&offset="+SAVED_SEARCH_LIST_OFFSET+"&limit="+SAVED_SEARCH_LIST_INVALID_LIMIT
+		+ "\nDescription: Verifying saved search service for searching searchText with given parameters and expecting success response."
+		+ "\nInput: searchText = " + SEARCH_TEXT + " and invalid limit and valid offset\nExpected Output: Response status 200");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes GET request and returns Response
+	Response responsebody = suggestConsumer.getSavedSearchUsingSearchText(hostName, SEARCH_TEXT, SAVED_SEARCH_LIST_OFFSET, SAVED_SEARCH_LIST_INVALID_LIMIT);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+	Assertion.assertTrue(StringUtils.containsIgnoreCase(response, SEARCH_TEXT),
+		"searchText=" + SEARCH_TEXT + " is not found in response");
+	
+	JSONObject obj = new JSONObject(response);
+	JSONArray savedSearchDetails = obj.getJSONObject("response").getJSONArray("savedSearchDetails");
+	if(savedSearchDetails!=null){
+	    Assertion.assertTrue(savedSearchDetails.length()>Integer.parseInt(SAVED_SEARCH_LIST_INVALID_LIMIT), "savedSearchList is coming with invalid limit : "+SAVED_SEARCH_LIST_INVALID_LIMIT);
+	}
     }
 
     /**
@@ -2505,6 +3322,55 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      *             <b>Test Case Description :</b>
      *             </p>
      *             <p>
+     *             Search candidates with no searchInput
+     *             </p>
+     *             <p>
+     *             <b>Input :</b> no searchInput
+     *             </p>
+     *             <p>
+     *             <b>Expected Output :</b> Response status 400
+     *             </p>
+     *             <p>
+     *             <b>Category :</b> Negative - Functional Test Case
+     *             </p>
+     *             <p>
+     *             <b>Bug Level :</b><font color=#E6A001> P3</font>
+     *             </p>
+     *  	   <p>
+     *             @author Jyoti
+     *             </p>
+     */
+    @Test(groups = { "sanity", "getCandidatesFromSavedSearchWithNoSearchInput", "NA" })
+    public void getCandidatesFromSavedSearchWithNoSearchInput() throws ClientProtocolException, IOException {
+	String inputBean = "{\"searchInput\": {\"searchQueryString\": \"(skill:MySQL or skill:ajax)\",\"searchAttributeMap\": {\"skill\": [\"MySQL\",\"ajax\"]}}}}";
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search/{savedSearchId}/candidates"
+		+ "\nDescription: Get candidates from saved search without searchInput and expecting failure response."
+		+ "\nInput: inputBean : "+inputBean + "\nExpected Output: Response status 400");
+	
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.getCandidatesFromSavedSearch(null, hostName, savedSearchId);
+	String response = responsebody.readEntity(String.class);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400, "Expected 400 status code but found "+responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchInputRequest cannot be null or empty"), "Response successful");
+    }
+    
+    /**
+     *             <p>
+     *             <b>Target Service URL :</b>
+     *             /generic-services/api/search/save_search/{savedSearchId}/candidates
+     *             </p>
+     *             <p>
+     *             <b>Test Case Description :</b>
+     *             </p>
+     *             <p>
      *             Search candidates for given skill
      *             </p>
      *             <p>
@@ -2556,7 +3422,6 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
      * 
      * @throws IOException
      * @throws ClientProtocolException
-     *             Updated by Jyoti
      *             <p>
      *             <b>Target Service URL :</b>
      *             /generic-services/api/search/save_search
@@ -2609,5 +3474,203 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Assertion.assertTrue(response.contains("Invalid input. Savedsearch cannot be created using existing name"),
 		"Savedsearch created with an existing name");
     }
+    
+    /**
+     * 
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Create a saved search without searchQueryString
+     * </p>
+     * <p>
+     * <b>Input :</b> searchInput without searchQueryString where searchQueyString is mandatory input
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 400
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "createSavedSearchWithoutSearchQueryString", "NA" })
+    public void createSavedSearchWithoutSearchQueryString() throws ClientProtocolException, IOException {
+	SavedSearchDetails savedSearchDetails = new SavedSearchDetails();
+	Random rand = new Random();
+	savedSearchDetails.setName("Test Saved Search"+rand.nextInt());
+	savedSearchDetails.setSearchDescription("Test");
+	savedSearchDetails.setCreatedByName("Jyoti");
+	savedSearchDetails.setPublicPool(true);
+	SearchInput searchInput = new SearchInput();
 
+	Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
+	List<String> skills = new ArrayList<String>();
+	skills.add("java");
+	searchAttributeMap.put("skill", skills);
+	searchInput.setSearchAttributeMap(searchAttributeMap);
+	savedSearchDetails.setSearchInput(searchInput);
+	Logging.log("savedSearchDetails..................." + savedSearchDetails);
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Creating a saved search without searchQueryString and expecting failure response." + "\nInput: "
+		+ savedSearchDetails + "\nExpected Output: Response status 400");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.createSavedSearchWithSkill(savedSearchDetails, hostName);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400,
+		"response code expected equal to 400 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchQueryString cannot be null or empty."),
+		"Savedsearch created without searchQueryString");
+    }
+    
+    /**
+     * 
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Create a saved search without searchAttributeMap
+     * </p>
+     * <p>
+     * <b>Input :</b> searchInput without searchAttributeMap where searchAttributeMap is mandatory input
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 400
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "createSavedSearchWithoutSearchAttributeMap", "NA" })
+    public void createSavedSearchWithoutSearchAttributeMap() throws ClientProtocolException, IOException {
+	SavedSearchDetails savedSearchDetails = new SavedSearchDetails();
+	Random rand = new Random();
+	savedSearchDetails.setName("Test Saved Search"+rand.nextInt());
+	savedSearchDetails.setSearchDescription("Test");
+	savedSearchDetails.setCreatedByName("Jyoti");
+	savedSearchDetails.setPublicPool(true);
+	SearchInput searchInput = new SearchInput();
+	searchInput.setSearchQueryString("(skill:java)");
+	savedSearchDetails.setSearchInput(searchInput);
+	
+	Logging.log("savedSearchDetails..................." + savedSearchDetails);
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Creating saved search without searchAttributeMap and expecting failure response." + "\nInput: "
+		+ savedSearchDetails + "\nExpected Output: Response status 400");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.createSavedSearchWithSkill(savedSearchDetails, hostName);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400,
+		"response code expected equal to 400 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchAttributeMap cannot be null or empty."),
+		"Savedsearch created without searchAttributeMap");
+    }
+
+    /**
+     * 
+     * @throws IOException
+     * @throws ClientProtocolException
+     * <p>
+     * <b>Target Service URL :</b>
+     * /generic-services/api/search/save_search
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Create a saved search without searchDescription
+     * </p>
+     * <p>
+     * <b>Input :</b> searchInput without searchDescription where searchDescription is mandatory input
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 400
+     * </p>
+     * <p>
+     * <b>Category :</b> Negative - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#E6A001> P3</font>
+     * </p>
+     * <p>
+     * @author Jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "createSavedSearchWithoutSearchDescription", "NA" })
+    public void createSavedSearchWithoutSearchDescription() throws ClientProtocolException, IOException {
+	SavedSearchDetails savedSearchDetails = new SavedSearchDetails();
+	Random rand = new Random();
+	savedSearchDetails.setName("Test Saved Search"+rand.nextInt());
+	savedSearchDetails.setCreatedByName("Jyoti");
+	savedSearchDetails.setPublicPool(true);
+	SearchInput searchInput = new SearchInput();
+	Map<String, List<String>> searchAttributeMap = new HashMap<String, List<String>>();
+	List<String> skills = new ArrayList<String>();
+	skills.add("java");
+	searchAttributeMap.put("skill", skills);
+	searchInput.setSearchQueryString("(skill:java)");
+	savedSearchDetails.setSearchInput(searchInput);
+	
+	Logging.log("savedSearchDetails..................." + savedSearchDetails);
+	
+	Logging.log("Service Name: /generic-services/api/search/save_search"
+		+ "\nDescription: Creating saved search without searchDescription and expecting failure response." + "\nInput: "
+		+ savedSearchDetails + "\nExpected Output: Response status 400");
+
+	// Get authentication token
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+
+	// Executes POST request and returns Response
+	Response responsebody = suggestConsumer.createSavedSearchWithSkill(savedSearchDetails, hostName);
+	String response = responsebody.readEntity(String.class);
+
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 400,
+		"response code expected equal to 400 but found as:" + responsebody.getStatus());
+	Assertion.assertTrue(response.contains("Invalid input. SearchDescription cannot be null or empty."),
+		"Savedsearch created without searchDescription");
+    }
 }
