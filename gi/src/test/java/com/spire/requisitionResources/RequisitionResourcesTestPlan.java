@@ -37,6 +37,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public static String VALID_LIMIT = ReadingServiceEndPointsProperties.getServiceEndPoint("valid_limit");
 	public static String INVALID_OFFSET_OR_LIMIT = ReadingServiceEndPointsProperties.getServiceEndPoint("invalid_offset_or_limit");
 	public static String INVALID_TYPE_OR_KEYWORD = ReadingServiceEndPointsProperties.getServiceEndPoint("invalid_type_or_keyword");
+	public static String REQUISITION_KEYWORD_VALID_TYPE = ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_keyword_valid_type");
 
 	/**
 	 * Passing HostName,UserName and Password from the xml.
@@ -653,6 +654,204 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		 */
 	}
 	
+	/**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/keyword
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> valid type, offset & limit
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetRequisitionKeyword_PositiveFunctional","NA" })
+	public void testGetRequisitionKeyword_PositiveFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/keyword"
+			+ "\nDescription: Get the list of keywords using given parameters and expecting success response." 
+		        + "\nInput: valid type, offset & limit \nExpected Output: Response status 200");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getRequisitionKeyword(hostName, REQUISITION_KEYWORD_VALID_TYPE, VALID_OFFSET, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+	}
+	
+	/**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/keyword
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> invalid type, valid offset & limit
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetRequisitionKeywordInvalidType_NegativeFunctional","NA" })
+	public void testGetRequisitionKeywordInvalidType_NegativeFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/keyword"
+			+ "\nDescription: Get the list of keywords using given parameters and expecting success response." 
+		        + "\nInput: invalid type, valid offset & limit \nExpected Output: Response status 200");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getRequisitionKeyword(hostName, INVALID_TYPE_OR_KEYWORD, VALID_OFFSET, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+	}
+	
+	/**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/keyword
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> invalid offset, valid type & limit
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetRequisitionKeywordInvalidOffset_NegativeFunctional","NA" })
+	public void testGetRequisitionKeywordInvalidOffset_NegativeFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/keyword"
+			+ "\nDescription: Get the list of keywords using given parameters and expecting failure response." 
+		        + "\nInput: invalid offset, valid type & limit \nExpected Output: Response status 500");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getRequisitionKeyword(hostName, REQUISITION_KEYWORD_VALID_TYPE, INVALID_OFFSET_OR_LIMIT, VALID_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 500, "Response unsuccessful, Expected 500 status code");
+    	     Assertion.assertTrue(response.contains("Unable to fetch the keywords for the given type"),"Response succeeded with invalid offset");
+	}	
+	
+	/**
+	* 
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b>
+	* generic-services/api/requisitions/keyword
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the list of keywords using given parameters
+	* </p>
+	* <p>
+	* <b>Input :</b> invalid limit, valid type & offset
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#E6A001> P3</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetRequisitionKeywordInvalidLimit_NegativeFunctional","NA" })
+	public void testGetRequisitionKeywordInvalidLimit_NegativeFunctional() throws ClientProtocolException, IOException {
+	      Logging.log("Service Name: generic-services/api/requisitions/keyword"
+			+ "\nDescription: Get the list of keywords using given parameters and expecting failure response." 
+		        + "\nInput: invalid limit, valid type & offset \nExpected Output: Response status 500");
+	      
+	     // Get authentication token
+    	     reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+    		
+    	     // Executes POST request and returns Response
+    	     Response responsebody = reqConsumer.getRequisitionKeyword(hostName, REQUISITION_KEYWORD_VALID_TYPE, VALID_OFFSET, INVALID_OFFSET_OR_LIMIT);
+    	     String response = responsebody.readEntity(String.class);
+    	     
+    	     Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+
+    	     // Asserting Response Code
+    	     Assertion.assertTrue(responsebody.getStatus() == 500, "Response unsuccessful, Expected 500 status code");
+    	     Assertion.assertTrue(response.contains("Unable to fetch the keywords for the given type"),"Response succeeded with invalid limit");
+	}
+	
       /**
 	* 
 	* @throws IOException
@@ -750,6 +949,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
     	     // Asserting Response Code
     	     Assertion.assertTrue(responsebody.getStatus() == 500, "Response successful, Expected 500 status code");
 	}
+	
 	
       /**
 	* 
