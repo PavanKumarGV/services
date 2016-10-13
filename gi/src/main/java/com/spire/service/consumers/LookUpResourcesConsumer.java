@@ -18,6 +18,15 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	String lookUp = getServiceEndPoint("LOOK_UP");
 	String getlistlookupwithspecialcharacter=getServiceEndPoint("LOOK_UP_WITH_SPECIAL_CHARACTER");
 	public static String LOOKUP_FILTER = getServiceEndPoint("LOOKUP_FILTER");
+	public static String LOOKUP_FILTER_MATCH = getServiceEndPoint("LOOKUP_FILTER_MATCH");
+	
+	public Response getLookupFilterMatchByTypeKeywordEntityType(String hostName, String type, String keyword, String entityType, String offset, String limit) {
+		String serviceEndPoint = LOOKUP_FILTER_MATCH.replaceAll("hostAddress", hostName)
+			+"?type="+type+"&keyword="+keyword+"&entityType="+entityType
+			+"&offset="+offset+"&limit="+limit;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
+	}
 	
 	public Response getLookupFilterByTypeAndEntityType(String hostName, String type, String entityType) {
 		String serviceEndPoint = LOOKUP_FILTER.replaceAll("hostAddress", hostName)+"?type="+type+"&entityType="+entityType;
