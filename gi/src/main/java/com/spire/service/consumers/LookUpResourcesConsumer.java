@@ -5,6 +5,7 @@ import javax.ws.rs.core.Response;
 import com.spire.base.controller.Assertion;
 import com.spire.base.controller.Logging;
 import com.spire.base.service.BaseServiceConsumerNew;
+import com.spire.base.service.ReadingServiceEndPointsProperties;
 
 public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	
@@ -16,6 +17,14 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 
 	String lookUp = getServiceEndPoint("LOOK_UP");
 	String getlistlookupwithspecialcharacter=getServiceEndPoint("LOOK_UP_WITH_SPECIAL_CHARACTER");
+	public static String LOOKUP_FILTER = getServiceEndPoint("LOOKUP_FILTER");
+	
+	public Response getLookupFilterByTypeAndEntityType(String hostName, String type, String entityType) {
+		String serviceEndPoint = LOOKUP_FILTER.replaceAll("hostAddress", hostName)+"?type="+type+"&entityType="+entityType;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		System.out.println(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
+	}
 
 	public Response getListOfDemandFilter(String hostName) {
 		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"?type=REQUISITION_STATUS";
