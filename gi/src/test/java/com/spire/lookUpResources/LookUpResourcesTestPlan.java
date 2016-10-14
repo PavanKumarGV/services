@@ -630,23 +630,51 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	}
 
 	/**
-	 * Steps: GET list of demand filter by Type(REQUISITION_STATUS) Validation:
-	 * Asserting Open Requisition Status in response body
-	 */
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by type
+	* </p>
+	* <p>
+	* <b>Input :</b> valid type
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	*/ 
+	@Test(groups = { "sanity", "testGetLookupDemandFilterByType_PositiveFunctional","P1","NA" })
+	public void testGetLookupDemandFilterByType_PositiveFunctional() {
+	       Logging.log("Service Name: generic-services/api/lookup/filter"
+			+ "\nDescription: Get the list of demand filter by type"
+			+ "\nInput: valid type \nExpected Output: Response status 200");
 
-	@Test(groups = { "sanity", "verifyLookupservices","P1","NA" })
-	public void verifyLookupservices() {
+	        // Get authentication token
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
 		// Executes Get request and returns Response
-		Response response = lookUpConsumer.getListOfDemandFilter(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Asserting Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull");
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
+		Response responsebody = lookUpConsumer.getListOfDemandFilter(hostName);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
 		// Asserting Response Body
-		Assertion.assertTrue(responseBody.contains("Open"), "Open demand filter is not available.");
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+		Assertion.assertTrue(response.contains("Open"), "Open demand filter is not available.");
 		Logging.log("Open demand filter is available.");
 	}
 
@@ -673,40 +701,105 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	}
 
 	/**
-	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter with
-	 *         Blank demand filter type Validation: Status code 500, Response
-	 *         message
-	 */
-	@Test(groups = { "sanity", "getListOfDemandFilterWithBlankType","P2","NA" })
-	public void getListOfDemandFilterWithoutType() {
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by type
+	* </p>
+	* <p>
+	* <b>Input :</b> without passing type
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	* <p>
+	* @since 10/08/16
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetListOfDemandFilterWithBlankType_NegativeFunctional","P2","NA" })
+	public void testGetListOfDemandFilterWithBlankType_NegativeFunctional() {
+		Logging.log("Service Name: generic-services/api/lookup/filter"
+			+ "\nDescription: Get the list of demand filter by type"
+			+ "\nInput: without passing type \nExpected Output: Response status 400");
+
+	        // Get authentication token
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
 		// Executes Get request and returns Response
-		Response response = lookUpConsumer.verifyListOfDemandFilterWithoutType(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Asserting Response Code
-		Assertion.assertTrue(response.getStatus()!=200, "response code expected not equal to 200 but found as:"+response.getStatus());
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
+		Response responsebody = lookUpConsumer.verifyListOfDemandFilterWithoutType(hostName);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Body
+		Assertion.assertTrue(responsebody.getStatus() == 400, "Response unsuccessful, Expected 400 status code");
+		Assertion.assertTrue(response.contains("demand filter type can't be blank"), "mandatory demand filter type can be blank");
 	}
 
 	/**
-	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter with
-	 *         Blank demand filter type Validation: Status code 500, Response
-	 *         message
-	 */
-	@Test(groups = { "sanity", "getListOfDemandFilterWithInvalidType","P2","NA" })
-	public void getListOfDemandFilterWithInvalidType() {
-		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
-		// Executes Get request and returns Response
-		Response response = lookUpConsumer.verifyListOfDemandFilterWithInvalidType(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Asserting Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull");
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by type
+	* </p>
+	* <p>
+	* <b>Input :</b> Invalid type
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	* <p>
+	* @since 10/08/16
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetListOfDemandFilterWithInvalidType_NegativeFunctional","P2","NA" })
+	public void testGetListOfDemandFilterWithInvalidType_NegativeFunctional() {
+		Logging.log("Service Name: generic-services/api/lookup/filter"
+			+ "\nDescription: Get the list of demand filter by type"
+			+ "\nInput: Invalid type \nExpected Output: Response status 200");
 
+	        // Get authentication token
+		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
+		// Executes Get request and returns Response
+		Response responsebody = lookUpConsumer.verifyListOfDemandFilterWithInvalidType(hostName);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Body
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+		Assertion.assertTrue(!response.contains("Open"), "Open demand filter can be fetched using invalid type");
 	}
 
 	/**

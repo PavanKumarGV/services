@@ -31,16 +31,13 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	public Response getLookupFilterByTypeAndEntityType(String hostName, String type, String entityType) {
 		String serviceEndPoint = LOOKUP_FILTER.replaceAll("hostAddress", hostName)+"?type="+type+"&entityType="+entityType;
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
 		return executeGET(serviceEndPoint);
 	}
 
 	public Response getListOfDemandFilter(String hostName) {
 		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"?type=REQUISITION_STATUS";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
-		Response response = executeGET(serviceEndPoint);
-		return response;
+		return executeGET(serviceEndPoint);
 	}
 	
 	public Response getListOfDemandFilterByTypeNKeyword(String hostName) {
