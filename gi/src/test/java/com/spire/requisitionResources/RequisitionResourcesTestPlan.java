@@ -160,7 +160,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	* <b>Input :</b>Invalid requisitionId & valid projection
 	* </p>
 	* <p>
-	* <b>Expected Output :</b> Response status 200 with proper requisition
+	* <b>Expected Output :</b> Response status 404 with invalid requisition
 	* </p>
 	* <p>
 	* <b>Category :</b> Negative - Functional Test Case
@@ -175,7 +175,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	    
 		Logging.log("Service Name: generic-services/api/requisitions"
 				+ "\nDescription: Get requisition using invalid requisitionId & valid projection"
-				+ "\nInput: Invalid requisitionId & valid projection" + "\nExpected Output: Response status 200 with proper requisition");
+				+ "\nInput: Invalid requisitionId & valid projection" + "\nExpected Output: Response status 404 with invalid requisition");
 		
 		// Get authentication token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -187,9 +187,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 		
 		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
-		Assert.assertTrue(response.contains("primarySkill"));  Logging.log("contains the primary skill ");
-		Assert.assertTrue(response.contains("jobLevel")); Logging.log("contains the jobLevel ");
+		Assertion.assertEquals(responsebody.getStatus(), 404, "Response not successfull");
+		Assert.assertTrue(response.contains("Requisition doesn't exist for requisition id: abc"));  Logging.log("contains the primary skill ");
 	}
 
 	/*
