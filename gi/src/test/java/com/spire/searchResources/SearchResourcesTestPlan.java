@@ -82,16 +82,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     /**
      * Passing HostName,UserName and Password from the xml.
      */
-
     @BeforeTest(alwaysRun = true)
     public void setUp() {
 	hostName = (String) ContextManager.getThreadContext().getHostAddress();
 	userId = ReadingServiceEndPointsProperties.getServiceEndPoint("user_Id");
 	password = ReadingServiceEndPointsProperties.getServiceEndPoint("password");
-	// userId = (String) ContextManager.getThreadContext().getUserid();
-	// password = (String) ContextManager.getThreadContext().getPassword();
 	Logging.log("Start :: Login with Username: " + userId + "Password: " + password + "and hostName: " + hostName);
-
     }
 
     /**
@@ -144,28 +140,52 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get suggestion when passing keyword
-     * 
-     * @throws IOException
-     * @throws ClientProtocolException
-     **/
+    * @throws IOException
+    * @throws ClientProtocolException
+    * <p>
+    * <b>Target Service URL :</b>
+    * /generic-services/api/search/_suggest
+    * </p>
+    * <p>
+    * <b>Test Case Description :</b>
+    * </p>
+    * <p>
+    * Get suggestion when passing keyword and expecting success response.
+    * </p>
+    * <p>
+    * <b>Input :</b> keyword = java
+    * </p>
+    * <p>
+    * <b>Expected Output :</b> Response status 200
+    * </p>
+    * <p>
+    * <b>Category :</b> Positive - Functional Test Case
+    * </p>
+    * <p>
+    * <b>Bug Level :</b><font color=#81017F> P2</font>
+    * </p>
+    * <p>
+    * @author Bhagyasree & jyoti
+    * </p>
+    */
+    @Test(groups = { "sanity", "testGetVerifySuggestRequest_PositiveFunctional", "NA" })
+    public void testGetVerifySuggestRequest_PositiveFunctional() throws ClientProtocolException, IOException {
+	Logging.log("Service Name: /generic-services/api/search/_suggest"
+		+ "\nDescription: Get suggestion when passing keyword and expecting success response."
+		+ "\nInput: keyword is java " + "\nExpected Output: Response status 200");
 
-    @Test(groups = { "sanity", "verifySuggestRequest", "NA" })
-    public void verifySuggestRequest() throws ClientProtocolException, IOException {
-	SearchResourcesConsumer suggestConsumer = null;
 	// Get authentication token
-	suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
+	
 	// Executes Get request and returns Response
 	Response responsebody = suggestConsumer.getSuggest(hostName);
-	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected status 200");
-	Logging.log("Response successful");
-	Logging.log(" RESPONSE BODY>>" + responsebody.getStatus());
 	String response = responsebody.readEntity(String.class);
-	System.out.println(" RESPONSE>>" + response);
-	Logging.log(" RESPONSE CODE>>" + response);
+	
+	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+	
 	// Asserting Response Code
+	Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected status 200");
 	Assert.assertTrue(response.contains("java"));
-
     }
 
     /**
@@ -536,29 +556,50 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
     }
 
     /**
-     * Bhagyasree - Get list of saved search
-     * 
      * @throws IOException
      * @throws ClientProtocolException
-     **/
-    @Test(groups = { "sanity", "getSavedSearch","NA" })
-	public void getSavedSearch() throws ClientProtocolException, IOException {
+     * <p>
+     * <b>Target Service URL :</b> generic-services/api/search/save_search/list
+     * </p>
+     * <p>
+     * <b>Test Case Description :</b>
+     * </p>
+     * <p>
+     * Get list of saved search and expecting success response.
+     * </p>
+     * <p>
+     * <b>Input :</b> No input
+     * </p>
+     * <p>
+     * <b>Expected Output :</b> Response status 200
+     * </p>
+     * <p>
+     * <b>Category :</b> Positive - Functional Test Case
+     * </p>
+     * <p>
+     * <b>Bug Level :</b><font color=#C90000> P1</font>
+     * </p>
+     * <p>
+     * @author Bhagyasree & jyoti
+     * </p>
+     */
+    @Test(groups = { "sanity", "testGetSavedSearch_PositiveFunctional","NA" })
+	public void testGetSavedSearch_PositiveFunctional() throws ClientProtocolException, IOException {
 	    	Logging.log("Service Name: generic-services/api/search/save_search/list?sortBy=modifiedOn&orderBy=dsc&offset=0&limit=10"
 			+ "\nDescription: get saved search and expecting 200 response."
 			+ "\nInput: No Input" + "\nExpected Output: 200 Response");
-		SearchResourcesConsumer suggestConsumer = null;
-		// Get authentication token
-		suggestConsumer = new SearchResourcesConsumer(userId, password,
+		
+	    	// Get authentication token
+		SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password,
 				hostName);
+		
 		// Executes get request and returns Response
 		Response responsebody = suggestConsumer.getSavedSearch(hostName);
-		// Asserting Response Code
-		Assertion.assertEquals(responsebody.getStatus(), 200,
-						"Response not successful");
 		String response = responsebody.readEntity(String.class);
 		
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200,"Response not successful");
 		Assertion.assertTrue(response.contains("total"),"Response not successful");
-		
 	}
 
     /**
