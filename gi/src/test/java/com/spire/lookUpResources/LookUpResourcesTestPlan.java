@@ -679,24 +679,51 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	}
 
 	/**
-	 * Steps: GET list of demand filter by Type(REQUISITION_STATUS) and
-	 * Keyword(o) Validation: Asserting Joined Requistion Status in response
-	 * body
-	 */
-
-	@Test(groups = { "sanity", "verifyLookupservicesByTypeNKeyword","P1","NA" })
-	public void verifyLookupservicesByTypeNKeyword() {
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter/match
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by Type and Keyword
+	* </p>
+	* <p>
+	* <b>Input :</b> valid type - REQUISITION_STATUS and Keyword(o)
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/ 
+	@Test(groups = { "sanity", "testGetVerifyLookupservicesByTypeNKeyword_PositiveFunctional","P1","NA" })
+	public void testGetVerifyLookupservicesByTypeNKeyword_PositiveFunctional() {
+	    Logging.log("Service Name: generic-services/api/lookup/demand/filter/match"
+			+ "\nDescription: Get the list of demand filter by type"
+			+ "\nInput: valid type - REQUISITION_STATUS and Keyword(o) \nExpected Output: Response status 200");
+	    
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
 		// Executes Get request and returns Response
-		Response response = lookUpConsumer.getListOfDemandFilterByTypeNKeyword(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+		Response responsebody = lookUpConsumer.getListOfDemandFilterByTypeNKeyword(hostName);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
 		// Asserting Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull");
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
-		// Asserting Response Body
-		Assertion.assertTrue(responseBody.contains("Closed")||responseBody.contains("Open"), "Closed/Open demand filter is not available.");
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Request Unsuccessful");
+		Assertion.assertTrue(response.contains("Closed")||response.contains("Open"), "Closed/Open demand filter is not available.");
+		
 		Logging.log("Closed/Open demand filter is available.");
 	}
 
@@ -803,111 +830,251 @@ public class LookUpResourcesTestPlan extends TestPlan {
 	}
 
 	/**
-	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
-	 *         blank Type and Keyword Validation: Status code 500, Response
-	 *         message
-	 */
-
-	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNBlankKeyword","P2","NA" })
-	public void verifyLookUpServiceByBlankTypeNBlankKeyword() {
-
-	    	Logging.log("Service Name: /generic-services/api/lookup/demand/filter/match"
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter/match
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by blank type and blank keyword
+	* </p>
+	* <p>
+	* <b>Input :</b> blank type and blank keyword
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	* <p>
+	* @since 10/08/16
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetVerifyLookUpServiceByBlankTypeNBlankKeyword_NegativeFunctional","P2","NA" })
+	public void testGetVerifyLookUpServiceByBlankTypeNBlankKeyword_NegativeFunctional() {
+	    	Logging.log("Service Name: generic-services/api/lookup/demand/filter/match"
 				+ "\nDescription: Verifying Lookup service with Blank parameter and expecting failure response."
-				+ "\nInput: Using Blank Keyword that not present in the system" + "\nExpected Output: Response status 400");
-		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
-		// Executes Get request and returns Response
-		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNBlankKeyword(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+				+ "\nInput: blank type and blank keyword" + "\nExpected Output: Response status 400");
+		
+	    	lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
+	    	// Executes Get request and returns Response
+		Response responseBody = lookUpConsumer.getListOfDemandFilterByBlankTypeNBlankKeyword(hostName);
+		String response = responseBody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responseBody.getStatus() + "\n***** RESPONSE ******" + response);
+		
 		// Asserting Response Code
-		Assertion.assertTrue(response.getStatus()==400, "response code expected equal to 400 but found as:"+response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		Assertion.assertTrue(responseBody.contains("free text/type can't be blank"), "response is not correct");
+		Assertion.assertTrue(responseBody.getStatus()==400, "response code expected equal to 400 but found as:"+responseBody.getStatus());
+		Assertion.assertTrue(response.contains("free text/type can't be blank"), "response is correct with blank type and blank keyword");
 	}
 
 	/**
-	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
-	 *         Primary skill Type and Keyword j Validation: Asserting Status
-	 *         code 200, Response Message
-	 */
-	@Test(groups = { "sanity", "verifyLookupservicesByPrimarySkillTypeNKeyword","P1","NA" })
-	public void verifyLookupservicesByPrimarySkillTypeNKeyword() {
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter/match
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by Type and Keyword
+	* </p>
+	* <p>
+	* <b>Input :</b> valid Primary skill Type and Keyword ja
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Jyoti
+	* </p>
+	*/ 
+	@Test(groups = { "sanity", "testGetVerifyLookupservicesByPrimarySkillTypeNKeyword_PositiveFunctional","P1","NA" })
+	public void testGetVerifyLookupservicesByPrimarySkillTypeNKeyword_PositiveFunctional() {
+	    	Logging.log("Service Name: generic-services/api/lookup/demand/filter/match"
+			+ "\nDescription: Verifying Lookup service with Blank parameter and expecting success response."
+			+ "\nInput: valid Primary skill Type and Keyword ja" + "\nExpected Output: Response status 200");
+	
 		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
 		// Executes Get request and returns Response
-		Response response = lookUpConsumer.getListOfDemandFilterByPrimarySKillTypeNKeyword(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		// Asserting Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull");
-		System.out.println("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		System.out.println("RESPONSE CODE >>" + responseBody);
+		Response responseBody = lookUpConsumer.getListOfDemandFilterByPrimarySKillTypeNKeyword(hostName);
+		String response = responseBody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responseBody.getStatus() + "\n***** RESPONSE ******" + response);
+		
 		// Asserting Response Body
-		Assertion.assertTrue(responseBody.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("lookup_Skill_keyword")), "primary skill is not available.");
+		Assertion.assertEquals(responseBody.getStatus(), 200, "Request Unsuccessfull");
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("lookup_Skill_keyword")), "primary skill is not available.");
+		
 		Logging.log("Primary skill is available.");
 	}
 
 	/**
-	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
-	 *         blank Type and Keyword Validation: Status code 500, Response
-	 *         message
-	 */
-
-	@Test(groups = { "sanity", "verifyLookUpServiceByBlankTypeNKeyword","P2","NA" })
-	public void verifyLookUpServiceByBlankTypeNKeyword() {
-	    	Logging.log("Service Name: generic-services/api/lookup/demand/filtermatch?keyword=ja"
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter/match
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by type and keyword
+	* </p>
+	* <p>
+	* <b>Input :</b> blank type and valid keyword
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	* <p>
+	* @since 10/08/16
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetVerifyLookUpServiceByBlankTypeNKeyword_NegativeFunctional","P2","NA" })
+	public void testGetVerifyLookUpServiceByBlankTypeNKeyword_NegativeFunctional() {
+	    	Logging.log("Service Name: generic-services/api/lookup/demand/filter/match?keyword=ja"
 			+ "\nDescription: Verifying Lookup service with Blank Type and Keyword parameter and expecting failure response."
-			+ "\nInput: Using Blank Type and Keyword " + "\nExpected Output: Response status 404");
-		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
-		// Executes Get request and returns Response
-		Response response = lookUpConsumer.getListOfDemandFilterByBlankTypeNKeyword(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+			+ "\nInput: Using Blank type and valid keyword " + "\nExpected Output: Response status 400");
+		
+	    	lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
+	    	// Executes Get request and returns Response
+		Response responseBody = lookUpConsumer.getListOfDemandFilterByBlankTypeNKeyword(hostName);
+		String response = responseBody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responseBody.getStatus() + "\n***** RESPONSE ******" + response);
+		
 		// Asserting Response Code
-		Assertion.assertTrue(response.getStatus()==404, "response code expected equal to 404 but found as:"+response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		Assertion.assertTrue(responseBody.contains("HTTP Status 404"),"Expected 404 as status but actual is different");
+		Assertion.assertTrue(responseBody.getStatus()==400, "response code expected equal to 400 but found as:"+responseBody.getStatus());
+		Assertion.assertTrue(response.contains("free text/type can't be blank"), "response is correct with blank type and valid keyword");
 	}
 
 	/**
-	 * @author Radharani Patra 10/08/16 Steps: GET list of demand filter by
-	 *         blank Type and Keyword Validation: Status code 500, Response
-	 *         message
-	 */
-
-	@Test(groups = { "sanity", "verifyLookUpServiceByTypeNBlankKeyword","P2","NA" })
-	public void verifyLookUpServiceByTypeNBlankKeyword() {
-	    	Logging.log("Service Name: generic-services/api/lookup/demand/filtermatch?type=REQUISITION_STATUS"
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter/match
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by type and keyword
+	* </p>
+	* <p>
+	* <b>Input :</b> valid type and blank keyword
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 400
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	* <p>
+	* @since 10/08/16
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetVerifyLookUpServiceByTypeNBlankKeyword_NegativeFunctional","P2","NA" })
+	public void testGetVerifyLookUpServiceByTypeNBlankKeyword_NegativeFunctional() {
+	    	Logging.log("Service Name: generic-services/api/lookup/demand/filter/match?type=REQUISITION_STATUS"
 			+ "\nDescription: Verifying Lookup service with Blank Type and Keyword parameter and expecting failure response."
-			+ "\nInput: Using Blank Keyword " + "\nExpected Output: Response status 404");
-		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
-		// Executes Get request and returns Response
-		Response response = lookUpConsumer.getListOfDemandFilterByTypeNBlankKeyword(hostName);
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
+			+ "\nInput: Using valid type and blank keyword " + "\nExpected Output: Response status 400");
+		
+	    	lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
+		
+	    	// Executes Get request and returns Response
+		Response responseBody = lookUpConsumer.getListOfDemandFilterByTypeNBlankKeyword(hostName);
+		String response = responseBody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responseBody.getStatus() + "\n***** RESPONSE ******" + response);
+		
 		// Asserting Response Code
-		Assertion.assertTrue(response.getStatus()==404, "response code expected equal to 404 but found as: "+response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		Assertion.assertTrue(responseBody.contains("HTTP Status 404"),"Expected 404 as status but actual is different");
-
+		Assertion.assertTrue(responseBody.getStatus()==400, "response code expected equal to 400 but found as: "+responseBody.getStatus());
+		Assertion.assertTrue(response.contains("free text/type can't be blank"), "response is correct with valid type and blank keyword");
 	}
 	
 	/**
-     * @author Pritisudha Pattanaik
-     * Steps: Get list of demand filter by passing special characters
-     * Validation: asserting status code
-     */
-	 @Test(groups={"sanity","verifylistofdemancharactersdfilterwithSpecialcharacters","NA"})
-	    public void verifylistofdemandfilterwithSpecialcharacters()
-	    {
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/lookup/demand/filter
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* GET list of demand filter by passing special characters
+	* </p>
+	* <p>
+	* <b>Input :</b> valid type and blank keyword
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Pritisudha Pattanaik & Jyoti
+	* </p>
+	* <p>
+	* @since 10/08/16
+	* </p>
+	*/
+	 @Test(groups={"sanity","testGetVerifyListOfDemandFilterByTypeWithSpecialCharacters_PositiveFunctional","NA"})
+	    public void testGetVerifyListOfDemandFilterByTypeWithSpecialCharacters_PositiveFunctional(){
 		Logging.log("Service Name: generic-services/api/lookup/demand/filter?type=!%40%23%24%40"
 			+ "\nDescription: Verifying Lookup service with Special Character as parameter and expecting Empty response."
-			+ "\nInput: Special Characters " + "\nExpected Output: Empty Response");
-	        lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
-	        // Executes Get request and returns Response
-	        Response response=lookUpConsumer.getListOfDemandFilterWithSpecialCharacter(hostName);
-	        Logging.log("RESPONSE CODE >>" + response.getStatus());
-	        // Asserting Response Code
-	        //TODO: Expect 204 from service
-	        Assertion.assertEquals(response.getStatus(), 200, "Request Unsuccessfull: Expected Response Code 200 but found :"+response.getStatus());
-	        String responseBody = response.readEntity(String.class);
-	        Assertion.assertTrue(responseBody.contains("\"response\":{}"), "Request Unsuccessful: Expected Empty Response but response was: " +responseBody);
+			+ "\nInput: type as special characters " + "\nExpected Output: Empty Response");
+	       
+		lookUpConsumer = new LookUpResourcesConsumer(userId, password, hostName);
 	        
+	        // Executes Get request and returns Response
+	        Response responseBody=lookUpConsumer.getListOfDemandFilterWithSpecialCharacter(hostName);
+	        String response = responseBody.readEntity(String.class);
+	        
+	        Logging.log("***** RESPONSE CODE ******" + responseBody.getStatus() + "\n***** RESPONSE ******" + response);
+	        
+	        // Asserting Response Code
+	        Assertion.assertEquals(responseBody.getStatus(), 200, "Request Unsuccessfull: Expected Response Code 200 but found :"+responseBody.getStatus());
+	        Assertion.assertTrue(response.contains("\"response\":{}"), "Request Unsuccessful: Expected Empty Response but response was: " +response);
 	    }
 }

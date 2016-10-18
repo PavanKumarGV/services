@@ -43,9 +43,7 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	public Response getListOfDemandFilterByTypeNKeyword(String hostName) {
 		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=REQUISITION_STATUS&keyword=O";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
-		Response response = executeGET(serviceEndPoint);
-		return response;
+		return executeGET(serviceEndPoint);
 	}
 	
 	public Response verifyListOfDemandFilterWithoutType(String hostName){
@@ -67,8 +65,7 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	public Response getListOfDemandFilterByBlankTypeNBlankKeyword(String hostName){
 		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Response response = executeGET(serviceEndPoint);
-		return response;
+		return executeGET(serviceEndPoint);
 	}
 	
 	public Response getListOfDemandFilterByPrimarySKillTypeNKeyword(String hostName) {
@@ -80,25 +77,20 @@ public class LookUpResourcesConsumer extends BaseServiceConsumerNew {
 	}
 	
 	public Response getListOfDemandFilterByBlankTypeNKeyword(String hostName){
-		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?keyword="+getServiceEndPoint("lookup_Skill_keyword");
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?keyword="+getServiceEndPoint("lookup_Skill_keyword");
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Response response = executeGET(serviceEndPoint);
-		return response;
+		return executeGET(serviceEndPoint);
 	}
 	
 	public Response getListOfDemandFilterByTypeNBlankKeyword(String hostName){
-		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"match?type=REQUISITION_STATUS";
+		String serviceEndPoint = lookUp.replaceAll("hostAddress", hostName)+"/match?type=REQUISITION_STATUS";
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Response response = executeGET(serviceEndPoint);
-		return response;
+		return executeGET(serviceEndPoint);
 	}
 	public Response getListOfDemandFilterWithSpecialCharacter(String hostName)
 	{
 		String serviceEndPoint = getlistlookupwithspecialcharacter.replaceAll("hostAddress", hostName);
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
-		Response response = executeGET(serviceEndPoint);
-		return response;
-		
-		
+		return executeGET(serviceEndPoint);
 	}
 }
