@@ -48,10 +48,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		hostName = (String) ContextManager.getThreadContext().getHostAddress();
 		userId = ReadingServiceEndPointsProperties.getServiceEndPoint("user_Id");
 		password = ReadingServiceEndPointsProperties.getServiceEndPoint("password");
-		// userId = (String) ContextManager.getThreadContext().getUserid();
-		// password = (String) ContextManager.getThreadContext().getPassword();
 		Logging.log("Start :: Login with Username: " + userId + "Password: " + password + "and hostName: " + hostName);
-
 	}
 
 	
@@ -191,199 +188,439 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Assert.assertTrue(response.contains("Requisition doesn't exist for requisition id: abc"));  Logging.log("contains the primary skill ");
 	}
 
-	/*
-	 * Vasista -Get the job description by requisition id
-	 */
-
-	@Test(groups = { "sanity", "GetJobDesByID","NA" })
-	public void GetJobDesByID() throws ClientProtocolException, IOException {
+	/**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/jd/{requisitionId}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get the job description by requisition id
+	* </p>
+	* <p>
+	* <b>Input :</b>valid requisitionId 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Vasista & Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetJobDesByID_PositiveFunctional","P2","NA"})
+	public void testGetJobDesByID_PositiveFunctional() throws ClientProtocolException, IOException {
 	    Logging.log("Service Name: generic-services/api/requisitions/jd/6100:6066:4f12a7a0193542c5a3bf5f179a1b4913"
 			+ "\nDescription: Get Job Description service with Id as parameter and expecting 200 response."
-			+ "\nInput: Job description Id" + "\nExpected Output: 200 Response");
-		RequisitionResourceConsumer reqConsumer = null;
-		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		reqConsumer.getJobDesByreqID(hostName);
+			+ "\nInput: requisition Id" + "\nExpected Output: 200 Response");
+		
+	    	// Get authentication token
+	    	RequisitionResourceConsumer reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
+	    	// Executes GET request and returns Response
 		Response responsebody = reqConsumer.getJobDesByreqID(hostName);
-		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessfull, Expected 200 status code");
-		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
-		Logging.log("Response: "+response);
-		Assertion.assertTrue(response.contains("fileName") || response.contains("filename"),"Response unsuccessfull, Expected 200 status code");
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus() == 200, "Response unsuccessful, Expected 200 status code");
+		Assertion.assertTrue(response.contains("fileName") || response.contains("filename"),"Response unsuccessful, Expected 200 status code");
+		
 		Logging.log("Response Successful, Able to get JD");
-
 	}
 
-	/*
-	 * * Udhay - /requisitions/{requisitionId}
-	 * 
-	 * Search RR with special character. The test case should not return 200
-	 * response
-	 * 
-	 * @throws IOException
-	 * 
-	 * @throws ClientProtocolException
-	 **/
-	@Test(groups = { "sanity", "GetRequInvalidSrch" })
-	public void GetRequInvalidSrch() throws ClientProtocolException, IOException {
+       /*
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/{requisitionId}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Search requisitionId with special character
+	* </p>
+	* <p>
+	* <b>Input :</b>valid requisitionId with special character
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 500
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Udhay & Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetRequisitonWithSpecialChar_NegativeFunctional","P2","NA"})
+	public void testGetRequisitonWithSpecialChar_NegativeFunctional() throws ClientProtocolException, IOException {
+	    Logging.log("Service Name: generic-services/api/requisitions/{requisitionId}"
+			+ "\nDescription: Search requisitionId with special character and expecting 500 response."
+			+ "\nInput: requisition Id with special character" + "\nExpected Output: 500 Response");
+	    
+	    	// Get authentication token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
+		// Executes GET request and returns Response
 		Response responsebody = reqConsumer.getRequisitionInvalid(hostName);
-		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
-		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
-		/*
-		 * Assert.assertTrue(response.contains("primarySkill")); Logging.log(
-		 * "contains the primary skill " );
-		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
-		 * "contains the jobLevel " );
-		 */
-		Logging.log("Response: "+response);
-
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus() == 500, "Response unsuccessful, Expected 500 status code");
+		Assertion.assertTrue(response.contains("Unable to get JD/RESUME for ID"), "Got response from requisitionId with special character");
 	}
 
 	/*
-	 * * Udhay - /requisitions/{requisitionId}
-	 * 
-	 * Search RR with Invalid Requisition. The test case should not return 200
-	 * response
-	 * 
-	 * @throws IOException
-	 * 
-	 * @throws ClientProtocolException
-	 **/
-	@Test(groups = { "sanity", "GetRequInvalidInputSrch" })
-	public void GetRequInvalidInputSrch() throws ClientProtocolException, IOException {
-		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+	* @throws IOException
+	* @throws ClientProtocolException
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/{requisitionId}
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Search requisitionId which is not present in the system
+	* </p>
+	* <p>
+	* <b>Input :</b>Invalid requisitionId
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 404
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Udhay & Jyoti
+	* </p>
+	*/
+	@Test(groups = { "sanity", "testGetRequisitionWithInvalidReqId_NegativeFunctional","P2","NA"})
+	public void testGetRequisitionWithInvalidReqId_NegativeFunctional() throws ClientProtocolException, IOException {
+	    Logging.log("Service Name: generic-services/api/requisitions/{requisitionId}"
+		+ "\nDescription: Search requisitionId with special character and expecting 404 response."
+		+ "\nInput: requisition Id with special character" + "\nExpected Output: 404 Response");
+		    
+		// Get authentication token
+	    	reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+			
+		// Executes GET request and returns Response
 		Response responsebody = reqConsumer.getRequisitionInvalidInput(hostName);
-		Assertion.assertTrue(responsebody.getStatus() != 200, "Response unsuccessfull, Expected 200 status code");
-		Logging.log("Response successful");
 		String response = responsebody.readEntity(String.class);
-		System.out.println("***** RESPONSE ******" + response);
-		/*
-		 * Assert.assertTrue(response.contains("primarySkill")); Logging.log(
-		 * "contains the primary skill " );
-		 * Assert.assertTrue(response.contains("jobLevel")); Logging.log(
-		 * "contains the jobLevel " );
-		 */
-
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertTrue(responsebody.getStatus() == 404, "Response unsuccessful, Expected 404 status code");
+		Assertion.assertTrue(response.contains("Requisition doesn't exist for requisition id"), "Got response for invalid requisitionId");
 	}
 
-	/**
-	 * @author Radharani Patra 11/08/16 Steps:Post - Search requisition with
-	 *         mandatory field Validation: Success Response Code, validate list
-	 *         of requiistion in response body
-	 */
-	@Test(groups = { "sanity", "searchRequisitionWithInSearchCriteria", "P1","NA" })
-	public void searchRequisitionWithInSearchCriteria() {
+      /**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/search
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* To get the list of requisition using InSearch Criteria
+	* </p>
+	* <p>
+	* <b>Input :</b> InSearch Criteria
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	* <p>
+	* @since 11/08/16
+	* </p>	
+	*/
+	@Test(groups = { "sanity", "testPostSearchRequisitionWithInSearchCriteria_PositiveFunctional", "P1","NA" })
+	public void testPostSearchRequisitionWithInSearchCriteria_PositiveFunctional() {
+	    Logging.log("Service Name: generic-services/api/requisitions/search"
+			+ "\nDescription:  To get the list of requisition using InSearch Criteria and expecting 200 response."
+			+ "\nInput:  InSearch Criteria" + "\nExpected Output: 200 Response");
+			
 		// Get Request Bean
 		searchReqrequestBean = RequisitionResourceServiceUtil.getSearchRequisition();
+		
 		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
 		// Execute POST Request
-		Response response = reqConsumer.searchRequisition(hostName, searchReqrequestBean);
-		// Assering Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		// Logging.log(responseBody);
-		// Asseting response body
-		Assertion.assertTrue(responseBody.contains("Open"), "Open requisition not found");
-		Logging.log("InSearch Criteria : Open, Open requistions found");
+		Response responsebody = reqConsumer.searchRequisition(hostName, searchReqrequestBean);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful Expected:200");
+		if(response.contains("\"totalResults\":0")){
+		    Logging.log("No requistions found for InSearch Criteria");
+		}else{
+		    Assertion.assertTrue(response.contains("Open"), "Open requisition not found");
+        	    Logging.log("InSearch Criteria : Open, Open requistions found");
+		}
 	}
 
-	/**
-	 * @author Radharani Patra 11/08/16 Steps:Post - Search requisition with
-	 *         mandatory field Validation: Success Response Code, validate list
-	 *         of requiistion in response body
-	 */
-	@Test(groups = { "sanity", "searchRequisitionWithoutSearchCriteria", "P1","NA" })
-	public void searchRequisitionWithoutSearchCriteria() {
+      /**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/search
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Search requisition without InSearch Criteria
+	* </p>
+	* <p>
+	* <b>Input :</b>no InSearch Criteria
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Negative - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Radharani Patra & Jyoti
+	* </p>
+	* <p>
+	* @since 11/08/16
+	* </p>	
+	*/
+	@Test(groups = { "sanity", "testPostSearchRequisitionWithoutSearchCriteria_NegativeFunctional", "P1","NA" })
+	public void testPostSearchRequisitionWithoutSearchCriteria_NegativeFunctional() {
 	    Logging.log("Service Name: generic-services/api/requisitions/search"
 			+ "\nDescription: Search Requisition using no criteria as parameter and expecting 200 response."
 			+ "\nInput: No criteria for search" + "\nExpected Output: 200 Response");
-		// Get Request Bean
+		
+	    	// Get Request Bean
 		searchReqrequestBean1 = RequisitionResourceServiceUtil.getSearchRequisitionWithoutCriteria();
+		
 		// Get user Token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
 		// Execute POST Request
-		Response response = reqConsumer.searchRequisition(hostName, searchReqrequestBean1);
-		// Assering Response Code
-		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull Expected:200");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Hired")
-			|| responseBody.contains("APPLIED") || responseBody.contains("New")
-			|| responseBody.contains("Active") || responseBody.contains("Pending"), "Response not successfull");
-	}
-	/**
-	 * @author Pritisudha Pattanaik 11/08/16 Steps:Post - Get candidate stats
-	 *         for search criteria with insearchcriteria,and experience from
-	 *         month and to month Validation: Success Response Code, validate
-	 *         list of requiistion in response body
-	 */
-	@Test(groups = { "sanity", "getcandidatestas","NA" })
-	public void getcandidatestas() {
-		candidatestasBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisition();
-		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response response = reqConsumer.createcandidatestas(hostName, candidatestasBean1);
-		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
-		System.out.println("response=" + response.getStatus());
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		System.out.println(responseBody);
-		Logging.log(responseBody);
-		Assertion.assertTrue(
-				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
-						|| responseBody.contains("APPLIED") || responseBody.contains("New")
-						|| responseBody.contains("Active") || responseBody.contains("Pending"),
-				"Automatched requisition not found");
-		Logging.log("Automatched requiistions found");
-
+		Response responsebody = reqConsumer.searchRequisition(hostName, searchReqrequestBean1);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful Expected:200");
+		if(response.contains("\"totalResults\":0")){
+		    Logging.log("No requistions found for InSearch Criteria");
+		}else{
+		    Assertion.assertTrue(response.contains("Automatched") || response.contains("Hired")
+			|| response.contains("APPLIED") || response.contains("New")
+			|| response.contains("Active") || response.contains("Pending"), "Response not successful");
+		}
 	}
 
-	/**
-	 * @author Pritisudha Pattanaik 11/08/16 Steps:Post - Get candidate stats
-	 *         without any field Validation: Response Code
-	 */
-
-	@Test(groups = { "sanity", "candidatestasRequisitionWithoutSearchCriteria","NA" })
-	public void candidatestasRequisitionWithoutSearchCriteria() {
+      /**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/candidate/stats
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate stats for search criteria
+	* </p>
+	* <p>
+	* <b>Input :</b>InSearch criteria and experience from month and to month
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#C90000> P1</font>
+	* </p>
+	* <p>
+	* @author Pritisudha Pattanaik & Jyoti
+	* </p>
+	* <p>
+	* @since 11/08/16
+	* </p>	
+	*/	
+	@Test(groups = { "sanity", "testPostGetCandidateStats_PositiveFunctional", "P1","NA" })
+	public void testPostGetCandidateStats_PositiveFunctional() {
 	    Logging.log("Service Name: generic-services/api/requisitions/candidate/stats"
-			+ "\nDescription: Get Candidates as per Status and expecting 200 response."
-			+ "\nInput: No criteria for search" + "\nExpected Output: 200 Response");
-		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandiadteStasRequisitionWithoutCriteria();
+			+ "\nDescription: Get candidate stats for search criteria and expecting 200 response."
+			+ "\nInput: InSearch criteria and experience from month and to month" + "\nExpected Output: 200 Response");
+	
+	    	// Get Candidate Stats Bean
+		candidatestasBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisition();
+		
+		//Get user auth token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response response = reqConsumer.createcandidatestas(hostName, searchReqrequestBean1);
-		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		Assertion.assertTrue(responseBody.contains("Automatched") || responseBody.contains("Hired")
-			|| responseBody.contains("APPLIED") || responseBody.contains("New")
-			|| responseBody.contains("Active") || responseBody.contains("Pending"), "Response not successfull");
+		
+		// Execute POST Request
+		Response responsebody = reqConsumer.createcandidatestas(hostName, candidatestasBean1);
+		String response = responsebody.readEntity(String.class);
+		
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+		// Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successful");
+		if(response.contains("\"response\":{}")){
+		    	Logging.log("No response found for given candidate stats");
+		}else{
+    			Assertion.assertTrue(response.contains("Automatched") || response.contains("Customer Mapped")
+    					|| response.contains("APPLIED") || response.contains("New")
+    					|| response.contains("Active") || response.contains("Pending"),
+    				"Automatched requisition not found");
+    			Logging.log("Automatched requiistions found");
+		}
 	}
 
-	/**
-	 * @author Pritisudha Pattanaik 12/08/16 Steps:Post - Get candidate stats
-	 *         with only insearchcriteria Validation: Response Code and
-	 *         asserting response.
-	 */
-	@Test(groups = { "sanity", "candidatestasRequisitionWithonlyinsearchcriteria","NA" })
-	public void candidatestasRequisitionWithonlyinsearchcriteria() {
-		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisitionwithInsearchcriteria();
-		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
-		Response response = reqConsumer.createcandidatestas(hostName, searchReqrequestBean1);
-		Assertion.assertEquals(response.getStatus(), 200, "Response not successfull");
-		Logging.log("RESPONSE CODE >>" + response.getStatus());
-		String responseBody = response.readEntity(String.class);
-		System.out.println(responseBody);
-		Logging.log(responseBody);
-		Assertion.assertTrue(
-				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
-						|| responseBody.contains("APPLIED") || responseBody.contains("New")
-						|| responseBody.contains("Active") || responseBody.contains("Pending"),
-				"Automatched requisition not found");
-		Logging.log("Automatched requiistions found");
+      /**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/candidate/stats
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate stats for search criteria
+	* </p>
+	* <p>
+	* <b>Input :</b>without any field validation
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Pritisudha Pattanaik & Jyoti
+	* </p>
+	* <p>
+	* @since 11/08/16
+	* </p>	
+	*/
+	@Test(groups = { "sanity", "testPostCandidateStatsRequisitionWithoutSearchCriteria_PositiveFunctional","P2", "NA" })
+	public void testPostCandidateStatsRequisitionWithoutSearchCriteria_PositiveFunctional() {
+	    Logging.log("Service Name: generic-services/api/requisitions/candidate/stats"
+			+ "\nDescription: Get candidate stats and expecting 200 response."
+			+ "\nInput: without any field validation" + "\nExpected Output: 200 Response");
+		
+	    // Get search requisition request bean
+	    searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandiadteStasRequisitionWithoutCriteria();
+		
+	    //Get user auth token
+	    reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
+	    // Execute POST Request
+	    Response responsebody = reqConsumer.createcandidatestas(hostName, searchReqrequestBean1);
+	    String response = responsebody.readEntity(String.class);
+	    
+	    Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+		
+	    // Asserting Response Code
+	    Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
+	    if(response.contains("\"response\":{}")){
+	    	Logging.log("No response found for given candidate stats");
+	    }else{	
+		Assertion.assertTrue(response.contains("Automatched") || response.contains("Hired")
+			|| response.contains("APPLIED") || response.contains("New")
+			|| response.contains("Active") || response.contains("Pending"), "Response not successfull");
+	    }
+	}
 
+      /**
+	* <p>
+	* <b>Target Service URL :</b> generic-services/api/requisitions/candidate/stats
+	* </p>
+	* <p>
+	* <b>Test Case Description :</b>
+	* </p>
+	* <p>
+	* Get candidate stats for search criteria
+	* </p>
+	* <p>
+	* <b>Input :</b>with only InSearch criteria 
+	* </p>
+	* <p>
+	* <b>Expected Output :</b> Response status 200
+	* </p>
+	* <p>
+	* <b>Category :</b> Positive - Functional Test Case
+	* </p>
+	* <p>
+	* <b>Bug Level :</b><font color=#81017F> P2</font>
+	* </p>
+	* <p>
+	* @author Pritisudha Pattanaik & Jyoti
+	* </p>
+	* <p>
+	* @since 11/08/16
+	* </p>	
+	*/
+	@Test(groups = { "sanity", "testPostCandidateStatsRequisitionWithOnlyInSearchCriteria_PositiveFunctional","P2","NA" })
+	public void testPostCandidateStatsRequisitionWithOnlyInSearchCriteria_PositiveFunctional() {
+	    Logging.log("Service Name: generic-services/api/requisitions/candidate/stats"
+			+ "\nDescription: Get candidate stats and expecting 200 response."
+			+ "\nInput: with only InSearch criteria " + "\nExpected Output: 200 Response");
+	    	
+	    	// Get search requisition request bean
+		searchReqrequestBean1 = RequisitionResourceServiceUtil.getCandidateStasRequisitionwithInsearchcriteria();
+		
+		//Get user auth token
+		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
+		
+		// Execute POST Request
+		Response responsebody = reqConsumer.createcandidatestas(hostName, searchReqrequestBean1);
+		String response = responsebody.readEntity(String.class);
+		    
+		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
+			
+	        // Asserting Response Code
+		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull");
+		if(response.contains("\"response\":{}")){
+		    	Logging.log("No response found for given candidate stats");
+		}else{	
+			Assertion.assertTrue(response.contains("Automatched") || response.contains("Hired")
+				|| response.contains("APPLIED") || response.contains("New")
+				|| response.contains("Active") || response.contains("Pending"), "Response not successfull");
+	         }
 	}
 
 	/**
