@@ -275,7 +275,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	
 	Logging.log("Service Name: /generic-services/api/search/_suggest?keyword="
 		+ "\nDescription: Get suggestion when passing keyword having multiple words(Like project planning, project management)"
-		+ "\nInput: Android Development \nExpected Output: Response status 500");
+		+ "\nInput: Android Development \nExpected Output: Response status 200");
 
 	// Get authentication token
 	SearchResourcesConsumer suggestConsumer = new SearchResourcesConsumer(userId, password, hostName);
@@ -289,9 +289,12 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	// Asserting Response Code
 	Assertion.assertTrue(responsebody.getStatus() == 200,
 		"response code expected equal to 200 but found as:" + responsebody.getStatus());
-	Assertion.assertTrue(StringUtils.containsIgnoreCase(response,
+	if(!StringUtils.containsIgnoreCase(response,ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace("%20", " "))){
+	    Logging.log("System doesn't contain required skill");
+	}else{
+	    Assertion.assertTrue(StringUtils.containsIgnoreCase(response,
 		ReadingServiceEndPointsProperties.getServiceEndPoint("suggest_Multiple_words").replace("%20", " ")),"System doesn't contain required skill");
-
+	}
     }
 
     /**

@@ -78,15 +78,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getRequisitionInvalid(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_REQInvalid.replaceAll("hostAddress", hostName);
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
-		Response response1 = executeGET(serviceEndPoint);
-		/*if (response1.getStatus() != 200) {
-			System.out.println("********** pass **************");
-		} else {
-			Assert.fail();
-		}*/
-		Logging.log("Response Code >>" + response1.getStatus());
-		return response1;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	/* Get RR status code for Blank RR ID */
@@ -288,7 +281,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	/*Get the list of requisition keywords*/
 	public Response getRequisitionKeyword(String hostName, String type, String offset, String limit) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURLRequisitionKeyword.replaceAll("hostAddress", hostName)
-				+ "?type=" + type + "&offset=" + offset + "&limit" + limit;
+				+ "?type=" + type + "&offset=" + offset + "&limit=" + limit;
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		return executeGET(serviceEndPoint);
 	}
