@@ -182,7 +182,7 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		// Get Requset Bean, pass multiple requisitions
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStatsGender(
 				ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id"),
-				ReadingServiceEndPointsProperties.getServiceEndPoint("stas_requisition_id"));
+				ReadingServiceEndPointsProperties.getServiceEndPoint("statServiceAttribute2"));
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
 		// Execute POST Request,returns response
 		Response response = candStatsConsumer.getCandidateStats(candStatsReqBean, hostName);
