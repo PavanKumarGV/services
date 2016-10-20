@@ -119,19 +119,11 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	/*
 	 * Get the job description by requisition id
 	 */
-
 	public Response getJobDesByreqID(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_JOBDES_BY_ID.replaceAll("hostAddress", hostName)
 				+ getServiceEndPoint("Requisition_JD");
-		Response response1 = executeGET(serviceEndPoint);
-		Logging.log("Response Code >>" + response1.getStatus());
-	/*	if (response1.getStatus() == 200) {
-			Logging.log("Status Code 200 ");
-		} else {
-			Assert.fail();
-		}*/
-		//Logging.log("Response Code >>" + response1.getStatus());
-		return response1;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	public Response searchRequisition(String hostName, SearchRequisitionRequestBean searchReqrequestBean) {
@@ -139,10 +131,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean,
 				MediaType.APPLICATION_JSON_TYPE);
-		Response response = executePOST(serviceEndPoint, searchBean);
-
-		return response;
-
+		return executePOST(serviceEndPoint, searchBean);
 	}
 
 	/*
@@ -341,9 +330,7 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 		Logging.log(" EndPoint URL >>" + serviceEndPoint);
 		Entity<SearchRequisitionRequestBean> searchBean = Entity.entity(searchReqrequestBean,
 				MediaType.APPLICATION_JSON_TYPE);
-		Response response = executePOST(serviceEndPoint, searchBean);
-		return response;
-
+		return executePOST(serviceEndPoint, searchBean);
 	}
 
 	public Response changeReqStatus(RequisitionStatusBean serviceBean, String hostname, String reqId, String stats) {
