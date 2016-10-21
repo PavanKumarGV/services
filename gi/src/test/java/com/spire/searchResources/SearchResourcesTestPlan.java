@@ -904,7 +904,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * @author Pritisudha
 	 */
 
-	@Test(groups = { "sanity", "getautocompletewithfullinstituteRequest", "NA" })
+	@Test(groups = { "sanity", "getAutoCompleteWithFullInstituteRequest", "NA" })
 	public void getAutoCompleteWithFullInstituteRequest() {
 		
 		Logging.log("Service Name: /generic-services/api/search/auto_complete"
@@ -1104,7 +1104,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * 
 	 * @author Pritisudha
 	 */
-	@Test(groups = { "sanity", "getautocompletewithfullemployerRequest", "NA" })
+	@Test(groups = { "sanity", "getAutoCompleteWithFullEmployerRequest", "NA" })
 	public void getAutoCompleteWithFullEmployerRequest() {
 		Logging.log("Service Name: /generic-services/api/search/auto_complete"
 				+ "\nDescription:  Verifying autocomplete with full employer search service with correct parameter and expecting pass response."
@@ -1207,7 +1207,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * </p>
 	 * @author Pritisudha
 	 */
-	@Test(groups = { "sanity", "getautocompletfulllocationRequest", "NA" })
+	@Test(groups = { "sanity", "getAutoCompletFullLocationRequest", "NA" })
 	public void getAutoCompletFullLocationRequest() {
 		Logging.log("Service Name: /generic-services/api/search/auto_complete"
 				+ "\nDescription:  Verifying autocomplete with full location search service with correct parameter and expecting pass response."
@@ -1311,7 +1311,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * 
 	 * @author Pritisudha
 	 */
-	@Test(groups = { "sanity", "getautocompletfullsourcetypeRequest", "NA" })
+	@Test(groups = { "sanity", "getAutoCompletFullSourceTypeRequest", "P1", "NA" })
 	public void getAutoCompletFullSourceTypeRequest() {
 		Logging.log("Service Name: /generic-services/api/search/auto_complete"
 				+ "\nDescription:  Verifying autocomplete with full sourcetype search service with correct parameter and expecting pass response."
@@ -1326,10 +1326,8 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.sourcetype), "sourcetype not found in the response.");
 
-		Assertion.assertTrue(
-				response.toLowerCase().contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcetype_to_search").toLowerCase()),
+		Assertion.assertTrue(StringUtils.containsIgnoreCase(response, ReadingServiceEndPointsProperties.getServiceEndPoint("full_sourcetype_to_search").replaceAll("%20", " ")),
 				"Response is empty.So full sourcetype not found in response");
-
 	}
 
 	/**
