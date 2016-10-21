@@ -205,15 +205,8 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 	public Response getMatchingReqsOnlyLimit(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_MATCHING_REQ1.replaceAll("hostAddress", hostName)
 				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?limit=10";
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
-		Response response1 = executeGET(serviceEndPoint);
-	/*	if (response1.getStatus() == 200) {
-			Logging.log("Status Code 200");
-		} else {
-			Assert.fail();
-		}*/
-		Logging.log("Response Code >>" + response1.getStatus());
-		return response1;
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	/*

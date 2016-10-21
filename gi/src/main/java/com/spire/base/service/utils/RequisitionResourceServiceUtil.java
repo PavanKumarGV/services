@@ -116,7 +116,6 @@ public class RequisitionResourceServiceUtil {
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("statusDisplay", list);
 		searchReqBean.setInSearchCriteria(map);
-		System.out.println(searchReqBean.getInSearchCriteria());
 		searchReqBean.setExprncFromMnth(24);
 		searchReqBean.setExprncToMnth(48);
 		return searchReqBean;
