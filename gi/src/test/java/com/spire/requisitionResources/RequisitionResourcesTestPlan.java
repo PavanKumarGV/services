@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -252,7 +253,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	* <b>Input :</b>valid requisitionId with special character
 	* </p>
 	* <p>
-	* <b>Expected Output :</b> Response status 500
+	* <b>Expected Output :</b> Response status 404
 	* </p>
 	* <p>
 	* <b>Category :</b> Negative - Functional Test Case
@@ -267,8 +268,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	@Test(groups = { "sanity", "testGetRequisitonWithSpecialChar_NegativeFunctional","P2","NA"})
 	public void testGetRequisitonWithSpecialChar_NegativeFunctional() throws ClientProtocolException, IOException {
 	    Logging.log("Service Name: generic-services/api/requisitions/{requisitionId}"
-			+ "\nDescription: Search requisitionId with special character and expecting 500 response."
-			+ "\nInput: requisition Id with special character" + "\nExpected Output: 500 Response");
+			+ "\nDescription: Search requisitionId with special character and expecting 404 response."
+			+ "\nInput: requisition Id with special character" + "\nExpected Output: 404 Response");
 	    
 	    	// Get authentication token
 		reqConsumer = new RequisitionResourceConsumer(userId, password, hostName);
@@ -280,8 +281,8 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 		
 		// Asserting Response Code
-		Assertion.assertTrue(responsebody.getStatus() == 500, "Response unsuccessful, Expected 500 status code");
-		Assertion.assertTrue(response.contains("Unable to get JD/RESUME for ID"), "Got response from requisitionId with special character");
+		Assertion.assertTrue(responsebody.getStatus() == 404, "Response unsuccessful, Expected 404 status code");
+		Assertion.assertTrue(response.contains("Requisition doesn't exist for requisition id"), "Got response from requisitionId with special character");
 	}
 
 	/*
@@ -499,11 +500,11 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		if(response.contains("\"response\":{}")){
 		    	Logging.log("No response found for given candidate stats");
 		}else{
-    			Assertion.assertTrue(response.contains("Automatched") || response.contains("Customer Mapped")
-    					|| response.contains("APPLIED") || response.contains("New")
-    					|| response.contains("Active") || response.contains("Pending"),
-    				"Automatched requisition not found");
-    			Logging.log("Automatched requiistions found");
+		     	Assertion.assertTrue(StringUtils.containsIgnoreCase(response, "Automatched") || StringUtils.containsIgnoreCase(response,"Customer Mapped")
+				|| StringUtils.containsIgnoreCase(response,"Applied") || StringUtils.containsIgnoreCase(response,"New")
+				|| StringUtils.containsIgnoreCase(response,"Active") || StringUtils.containsIgnoreCase(response,"Pending"),
+			"Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
+		     	Logging.log("Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
 		}
 	}
 
@@ -559,9 +560,11 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	    if(response.contains("\"response\":{}")){
 	    	Logging.log("No response found for given candidate stats");
 	    }else{	
-		Assertion.assertTrue(response.contains("Automatched") || response.contains("Hired")
-			|| response.contains("APPLIED") || response.contains("New")
-			|| response.contains("Active") || response.contains("Pending"), "Response not successfull");
+		Assertion.assertTrue(StringUtils.containsIgnoreCase(response, "Automatched") || StringUtils.containsIgnoreCase(response,"Customer Mapped")
+				|| StringUtils.containsIgnoreCase(response,"Applied") || StringUtils.containsIgnoreCase(response,"New")
+				|| StringUtils.containsIgnoreCase(response,"Active") || StringUtils.containsIgnoreCase(response,"Pending"),
+			"Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
+		Logging.log("Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
 	    }
 	}
 
@@ -617,9 +620,11 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		if(response.contains("\"response\":{}")){
 		    	Logging.log("No response found for given candidate stats");
 		}else{	
-			Assertion.assertTrue(response.contains("Automatched") || response.contains("Hired")
-				|| response.contains("APPLIED") || response.contains("New")
-				|| response.contains("Active") || response.contains("Pending"), "Response not successfull");
+		        Assertion.assertTrue(StringUtils.containsIgnoreCase(response, "Automatched") || StringUtils.containsIgnoreCase(response,"Customer Mapped")
+				|| StringUtils.containsIgnoreCase(response,"Applied") || StringUtils.containsIgnoreCase(response,"New")
+				|| StringUtils.containsIgnoreCase(response,"Active") || StringUtils.containsIgnoreCase(response,"Pending"),
+		        	"Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
+		        Logging.log("Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
 	         }
 	}
 
@@ -675,11 +680,11 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		if(response.contains("\"response\":{}")){
 		    	Logging.log("No response found for given candidate stats");
 		}else{
-			Assertion.assertTrue(response.contains("Automatched") || response.contains("Customer Mapped")
-					|| response.contains("APPLIED") || response.contains("New")
-					|| response.contains("Active") || response.contains("Pending"),
-				"Automatched requisition not found");
-			Logging.log("Automatched requiistions found");
+		    Assertion.assertTrue(StringUtils.containsIgnoreCase(response, "Automatched") || StringUtils.containsIgnoreCase(response,"Customer Mapped")
+				|| StringUtils.containsIgnoreCase(response,"Applied") || StringUtils.containsIgnoreCase(response,"New")
+				|| StringUtils.containsIgnoreCase(response,"Active") || StringUtils.containsIgnoreCase(response,"Pending"),
+			"Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
+		    Logging.log("Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
 		}
 	}
 
@@ -737,11 +742,11 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		if(response.contains("\"response\":{}")){
 		    	Logging.log("No response found for given candidate stats");
 		}else{
-			Assertion.assertTrue(response.contains("Automatched") || response.contains("Customer Mapped")
-					|| response.contains("APPLIED") || response.contains("New")
-					|| response.contains("Active") || response.contains("Pending"),
-				"Automatched requisition not found");
-			Logging.log("Automatched requiistions found");
+			Assertion.assertTrue(StringUtils.containsIgnoreCase(response, "Automatched") || StringUtils.containsIgnoreCase(response,"Customer Mapped")
+					|| StringUtils.containsIgnoreCase(response,"Applied") || StringUtils.containsIgnoreCase(response,"New")
+					|| StringUtils.containsIgnoreCase(response,"Active") || StringUtils.containsIgnoreCase(response,"Pending"),
+				"Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
+			Logging.log("Automatched/Customer Mapped/Applied/New/Active/Pending requisition not found");
 		}
 	}
 
@@ -756,7 +761,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	* Search requisition with status and experience
 	* </p>
 	* <p>
-	* <b>Input :</b> status Open and Closed and Experience from 0 to 5
+	* <b>Input :</b> status Open and Closed and Experience from 2 to 4 years
 	* </p>
 	* <p>
 	* <b>Expected Output :</b> Response status 200
@@ -778,7 +783,7 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 	public void testPostSearchRequisitionWithStatusAndExperienceRange_PositiveFunctional() {
 	    	Logging.log("Service Name: generic-services/api/requisitions/search"
 			+ "\nDescription: Get candidate stats and expecting 200 response."
-			+ "\nInput: status Open and Closed and Experience from 0 to 5"
+			+ "\nInput: status Open and Closed and Experience from 2 to 4 years"
 			+ "\nExpected Output: 200 Response");
 	    
 		// Get Request Bean
@@ -795,9 +800,13 @@ public class RequisitionResourcesTestPlan extends TestPlan {
 		
 		// Asserting Response Code
 		Assertion.assertEquals(responsebody.getStatus(), 200, "Response not successfull Expected:200");
-		Assertion.assertTrue(response.contains("Open") || response.contains("Closed"),"Open/Closed requisition not found");
+		if(response.contains("\"totalResults\":0")){
+		    Logging.log("totalResults are 0 so no Open and Closed Requisitions within experience 2 to 4 years");
+		}else{
+		    Assertion.assertTrue(response.contains("Open") || response.contains("Closed"),"Open/Closed requisition not found");
+		    Logging.log("InSearch Criteria : Open and Closed status with experience 2 to 4 years ");
+		}
 		
-		Logging.log("InSearch Criteria : Open and Closed status with experience 0 to 5 ");
 	}
 
       /**
