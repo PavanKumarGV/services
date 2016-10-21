@@ -148,8 +148,8 @@ public class CandidateResourcesTestPlan extends TestPlan {
 	public void getCandidateStatsWithValidParameter() {
 		// Get Requset Bean, pass multiple requisitions
 		candStatsReqBean = CandidateResourceServiceUtil.getCandidateStats(
-				ReadingServiceEndPointsProperties.getServiceEndPoint("requisition_Id1"),
-				ReadingServiceEndPointsProperties.getServiceEndPoint("stas_requisition_id"));
+				ReadingServiceEndPointsProperties.getServiceEndPoint("requisitionDisplayId1"),
+				ReadingServiceEndPointsProperties.getServiceEndPoint("statServiceAttribute"));
 		// Get authentication token
 		candStatsConsumer = new CandidateStatsConsumer(userId, password, hostName);
 		// Execute POST Request,returns response
@@ -161,11 +161,13 @@ public class CandidateResourcesTestPlan extends TestPlan {
 		String responseBody = response.readEntity(String.class);
 		Logging.log(responseBody);
 		// Asserting response Body
-		Assertion.assertTrue(
-				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
-						|| responseBody.contains("Applied") || responseBody.contains("New")
-						|| responseBody.contains("Active") || responseBody.contains("Pending"),
-				"Get Candidate Stats Unsuccessful");
+//		Assertion.assertTrue(
+//				responseBody.contains("Automatched") || responseBody.contains("Customer Mapped")
+//						|| responseBody.contains("Applied") || responseBody.contains("New")
+//						|| responseBody.contains("Active") || responseBody.contains("Pending"),
+//				"Get Candidate Stats Unsuccessful");
+		Assertion.assertTrue( responseBody.contains("Applied"),	"Get Candidate Stats Unsuccessful");
+
 		Logging.log("Get Candidate Stats successful and contains Automatched or Customer Mapped status count");
 	}
 
