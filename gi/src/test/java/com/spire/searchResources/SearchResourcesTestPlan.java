@@ -1505,7 +1505,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	 * 
 	 * @author Pritisudha
 	 */
-	@Test(groups = { "sanity", "getautocompletfullstatusRequest", "NA" })
+	@Test(groups = { "sanity", "getAutoCompletFullStatusRequest", "NA" })
 	public void getAutoCompletFullStatusRequest() {
 		Logging.log("Service Name: /generic-services/api/search/auto_complete"
 				+ "\nDescription:  Verifying autocomplete with full status search service with correct parameter and expecting pass response."
@@ -1520,8 +1520,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		Logging.log(" Response Body >>" + response);
 		Assertion.assertTrue(response.contains(Constants.status), "status not found in the response.");
 
-		Assertion.assertTrue(
-				response.toLowerCase().contains(ReadingServiceEndPointsProperties.getServiceEndPoint("full_status_to_search").toLowerCase()),
+		Assertion.assertTrue(StringUtils.containsIgnoreCase(response, ReadingServiceEndPointsProperties.getServiceEndPoint("full_status_to_search").replaceAll("%20"," ")),
 				"response is empty so full status not found in response");
 
 	}
