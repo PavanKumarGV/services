@@ -228,16 +228,9 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getMatchingReqWithAllFeilds(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_MATCHING_REQ3.replaceAll("hostAddress", hostName)
-				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?offset=5&limit=10";
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
-		Response response1 = executeGET(serviceEndPoint);
-	/*	if (response1.getStatus() == 200) {
-			Logging.log("Status Code 200");
-		} else {
-			Assert.fail();
-		}*/
-		Logging.log("Response Code >>" + response1.getStatus());
-		return response1;
+				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?offset=0&limit=10";
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	/*
@@ -247,16 +240,9 @@ public class RequisitionResourceConsumer extends BaseServiceConsumerNew {
 
 	public Response getMatchingReqWithOfSet(String hostName) throws ClientProtocolException, IOException {
 		String serviceEndPoint = endPointURL_MATCHING_REQ4.replaceAll("hostAddress", hostName)
-				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?offset=5";
-		System.out.println(" EndPoint URL >>" + serviceEndPoint);
-		Response response1 = executeGET(serviceEndPoint);
-	/*	if (response1.getStatus() == 200) {
-			Logging.log("Status Code 200");
-		} else {
-			Assert.fail();
-		}*/
-		Logging.log("Response Code >>" + response1.getStatus());
-		return response1;
+				+ getServiceEndPoint("Requisition_Match_First_Two_Chars") + "?offset=0";
+		Logging.log(" EndPoint URL >>" + serviceEndPoint);
+		return executeGET(serviceEndPoint);
 	}
 
 	/*
