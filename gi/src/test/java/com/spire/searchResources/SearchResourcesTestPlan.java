@@ -392,7 +392,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Asserting Response Code
 		Assertion.assertTrue(responsebody.getStatus() == 500,
 				"response code expected not equal to 500 but found as:" + responsebody.getStatus());
-		Assertion.assertTrue(response.contains("Unable to fetch the recommended similar profiles"), "Able to fetch the recommended similar profiles using invalid id");
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("no_similar_candidates_found")), "Able to fetch the recommended similar profiles using invalid id");
 	}
 	
 	/**
@@ -439,7 +439,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 		// Asserting Response Code
 		Assertion.assertTrue(responsebody.getStatus() == 500,
 				"response code expected not equal to 500 but found as:" + responsebody.getStatus());
-		Assertion.assertTrue(response.contains("Unable to fetch the recommended similar profiles"), "Able to fetch the recommended similar profiles using invalid id");
+		Assertion.assertTrue(response.contains(ReadingServiceEndPointsProperties.getServiceEndPoint("no_similar_candidates_found")), "Able to fetch the recommended similar profiles using invalid id");
 	}
 
     /**
