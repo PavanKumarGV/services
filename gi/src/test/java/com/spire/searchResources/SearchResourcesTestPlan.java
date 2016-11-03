@@ -2751,7 +2751,7 @@ public class SearchResourcesTestPlan<SearchCriteriaBean> extends TestPlan {
 	Logging.log("***** RESPONSE CODE ******" + responsebody.getStatus() + "\n***** RESPONSE ******" + response);
 
 	// Asserting Response Code
-	Assertion.assertTrue(responsebody.getStatus() == 500,
+	Assertion.assertTrue(responsebody.getStatus() == 400,
 		"response code expected equal to 500 but found as:" + responsebody.getStatus());
 	Assert.assertTrue(response.contains("search candidate has failed"), "Response is successful without search query string");
 
