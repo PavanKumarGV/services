@@ -16,28 +16,27 @@ import java.util.TreeMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.testng.annotations.Parameters;
 
 import com.spire.dataprovider.RestServiceTokenProvider;
 
 /**
  * @author Garnepudi V
+ * @param <AnalyticsTestData>
  *
  */
-public class AnalyticsRestClient {
+public class AnalyticsRestClient<AnalyticsTestData> {
 
 	static Map<String, String> headers = new TreeMap<String, String>();
-	static String filePathForAnalytics = "C:/Repos/gi/gi/src/test/java/src/test/resources/Analytic_Service.properties";
+	static String filePathForAnalytics = null; 
 	static String endPoint = null;
 	static String[] tokenValues = null;
 
-	@Parameters({ "env" })
-	public AnalyticsRestClient(String env) {
+	public AnalyticsRestClient(String env, String filePath) {
 		if (env.equalsIgnoreCase("staging")) {
-
+			filePathForAnalytics=filePath;
 			endPoint = PropertiesPicker.getValues(filePathForAnalytics, "endPoint_EEStaging").toString()
 					+ PropertiesPicker.getValues(filePathForAnalytics, "analyticsResource").toString();
-			tokenValues = RestServiceTokenProvider.getToken(env);
+			tokenValues = RestServiceTokenProvider.getToken(env, filePathForAnalytics);
 
 			headers.put("Content-Type", "application/json");
 			headers.put("realmName", tokenValues[2]);
@@ -50,7 +49,7 @@ public class AnalyticsRestClient {
 
 	}
 
-	public int []  postServiceResp(String reqBody) {
+	public  int []  postServiceResp(String reqBody, AnalyticsDataSet analyticsData) {
 
 		String response = null;
 		JSONObject jsonObj = null;
@@ -75,9 +74,9 @@ public class AnalyticsRestClient {
 			httpConn.setDoOutput(true);
 
 			System.out.println("Request Body fetch is" + " " + reqBody);
-			reqBody = reqBody.replaceFirst("valueForUsecase", "matchesviewedperuser");
-			reqBody = reqBody.replaceFirst("valueForSiteId", "13");
-			reqBody = reqBody.replaceFirst("valueForFrom", "1");
+			reqBody = reqBody.replaceFirst("valueForUsecase", analyticsData.getvalueForUsecase());
+			reqBody = reqBody.replaceFirst("valueForSiteId", analyticsData.getvalueForSiteId());
+			reqBody = reqBody.replaceFirst("valueForFrom", analyticsData.getvalueForFrom());
 			reqBody = reqBody.replaceFirst("valueForTo", "" + Calendar.getInstance().getTimeInMillis() + "");
 
 			System.out.println("Request Body updated to" + " " + reqBody);
