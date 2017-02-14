@@ -43,7 +43,7 @@ public class TestAnalyticService extends TestPlan {
 	}
 
 	@Parameters({ "env" })
-	@BeforeClass
+	@BeforeClass	 
 	public static void init(String env) {
 
 		filePathForAnalytics = "./src/test/java/com/spire/analyticservices/Analytic_Service.properties";
@@ -56,20 +56,14 @@ public class TestAnalyticService extends TestPlan {
 	@Test(groups = { "sanity" }, dataProvider = "AnalyticsTestData")
 	public void testAnalyticsService(SpireTestObject testObject, AnalyticsDataSet testData) {
 
-		AnalyticsRestClient<AnalyticsDataSet> utility = new AnalyticsRestClient<AnalyticsDataSet>(environment, filePathForAnalytics);
-		int respValidate[] = utility.postServiceResp(PropertiesPicker.getValues(filePathForAnalytics, "reqBody"), testData);
+		AnalyticsRestClient<AnalyticsDataSet> utility = new AnalyticsRestClient<AnalyticsDataSet>(environment,
+				filePathForAnalytics);
+		int respValidate[] = utility.postServiceResp(PropertiesPicker.getValues(filePathForAnalytics, "reqBody"),
+				testData);
 		for (int i = 0; i < respValidate.length; i++) {
 			Assert.assertEquals(respValidate[0] == 200, true, "Service response is not true");
 			Assert.assertEquals(respValidate[1] > 0, true, "Service response has results");
 		}
-
-	}
-
-	@Test(groups = { "sanity" }, dataProvider = "AnalyticsTestData")
-
-	public void testAnalyticsCSV(SpireTestObject testData) {
-
-		System.out.println("Test Data" + " " + testData.getTestData());
 
 	}
 
