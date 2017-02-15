@@ -1,0 +1,6 @@
+SpireTestObject.testCaseId,SpireTestObject.TestTitle,AnalyticsDataSet.valueForUsecase,AnalyticsDataSet.valueForSiteId,AnalyticsDataSet.valueForFrom,AnalyticsDataSet.valueForTo
+1,testAnalyticsService,matchesviewedperuser,13,1,1.48E+12
+2,testAnalyticsService,usersearches,13,1,
+3,testAnalyticsService,userlogin,13,1,
+4,testAnalyticsService,actionnamessearches,13,1,
+5,testAnalyticsService,topRecruiter,13,1,
