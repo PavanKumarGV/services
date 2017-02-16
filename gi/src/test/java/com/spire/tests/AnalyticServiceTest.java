@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -24,7 +25,7 @@ public class AnalyticServiceTest extends TestPlan {
 	public static String fileName = null;
 
 	@Parameters({ "env", "client" })
-	@BeforeClass
+	@BeforeClass(alwaysRun=true)
 	public static void init(String env, String client) {
 
 		environment = env;
@@ -41,11 +42,11 @@ public class AnalyticServiceTest extends TestPlan {
 	}
 
 	@DataProvider(name = "AnalyticsTestData")
-
+	//@BeforeSuite(alwaysRun=true)
 	public static Iterator<Object[]> gettestData(Method method) {
 
 		Iterator<Object[]> objectsFromCsv = null;
-
+		 
 		try {
 
 			LinkedHashMap<String, Class<?>> entityClazzMap = new LinkedHashMap<String, Class<?>>();
