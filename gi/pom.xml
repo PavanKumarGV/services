@@ -26,7 +26,7 @@
 						<!-- Configuration variables -->
 						<env>env</env>
 						<client>client</client>
-						<buildDirectory>${project.build.directory}</buildDirectory>
+						<!-- <buildDirectory>${project.build.directory}</buildDirectory> -->
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
@@ -57,7 +57,7 @@
 			<artifactId>json</artifactId>
 			<version>20160810</version>
 		</dependency>
-
+		 
 		<!--common -->
 
 		<dependency>
@@ -72,16 +72,9 @@
 			<groupId>com.spire.automation</groupId>
 			<artifactId>spire-base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.sun.jersey</groupId>
-					<artifactId>jersey-client</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jersey</groupId>
-					<artifactId>jersey-json</artifactId>
-				</exclusion>
-			</exclusions>
+			<!-- <exclusions> <exclusion> <groupId>com.sun.jersey</groupId> <artifactId>jersey-client</artifactId> 
+				</exclusion> <exclusion> <groupId>com.sun.jersey</groupId> <artifactId>jersey-json</artifactId> 
+				</exclusion> </exclusions> -->
 		</dependency>
 
 		<dependency>
