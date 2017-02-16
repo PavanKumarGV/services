@@ -26,7 +26,7 @@
 						<!-- Configuration variables -->
 						<env>env</env>
 						<client>client</client>
-						<!-- <buildDirectory>${project.build.directory}</buildDirectory> -->
+
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
@@ -57,7 +57,7 @@
 			<artifactId>json</artifactId>
 			<version>20160810</version>
 		</dependency>
-		 
+
 		<!--common -->
 
 		<dependency>
