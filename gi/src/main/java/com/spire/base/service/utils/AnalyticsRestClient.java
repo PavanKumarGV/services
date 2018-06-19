@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.spire.base.service.utils;
+package com.base.service.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.util.TreeMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.spire.dataprovider.RestServiceTokenProvider;
+import com.dataprovider.RestServiceTokenProvider;
 
 /**
  * @author Garnepudi V
